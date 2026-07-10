@@ -308,13 +308,13 @@ export default function AdminDashboard({ onLogout, theme, setTheme }: AdminDashb
   // Login handler
   const handleLogin = (e: React.FormEvent) => {
     e.preventDefault();
-    if (username.trim().toLowerCase() === "admin" && password === "admin") {
+    if (username.trim().toLowerCase() === "admin" && password === "hitham") {
       localStorage.setItem("algora_admin_logged", "true");
       setIsAuthenticated(true);
       setLoginError("");
       addLog("قام المشرف بتسجيل الدخول بأمان إلى لوحة التسيير الكبرى.");
     } else {
-      setLoginError("اسم المستخدم أو كلمة المرور غير صحيحة. يرجى استخدام 'admin' لكلاهما.");
+      setLoginError("اسم المستخدم أو كلمة المرور غير صحيحة.");
     }
   };
 
@@ -666,7 +666,7 @@ export default function AdminDashboard({ onLogout, theme, setTheme }: AdminDashb
                 required
                 value={username}
                 onChange={(e) => setUsername(e.target.value)}
-                placeholder="أدخل admin"
+                placeholder="اسم المستخدم"
                 className="w-full bg-[#0B0B0F] border border-[rgba(255,255,255,0.06)] rounded-xl px-4 py-3 text-sm text-slate-100 placeholder:text-slate-600 text-right focus:outline-none focus:ring-1 focus:ring-[#7C3AED]"
               />
             </div>
@@ -678,7 +678,7 @@ export default function AdminDashboard({ onLogout, theme, setTheme }: AdminDashb
                 required
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
-                placeholder="أدخل admin"
+                placeholder="كلمة المرور"
                 className="w-full bg-[#0B0B0F] border border-[rgba(255,255,255,0.06)] rounded-xl px-4 py-3 text-sm text-slate-100 placeholder:text-slate-600 text-right focus:outline-none focus:ring-1 focus:ring-[#7C3AED]"
               />
             </div>
@@ -697,13 +697,6 @@ export default function AdminDashboard({ onLogout, theme, setTheme }: AdminDashb
               <span>دخول للوحة التحكم 🔐</span>
             </button>
           </form>
-
-          <div className="mt-6 pt-5 border-t border-[rgba(255,255,255,0.06)] text-center text-[10px] text-slate-500">
-            <p className="font-mono mb-1">المعلومات الافتراضية للتجربة والتدقيق:</p>
-            <p className="bg-[#0B0B0F] p-2 rounded border border-[rgba(255,255,255,0.06)] inline-block">
-              User: <span className="text-[#A855F7] font-mono font-bold">admin</span> &nbsp;|&nbsp; Pass: <span className="text-[#A855F7] font-mono font-bold">admin</span>
-            </p>
-          </div>
         </motion.div>
       </div>
     );

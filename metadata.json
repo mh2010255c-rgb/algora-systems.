@@ -1,0 +1,6 @@
+{
+  "name": "Algora Systems",
+  "description": "صفحة هبوط احترافية تفاعلية لنظام Algora Systems لإدارة محلات الهواتف في الجزائر، تشمل استعراض الميزات، وباقات الاشتراك، ونموذج طلب نسخة تجريبية، ودعم فني ذكي مباشر.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}

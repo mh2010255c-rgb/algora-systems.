@@ -39,7 +39,7 @@ export default function App() {
 
   // Trigger interactive greeting wizard on first load if not requested trial yet or route to admin
   useEffect(() => {
-    const path = window.location.pathname;
+    const path = window.location.pathname.replace(/\/$/, "");
     if (path === "/admin" || path === "/admine") {
       setActiveTab("admin");
     } else {

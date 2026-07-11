@@ -1,5 +1,7 @@
 import React, { useState, useRef } from "react";
 import { motion, AnimatePresence } from "motion/react";
+import { useMutation } from "convex/react";
+import { api } from "../../convex/_generated/api";
 import { 
   ArrowLeft, Smartphone, ShieldCheck, Wrench, BarChart3, ScanBarcode, 
   Check, Printer, AlertCircle, Sparkles, ChevronLeft, ChevronRight, CreditCard,
@@ -131,6 +133,8 @@ export default function LandingPage({ onSelectDemo, onSelectSupport, onSelectTri
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [submitStatus, setSubmitStatus] = useState<{ success?: boolean; message?: string; error?: string } | null>(null);
   const [showSuccessDownloads, setShowSuccessDownloads] = useState(false);
+
+  const registerTrial = useMutation(api.orders.create);
 
   const startDownload = (filename: string) => {
     const link = document.createElement("a");
@@ -548,48 +552,47 @@ export default function LandingPage({ onSelectDemo, onSelectSupport, onSelectTri
     setShowSuccessDownloads(false);
 
     try {
-      const response = await fetch("/api/register-trial", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-          storeName,
-          ownerName,
-          phone,
-          phone2,
-          hasWhatsapp,
-          paymentMethod,
-          programType,
-          city,
-          province,
-          notes
-        })
+      const result = await registerTrial({
+        storeName,
+        ownerName,
+        phonePrimary: phone,
+        phoneSecondary: phone2 || "",
+        province,
+        city,
+        packageType: programType,
+        packagePrice: programType === "both" ? 22000 : 12000,
+        paymentMethod,
+        notes: notes || "",
       });
 
-      const data = await response.json();
-
-      if (response.ok && data.success) {
-        setSubmitStatus({ success: true, message: data.message });
-        
-        // Track Meta Pixel Lead event
-        if (typeof window !== "undefined" && (window as any).fbq) {
-          (window as any).fbq('track', 'Lead');
-        }
-
-        // Clear forms
-        setStoreName("");
-        setOwnerName("");
-        setPhone("");
-        setPhone2("");
-        setCity("");
-        setProvince("");
-        setNotes("");
-        
-        // Save to client localStorage as well so they can remember they requested it
-        localStorage.setItem("algora_trial_requested", "true");
-        localStorage.setItem("algora_trial_details", JSON.stringify(data.data));
-      } else {
-        setSubmitStatus({ error: data.error || "عذراً، حدث خطأ أثناء إرسال الطلب." });
+      setSubmitStatus({ 
+        success: true, 
+        message: "تم تسجيل طلبك للنسخة التجريبية بنجاح! سيتصل بك فريق الدعم الفني خلال ساعات لتفعيل حسابك وإرسال بيانات الدخول." 
+      });
+      
+      // Track Meta Pixel Lead event
+      if (typeof window !== "undefined" && (window as any).fbq) {
+        (window as any).fbq('track', 'Lead');
       }
+
+      // Clear forms
+      setStoreName("");
+      setOwnerName("");
+      setPhone("");
+      setPhone2("");
+      setCity("");
+      setProvince("");
+      setNotes("");
+      
+      // Save to client localStorage as well so they can remember they requested it
+      localStorage.setItem("algora_trial_requested", "true");
+      localStorage.setItem("algora_trial_details", JSON.stringify({ 
+        id: result.id, 
+        orderNumber: result.orderNumber, 
+        storeName, 
+        ownerName, 
+        phonePrimary: phone 
+      }));
     } catch (err) {
       setSubmitStatus({ error: "فشل الاتصال بالخادم. يرجى محاولة التسجيل مجدداً أو الاتصال بـ 0553361047" });
     } finally {

@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
-import { db } from "../firebase";
-import { collection, onSnapshot, query, orderBy } from "firebase/firestore";
 import { motion, AnimatePresence } from "motion/react";
+import { useQuery, useMutation } from "convex/react";
+import { api } from "../../convex/_generated/api";
 import { 
   Users, CheckCircle2, Clock, Trash2, Edit, Search, Filter, 
   Plus, RefreshCw, Phone, MessageSquareCode, FileText, Check, 
@@ -57,11 +57,47 @@ export default function AdminDashboard({ onLogout, theme, setTheme }: AdminDashb
   const [password, setPassword] = useState("");
   const [loginError, setLoginError] = useState("");
 
-  // Data State
-  const [trialRequests, setTrialRequests] = useState<TrialRequest[]>([]);
-  const [supportTickets, setSupportTickets] = useState<SupportTicket[]>([]);
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState("");
+  // Convex queries
+  const rawTrialRequests = useQuery(api.orders.list);
+  const rawSupportTickets = useQuery(api.tickets.list);
+
+  // Convex mutations
+  const createOrderMutation = useMutation(api.orders.create);
+  const updateOrderMutation = useMutation(api.orders.update);
+  const deleteOrderMutation = useMutation(api.orders.remove);
+  const createTicketMutation = useMutation(api.tickets.create);
+  const updateTicketMutation = useMutation(api.tickets.updateStatus);
+  const deleteTicketMutation = useMutation(api.tickets.remove);
+
+  // Mapped lists for local components
+  const trialRequests: TrialRequest[] = (rawTrialRequests || []).map((o: any) => ({
+    id: o._id,
+    storeName: o.storeName,
+    ownerName: o.ownerName,
+    phone: o.phonePrimary,
+    phone2: o.phoneSecondary,
+    hasWhatsapp: o.whatsappLinked ? "yes" : "no",
+    paymentMethod: o.paymentMethod,
+    programType: o.packageType,
+    city: o.city + (o.province ? ` (${o.province})` : ""),
+    timestamp: o.createdAt,
+    status: o.orderStatus,
+    packagePrice: o.packagePrice,
+    licenseKey: o.licenseKey,
+  }));
+
+  const supportTickets: SupportTicket[] = (rawSupportTickets || []).map((t: any) => ({
+    id: t._id,
+    storeName: t.storeName,
+    phone: t.phone,
+    subject: t.subject,
+    message: t.message,
+    timestamp: t.createdAt,
+    status: t.status,
+  }));
+
+  const loading = rawTrialRequests === undefined || rawSupportTickets === undefined;
+  const error = "";
 
   // Active Tab inside Admin Panel
   const [activeAdminSubTab, setActiveAdminSubTab] = useState<"overview" | "trials" | "tickets" | "baridimob" | "logs" | "settings" | "whatsapp">("trials");
@@ -219,57 +255,27 @@ export default function AdminDashboard({ onLogout, theme, setTheme }: AdminDashb
     addLog(`تم توليد مفتاح ترخيص مشفر جديد لصالح متجر "${licStore}".`);
   };
 
-  // Fetch all admin data
-  const fetchData = async () => {
-    setError("");
-    try {
-      const [ticketsRes, trialsRes] = await Promise.all([
-        fetch("/api/admin/support-tickets"),
-        fetch("/api/admin/trial-requests")
-      ]);
-      
-      if (!ticketsRes.ok || !trialsRes.ok) {
-        throw new Error("حدث خطأ أثناء تحميل البيانات من الخادم.");
-      }
-
-      const ticketsData = await ticketsRes.json();
-      const trialsData = await trialsRes.json();
-
-      setSupportTickets(ticketsData);
-      setTrialRequests(trialsData);
-
-      // Recalculate stats
-      const rev = trialsData.reduce((acc: number, current: any) => {
-        if (current.status !== "approved" && current.status !== "completed") return acc;
-        return acc + (current.packagePrice || 0);
-      }, 0);
-
-      setStats({
-        totalTrials: trialsData.length,
-        pendingTrials: trialsData.filter((t: any) => t.status === "pending").length,
-        approvedTrials: trialsData.filter((t: any) => t.status === "approved" || t.status === "completed").length,
-        totalTickets: ticketsData.length,
-        openTickets: ticketsData.filter((t: any) => t.status === "open").length,
-        totalRevenue: rev
-      });
-    } catch (err: any) {
-      console.error(err);
-      setError("فشل تحديث البيانات التلقائي: " + (err.message || "خطأ بالاتصال."));
-    } finally {
-      setLoading(false);
-    }
-  };
+  // Fetch all admin data (no-op since we use Convex queries)
+  const fetchData = async () => {};
 
   useEffect(() => {
-    if (!isAuthenticated) return;
-
-    setLoading(true);
-    fetchData(); // load tickets and trial requests
+    if (loading) return;
     
-    // Poll for new requests every 6 seconds to keep it dynamic and live
-    const interval = setInterval(fetchData, 6000);
-    return () => clearInterval(interval);
-  }, [isAuthenticated]);
+    // Recalculate stats
+    const rev = trialRequests.reduce((acc: number, current: any) => {
+      if (current.status !== "approved" && current.status !== "completed") return acc;
+      return acc + (current.packagePrice || 0);
+    }, 0);
+
+    setStats({
+      totalTrials: trialRequests.length,
+      pendingTrials: trialRequests.filter((t: any) => t.status === "pending").length,
+      approvedTrials: trialRequests.filter((t: any) => t.status === "approved" || t.status === "completed").length,
+      totalTickets: supportTickets.length,
+      openTickets: supportTickets.filter((t: any) => t.status === "open").length,
+      totalRevenue: rev
+    });
+  }, [rawTrialRequests, rawSupportTickets, loading]);
 
   const getStatusLabel = (status: string) => {
     switch (status) {
@@ -328,103 +334,62 @@ export default function AdminDashboard({ onLogout, theme, setTheme }: AdminDashb
   };
 
   // Update Trial Request Status (Quick Action)
-  const updateTrialStatus = async (id: string, newStatus: "pending" | "contacted" | "demo_sent" | "approved" | "completed" | "canceled") => {
+  const updateTrialStatus = async (id: any, newStatus: "pending" | "contacted" | "demo_sent" | "approved" | "completed" | "canceled") => {
     try {
       const targetReq = trialRequests.find(r => r.id === id);
       const storeName = targetReq ? targetReq.storeName : "العميل";
 
-      const response = await fetch(`/api/admin/trial-requests/${id}`, {
-        method: "PUT",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ status: newStatus }),
+      await updateOrderMutation({
+        id,
+        updates: { orderStatus: newStatus }
       });
-
-      if (response.ok) {
-        const updatedTrials = trialRequests.map(t => t.id === id ? { ...t, status: newStatus } : t);
-        setTrialRequests(updatedTrials);
-        calculateStats(updatedTrials, supportTickets);
-        addLog(`تم تغيير حالة تفعيل متجر "${storeName}" إلى: ${getStatusLabel(newStatus)}`);
-      } else {
-        alert("فشل تحديث حالة الطلب");
-      }
+      addLog(`تم تغيير حالة تفعيل متجر "${storeName}" إلى: ${getStatusLabel(newStatus)}`);
     } catch (err) {
-      alert("حدث خطأ في الاتصال");
+      alert("حدث خطأ في الاتصال بقاعدة البيانات");
     }
   };
 
   // Delete Trial Request
-  const deleteTrialRequest = async (id: string) => {
+  const deleteTrialRequest = async (id: any) => {
     const targetReq = trialRequests.find(r => r.id === id);
     const storeName = targetReq ? targetReq.storeName : "المتجر";
     
     if (!confirm(`هل أنت متأكد من رغبتك في حذف طلب "${storeName}" نهائياً من قاعدة البيانات؟`)) return;
 
     try {
-      const response = await fetch(`/api/admin/trial-requests/${id}`, {
-        method: "DELETE",
-      });
-
-      if (response.ok) {
-        const filtered = trialRequests.filter(t => t.id !== id);
-        setTrialRequests(filtered);
-        calculateStats(filtered, supportTickets);
-        addLog(`تم حذف سجل متجر "${storeName}" بالكامل وبنجاح.`);
-      } else {
-        alert("فشل حذف الطلب");
-      }
+      await deleteOrderMutation({ id });
+      addLog(`تم حذف سجل متجر "${storeName}" بالكامل وبنجاح.`);
     } catch (err) {
-      alert("حدث خطأ في الاتصال");
+      alert("حدث خطأ في الاتصال بقاعدة البيانات");
     }
   };
 
   // Toggle Ticket Status
-  const toggleTicketStatus = async (id: string, currentStatus: "open" | "resolved") => {
+  const toggleTicketStatus = async (id: any, currentStatus: "open" | "resolved") => {
     try {
       const newStatus = currentStatus === "open" ? "resolved" : "open";
       const targetTkt = supportTickets.find(t => t.id === id);
       const subject = targetTkt ? targetTkt.subject : "التذكرة";
 
-      const response = await fetch(`/api/admin/support-tickets/${id}`, {
-        method: "PUT",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ status: newStatus }),
-      });
-
-      if (response.ok) {
-        const updatedTickets = supportTickets.map(t => t.id === id ? { ...t, status: newStatus } : t);
-        setSupportTickets(updatedTickets);
-        calculateStats(trialRequests, updatedTickets);
-        addLog(`تم تعديل تذكرة "${subject}" إلى: ${newStatus === "resolved" ? "تم حلها بنجاح ✅" : "مفتوحة ومعلّقة 🔴"}`);
-      } else {
-        alert("فشل تحديث حالة التذكرة");
-      }
+      await updateTicketMutation({ id, status: newStatus });
+      addLog(`تم تعديل تذكرة "${subject}" إلى: ${newStatus === "resolved" ? "تم حلها بنجاح ✅" : "مفتوحة ومعلّقة 🔴"}`);
     } catch (err) {
-      alert("حدث خطأ في الاتصال");
+      alert("حدث خطأ في الاتصال بقاعدة البيانات");
     }
   };
 
   // Delete Support Ticket
-  const deleteSupportTicket = async (id: string) => {
+  const deleteSupportTicket = async (id: any) => {
     const targetTkt = supportTickets.find(t => t.id === id);
     const subject = targetTkt ? targetTkt.subject : "تذكرة";
 
     if (!confirm(`هل أنت متأكد من رغبتك في حذف تذكرة الدعم الفني "${subject}"؟`)) return;
 
     try {
-      const response = await fetch(`/api/admin/support-tickets/${id}`, {
-        method: "DELETE",
-      });
-
-      if (response.ok) {
-        const filtered = supportTickets.filter(t => t.id !== id);
-        setSupportTickets(filtered);
-        calculateStats(trialRequests, filtered);
-        addLog(`تم حذف تذكرة "${subject}" نهائياً.`);
-      } else {
-        alert("فشل حذف التذكرة");
-      }
+      await deleteTicketMutation({ id });
+      addLog(`تم حذف تذكرة "${subject}" نهائياً.`);
     } catch (err) {
-      alert("حدث خطأ في الاتصال");
+      alert("حدث خطأ في الاتصال بقاعدة البيانات");
     }
   };
 
@@ -449,34 +414,30 @@ export default function AdminDashboard({ onLogout, theme, setTheme }: AdminDashb
 
     setIsUpdating(true);
     try {
-      const response = await fetch(`/api/admin/trial-requests/${editingRequest.id}`, {
-        method: "PUT",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
+      // Split city and province back
+      const parts = editCity.split(" (");
+      const cityOnly = parts[0];
+      const provinceOnly = parts[1] ? parts[1].replace(")", "") : "";
+
+      await updateOrderMutation({
+        id: editingRequest.id as any,
+        updates: {
           storeName: editStoreName,
           ownerName: editOwnerName,
-          phone: editPhone,
-          phone2: editPhone2,
-          city: editCity,
-          programType: editProgramType,
+          phonePrimary: editPhone,
+          phoneSecondary: editPhone2,
+          city: cityOnly,
+          province: provinceOnly,
+          packageType: editProgramType,
           paymentMethod: editPaymentMethod,
-          hasWhatsapp: editHasWhatsapp,
-          status: editStatus,
-        }),
+          whatsappLinked: editHasWhatsapp === "yes",
+          orderStatus: editStatus,
+        }
       });
-
-      if (response.ok) {
-        const result = await response.json();
-        const updatedTrials = trialRequests.map(t => t.id === editingRequest.id ? result.data : t);
-        setTrialRequests(updatedTrials);
-        calculateStats(updatedTrials, supportTickets);
-        addLog(`تم تعديل وحفظ بيانات المتجر "${editStoreName}" بنجاح في قاعدة البيانات السحابية.`);
-        setEditingRequest(null);
-      } else {
-        alert("فشل تحديث بيانات العميل");
-      }
+      addLog(`تم تعديل وحفظ بيانات المتجر "${editStoreName}" بنجاح في قاعدة البيانات السحابية.`);
+      setEditingRequest(null);
     } catch (err) {
-      alert("حدث خطأ في الاتصال بالسيرفر");
+      alert("حدث خطأ في الاتصال بقاعدة البيانات");
     } finally {
       setIsUpdating(false);
     }
@@ -496,31 +457,29 @@ export default function AdminDashboard({ onLogout, theme, setTheme }: AdminDashb
 
     const rStore = storeNames[Math.floor(Math.random() * storeNames.length)];
     const rOwner = ownerNames[Math.floor(Math.random() * ownerNames.length)];
-    const rCity = cities[Math.floor(Math.random() * cities.length)];
+    const rCityWithProvince = cities[Math.floor(Math.random() * cities.length)];
     const rProg = programTypes[Math.floor(Math.random() * programTypes.length)];
     const rPay = paymentMethods[Math.floor(Math.random() * paymentMethods.length)];
     const rPhone = "0" + [5, 6, 7][Math.floor(Math.random() * 3)] + Math.floor(10000000 + Math.random() * 90000000).toString().substring(0, 8);
 
-    try {
-      const response = await fetch("/api/register-trial", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-          storeName: rStore,
-          ownerName: rOwner,
-          phone: rPhone,
-          phone2: "",
-          city: rCity,
-          hasWhatsapp: Math.random() > 0.3 ? "yes" : "no",
-          paymentMethod: rPay,
-          programType: rProg
-        }),
-      });
+    const parts = rCityWithProvince.split(" (");
+    const cityOnly = parts[0];
+    const provinceOnly = parts[1] ? parts[1].replace(")", "") : "";
 
-      if (response.ok) {
-        addLog(`طلب جديد متطوع وصل الآن من: ${rStore} (${rCity})`);
-        fetchData();
-      }
+    try {
+      await createOrderMutation({
+        storeName: rStore,
+        ownerName: rOwner,
+        phonePrimary: rPhone,
+        phoneSecondary: "",
+        city: cityOnly,
+        province: provinceOnly,
+        packageType: rProg,
+        packagePrice: rProg === "both" ? 22000 : 12000,
+        paymentMethod: rPay,
+        notes: "Mock request"
+      });
+      addLog(`طلب جديد متطوع وصل الآن من: ${rStore} (${rCityWithProvince})`);
     } catch (err) {
       console.error(err);
     }
@@ -540,21 +499,13 @@ export default function AdminDashboard({ onLogout, theme, setTheme }: AdminDashb
     const idx = Math.floor(Math.random() * storeNames.length);
 
     try {
-      const response = await fetch("/api/support/ticket", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-          storeName: storeNames[idx],
-          phone: phones[idx],
-          subject: subjects[idx],
-          message: messages[idx]
-        }),
+      await createTicketMutation({
+        storeName: storeNames[idx],
+        phone: phones[idx],
+        subject: subjects[idx],
+        message: messages[idx]
       });
-
-      if (response.ok) {
-        addLog(`تذكرة دعم فني جديدة من متجر: ${storeNames[idx]} - الموضوع: ${subjects[idx]}`);
-        fetchData();
-      }
+      addLog(`تذكرة دعم فني جديدة من متجر: ${storeNames[idx]} - الموضوع: ${subjects[idx]}`);
     } catch (err) {
       console.error(err);
     }

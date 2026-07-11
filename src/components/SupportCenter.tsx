@@ -1,5 +1,7 @@
 import React, { useState, useRef, useEffect } from "react";
 import { motion, AnimatePresence } from "motion/react";
+import { useMutation } from "convex/react";
+import { api } from "../../convex/_generated/api";
 import { 
   Bot, Send, User, MessageSquareCode, Headphones, AlertCircle, CheckCircle, 
   PhoneCall, Mail, Clock, HelpCircle, Loader2, PlayCircle, Smartphone
@@ -18,6 +20,8 @@ export default function SupportCenter() {
   const [inputMessage, setInputMessage] = useState("");
   const [isSending, setIsSending] = useState(false);
   const messagesEndRef = useRef<HTMLDivElement>(null);
+  
+  const createTicket = useMutation(api.tickets.create);
 
   // Ticket Form State
   const [ticketStoreName, setTicketStoreName] = useState("");
@@ -109,31 +113,24 @@ export default function SupportCenter() {
     const subject = ticketSubject.trim() || "دعم فني واتساب";
 
     try {
-      const response = await fetch("/api/support/ticket", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-          storeName: storeName,
-          phone: ticketPhone,
-          subject: subject,
-          message: ticketMessage
-        })
+      await createTicket({
+        storeName: storeName,
+        phone: ticketPhone,
+        subject: subject,
+        message: ticketMessage
       });
 
-      const data = await response.json();
-
-      if (response.ok && data.success) {
-        setTicketStatus({ success: true, message: data.message });
-        // Clear inputs
-        setTicketStoreName("");
-        setTicketPhone("");
-        setTicketSubject("");
-        setTicketMessage("");
-      } else {
-        setTicketStatus({ error: data.error || "فشل في إرسال التذكرة. الرجاء المحاولة مجدداً." });
-      }
+      setTicketStatus({ 
+        success: true, 
+        message: "تم إرسال تذكرة الدعم الفني بنجاح! سيقوم أحد المهندسين بالرد عليك أو التواصل معك عبر الهاتف/الواتساب خلال دقائق." 
+      });
+      // Clear inputs
+      setTicketStoreName("");
+      setTicketPhone("");
+      setTicketSubject("");
+      setTicketMessage("");
     } catch (err) {
-      setTicketStatus({ error: "حدث خطأ غير متوقع. يرجى فحص جودة اتصالك بالإنترنت." });
+      setTicketStatus({ error: "فشل الاتصال بالخادم. يرجى المحاولة لاحقاً." });
     } finally {
       setIsSubmittingTicket(false);
     }

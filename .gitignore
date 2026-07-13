@@ -7,7 +7,7 @@ coverage/
 .env*
 !.env.example
 .wwebjs_auth/
-data/
+/data/
 public/downloads/
 *.exe
 *.mp4

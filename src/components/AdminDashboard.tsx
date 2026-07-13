@@ -97,7 +97,7 @@ export default function AdminDashboard({ onLogout, theme, setTheme }: AdminDashb
   }));
 
   const loading = rawTrialRequests === undefined || rawSupportTickets === undefined;
-  const error = "";
+  const [error, setError] = useState<string>("");
 
   // Active Tab inside Admin Panel
   const [activeAdminSubTab, setActiveAdminSubTab] = useState<"overview" | "trials" | "tickets" | "baridimob" | "logs" | "settings" | "whatsapp">("trials");

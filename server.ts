@@ -1571,7 +1571,7 @@ await seedFirestoreCollections();
   });
 
   // Handle Vite asset serving
-  const isProduction = process.env.NODE_ENV === "production" || __filename.includes("server.cjs");
+  const isProduction = process.env.NODE_ENV === "production" || import.meta.url.includes("server.cjs");
   if (!isProduction) {
     const vite = await createViteServer({
       server: { middlewareMode: true },

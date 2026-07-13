@@ -11,6 +11,13 @@ import {
 } from "lucide-react";
 import { Testimonial, SubscriptionPlan } from "../types";
 import SystemMockup from "./SystemMockup";
+import algeriaData from "../data/algeria.json";
+
+const wilayas = algeriaData;
+const getCommunesByWilaya = (code: number) => {
+  const wilaya = wilayas.find(w => w.code === code);
+  return wilaya ? wilaya.communes : [];
+};
 
 interface LandingPageProps {
   onSelectDemo: () => void;
@@ -22,7 +29,7 @@ interface LandingPageProps {
 export default function LandingPage({ onSelectDemo, onSelectSupport, onSelectTrial, trialFormRef }: LandingPageProps) {
   
   // Video Demo Section States
-  const [videoSrc, setVideoSrc] = useState("https://assets.mixkit.co/videos/preview/mixkit-software-developer-working-on-his-computer-34283-large.mp4");
+  const [videoSrc, setVideoSrc] = useState("/videos/demo.mp4");
   const [isPlaying, setIsPlaying] = useState(false);
   const [isMuted, setIsMuted] = useState(true);
   const [videoLinkInput, setVideoLinkInput] = useState("");
@@ -30,6 +37,9 @@ export default function LandingPage({ onSelectDemo, onSelectSupport, onSelectTri
   const [uploadError, setUploadError] = useState<string | null>(null);
   const [uploadSuccess, setUploadSuccess] = useState(false);
   const videoRef = useRef<HTMLVideoElement | null>(null);
+  const [uploadTab, setUploadTab] = useState<"file" | "link">("file");
+  const [isDragOver, setIsDragOver] = useState(false);
+  const fileInputRef = useRef<HTMLInputElement>(null);
 
   // Video Demo Chapters list
   const videoChapters = [
@@ -76,23 +86,35 @@ export default function LandingPage({ onSelectDemo, onSelectSupport, onSelectTri
   const handleFileUpload = (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0];
     if (file) {
-      if (file.size > 100 * 1024 * 1024) { // 100MB limit
-        setUploadError("حجم الفيديو كبير جداً. يرجى اختيار فيديو أقل من 100 ميغابايت.");
+      if (file.size > 500 * 1024 * 1024) { // 500MB limit
+        setUploadError("حجم الفيديو كبير جداً. يرجى اختيار فيديو أقل من 500 ميغابايت.");
         setUploadSuccess(false);
         return;
       }
       setUploadError(null);
+      setUploadSuccess(false);
+      
+      // Revoke previous blob URL to avoid memory leaks
+      if (videoSrc.startsWith("blob:")) {
+        URL.revokeObjectURL(videoSrc);
+      }
+      
       const url = URL.createObjectURL(file);
       setVideoSrc(url);
-      setUploadSuccess(true);
       setIsPlaying(false);
       
-      // Auto-play the newly uploaded video
+      // Load and auto-play the newly uploaded video
       setTimeout(() => {
         if (videoRef.current) {
+          videoRef.current.load(); // reload source
           videoRef.current.play().then(() => {
             setIsPlaying(true);
+            setUploadSuccess(true);
+          }).catch(() => {
+            setUploadSuccess(true); // still success even if autoplay blocked
           });
+        } else {
+          setUploadSuccess(true);
         }
       }, 300);
     }
@@ -126,9 +148,12 @@ export default function LandingPage({ onSelectDemo, onSelectSupport, onSelectTri
   const [phone2, setPhone2] = useState("");
   const [hasWhatsapp, setHasWhatsapp] = useState<"yes" | "no">("yes");
   const [paymentMethod, setPaymentMethod] = useState("electronic");
+  const [electronicPaymentType, setElectronicPaymentType] = useState("ccp");
+  const [deliveryType, setDeliveryType] = useState("home");
   const [programType, setProgramType] = useState("both");
   const [city, setCity] = useState("");
   const [province, setProvince] = useState("");
+  const [selectedWilayaCode, setSelectedWilayaCode] = useState<number | "">("");
   const [notes, setNotes] = useState("");
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [submitStatus, setSubmitStatus] = useState<{ success?: boolean; message?: string; error?: string } | null>(null);
@@ -552,6 +577,10 @@ export default function LandingPage({ onSelectDemo, onSelectSupport, onSelectTri
     setShowSuccessDownloads(false);
 
     try {
+      const finalPaymentMethod = paymentMethod === "electronic" 
+        ? `electronic - ${electronicPaymentType}`
+        : `cod - ${deliveryType}`;
+
       const result = await registerTrial({
         storeName,
         ownerName,
@@ -561,7 +590,7 @@ export default function LandingPage({ onSelectDemo, onSelectSupport, onSelectTri
         city,
         packageType: programType,
         packagePrice: programType === "both" ? 22000 : 12000,
-        paymentMethod,
+        paymentMethod: finalPaymentMethod,
         notes: notes || "",
       });
 
@@ -712,7 +741,7 @@ export default function LandingPage({ onSelectDemo, onSelectSupport, onSelectTri
           </div>
 
           {/* Centered Video Player Display - Larger and with minimum height for mobile */}
-          <div className="relative w-full aspect-video min-h-[220px] sm:min-h-[320px] md:min-h-[440px] lg:min-h-[500px] rounded-3xl bg-slate-950 border border-slate-900 overflow-hidden shadow-2xl group transition-all duration-300">
+          <div className="relative w-full aspect-video min-h-[220px] sm:min-h-[320px] md:min-h-[440px] lg:min-h-[500px] xl:min-h-[600px] 2xl:min-h-[700px] rounded-3xl bg-slate-950 border border-slate-900 overflow-hidden shadow-2xl group transition-all duration-300">
             
             {/* YouTube Link or Direct Link Handler */}
             {videoSrc.includes("youtube.com") || videoSrc.includes("youtu.be") ? (
@@ -727,13 +756,20 @@ export default function LandingPage({ onSelectDemo, onSelectSupport, onSelectTri
               <>
                 <video
                   ref={videoRef}
-                  src={videoSrc}
                   loop
                   muted={isMuted}
                   playsInline
+                  preload="auto"
                   className="w-full h-full object-cover"
                   onClick={handlePlayPause}
-                />
+                  onError={(e) => {
+                    console.error('Video failed to load:', e);
+                  }}
+                >
+                  <source src={videoSrc} type="video/mp4" />
+                  <source src={videoSrc.replace('.mp4', '.mov')} type="video/quicktime" />
+                  متصفحك لا يدعم تشغيل الفيديو
+                </video>
 
                 {/* Styled Player Controls Overlay */}
                 <div className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-black/95 via-black/50 to-transparent p-5 opacity-100 lg:opacity-0 lg:group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-between gap-4">
@@ -778,6 +814,125 @@ export default function LandingPage({ onSelectDemo, onSelectSupport, onSelectTri
             <div className="absolute top-4 right-4 md:top-5 md:right-5 bg-slate-950/90 backdrop-blur-md px-3.5 py-1.5 rounded-full border border-slate-800/80 flex items-center gap-2 shadow-lg">
               <div className="w-2 h-2 rounded-full bg-emerald-500 animate-ping" />
               <span className="text-[10px] md:text-xs text-slate-200 font-extrabold tracking-wider font-mono">LIVE PREVIEW</span>
+            </div>
+          </div>
+
+          {/* Video Upload / Change Panel */}
+          <div className="w-full max-w-3xl mx-auto mt-4">
+            <div className="bg-slate-950/60 border border-slate-800/70 rounded-2xl overflow-hidden shadow-lg">
+              
+              {/* Tab Header */}
+              <div className="flex items-center border-b border-slate-800/60">
+                <button
+                  onClick={() => setUploadTab("file")}
+                  className={`flex-1 flex items-center justify-center gap-2 py-3 text-xs font-black transition-all ${
+                    uploadTab === "file"
+                      ? "bg-purple-600/15 text-purple-400 border-b-2 border-purple-500"
+                      : "text-slate-500 hover:text-slate-300 hover:bg-slate-900/40"
+                  }`}
+                >
+                  <UploadCloud className="w-4 h-4" />
+                  <span>رفع ملف فيديو</span>
+                </button>
+                <div className="w-px h-8 bg-slate-800/60" />
+                <button
+                  onClick={() => setUploadTab("link")}
+                  className={`flex-1 flex items-center justify-center gap-2 py-3 text-xs font-black transition-all ${
+                    uploadTab === "link"
+                      ? "bg-indigo-600/15 text-indigo-400 border-b-2 border-indigo-500"
+                      : "text-slate-500 hover:text-slate-300 hover:bg-slate-900/40"
+                  }`}
+                >
+                  <Link2 className="w-4 h-4" />
+                  <span>لصق رابط YouTube / MP4</span>
+                </button>
+              </div>
+
+              {/* Tab Content */}
+              <div className="p-4">
+                {uploadTab === "file" ? (
+                  <div
+                    onDragOver={(e) => { e.preventDefault(); setIsDragOver(true); }}
+                    onDragLeave={() => setIsDragOver(false)}
+                    onDrop={(e) => {
+                      e.preventDefault();
+                      setIsDragOver(false);
+                      const file = e.dataTransfer.files?.[0];
+                      if (file) {
+                        const fakeEvent = { target: { files: [file] } } as any;
+                        handleFileUpload(fakeEvent);
+                      }
+                    }}
+                    onClick={() => fileInputRef.current?.click()}
+                    className={`relative flex flex-col items-center justify-center gap-3 py-10 rounded-xl border-2 border-dashed cursor-pointer transition-all duration-200 ${
+                      isDragOver
+                        ? "border-purple-500 bg-purple-500/10 scale-[1.01]"
+                        : "border-slate-700/60 hover:border-purple-500/50 hover:bg-purple-500/5"
+                    }`}
+                  >
+                    <div className={`w-16 h-16 rounded-2xl flex items-center justify-center transition-all ${isDragOver ? "bg-purple-600" : "bg-slate-800/80"}`}>
+                      <FileVideo className={`w-8 h-8 transition-colors ${isDragOver ? "text-white" : "text-purple-400"}`} />
+                    </div>
+                    <div className="text-center space-y-1.5">
+                      <p className="text-sm font-black text-slate-200">
+                        {isDragOver ? "✅ أفلت الملف هنا!" : "اسحب وأفلت ملف الفيديو هنا"}
+                      </p>
+                      <p className="text-[11px] text-slate-500 font-medium">
+                        أو انقر للاختيار من جهازك — MP4, MOV, AVI, WEBM (حتى 500 MB)
+                      </p>
+                    </div>
+                    <span className="px-4 py-1.5 bg-purple-600/20 border border-purple-500/30 text-purple-400 text-xs font-bold rounded-full hover:bg-purple-600/30 transition-colors">
+                      اختيار ملف فيديو
+                    </span>
+                    <input
+                      ref={fileInputRef}
+                      type="file"
+                      accept="video/*"
+                      className="hidden"
+                      onChange={handleFileUpload}
+                    />
+                  </div>
+                ) : (
+                  <form onSubmit={handleLinkSubmit} className="space-y-3">
+                    <div className="relative">
+                      <div className="absolute right-3 top-1/2 -translate-y-1/2 flex items-center gap-1.5 pointer-events-none">
+                        <Youtube className="w-4 h-4 text-red-400" />
+                        <span className="text-slate-600 text-xs">|</span>
+                        <Link2 className="w-3.5 h-3.5 text-slate-500" />
+                      </div>
+                      <input
+                        type="url"
+                        value={videoLinkInput}
+                        onChange={(e) => setVideoLinkInput(e.target.value)}
+                        placeholder="https://youtube.com/watch?v=... أو رابط MP4 مباشر"
+                        dir="ltr"
+                        className="w-full pr-20 pl-4 py-3 bg-slate-900 border border-slate-700 rounded-xl text-slate-200 text-xs font-mono placeholder:text-slate-600 focus:outline-none focus:border-indigo-500 focus:bg-slate-900/80 transition-all"
+                      />
+                    </div>
+                    <button
+                      type="submit"
+                      className="w-full py-3 bg-gradient-to-l from-indigo-600 to-purple-600 hover:from-indigo-500 hover:to-purple-500 text-white font-black text-xs rounded-xl flex items-center justify-center gap-2 transition-all active:scale-95 shadow-md hover:shadow-lg hover:shadow-indigo-900/30 cursor-pointer"
+                    >
+                      <ExternalLink className="w-4 h-4" />
+                      تحميل الفيديو من الرابط
+                    </button>
+                  </form>
+                )}
+
+                {/* Status Messages */}
+                {uploadError && (
+                  <div className="mt-3 flex items-start gap-2 p-3 bg-red-500/10 border border-red-500/20 rounded-xl">
+                    <AlertCircle className="w-4 h-4 text-red-400 shrink-0 mt-0.5" />
+                    <p className="text-xs text-red-400 font-bold leading-relaxed">{uploadError}</p>
+                  </div>
+                )}
+                {uploadSuccess && !uploadError && (
+                  <div className="mt-3 flex items-center gap-2 p-3 bg-emerald-500/10 border border-emerald-500/20 rounded-xl">
+                    <CheckCircle className="w-4 h-4 text-emerald-400 shrink-0" />
+                    <p className="text-xs text-emerald-400 font-bold">✅ تم تحميل الفيديو بنجاح! يمكنك الآن تشغيله من الأعلى.</p>
+                  </div>
+                )}
+              </div>
             </div>
           </div>
 
@@ -1000,25 +1155,42 @@ export default function LandingPage({ onSelectDemo, onSelectSupport, onSelectTri
                 <div className="grid grid-cols-2 gap-3">
                   <div>
                     <label className="block text-xs text-slate-600 font-bold mb-1">الولاية</label>
-                    <input
-                      type="text"
-                      value={province}
-                      onChange={(e) => setProvince(e.target.value)}
-                      placeholder="مثال: سطيف"
-                      className="w-full text-xs px-3 py-2.5 bg-slate-50 border border-slate-200 rounded-lg text-slate-900 placeholder:text-slate-400 focus:outline-none focus:border-purple-600 focus:bg-white transition-all font-semibold"
+                    <select
+                      value={selectedWilayaCode}
+                      onChange={(e) => {
+                        const code = parseInt(e.target.value);
+                        setSelectedWilayaCode(code);
+                        const wilaya = wilayas.find(w => w.code === code);
+                        setProvince(wilaya ? wilaya.name_ar : "");
+                        setCity(""); // reset city
+                      }}
+                      className="w-full text-xs px-3 py-2.5 bg-slate-50 border border-slate-200 rounded-lg text-slate-900 focus:outline-none focus:border-purple-600 focus:bg-white transition-all font-semibold appearance-none cursor-pointer"
                       required
-                    />
+                    >
+                      <option value="" disabled>اختر الولاية...</option>
+                      {wilayas.map(w => (
+                        <option key={w.code} value={w.code}>
+                          {w.code} - {w.name_ar}
+                        </option>
+                      ))}
+                    </select>
                   </div>
                   <div>
-                    <label className="block text-xs text-slate-600 font-bold mb-1">المدينة</label>
-                    <input
-                      type="text"
+                    <label className="block text-xs text-slate-600 font-bold mb-1">المدينة (البلدية)</label>
+                    <select
                       value={city}
                       onChange={(e) => setCity(e.target.value)}
-                      placeholder="مثال: العلمة"
-                      className="w-full text-xs px-3 py-2.5 bg-slate-50 border border-slate-200 rounded-lg text-slate-900 placeholder:text-slate-400 focus:outline-none focus:border-purple-600 focus:bg-white transition-all font-semibold"
+                      className="w-full text-xs px-3 py-2.5 bg-slate-50 border border-slate-200 rounded-lg text-slate-900 focus:outline-none focus:border-purple-600 focus:bg-white transition-all font-semibold appearance-none cursor-pointer disabled:opacity-50 disabled:cursor-not-allowed"
                       required
-                    />
+                      disabled={!selectedWilayaCode}
+                    >
+                      <option value="" disabled>اختر البلدية...</option>
+                      {selectedWilayaCode && getCommunesByWilaya(selectedWilayaCode as number).map((c: any) => (
+                        <option key={c.code_commune} value={c.name_ar}>
+                          {c.name_ar}
+                        </option>
+                      ))}
+                    </select>
                   </div>
                 </div>
 
@@ -1156,6 +1328,58 @@ export default function LandingPage({ onSelectDemo, onSelectSupport, onSelectTri
                       );
                     })}
                   </div>
+
+                  {paymentMethod === "electronic" && (
+                    <div className="grid grid-cols-2 md:grid-cols-4 gap-2 text-right mt-2">
+                      {[
+                        { id: "ccp", name: "CCP" },
+                        { id: "baridimob", name: "بريدي موب" },
+                        { id: "redotpay", name: "RedotPay" },
+                        { id: "binance", name: "Binance" },
+                      ].map((sub) => {
+                        const isSubSelected = electronicPaymentType === sub.id;
+                        return (
+                          <button
+                            key={sub.id}
+                            type="button"
+                            onClick={() => setElectronicPaymentType(sub.id)}
+                            className={`p-2 rounded-lg text-xs font-bold text-center transition-all border cursor-pointer ${
+                              isSubSelected
+                                ? "bg-purple-100 border-purple-500 text-purple-700 shadow-sm"
+                                : "bg-white border-slate-200 text-slate-600 hover:bg-slate-50"
+                            }`}
+                          >
+                            {sub.name}
+                          </button>
+                        );
+                      })}
+                    </div>
+                  )}
+
+                  {paymentMethod === "cod" && (
+                    <div className="grid grid-cols-2 gap-2 text-right mt-2">
+                      {[
+                        { id: "office", name: "توصيل للمكتب" },
+                        { id: "home", name: "توصيل للمنزل" },
+                      ].map((sub) => {
+                        const isSubSelected = deliveryType === sub.id;
+                        return (
+                          <button
+                            key={sub.id}
+                            type="button"
+                            onClick={() => setDeliveryType(sub.id)}
+                            className={`p-2 rounded-lg text-xs font-bold text-center transition-all border cursor-pointer ${
+                              isSubSelected
+                                ? "bg-purple-100 border-purple-500 text-purple-700 shadow-sm"
+                                : "bg-white border-slate-200 text-slate-600 hover:bg-slate-50"
+                            }`}
+                          >
+                            {sub.name}
+                          </button>
+                        );
+                      })}
+                    </div>
+                  )}
                 </div>
 
                 <div>

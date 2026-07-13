@@ -1405,6 +1405,23 @@ export default function LandingPage({ onSelectDemo, onSelectSupport, onSelectTri
           {/* Main Frame Container */}
           <div className="relative bg-white border-2 border-slate-200 rounded-3xl overflow-hidden shadow-xl hover:border-purple-300 transition-all duration-300">
             
+            {/* Navigation Arrows */}
+            <button
+              onClick={() => scrollToSlide(activeSlideIndex === 0 ? systemImages.length - 1 : activeSlideIndex - 1)}
+              className="absolute right-4 top-1/2 -translate-y-1/2 z-20 w-10 h-10 md:w-11 md:h-11 rounded-full bg-white/90 hover:bg-white text-slate-800 hover:text-purple-600 border border-slate-200/80 hover:border-purple-300 hover:scale-105 transition-all shadow-md flex items-center justify-center cursor-pointer active:scale-95 group/btn"
+              aria-label="الصورة السابقة"
+            >
+              <ChevronRight className="w-5 h-5 group-hover/btn:translate-x-0.5 transition-transform" />
+            </button>
+
+            <button
+              onClick={() => scrollToSlide(activeSlideIndex === systemImages.length - 1 ? 0 : activeSlideIndex + 1)}
+              className="absolute left-4 top-1/2 -translate-y-1/2 z-20 w-10 h-10 md:w-11 md:h-11 rounded-full bg-white/90 hover:bg-white text-slate-800 hover:text-purple-600 border border-slate-200/80 hover:border-purple-300 hover:scale-105 transition-all shadow-md flex items-center justify-center cursor-pointer active:scale-95 group/btn"
+              aria-label="الصورة التالية"
+            >
+              <ChevronLeft className="w-5 h-5 group-hover/btn:-translate-x-0.5 transition-transform" />
+            </button>
+
             {/* Scrollable drag container */}
             <div 
               ref={scrollContainerRef}

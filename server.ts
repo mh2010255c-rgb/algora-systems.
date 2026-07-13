@@ -772,25 +772,7 @@ await seedFirestoreCollections();
       await dbSetDoc("orders", orderId, orderDoc);
       console.log("New Trial Request Registered & Saved successfully:", orderDoc);
 
-      // Direct welcome message via WhatsApp Web if connected
-      if (whatsappStatus === "Connected" && clientInstance) {
-        try {
-          const welcomeMessage = `مرحباً ${ownerName} 🌸\n\nنشكرك على طلب النسخة التجريبية لبرنامج Fon Zon لمتجرك "${storeName}".\nتم استلام طلبك بنجاح وسيتواصل معك الدعم الفني لتفعيل حسابك وإرسال بيانات الدخول.`;
-          
-          let cleanPhone = phone.replace(/[\s\+\-]/g, "");
-          if (cleanPhone.startsWith("0")) {
-            cleanPhone = "213" + cleanPhone.substring(1);
-          }
-          if (!cleanPhone.startsWith("213") && cleanPhone.length === 9) {
-            cleanPhone = "213" + cleanPhone;
-          }
-          const chatId = `${cleanPhone}@c.us`;
-          await clientInstance.sendMessage(chatId, welcomeMessage);
-          console.log("Direct welcome message sent successfully to:", chatId);
-        } catch (wsErr) {
-          console.error("Direct welcome message failed to send:", wsErr);
-        }
-      }
+
 
       // Trigger automatic WhatsApp greeting queue fallback
       await enqueueWhatsAppMessage(orderDoc, "new_order");
@@ -1281,45 +1263,29 @@ await seedFirestoreCollections();
     }
   });
 
-  // WhatsApp Web Session connection routes
+  // WhatsApp Web Session connection routes (Dummy handlers as whatsapp-web.js is removed)
   app.get("/api/admin/whatsapp/connection-status", (req, res) => {
     res.json({
-      status: whatsappStatus,
-      qr: qrCodePayload,
-      error: connectionError,
-      name: connectedName,
-      phone: connectedPhone,
-      lastConnected: lastConnectedAt
+      status: "Disconnected",
+      qr: "",
+      error: "تم تعطيل اتصال WhatsApp Web المحلي. يرجى استخدام UltraMsg أو Meta API أو Twilio.",
+      name: "",
+      phone: "",
+      lastConnected: ""
     });
   });
 
-  app.post("/api/admin/whatsapp/connect-session", async (req, res) => {
-    try {
-      await initializeWhatsAppWeb();
-      res.json({ success: true, message: "جاري بدء جلسة الاتصال..." });
-    } catch (e: any) {
-      res.status(500).json({ error: e.message });
-    }
+  app.post("/api/admin/whatsapp/connect-session", (req, res) => {
+    res.status(400).json({ error: "اتصال WhatsApp Web المحلي غير متوفر. يرجى تهيئة مزودي الخدمة السحابية (API)." });
   });
 
-  app.post("/api/admin/whatsapp/disconnect-session", async (req, res) => {
+  app.post("/api/admin/whatsapp/disconnect-session", (req, res) => {
     try {
-      if (clientInstance) {
-        try {
-          await clientInstance.destroy();
-        } catch (destroyErr) {
-          console.warn("Client destroy failed:", destroyErr);
-        }
-        clientInstance = null;
-      }
-      whatsappStatus = "Disconnected";
-      qrCodePayload = "";
-      connectionError = "";
       const sessionPath = path.join(process.cwd(), ".wwebjs_auth");
       if (fs.existsSync(sessionPath)) {
         fs.rmSync(sessionPath, { recursive: true, force: true });
       }
-      res.json({ success: true, message: "تم تسجيل الخروج بنجاح." });
+      res.json({ success: true, message: "تم تسجيل الخروج وتطهير الجلسة بنجاح." });
     } catch (e: any) {
       res.status(500).json({ error: e.message });
     }

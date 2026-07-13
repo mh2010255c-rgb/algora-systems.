@@ -10,3 +10,8 @@ coverage/
 data/
 public/downloads/
 *.exe
+*.mp4
+*.mov
+*.MOV
+*.avi
+*.mkv

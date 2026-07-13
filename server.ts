@@ -21,9 +21,6 @@ import {
   serverTimestamp
 } from "firebase/firestore";
 
-// @ts-ignore
-import pkg from "whatsapp-web.js";
-const { Client, LocalAuth } = pkg;
 import qrcode from "qrcode";
 
 // Load environment variables
@@ -420,115 +417,6 @@ await seedFirestoreCollections();
     return text;
   };
 
-  // WhatsAppService local session management state
-  let whatsappStatus: "Connected" | "Disconnected" | "Connecting" | "Authentication Failed" | "QR Expired" | "Reconnecting" = "Disconnected";
-  let qrCodePayload: string = "";
-  let clientInstance: any = null;
-  let connectionError: string = "";
-  let connectedName: string = "";
-  let connectedPhone: string = "";
-  let lastConnectedAt: string = "";
-
-  const initializeWhatsAppWeb = async () => {
-    if (clientInstance) {
-      console.log("WhatsApp Web client already initialized or initializing.");
-      return;
-    }
-
-    whatsappStatus = "Connecting";
-    connectionError = "";
-    qrCodePayload = "";
-    connectedName = "";
-    connectedPhone = "";
-
-    try {
-      let chromePath = "C:\\Program Files\\Google\\Chrome\\Application\\chrome.exe";
-      if (!fs.existsSync(chromePath)) {
-        chromePath = "C:\\Program Files (x86)\\Google\\Chrome\\Application\\chrome.exe";
-      }
-      
-      const puppeteerOptions: any = {
-        headless: true,
-        args: ["--no-sandbox", "--disable-setuid-sandbox", "--disable-dev-shm-usage"]
-      };
-      if (fs.existsSync(chromePath)) {
-        console.log("Using system Chrome path:", chromePath);
-        puppeteerOptions.executablePath = chromePath;
-      }
-
-      clientInstance = new Client({
-        authStrategy: new LocalAuth({ dataPath: path.join(process.cwd(), ".wwebjs_auth") }),
-        puppeteer: puppeteerOptions
-      });
-
-      clientInstance.on("qr", async (qr: string) => {
-        try {
-          qrCodePayload = await qrcode.toDataURL(qr);
-          whatsappStatus = "Connecting";
-          console.log("WhatsApp Web QR Code generated.");
-        } catch (err: any) {
-          console.error("Failed to generate QR data URI:", err);
-        }
-      });
-
-      clientInstance.on("ready", () => {
-        whatsappStatus = "Connected";
-        qrCodePayload = "";
-        connectionError = "";
-        connectedName = clientInstance.info?.pushname || "رقمي الشخصي";
-        connectedPhone = clientInstance.info?.wid?.user || "";
-        lastConnectedAt = new Date().toISOString();
-        console.log(`WhatsApp Web Client is READY! Connected to ${connectedName} (${connectedPhone})`);
-      });
-
-      clientInstance.on("auth_failure", (msg: string) => {
-        whatsappStatus = "Authentication Failed";
-        qrCodePayload = "";
-        connectionError = "فشل المصادقة: " + msg;
-        console.error("WhatsApp Web Auth failure:", msg);
-        clientInstance = null;
-      });
-
-      clientInstance.on("change_state", (state: string) => {
-        console.log("WhatsApp Web State Changed:", state);
-        if (state === "CONNECTING" || state === "PROXY_CONNECTION_DELAY") {
-          whatsappStatus = "Reconnecting";
-        }
-      });
-
-      clientInstance.on("disconnected", (reason: string) => {
-        whatsappStatus = "Disconnected";
-        qrCodePayload = "";
-        connectionError = "تم قطع الاتصال: " + reason;
-        console.log("WhatsApp Web Client was disconnected:", reason);
-        clientInstance = null;
-        // Auto-reconnect trigger in 10s
-        setTimeout(() => {
-          console.log("Attempting auto-reconnection to WhatsApp Web...");
-          initializeWhatsAppWeb().catch(console.error);
-        }, 10000);
-      });
-
-      await clientInstance.initialize();
-    } catch (err: any) {
-      whatsappStatus = "Disconnected";
-      connectionError = "فشل تشغيل الخدمة: " + err.message;
-      console.error("Failed to initialize WhatsApp Web:", err);
-      clientInstance = null;
-    }
-  };
-
-  // Autostart WhatsApp Web on server start
-  initializeWhatsAppWeb().catch(err => console.error("Initial autostart failed:", err));
-
-  // 30-Second Server Connection Health Check Loop
-  setInterval(() => {
-    console.log(`[Health Check] WhatsApp connection status: ${whatsappStatus}`);
-    if (whatsappStatus !== "Connected" && whatsappStatus !== "Connecting") {
-      console.warn(`[Health Check Alert] WhatsApp Web client is NOT connected. Current status: ${whatsappStatus}`);
-    }
-  }, 30000);
-
   // Helper: WhatsApp core sender driver supporting all providers
   const sendWhatsAppRequest = async (settings: any, toPhone: string, bodyText: string): Promise<{ success: boolean; messageId?: string; error?: string }> => {
     let cleanPhone = toPhone.replace(/[\s\+\-]/g, "");
@@ -539,23 +427,8 @@ await seedFirestoreCollections();
       cleanPhone = "213" + cleanPhone;
     }
 
-    const provider = settings.provider || "whatsapp_web";
+    const provider = settings.provider || "ultramsg";
     console.log(`sendWhatsAppRequest: Sending message to ${cleanPhone} via provider: ${provider}`);
-
-    if (provider === "whatsapp_web" || !provider) {
-      if (whatsappStatus !== "Connected" || !clientInstance) {
-        return { success: false, error: "جلسة واتساب ويب غير متصلة حالياً. يرجى المسح أو إعادة الاتصال." };
-      }
-
-      try {
-        const chatId = `${cleanPhone}@c.us`;
-        const msg = await clientInstance.sendMessage(chatId, bodyText);
-        return { success: true, messageId: msg.id.id };
-      } catch (e: any) {
-        console.error("WhatsApp Web Send Error:", e);
-        return { success: false, error: e.message };
-      }
-    }
 
     // 1. UltraMsg API Driver
     if (provider === "ultramsg") {

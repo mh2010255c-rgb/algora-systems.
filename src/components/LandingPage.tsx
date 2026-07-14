@@ -722,7 +722,7 @@ export default function LandingPage({ onSelectDemo, onSelectSupport, onSelectTri
       </section>
 
       {/* 1.5 SYSTEM VIDEO DEMONSTRATION SECTION */}
-      <section className="relative py-6 overflow-hidden">
+      <section id="demo-video-section" className="relative py-6 overflow-hidden">
         {/* Decorative ambient blurred shapes */}
         <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[400px] bg-purple-900/10 rounded-full blur-3xl pointer-events-none" />
         
@@ -1732,36 +1732,43 @@ export default function LandingPage({ onSelectDemo, onSelectSupport, onSelectTri
             </button>
           </div>
 
-          {/* PDF Guide Download Card */}
+          {/* Video Guide Card */}
           <div className="bg-slate-950/50 hover:bg-slate-900/50 border border-slate-900 hover:border-purple-500/20 p-6 rounded-2xl transition-all duration-300 hover:-translate-y-1 text-right flex flex-col justify-between space-y-6">
             <div className="space-y-4">
               <div className="flex items-center justify-between">
                 <span className="px-2 py-0.5 bg-amber-500/10 border border-amber-500/20 rounded-full text-[9px] text-amber-300 font-bold">
-                  مستند PDF إرشادي
+                  فيديو شرح إرشادي
                 </span>
                 <div className="w-10 h-10 rounded-xl bg-amber-950/30 border border-amber-900/30 flex items-center justify-center text-amber-400">
-                  <FileText className="w-5 h-5" />
+                  <FileVideo className="w-5 h-5" />
                 </div>
               </div>
               <div className="space-y-1">
-                <h4 className="font-extrabold text-slate-100 text-sm md:text-base">دليل البدء السريع والتثبيت</h4>
+                <h4 className="font-extrabold text-slate-100 text-sm md:text-base">فيديو شرح وتثبيت البرنامج</h4>
                 <p className="text-[11px] text-slate-400 leading-relaxed">
-                  كتيب مبسط باللغة العربية يشرح خطوة بخطوة كيفية تثبيت اللوجيسيال، وربط قاعدة البيانات، وإعداد طابعة الكود بار.
+                  فيديو مبسط باللغة العربية يشرح خطوة بخطوة كيفية تثبيت اللوجيسيال، وتفعيل النسخة التجريبية وبدء العمل على الكاشير.
                 </p>
               </div>
               <div className="pt-2 border-t border-slate-900 flex justify-between items-center text-[10px] text-slate-500 font-mono font-bold">
-                <span>الصيغة: PDF كتابة</span>
-                <span>الحجم: 2.4 MB</span>
+                <span>الصيغة: MP4 فيديو</span>
+                <span>المدة: 1:46 دقيقة</span>
               </div>
             </div>
             <button
               onClick={() => {
-                startDownload("Algora_QuickStart_Guide.pdf");
+                const el = document.getElementById("demo-video-section");
+                if (el) {
+                  el.scrollIntoView({ behavior: "smooth" });
+                }
+                if (videoRef.current) {
+                  videoRef.current.play();
+                  setIsPlaying(true);
+                }
               }}
               className="w-full py-3 bg-amber-600 hover:bg-amber-500 text-white font-black text-xs rounded-xl flex items-center justify-center gap-2 cursor-pointer transition-all active:scale-95 shadow-lg shadow-amber-900/20"
             >
-              <FileText className="w-4 h-4" />
-              <span>تحميل دليل البدء (PDF)</span>
+              <Play className="w-4 h-4 fill-white" />
+              <span>شاهد فيديو الشرح (MP4)</span>
             </button>
           </div>
 

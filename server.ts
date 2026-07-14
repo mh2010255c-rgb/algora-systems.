@@ -632,6 +632,54 @@ await seedFirestoreCollections();
     }
   };
 
+  // Helper: Send Telegram notification for new trial request
+  const sendTelegramNotification = async (order: any) => {
+    const token = process.env.TELEGRAM_BOT_TOKEN;
+    const chatId = process.env.TELEGRAM_CHAT_ID;
+
+    if (!token || !chatId) {
+      console.log("Telegram Bot is not configured. Skipping notification.");
+      return;
+    }
+
+    const deviceTypeLabel = order.deviceType === "pc" ? "حاسوب فقط" : order.deviceType === "mobile" ? "تطبيق هاتف فقط" : "حاسوب وهاتف معاً";
+
+    const msg = `
+🔔 <b>طلب تفعيل تجريبي جديد!</b>
+
+🏪 <b>اسم المحل:</b> ${order.storeName}
+👤 <b>اسم المالك:</b> ${order.ownerName}
+📞 <b>الهاتف الرئيسي:</b> <code>${order.phonePrimary}</code>
+📞 <b>الهاتف الثاني:</b> <code>${order.phoneSecondary || "لا يوجد"}</code>
+📍 <b>الولاية/المدينة:</b> ${order.province} / ${order.city}
+📦 <b>نوع الباقة:</b> ${deviceTypeLabel}
+💵 <b>قيمة الباقة:</b> ${order.packagePrice.toLocaleString("ar-DZ")} دج
+🔢 <b>رقم الطلب:</b> <code>${order.orderNumber}</code>
+⏰ <b>تاريخ الطلب:</b> ${new Date(order.createdAt).toLocaleString("ar-DZ")}
+`;
+
+    try {
+      const url = `https://api.telegram.org/bot${token}/sendMessage`;
+      const response = await fetch(url, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          chat_id: chatId,
+          text: msg.trim(),
+          parse_mode: "HTML"
+        })
+      });
+      const data = await response.json() as any;
+      if (response.ok && data.ok) {
+        console.log("Telegram notification sent successfully to chat:", chatId);
+      } else {
+        console.warn("Telegram notification API returned error:", data);
+      }
+    } catch (err) {
+      console.error("Telegram notification failed:", err);
+    }
+  };
+
   // BACKGROUND QUEUE WORKER INTERVAL (Runs every 15 seconds to process queue)
   setInterval(async () => {
     try {
@@ -797,6 +845,9 @@ await seedFirestoreCollections();
       // Trigger automatic WhatsApp greeting queue fallback
       await enqueueWhatsAppMessage(orderDoc, "new_order");
 
+      // Send Telegram bot notification
+      await sendTelegramNotification(orderDoc);
+
       res.json({
         success: true,
         message: "تم تسجيل طلبك للنسخة التجريبية بنجاح! سيتصل بك فريق الدعم الفني خلال ساعات لتفعيل حسابك وإرسال بيانات الدخول.",
@@ -855,6 +906,57 @@ await seedFirestoreCollections();
     res.json({
       configured: !!process.env.GEMINI_API_KEY,
       keyLength: process.env.GEMINI_API_KEY ? process.env.GEMINI_API_KEY.length : 0
+    });
+  });
+
+  // Save Telegram Config
+  app.post("/api/admin/save-telegram-config", (req, res) => {
+    const { botToken, chatId } = req.body;
+    if (!botToken || !chatId) {
+      return res.status(400).json({ error: "كل من توكن البوت ومعرف الدردشة مطلوبان." });
+    }
+
+    try {
+      process.env.TELEGRAM_BOT_TOKEN = botToken;
+      process.env.TELEGRAM_CHAT_ID = chatId;
+
+      // Write to .env file
+      const envPath = path.join(process.cwd(), ".env");
+      let envContent = "";
+      if (fs.existsSync(envPath)) {
+        envContent = fs.readFileSync(envPath, "utf-8");
+        
+        // Replace or append TELEGRAM_BOT_TOKEN
+        if (envContent.includes("TELEGRAM_BOT_TOKEN=")) {
+          envContent = envContent.replace(/TELEGRAM_BOT_TOKEN=.*/, `TELEGRAM_BOT_TOKEN="${botToken}"`);
+        } else {
+          envContent += `\nTELEGRAM_BOT_TOKEN="${botToken}"`;
+        }
+
+        // Replace or append TELEGRAM_CHAT_ID
+        if (envContent.includes("TELEGRAM_CHAT_ID=")) {
+          envContent = envContent.replace(/TELEGRAM_CHAT_ID=.*/, `TELEGRAM_CHAT_ID="${chatId}"`);
+        } else {
+          envContent += `\nTELEGRAM_CHAT_ID="${chatId}"`;
+        }
+      } else {
+        envContent = `TELEGRAM_BOT_TOKEN="${botToken}"\nTELEGRAM_CHAT_ID="${chatId}"\n`;
+      }
+      fs.writeFileSync(envPath, envContent, "utf-8");
+
+      res.json({ success: true, message: "تم تحديث إعدادات بوت التيليجرام وتنشيط الإشعارات بنجاح!" });
+    } catch (err: any) {
+      res.status(500).json({ error: "فشل حفظ الإعدادات: " + err.message });
+    }
+  });
+
+  // Check Telegram Config status
+  app.get("/api/admin/telegram-status", (req, res) => {
+    res.json({
+      configured: !!(process.env.TELEGRAM_BOT_TOKEN && process.env.TELEGRAM_CHAT_ID),
+      botTokenLength: process.env.TELEGRAM_BOT_TOKEN ? process.env.TELEGRAM_BOT_TOKEN.length : 0,
+      chatIdLength: process.env.TELEGRAM_CHAT_ID ? process.env.TELEGRAM_CHAT_ID.length : 0,
+      chatId: process.env.TELEGRAM_CHAT_ID || ""
     });
   });
 

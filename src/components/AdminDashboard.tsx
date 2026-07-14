@@ -229,6 +229,28 @@ export default function AdminDashboard({ onLogout, theme, setTheme }: AdminDashb
     setActivityLogs(prev => [`[${time}] ${message}`, ...prev.slice(0, 15)]);
   };
 
+  // Request desktop notification permissions
+  useEffect(() => {
+    if (typeof window !== "undefined" && "Notification" in window) {
+      if (Notification.permission === "default") {
+        Notification.requestPermission();
+      }
+    }
+  }, []);
+
+  // Helper to show native desktop notification
+  const showDesktopNotification = (title: string, options?: NotificationOptions) => {
+    if (typeof window !== "undefined" && "Notification" in window) {
+      if (Notification.permission === "granted") {
+        try {
+          new Notification(title, options);
+        } catch (e) {
+          console.warn("Failed to trigger desktop notification:", e);
+        }
+      }
+    }
+  };
+
   // Notification Sound Generator (Web Audio API)
   const playNotificationSound = () => {
     try {
@@ -282,27 +304,45 @@ export default function AdminDashboard({ onLogout, theme, setTheme }: AdminDashb
     }
 
     let hasNewTrial = false;
+    let newTrialStore = "";
     for (const id of currentTrialIds) {
       if (!prevTrialIds.current.has(id)) {
         hasNewTrial = true;
+        const req = rawTrialRequests.find((o: any) => o._id === id);
+        if (req) {
+          newTrialStore = req.storeName;
+        }
         break;
       }
     }
 
     let hasNewTicket = false;
+    let newTicketSubject = "";
     for (const id of currentTicketIds) {
       if (!prevTicketIds.current.has(id)) {
         hasNewTicket = true;
+        const t = rawSupportTickets.find((o: any) => o._id === id);
+        if (t) {
+          newTicketSubject = t.subject;
+        }
         break;
       }
     }
 
     if (hasNewTrial) {
       playNotificationSound();
-      addLog("🔔 تم استلام طلب تفعيل تجريبي جديد!");
+      addLog(`🔔 تم استلام طلب تفعيل تجريبي جديد! (${newTrialStore || 'جديد'})`);
+      showDesktopNotification("🔔 طلب تفعيل تجريبي جديد!", {
+        body: newTrialStore ? `اسم المتجر: ${newTrialStore}` : "تم استلام طلب جديد في قائمة المراجعة.",
+        icon: "/favicon.ico"
+      });
     } else if (hasNewTicket) {
       playNotificationSound();
-      addLog("🔔 تم استلام تذكرة دعم فني جديدة!");
+      addLog(`🔔 تم استلام تذكرة دعم فني جديدة! (${newTicketSubject || 'جديد'})`);
+      showDesktopNotification("🔔 تذكرة دعم فني جديدة!", {
+        body: newTicketSubject ? `الموضوع: ${newTicketSubject}` : "تم استلام تذكرة جديدة في مركز الدعم.",
+        icon: "/favicon.ico"
+      });
     }
 
     prevTrialIds.current = currentTrialIds;

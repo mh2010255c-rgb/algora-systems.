@@ -36,12 +36,59 @@ export default function SettingsTab({
   const [isSavingKey, setIsSavingKey] = useState(false);
   const [saveMessage, setSaveMessage] = useState("");
 
+  // Telegram bot configuration states
+  const [telegramToken, setTelegramToken] = useState("");
+  const [telegramChatId, setTelegramChatId] = useState("");
+  const [telegramStatus, setTelegramStatus] = useState({ configured: false, chatId: "" });
+  const [isSavingTelegram, setIsSavingTelegram] = useState(false);
+  const [telegramSaveMsg, setTelegramSaveMsg] = useState("");
+
   useEffect(() => {
     fetch("/api/admin/gemini-status")
       .then(res => res.json())
       .then(data => setKeyStatus(data))
       .catch(err => console.error(err));
+
+    fetch("/api/admin/telegram-status")
+      .then(res => res.json())
+      .then(data => {
+        setTelegramStatus({ configured: data.configured, chatId: data.chatId });
+        if (data.configured) {
+          setTelegramChatId(data.chatId);
+        }
+      })
+      .catch(err => console.error(err));
   }, []);
+
+  const handleSaveTelegramConfig = async (e: React.FormEvent) => {
+    e.preventDefault();
+    const tokenToSave = telegramToken.trim() || "";
+    const chatIdToSave = telegramChatId.trim();
+
+    if (!chatIdToSave) return;
+    setIsSavingTelegram(true);
+    setTelegramSaveMsg("");
+    try {
+      const res = await fetch("/api/admin/save-telegram-config", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ botToken: tokenToSave, chatId: chatIdToSave })
+      });
+      const data = await res.json();
+      if (res.ok && data.success) {
+        setTelegramSaveMsg("✅ تم ربط البوت وحفظ الإعدادات بنجاح!");
+        setTelegramStatus({ configured: true, chatId: chatIdToSave });
+        setTelegramToken("");
+        addLog("تم تحديث إعدادات الإشعارات لبوت تيليجرام وتنشيط الإرسال التلقائي.");
+      } else {
+        setTelegramSaveMsg("❌ خطأ: " + (data.error || "فشل الحفظ."));
+      }
+    } catch (err: any) {
+      setTelegramSaveMsg("❌ خطأ بالشبكة: " + err.message);
+    } finally {
+      setIsSavingTelegram(false);
+    }
+  };
 
   const handleSaveGeminiKey = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -172,6 +219,58 @@ export default function SettingsTab({
         {saveMessage && (
           <p className="text-[11px] font-bold text-right mt-1 px-2">{saveMessage}</p>
         )}
+      </div>
+
+      {/* Telegram Notification Configuration Section */}
+      <div className="pt-6 border-t border-slate-800 space-y-4">
+        <div>
+          <h5 className="text-xs font-black text-white">إعداد وتنشيط إشعارات تيليجرام (Telegram Notifications Bot)</h5>
+          <p className="text-[11px] text-slate-400 mt-1">
+            اربط موقعك ببوت تيليجرام لتصلك إشعارات فورية مباشرة على هاتفك عند تسجيل أي طلب تجربة مجانية جديد.
+          </p>
+        </div>
+
+        <form onSubmit={handleSaveTelegramConfig} className="space-y-4 bg-[#0B0B0F] p-5 rounded-xl border border-[rgba(255,255,255,0.06)] text-right">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+            <div className="space-y-1.5">
+              <label className="block text-xs font-black text-slate-300">رمز توكن البوت (Bot Token):</label>
+              <input
+                type="password"
+                value={telegramToken}
+                onChange={(e) => setTelegramToken(e.target.value)}
+                placeholder={telegramStatus.configured ? `البوت مفعل حالياً — أدخل توكن جديداً لتغييره` : "أدخل الرمز المميز للبوت (Token)"}
+                className="w-full bg-[#121218] border border-[rgba(255,255,255,0.06)] rounded-xl px-4 py-2.5 text-xs text-slate-100 placeholder:text-slate-600 text-left focus:outline-none focus:ring-1 focus:ring-[#7C3AED]"
+                required={!telegramStatus.configured}
+              />
+            </div>
+            
+            <div className="space-y-1.5">
+              <label className="block text-xs font-black text-slate-300">معرّف الدردشة المستلمة (Chat ID):</label>
+              <input
+                type="text"
+                value={telegramChatId}
+                onChange={(e) => setTelegramChatId(e.target.value)}
+                placeholder={telegramStatus.configured ? `الدردشة الحالية: ${telegramStatus.chatId}` : "أدخل معرف الدردشة أو رقم المجموعة (Chat ID)"}
+                className="w-full bg-[#121218] border border-[rgba(255,255,255,0.06)] rounded-xl px-4 py-2.5 text-xs text-slate-100 placeholder:text-slate-600 text-right focus:outline-none focus:ring-1 focus:ring-[#7C3AED]"
+                required
+              />
+            </div>
+          </div>
+
+          <div className="flex justify-between items-center flex-row-reverse">
+            <button
+              type="submit"
+              disabled={isSavingTelegram}
+              className="py-2.5 px-6 bg-purple-600 hover:bg-purple-500 text-white font-black text-xs rounded-xl shadow transition-all cursor-pointer text-center flex items-center justify-center gap-1.5"
+            >
+              {isSavingTelegram ? "جاري الحفظ والربط..." : "حفظ وربط البوت 🚀"}
+            </button>
+            
+            {telegramSaveMsg && (
+              <p className={`text-[11px] font-bold ${telegramSaveMsg.includes("❌") ? "text-rose-500" : "text-emerald-500"}`}>{telegramSaveMsg}</p>
+            )}
+          </div>
+        </form>
       </div>
 
       {/* Generator Section */}

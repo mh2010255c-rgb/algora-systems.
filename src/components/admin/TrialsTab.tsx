@@ -1448,6 +1448,21 @@ export default function TrialsTab({
                               </button>
                             )}
 
+                            {/* Delete Action */}
+                            <button
+                              onClick={() => {
+                                if (confirm(`هل أنت متأكد من حذف طلب "${req.storeName}" بالكامل؟`)) {
+                                  deleteTrialRequest(req.id);
+                                  addLog(`تم حذف طلب "${req.storeName}" من جدول الإجراءات.`);
+                                  triggerToast("تم حذف الطلب بنجاح.");
+                                }
+                              }}
+                              className="p-1.5 bg-[#0B0B12] hover:bg-rose-500/20 border border-rose-500/30 text-rose-400 rounded-lg transition-all cursor-pointer"
+                              title="حذف طلب العميل"
+                            >
+                              <Trash2 className="w-3.5 h-3.5" />
+                            </button>
+
                           </div>
                         </td>
                       </tr>
@@ -1546,12 +1561,28 @@ export default function TrialsTab({
             >
               {/* Drawer Header */}
               <div className="p-5 bg-[#0B0B12] border-b border-white/5 flex items-center justify-between flex-row-reverse">
-                <button
-                  onClick={() => setSelectedRequest(null)}
-                  className="p-2 bg-[#14141D] hover:bg-[#1C1C26] border border-white/5 text-slate-400 hover:text-white rounded-xl transition-all cursor-pointer"
-                >
-                  <X className="w-4 h-4" />
-                </button>
+                <div className="flex items-center gap-2">
+                  <button
+                    onClick={() => {
+                      if (confirm(`هل أنت متأكد من حذف طلب "${selectedRequest.storeName}" بالكامل؟`)) {
+                        deleteTrialRequest(selectedRequest.id);
+                        addLog(`تم حذف طلب "${selectedRequest.storeName}" من لوحة التفاصيل.`);
+                        setSelectedRequest(null);
+                        triggerToast("تم حذف الطلب بنجاح.");
+                      }
+                    }}
+                    className="p-2 bg-[#14141D] hover:bg-rose-500/10 border border-rose-500/20 text-rose-400 rounded-xl transition-all cursor-pointer"
+                    title="حذف هذا الطلب"
+                  >
+                    <Trash2 className="w-4 h-4" />
+                  </button>
+                  <button
+                    onClick={() => setSelectedRequest(null)}
+                    className="p-2 bg-[#14141D] hover:bg-[#1C1C26] border border-white/5 text-slate-400 hover:text-white rounded-xl transition-all cursor-pointer"
+                  >
+                    <X className="w-4 h-4" />
+                  </button>
+                </div>
 
                 <div className="flex items-center gap-3">
                   <div className="w-12 h-12 rounded-2xl bg-gradient-to-tr from-[#8B5CF6]/30 to-[#A855F7]/30 border border-[#8B5CF6]/40 flex items-center justify-center shrink-0">

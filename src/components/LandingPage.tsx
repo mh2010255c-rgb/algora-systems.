@@ -31,7 +31,7 @@ export default function LandingPage({ onSelectDemo, onSelectSupport, onSelectTri
   // Video Demo Section States
   const [videoSrc, setVideoSrc] = useState("/videos/demo.mp4");
   const [isPlaying, setIsPlaying] = useState(false);
-  const [isMuted, setIsMuted] = useState(true);
+  const [isMuted, setIsMuted] = useState(false);
   const [videoLinkInput, setVideoLinkInput] = useState("");
   const [activeChapter, setActiveChapter] = useState(0);
   const [uploadError, setUploadError] = useState<string | null>(null);
@@ -63,14 +63,24 @@ export default function LandingPage({ onSelectDemo, onSelectSupport, onSelectTri
       }
     }
   };
-
   const handleMuteUnmute = () => {
     if (videoRef.current) {
       videoRef.current.muted = !isMuted;
       setIsMuted(!isMuted);
     }
   };
-
+  const handleFullscreen = () => {
+    if (videoRef.current) {
+      const video = videoRef.current;
+      if (video.requestFullscreen) {
+        video.requestFullscreen();
+      } else if ((video as any).webkitEnterFullscreen) {
+        (video as any).webkitEnterFullscreen(); // iOS Safari fallback
+      } else if ((video as any).msRequestFullscreen) {
+        (video as any).msRequestFullscreen();
+      }
+    }
+  };
   const handleChapterClick = (time: number, index: number) => {
     if (videoRef.current) {
       videoRef.current.currentTime = time;
@@ -172,6 +182,9 @@ export default function LandingPage({ onSelectDemo, onSelectSupport, onSelectTri
 
   // Faq State
   const [faqOpen, setFaqOpen] = useState<number | null>(null);
+
+  // Tutorials Accordion State
+  const [tutorialOpen, setTutorialOpen] = useState<number | null>(null);
 
   // System Screenshots Gallery States
   const [selectedLightboxImage, setSelectedLightboxImage] = useState<any | null>(null);
@@ -564,6 +577,30 @@ export default function LandingPage({ onSelectDemo, onSelectSupport, onSelectTri
     }
   ];
 
+  // 4. Video Tutorials Definition
+  const tutorials = [
+    {
+      title: "كيفية تحميل وتثبيت لوجيسيال Algora Systems على الحاسوب",
+      desc: "شرح خطوة بخطوة لطريقة تحميل برنامج التثبيت (Setup)، تنصيبه على نظام ويندوز، وبدء الفترة التجريبية وتخطي جدار الحماية (Windows Defender).",
+      videoUrl: "/videos/demo.mp4"
+    },
+    {
+      title: "كيفية إضافة السلع والمنتجات وضبط كميات المخزون بالباركود والـ IMEI",
+      desc: "تعلم كيفية إضافة منتج جديد، تحديد فئة السلعة، إدخال سعر الشراء والبيع، وتوليد أو قراءة الباركود والرقم التسلسلي (IMEI) لضبط المخزون بدقة.",
+      videoUrl: "/videos/demo.mp4"
+    },
+    {
+      title: "إدارة ورشة الصيانة واستلام أجهزة الزبائن وتتبع العطل",
+      desc: "طريقة إدخال هاتف للصيانة، تشخيص العطل، تسجيل قطع الغيار المستخدمة، وتحديث حالة الطلب مع إرسال رسائل التنبيه للزبائن.",
+      videoUrl: "/videos/demo.mp4"
+    },
+    {
+      title: "كيفية تفعيل الاشتراك وإدخال مفتاح الترخيص بعد الدفع",
+      desc: "شرح يوضح كيفية دفع قيمة الاشتراك عبر طرق الدفع المحلية (بريدي موب أو CCP)، والحصول على مفتاح التفعيل لتنشيط الترخيص السنوي.",
+      videoUrl: "/videos/demo.mp4"
+    }
+  ];
+
   // Submit trial request to API
   const handleRegisterTrial = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -741,7 +778,7 @@ export default function LandingPage({ onSelectDemo, onSelectSupport, onSelectTri
           </div>
 
           {/* Centered Video Player Display - Larger and with minimum height for mobile */}
-          <div className="relative w-full aspect-video min-h-[280px] sm:min-h-[400px] md:min-h-[520px] lg:min-h-[600px] xl:min-h-[680px] 2xl:min-h-[780px] rounded-2xl bg-slate-950 border border-slate-900 overflow-hidden shadow-2xl group transition-all duration-300">
+          <div className="relative w-full aspect-video min-h-[420px] sm:min-h-[480px] md:min-h-[520px] lg:min-h-[600px] xl:min-h-[680px] 2xl:min-h-[780px] rounded-2xl bg-slate-950 border border-slate-900 overflow-hidden shadow-2xl group transition-all duration-300">
             
             {/* YouTube Link or Direct Link Handler */}
             {videoSrc.includes("youtube.com") || videoSrc.includes("youtu.be") ? (
@@ -775,21 +812,23 @@ export default function LandingPage({ onSelectDemo, onSelectSupport, onSelectTri
                 </video>
 
                 {/* Styled Player Controls Overlay */}
-                <div className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-black/95 via-black/50 to-transparent p-5 opacity-100 lg:opacity-0 lg:group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-between gap-4">
-                  
-                  {/* Video Title Information */}
-                  <div className="flex-1 text-right px-2">
-                    <span className="text-xs md:text-sm text-slate-200 font-bold block truncate">
-                      فيديو تعريفي لبرنامج تسيير محلات الهواتف والصيانة
-                    </span>
-                  </div>
-
+                <div className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-black/95 via-black/50 to-transparent p-5 opacity-100 lg:opacity-0 lg:group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-end gap-3">
                   {/* Mute/Unmute control */}
                   <button
                     onClick={handleMuteUnmute}
-                    className="w-10 h-10 rounded-full bg-slate-900/90 hover:bg-slate-800 text-slate-300 flex items-center justify-center shrink-0 cursor-pointer border border-slate-800/80"
+                    className="w-10 h-10 rounded-full bg-slate-900/90 hover:bg-slate-800 text-slate-300 flex items-center justify-center cursor-pointer border border-slate-800/80"
+                    title={isMuted ? "تشغيل الصوت" : "كتم الصوت"}
                   >
                     {isMuted ? <VolumeX className="w-5 h-5" /> : <Volume2 className="w-5 h-5 text-purple-400" />}
+                  </button>
+
+                  {/* Fullscreen control */}
+                  <button
+                    onClick={handleFullscreen}
+                    className="w-10 h-10 rounded-full bg-slate-900/90 hover:bg-slate-800 text-slate-300 flex items-center justify-center cursor-pointer border border-slate-800/80"
+                    title="ملء الشاشة"
+                  >
+                    <Maximize2 className="w-5 h-5 text-indigo-400" />
                   </button>
                 </div>
 
@@ -1812,6 +1851,60 @@ export default function LandingPage({ onSelectDemo, onSelectSupport, onSelectTri
                     <p className="p-4 text-xs md:text-sm text-slate-400 leading-relaxed">
                       {faq.a}
                     </p>
+                  </motion.div>
+                )}
+              </AnimatePresence>
+            </div>
+          ))}
+        </div>
+      </section>
+
+      {/* 9. TUTORIALS ACCORDION */}
+      <section className="space-y-8 max-w-3xl mx-auto text-right">
+        <div className="text-center space-y-2">
+          <span className="inline-flex items-center gap-1.5 px-3 py-1 bg-purple-500/10 border border-purple-500/20 rounded-full text-purple-400 text-xs font-black">
+            <Video className="w-3.5 h-3.5" />
+            <span>شروحات استخدام النظام بالفيديو</span>
+          </span>
+          <h2 className="text-xl md:text-3xl font-black text-slate-100">دروس تعليمية مصورة خطوة بخطوة</h2>
+          <p className="text-xs md:text-sm text-slate-400">شاهد بالفيديو كيفية تثبيت البرنامج، إضافة منتجاتك، وتسيير محلك باحترافية كاملة.</p>
+        </div>
+
+        <div className="space-y-3.5">
+          {tutorials.map((tutorial, idx) => (
+            <div key={idx} className="bg-slate-950/60 border border-slate-900 rounded-xl overflow-hidden transition-all">
+              <button
+                onClick={() => setTutorialOpen(tutorialOpen === idx ? null : idx)}
+                className="w-full p-4 flex justify-between items-center text-right font-bold text-xs md:text-sm text-slate-200 hover:text-purple-400 transition-colors cursor-pointer"
+              >
+                <Play className={`w-3.5 h-3.5 text-purple-400 shrink-0 transition-transform ${tutorialOpen === idx ? "rotate-90 text-indigo-400 fill-indigo-400" : "fill-purple-400"}`} />
+                <span>{tutorial.title}</span>
+              </button>
+              
+              <AnimatePresence>
+                {tutorialOpen === idx && (
+                  <motion.div
+                    initial={{ height: 0, opacity: 0 }}
+                    animate={{ height: "auto", opacity: 1 }}
+                    exit={{ height: 0, opacity: 0 }}
+                    className="border-t border-slate-900 bg-slate-900/10 p-4 space-y-4"
+                  >
+                    <div className="relative w-full aspect-video rounded-xl bg-slate-950 border border-slate-900 overflow-hidden shadow-2xl">
+                      <video
+                        controls
+                        playsInline
+                        preload="metadata"
+                        className="w-full h-full object-cover"
+                        src={tutorial.videoUrl}
+                      >
+                        متصفحك لا يدعم تشغيل الفيديو
+                      </video>
+                    </div>
+                    {tutorial.desc && (
+                      <p className="text-xs md:text-sm text-slate-400 leading-relaxed px-1">
+                        {tutorial.desc}
+                      </p>
+                    )}
                   </motion.div>
                 )}
               </AnimatePresence>

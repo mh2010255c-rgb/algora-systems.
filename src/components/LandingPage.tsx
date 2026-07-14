@@ -726,7 +726,7 @@ export default function LandingPage({ onSelectDemo, onSelectSupport, onSelectTri
         {/* Decorative ambient blurred shapes */}
         <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[400px] bg-purple-900/10 rounded-full blur-3xl pointer-events-none" />
         
-        <div className="max-w-5xl mx-auto px-4 md:px-6 space-y-8">
+        <div className="max-w-7xl mx-auto px-2 md:px-6 space-y-8">
           <div className="text-center space-y-3">
             <span className="inline-flex items-center gap-1.5 px-3.5 py-1 bg-indigo-500/10 border border-indigo-500/20 rounded-full text-indigo-400 text-xs font-black">
               <Video className="w-4 h-4" />
@@ -741,7 +741,7 @@ export default function LandingPage({ onSelectDemo, onSelectSupport, onSelectTri
           </div>
 
           {/* Centered Video Player Display - Larger and with minimum height for mobile */}
-          <div className="relative w-full aspect-video min-h-[220px] sm:min-h-[320px] md:min-h-[440px] lg:min-h-[500px] xl:min-h-[600px] 2xl:min-h-[700px] rounded-3xl bg-slate-950 border border-slate-900 overflow-hidden shadow-2xl group transition-all duration-300">
+          <div className="relative w-full aspect-video min-h-[280px] sm:min-h-[400px] md:min-h-[520px] lg:min-h-[600px] xl:min-h-[680px] 2xl:min-h-[780px] rounded-2xl bg-slate-950 border border-slate-900 overflow-hidden shadow-2xl group transition-all duration-300">
             
             {/* YouTube Link or Direct Link Handler */}
             {videoSrc.includes("youtube.com") || videoSrc.includes("youtu.be") ? (

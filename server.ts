@@ -320,7 +320,7 @@ const seedFirestoreCollections = async () => {
         name: "طلب جديد",
         description: "ترسل تلقائياً عند تسجيل طلب تجريبي جديد",
         language: "ar",
-        message: `مرحباً {{customerName}} 👋\n\nتم استلام طلبك بنجاح.\n\nرقم الطلب:\n{{orderNumber}}\n\nاسم المحل:\n{{storeName}}\n\nالباقة المختارة:\n{{package}}\n\nسيتم التواصل معك خلال أقرب وقت لإكمال إجراءات التفعيل.\n\nشكراً لاختيارك Fon Zon Systems ❤️`,
+        message: `السلام عليكم أستاذ {{customerName}} 👋\nمعك فريق الدعم الفني والتقني لـ *Algora Systems* 🇩🇿💻\n\nيسعدنا جداً اختيارك لنا لتنظيم وتسيير نشاطك التجاري! لقد استلمنا طلبك لتجربة البرنامج لصالح متجركم المميز:\n🏪 *{{storeName}}*\n\nلقد قمنا بتجهيز حسابك وفترة التفعيل الخاصة بـ:\n📦 *{{package}}*\n\nهل أنت متاح حالياً لنقوم بمساعدتك عن بُعد في عملية التثبيت السريع للبرنامج وتفعيله لتبدأ العمل؟ 🚀😊`,
         enabled: true
       },
       {
@@ -379,6 +379,23 @@ const seedFirestoreCollections = async () => {
         await dbSetDoc("whatsapp_templates", t.id, t);
         console.log(`Database Seeded: Template "${t.name}" initialized.`);
       }
+    }
+
+    // Migrate/Update new_order template to the new professional format in Firestore
+    try {
+      const newOrderTemplateRef = doc(db, "whatsapp_templates", "new_order");
+      const newOrderSnap = await getDoc(newOrderTemplateRef);
+      if (newOrderSnap.exists()) {
+        const currentMsg = newOrderSnap.data().message || "";
+        if (currentMsg.includes("مرحباً أستاذ") || currentMsg.includes("تم استلام طلبك بنجاح") || currentMsg.includes("Fon Zon")) {
+          await updateDoc(newOrderTemplateRef, {
+            message: `السلام عليكم أستاذ {{customerName}} 👋\nمعك فريق الدعم الفني والتقني لـ *Algora Systems* 🇩🇿💻\n\nيسعدنا جداً اختيارك لنا لتنظيم وتسيير نشاطك التجاري! لقد استلمنا طلبك لتجربة البرنامج لصالح متجركم المميز:\n🏪 *{{storeName}}*\n\nلقد قمنا بتجهيز حسابك وفترة التفعيل الخاصة بـ:\n📦 *{{package}}*\n\nهل أنت متاح حالياً لنقوم بمساعدتك عن بُعد في عملية التثبيت السريع للبرنامج وتفعيله لتبدأ العمل؟ 🚀😊`
+          });
+          console.log("Migrated new_order template in Firestore to the new professional marketing version.");
+        }
+      }
+    } catch (migErr: any) {
+      console.warn("Migration of new_order template in Firestore failed:", migErr.message);
     }
   } catch (err) {
     console.error("Database Seeding failed:", err);

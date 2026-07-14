@@ -672,7 +672,7 @@ export default function TrialsTab({
     }
     
     const chosenPlan = translateProg(programType);
-    const textMessage = `مرحباً أستاذ ${ownerName}، معكم الدعم الفني لبرنامج الكاشير والبيع Algora POS.\n\nلقد استلمنا طلبكم لتجربة البرنامج لصالح متجركم المميز: *${storeName}*.\n\nلقد قمنا بتجهيز الحساب وفترة التفعيل لـ: *${chosenPlan}*.\n\nهل أنتم متاحون الآن لنقوم بمساعدتكم في عملية التثبيت السريع وبدء العمل؟ 😊`;
+    const textMessage = `السلام عليكم أستاذ ${ownerName} 👋\nمعك فريق الدعم الفني والتقني لـ *Algora Systems* 🇩🇿💻\n\nيسعدنا جداً اختيارك لنا لتنظيم وتسيير نشاطك التجاري! لقد استلمنا طلبك لتجربة البرنامج لصالح متجركم المميز:\n🏪 *${storeName}*\n\nلقد قمنا بتجهيز حسابك وفترة التفعيل الخاصة بـ:\n📦 *${chosenPlan}*\n\nهل أنت متاح حالياً لنقوم بمساعدتك عن بُعد في عملية التثبيت السريع للبرنامج وتفعيله لتبدأ العمل؟ 🚀😊`;
     
     return `https://wa.me/${cleanPhone}?text=${encodeURIComponent(textMessage)}`;
   };

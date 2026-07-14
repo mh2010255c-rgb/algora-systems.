@@ -756,12 +756,15 @@ export default function LandingPage({ onSelectDemo, onSelectSupport, onSelectTri
               <>
                 <video
                   ref={videoRef}
+                  autoPlay
                   loop
                   muted={isMuted}
                   playsInline
                   preload="auto"
                   className="w-full h-full object-cover"
                   onClick={handlePlayPause}
+                  onPlay={() => setIsPlaying(true)}
+                  onPause={() => setIsPlaying(false)}
                   onError={(e) => {
                     console.error('Video failed to load:', e);
                   }}

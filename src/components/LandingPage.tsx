@@ -777,14 +777,6 @@ export default function LandingPage({ onSelectDemo, onSelectSupport, onSelectTri
                 {/* Styled Player Controls Overlay */}
                 <div className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-black/95 via-black/50 to-transparent p-5 opacity-100 lg:opacity-0 lg:group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-between gap-4">
                   
-                  {/* Play/Pause control */}
-                  <button
-                    onClick={handlePlayPause}
-                    className="w-10 h-10 rounded-full bg-purple-600 hover:bg-purple-500 text-white flex items-center justify-center shrink-0 shadow-lg cursor-pointer transition-transform active:scale-95"
-                  >
-                    {isPlaying ? <Pause className="w-5 h-5 fill-white" /> : <Play className="w-5 h-5 fill-white translate-x-0.5" />}
-                  </button>
-
                   {/* Video Title Information */}
                   <div className="flex-1 text-right px-2">
                     <span className="text-xs md:text-sm text-slate-200 font-bold block truncate">
@@ -813,11 +805,7 @@ export default function LandingPage({ onSelectDemo, onSelectSupport, onSelectTri
               </>
             )}
 
-            {/* Floating Live Badge */}
-            <div className="absolute top-4 right-4 md:top-5 md:right-5 bg-slate-950/90 backdrop-blur-md px-3.5 py-1.5 rounded-full border border-slate-800/80 flex items-center gap-2 shadow-lg">
-              <div className="w-2 h-2 rounded-full bg-emerald-500 animate-ping" />
-              <span className="text-[10px] md:text-xs text-slate-200 font-extrabold tracking-wider font-mono">LIVE PREVIEW</span>
-            </div>
+
           </div>
 
 

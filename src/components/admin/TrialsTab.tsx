@@ -21,12 +21,12 @@ interface TrialRequest {
   programType?: string;
   city: string;
   timestamp: string;
-  status: "pending" | "contacted" | "demo_sent" | "approved" | "completed" | "canceled";
+  status: "pending" | "contacted" | "demo_sent" | "approved" | "completed" | "canceled" | "whatsapp_sent" | "no_whatsapp";
 }
 
 interface StatusDropdownProps {
-  currentStatus: "pending" | "contacted" | "demo_sent" | "approved" | "completed" | "canceled";
-  onChange: (newStatus: "pending" | "contacted" | "demo_sent" | "approved" | "completed" | "canceled") => void;
+  currentStatus: "pending" | "contacted" | "demo_sent" | "approved" | "completed" | "canceled" | "whatsapp_sent" | "no_whatsapp";
+  onChange: (newStatus: "pending" | "contacted" | "demo_sent" | "approved" | "completed" | "canceled" | "whatsapp_sent" | "no_whatsapp") => void;
   storeName?: string;
 }
 
@@ -63,6 +63,24 @@ function StatusDropdown({ currentStatus, onChange, storeName }: StatusDropdownPr
       btnClass: "bg-amber-500/10 border-amber-500/30 text-amber-400 hover:bg-amber-500/20 focus:ring-amber-500/30",
       activeTextClass: "text-amber-400",
       activeBgClass: "bg-amber-500/5 hover:bg-amber-500/10"
+    },
+    {
+      id: "whatsapp_sent" as const,
+      label: "تم ارسال واتس اب",
+      desc: "تم إرسال رسالة ترحيبية بالواتساب.",
+      icon: MessageSquareCode,
+      btnClass: "bg-teal-500/10 border-teal-500/30 text-teal-400 hover:bg-teal-500/20 focus:ring-teal-500/30",
+      activeTextClass: "text-teal-400",
+      activeBgClass: "bg-teal-500/5 hover:bg-teal-500/10"
+    },
+    {
+      id: "no_whatsapp" as const,
+      label: "لا يوجد واتس اب",
+      desc: "الرقم ليس لديه حساب واتساب.",
+      icon: AlertCircle,
+      btnClass: "bg-orange-500/10 border-orange-500/30 text-orange-400 hover:bg-orange-500/20 focus:ring-orange-500/30",
+      activeTextClass: "text-orange-400",
+      activeBgClass: "bg-orange-500/5 hover:bg-orange-500/10"
     },
     {
       id: "demo_sent" as const,
@@ -213,7 +231,7 @@ function StatusDropdown({ currentStatus, onChange, storeName }: StatusDropdownPr
 
 interface TrialsTabProps {
   sortedTrials: TrialRequest[];
-  updateTrialStatus: (id: string, newStatus: "pending" | "contacted" | "demo_sent" | "approved" | "completed" | "canceled") => void;
+  updateTrialStatus: (id: string, newStatus: "pending" | "contacted" | "demo_sent" | "approved" | "completed" | "canceled" | "whatsapp_sent" | "no_whatsapp") => void;
   openEditModal: (req: TrialRequest) => void;
   deleteTrialRequest: (id: string) => void;
   createMockRequest: () => void;
@@ -247,7 +265,7 @@ export default function TrialsTab({
   const [addProgramType, setAddProgramType] = useState("both");
   const [addPaymentMethod, setAddPaymentMethod] = useState("baridimob");
   const [addHasWhatsapp, setAddHasWhatsapp] = useState<"yes" | "no">("yes");
-  const [addStatus, setAddStatus] = useState<"pending" | "contacted" | "demo_sent" | "approved" | "completed" | "canceled">("pending");
+  const [addStatus, setAddStatus] = useState<"pending" | "contacted" | "demo_sent" | "approved" | "completed" | "canceled" | "whatsapp_sent" | "no_whatsapp">("pending");
   const [isSubmittingAdd, setIsSubmittingAdd] = useState(false);
   
   // Checkbox Quick Filters
@@ -2279,6 +2297,8 @@ export default function TrialsTab({
                       <option value="pending">⏳ قيد الانتظار والمراجعة</option>
                       <option value="contacted">📞 تم التواصل مع العميل</option>
                       <option value="demo_sent">🧪 تم ارسال النسخة التجريبية</option>
+                      <option value="whatsapp_sent">💬 تم إرسال واتساب</option>
+                      <option value="no_whatsapp">⚠️ لا يوجد واتساب</option>
                       <option value="approved">🟢 مفعّل ونشط (تسليم فوري)</option>
                       <option value="completed">✅ مكتمل ومؤكد</option>
                       <option value="canceled">❌ ملغى أو مرفوض</option>

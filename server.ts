@@ -98,6 +98,9 @@ async function startServer() {
   app.use(express.json());
   app.use(express.urlencoded({ extended: true }));
 
+  // Serve static files from "public" directory (downloads, videos, etc.)
+  app.use(express.static(path.join(process.cwd(), "public")));
+
   const DATA_DIR = path.join(process.cwd(), "data");
   if (!fs.existsSync(DATA_DIR)) {
     fs.mkdirSync(DATA_DIR);

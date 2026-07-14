@@ -168,16 +168,53 @@ export default function LandingPage({ onSelectDemo, onSelectSupport, onSelectTri
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [submitStatus, setSubmitStatus] = useState<{ success?: boolean; message?: string; error?: string } | null>(null);
   const [showSuccessDownloads, setShowSuccessDownloads] = useState(false);
+  const [downloadToast, setDownloadToast] = useState<{
+    show: boolean;
+    type: "info" | "success" | "error";
+    message: string;
+  } | null>(null);
 
   const registerTrial = useMutation(api.orders.create);
 
-  const startDownload = (filename: string) => {
-    const link = document.createElement("a");
-    link.href = `/downloads/${filename}`;
-    link.setAttribute("download", filename);
-    document.body.appendChild(link);
-    link.click();
-    document.body.removeChild(link);
+  const startDownload = async (filename: string) => {
+    setDownloadToast({
+      show: true,
+      type: "info",
+      message: "جاري التحقق من وجود الملف على الخادم لبدء التنزيل..."
+    });
+
+    try {
+      const response = await fetch(`/downloads/${filename}`, { method: "HEAD" });
+      
+      if (!response.ok) {
+        throw new Error("File not found on server");
+      }
+
+      setDownloadToast({
+        show: true,
+        type: "success",
+        message: "تم العثور على الملف! يبدأ التنزيل الآن..."
+      });
+
+      // Auto-hide success toast after 3 seconds
+      setTimeout(() => {
+        setDownloadToast(prev => prev?.type === "success" ? null : prev);
+      }, 3000);
+
+      const link = document.createElement("a");
+      link.href = `/downloads/${filename}`;
+      link.setAttribute("download", filename);
+      document.body.appendChild(link);
+      link.click();
+      document.body.removeChild(link);
+    } catch (error) {
+      console.error("Download verification error:", error);
+      setDownloadToast({
+        show: true,
+        type: "error",
+        message: "عذراً، هذا الملف غير متوفر حالياً للتنزيل. يرجى المحاولة لاحقاً أو الاتصال بالدعم الفني."
+      });
+    }
   };
 
   // Faq State
@@ -1912,6 +1949,45 @@ export default function LandingPage({ onSelectDemo, onSelectSupport, onSelectTri
           ))}
         </div>
       </section>
+
+      {/* Floating Download Toast Notifications */}
+      <AnimatePresence>
+        {downloadToast && downloadToast.show && (
+          <motion.div
+            initial={{ opacity: 0, y: 50, scale: 0.9 }}
+            animate={{ opacity: 1, y: 0, scale: 1 }}
+            exit={{ opacity: 0, y: 20, scale: 0.95 }}
+            transition={{ duration: 0.3, ease: "easeOut" }}
+            className="fixed bottom-6 right-6 z-50 max-w-sm w-full bg-slate-900/95 backdrop-blur-md border border-slate-800 p-4 rounded-xl shadow-2xl flex items-start gap-3 text-right text-slate-100"
+            dir="rtl"
+          >
+            <div className="shrink-0 pt-0.5">
+              {downloadToast.type === "info" && (
+                <Loader2 className="w-5 h-5 text-purple-400 animate-spin" />
+              )}
+              {downloadToast.type === "success" && (
+                <CheckCircle2 className="w-5 h-5 text-emerald-400" />
+              )}
+              {downloadToast.type === "error" && (
+                <AlertCircle className="w-5 h-5 text-rose-500" />
+              )}
+            </div>
+
+            <div className="flex-1 space-y-1">
+              <p className="text-xs font-bold leading-relaxed">
+                {downloadToast.message}
+              </p>
+            </div>
+
+            <button
+              onClick={() => setDownloadToast(null)}
+              className="shrink-0 p-1 hover:bg-slate-800 rounded-lg text-slate-400 hover:text-slate-200 transition-colors"
+            >
+              <X className="w-4 h-4" />
+            </button>
+          </motion.div>
+        )}
+      </AnimatePresence>
 
     </div>
   );

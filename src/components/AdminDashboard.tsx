@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import { motion, AnimatePresence } from "motion/react";
 import { useQuery, useMutation } from "convex/react";
 import { api } from "../../convex/_generated/api";
@@ -31,7 +31,7 @@ interface TrialRequest {
   programType?: string;
   city: string;
   timestamp: string;
-  status: "pending" | "contacted" | "demo_sent" | "approved" | "completed" | "canceled";
+  status: "pending" | "contacted" | "demo_sent" | "approved" | "completed" | "canceled" | "whatsapp_sent" | "no_whatsapp";
 }
 
 interface SupportTicket {
@@ -202,7 +202,7 @@ export default function AdminDashboard({ onLogout, theme, setTheme }: AdminDashb
   const [editProgramType, setEditProgramType] = useState("annual");
   const [editPaymentMethod, setEditPaymentMethod] = useState("baridimob");
   const [editHasWhatsapp, setEditHasWhatsapp] = useState<"yes" | "no">("yes");
-  const [editStatus, setEditStatus] = useState<"pending" | "contacted" | "approved" | "completed" | "canceled">("pending");
+  const [editStatus, setEditStatus] = useState<"pending" | "contacted" | "demo_sent" | "approved" | "completed" | "canceled" | "whatsapp_sent" | "no_whatsapp">("pending");
   const [isUpdating, setIsUpdating] = useState(false);
 
   // Stats Counters
@@ -228,6 +228,86 @@ export default function AdminDashboard({ onLogout, theme, setTheme }: AdminDashb
     const time = new Date().toLocaleTimeString("ar-DZ", { hour: '2-digit', minute: '2-digit', second: '2-digit' });
     setActivityLogs(prev => [`[${time}] ${message}`, ...prev.slice(0, 15)]);
   };
+
+  // Notification Sound Generator (Web Audio API)
+  const playNotificationSound = () => {
+    try {
+      const audioCtx = new (window.AudioContext || (window as any).webkitAudioContext)();
+      const now = audioCtx.currentTime;
+
+      const playNote = (frequency: number, startTime: number, duration: number, volume: number) => {
+        const osc = audioCtx.createOscillator();
+        const gainNode = audioCtx.createGain();
+        
+        osc.type = "sine"; 
+        osc.frequency.setValueAtTime(frequency, startTime);
+        
+        gainNode.gain.setValueAtTime(0, startTime);
+        gainNode.gain.linearRampToValueAtTime(volume, startTime + 0.04); 
+        gainNode.gain.exponentialRampToValueAtTime(0.0001, startTime + duration); 
+        
+        osc.connect(gainNode);
+        gainNode.connect(audioCtx.destination);
+        
+        osc.start(startTime);
+        osc.stop(startTime + duration);
+      };
+
+      // Premium sweet chime sequence (A5 -> C#6 -> E6)
+      playNote(880, now, 0.35, 0.08);              // A5
+      playNote(1108.73, now + 0.08, 0.4, 0.06);     // C#6
+      playNote(1318.51, now + 0.16, 0.45, 0.04);    // E6
+    } catch (error) {
+      console.warn("Failed to play notification sound:", error);
+    }
+  };
+
+  // Refs to track previous ids for live alerts
+  const isInitialLoad = useRef(true);
+  const prevTrialIds = useRef<Set<string>>(new Set());
+  const prevTicketIds = useRef<Set<string>>(new Set());
+
+  // Listen to incoming trial requests or tickets and trigger sound
+  useEffect(() => {
+    if (rawTrialRequests === undefined || rawSupportTickets === undefined) return;
+
+    const currentTrialIds = new Set<string>((rawTrialRequests || []).map((o: any) => o._id));
+    const currentTicketIds = new Set<string>((rawSupportTickets || []).map((t: any) => t._id));
+
+    if (isInitialLoad.current) {
+      prevTrialIds.current = currentTrialIds;
+      prevTicketIds.current = currentTicketIds;
+      isInitialLoad.current = false;
+      return;
+    }
+
+    let hasNewTrial = false;
+    for (const id of currentTrialIds) {
+      if (!prevTrialIds.current.has(id)) {
+        hasNewTrial = true;
+        break;
+      }
+    }
+
+    let hasNewTicket = false;
+    for (const id of currentTicketIds) {
+      if (!prevTicketIds.current.has(id)) {
+        hasNewTicket = true;
+        break;
+      }
+    }
+
+    if (hasNewTrial) {
+      playNotificationSound();
+      addLog("🔔 تم استلام طلب تفعيل تجريبي جديد!");
+    } else if (hasNewTicket) {
+      playNotificationSound();
+      addLog("🔔 تم استلام تذكرة دعم فني جديدة!");
+    }
+
+    prevTrialIds.current = currentTrialIds;
+    prevTicketIds.current = currentTicketIds;
+  }, [rawTrialRequests, rawSupportTickets]);
 
   const handleVerifyPayment = (paymentId: string, amount: number) => {
     setBaridimobPayments(prev => prev.map(p => p.id === paymentId ? { ...p, status: "verified" } : p));
@@ -282,6 +362,8 @@ export default function AdminDashboard({ onLogout, theme, setTheme }: AdminDashb
       case "pending": return "⏳ جديد";
       case "contacted": return "📞 تم التواصل";
       case "demo_sent": return "🧪 تم ارسال النسخة التجريبية";
+      case "whatsapp_sent": return "💬 تم إرسال واتساب";
+      case "no_whatsapp": return "⚠️ لا يوجد واتساب";
       case "approved": return "🟢 مفعّل ونشط";
       case "completed": return "✅ تم الدفع";
       case "canceled": return "❌ ملغى";
@@ -334,7 +416,7 @@ export default function AdminDashboard({ onLogout, theme, setTheme }: AdminDashb
   };
 
   // Update Trial Request Status (Quick Action)
-  const updateTrialStatus = async (id: any, newStatus: "pending" | "contacted" | "demo_sent" | "approved" | "completed" | "canceled") => {
+  const updateTrialStatus = async (id: any, newStatus: "pending" | "contacted" | "demo_sent" | "approved" | "completed" | "canceled" | "whatsapp_sent" | "no_whatsapp") => {
     try {
       const targetReq = trialRequests.find(r => r.id === id);
       const storeName = targetReq ? targetReq.storeName : "العميل";
@@ -1071,6 +1153,9 @@ export default function AdminDashboard({ onLogout, theme, setTheme }: AdminDashb
                     >
                       <option value="pending">⏳ قيد الانتظار والمراجعة</option>
                       <option value="contacted">📞 تم التواصل مع العميل</option>
+                      <option value="demo_sent">🧪 تم ارسال النسخة التجريبية</option>
+                      <option value="whatsapp_sent">💬 تم إرسال واتساب</option>
+                      <option value="no_whatsapp">⚠️ لا يوجد واتساب</option>
                       <option value="approved">🟢 مفعّل ونشط (تم تسليم الترخيص)</option>
                       <option value="completed">✅ مكتمل ومؤكد</option>
                       <option value="canceled">❌ ملغى أو مرفوض</option>

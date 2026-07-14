@@ -8,7 +8,7 @@ interface TrialRequest {
   phone: string;
   city: string;
   timestamp: string;
-  status: "pending" | "contacted" | "demo_sent" | "approved" | "completed" | "canceled";
+  status: "pending" | "contacted" | "demo_sent" | "approved" | "completed" | "canceled" | "whatsapp_sent" | "no_whatsapp";
 }
 
 interface OverviewTabProps {

@@ -8,7 +8,9 @@ coverage/
 !.env.example
 .wwebjs_auth/
 /data/
-public/downloads/
+public/downloads/*
+!public/downloads/app-debug.apk
+!public/downloads/Algora_QuickStart_Guide.pdf
 *.exe
 *.mp4
 *.mov

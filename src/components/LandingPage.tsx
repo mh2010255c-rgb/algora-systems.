@@ -177,33 +177,74 @@ export default function LandingPage({ onSelectDemo, onSelectSupport, onSelectTri
   const registerTrial = useMutation(api.orders.create);
 
   const startDownload = async (filename: string) => {
-    setDownloadToast({
-      show: true,
-      type: "info",
-      message: "جاري تحويلك إلى صفحة التحميل على Google Drive..."
-    });
-
-    try {
-      // Open the shared Google Drive folder in a new tab
-      window.open("https://drive.google.com/drive/folders/1vtKQi5XgidR2DSzLcfaDSbAZVRIWaohv?usp=drive_link", "_blank");
-
+    if (filename === "Setup.exe") {
       setDownloadToast({
         show: true,
-        type: "success",
-        message: "تم توجيهك بنجاح! يمكنك الآن تحميل الملف من مجلد Google Drive."
+        type: "info",
+        message: "جاري تحويلك إلى صفحة التحميل على Google Drive..."
       });
 
-      // Auto-hide success toast after 3 seconds
-      setTimeout(() => {
-        setDownloadToast(prev => prev?.type === "success" ? null : prev);
-      }, 3000);
-    } catch (error) {
-      console.error("Download redirection error:", error);
+      try {
+        // Open the shared Google Drive folder in a new tab
+        window.open("https://drive.google.com/drive/folders/1vtKQi5XgidR2DSzLcfaDSbAZVRIWaohv?usp=drive_link", "_blank");
+
+        setDownloadToast({
+          show: true,
+          type: "success",
+          message: "تم توجيهك بنجاح! يمكنك الآن تحميل الملف من مجلد Google Drive."
+        });
+
+        // Auto-hide success toast after 3 seconds
+        setTimeout(() => {
+          setDownloadToast(prev => prev?.type === "success" ? null : prev);
+        }, 3000);
+      } catch (error) {
+        console.error("Download redirection error:", error);
+        setDownloadToast({
+          show: true,
+          type: "error",
+          message: "عذراً، حدث خطأ أثناء محاولة التوجيه لصفحة التحميل. يرجى المحاولة لاحقاً."
+        });
+      }
+    } else {
       setDownloadToast({
         show: true,
-        type: "error",
-        message: "عذراً، حدث خطأ أثناء محاولة التوجيه لصفحة التحميل. يرجى المحاولة لاحقاً."
+        type: "info",
+        message: "جاري التحقق من وجود الملف لبدء التنزيل المباشر..."
       });
+
+      try {
+        const response = await fetch(`/downloads/${filename}`, { method: "HEAD" });
+        
+        if (!response.ok) {
+          throw new Error("File not found on server");
+        }
+
+        setDownloadToast({
+          show: true,
+          type: "success",
+          message: "تم العثور على الملف! يبدأ التنزيل المباشر الآن..."
+        });
+
+        // Auto-hide success toast after 3 seconds
+        setTimeout(() => {
+          setDownloadToast(prev => prev?.type === "success" ? null : prev);
+        }, 3000);
+
+        const link = document.createElement("a");
+        link.href = `/downloads/${filename}`;
+        link.setAttribute("download", filename);
+        document.body.appendChild(link);
+        link.click();
+        document.body.removeChild(link);
+      } catch (error) {
+        console.error("Download verification error:", error);
+        setDownloadToast({
+          show: true,
+          type: "error",
+          message: "عذراً، هذا الملف غير متوفر حالياً للتنزيل المباشر. يرجى الاتصال بالدعم الفني."
+        });
+      }
     }
   };
 

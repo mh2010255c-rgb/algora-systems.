@@ -180,39 +180,29 @@ export default function LandingPage({ onSelectDemo, onSelectSupport, onSelectTri
     setDownloadToast({
       show: true,
       type: "info",
-      message: "جاري التحقق من وجود الملف على الخادم لبدء التنزيل..."
+      message: "جاري تحويلك إلى صفحة التحميل على Google Drive..."
     });
 
     try {
-      const response = await fetch(`/downloads/${filename}`, { method: "HEAD" });
-      
-      if (!response.ok) {
-        throw new Error("File not found on server");
-      }
+      // Open the shared Google Drive folder in a new tab
+      window.open("https://drive.google.com/drive/folders/1vtKQi5XgidR2DSzLcfaDSbAZVRIWaohv?usp=drive_link", "_blank");
 
       setDownloadToast({
         show: true,
         type: "success",
-        message: "تم العثور على الملف! يبدأ التنزيل الآن..."
+        message: "تم توجيهك بنجاح! يمكنك الآن تحميل الملف من مجلد Google Drive."
       });
 
       // Auto-hide success toast after 3 seconds
       setTimeout(() => {
         setDownloadToast(prev => prev?.type === "success" ? null : prev);
       }, 3000);
-
-      const link = document.createElement("a");
-      link.href = `/downloads/${filename}`;
-      link.setAttribute("download", filename);
-      document.body.appendChild(link);
-      link.click();
-      document.body.removeChild(link);
     } catch (error) {
-      console.error("Download verification error:", error);
+      console.error("Download redirection error:", error);
       setDownloadToast({
         show: true,
         type: "error",
-        message: "عذراً، هذا الملف غير متوفر حالياً للتنزيل. يرجى المحاولة لاحقاً أو الاتصال بالدعم الفني."
+        message: "عذراً، حدث خطأ أثناء محاولة التوجيه لصفحة التحميل. يرجى المحاولة لاحقاً."
       });
     }
   };

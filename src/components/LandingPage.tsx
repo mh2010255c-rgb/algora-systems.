@@ -212,6 +212,7 @@ export default function LandingPage({ onSelectDemo, onSelectSupport, onSelectTri
 
   // Tutorials Accordion State
   const [tutorialOpen, setTutorialOpen] = useState<number | null>(null);
+  const [activeTutorialTab, setActiveTutorialTab] = useState<"computer" | "phone">("computer");
 
   // System Screenshots Gallery States
   const [selectedLightboxImage, setSelectedLightboxImage] = useState<any | null>(null);
@@ -609,22 +610,44 @@ export default function LandingPage({ onSelectDemo, onSelectSupport, onSelectTri
     {
       title: "كيفية تحميل وتثبيت لوجيسيال Algora Systems على الحاسوب",
       desc: "شرح خطوة بخطوة لطريقة تحميل برنامج التثبيت (Setup)، تنصيبه على نظام ويندوز، وبدء الفترة التجريبية وتخطي جدار الحماية (Windows Defender).",
-      videoUrl: "/videos/demo.mp4"
+      videoUrl: "/videos/demo.mp4",
+      category: "computer" as const
     },
     {
       title: "كيفية إضافة السلع والمنتجات وضبط كميات المخزون بالباركود والـ IMEI",
       desc: "تعلم كيفية إضافة منتج جديد، تحديد فئة السلعة، إدخال سعر الشراء والبيع، وتوليد أو قراءة الباركود والرقم التسلسلي (IMEI) لضبط المخزون بدقة.",
-      videoUrl: "/videos/demo.mp4"
+      videoUrl: "/videos/demo.mp4",
+      category: "computer" as const
     },
     {
       title: "إدارة ورشة الصيانة واستلام أجهزة الزبائن وتتبع العطل",
       desc: "طريقة إدخال هاتف للصيانة، تشخيص العطل، تسجيل قطع الغيار المستخدمة، وتحديث حالة الطلب مع إرسال رسائل التنبيه للزبائن.",
-      videoUrl: "/videos/demo.mp4"
+      videoUrl: "/videos/demo.mp4",
+      category: "computer" as const
     },
     {
       title: "كيفية تفعيل الاشتراك وإدخال مفتاح الترخيص بعد الدفع",
       desc: "شرح يوضح كيفية دفع قيمة الاشتراك عبر طرق الدفع المحلية (بريدي موب أو CCP)، والحصول على مفتاح التفعيل لتنشيط الترخيص السنوي.",
-      videoUrl: "/videos/demo.mp4"
+      videoUrl: "/videos/demo.mp4",
+      category: "computer" as const
+    },
+    {
+      title: "كيفية ربط تطبيق الهاتف وتفعيل المزامنة السحابية",
+      desc: "شرح طريقة ربط وإقران تطبيق الهاتف مع جهاز الكمبيوتر الخاص بك، لمزامنة البيانات والسلع والتقارير فورا وتلقائيا.",
+      videoUrl: "/videos/demo.mp4",
+      category: "phone" as const
+    },
+    {
+      title: "متابعة المبيعات والتقارير الفورية والأرباح من الهاتف",
+      desc: "تعلم كيفية استعراض تقارير المبيعات اليومية، الأرباح، وحالة صندوق المال (الجرار) عن بعد من أي مكان وفي أي وقت عبر الهاتف.",
+      videoUrl: "/videos/demo.mp4",
+      category: "phone" as const
+    },
+    {
+      title: "إجراء عمليات الجرد السريع وقراءة الباركود عبر كاميرا الهاتف",
+      desc: "شرح كيفية استخدام كاميرا هاتفك كقارئ باركود لمراجعة المخزون، أو إدخال السلع، والتحقق من أسعار المنتجات مباشرة.",
+      videoUrl: "/videos/demo.mp4",
+      category: "phone" as const
     }
   ];
 
@@ -1897,46 +1920,80 @@ export default function LandingPage({ onSelectDemo, onSelectSupport, onSelectTri
           <p className="text-xs md:text-sm text-slate-400">شاهد بالفيديو كيفية تثبيت البرنامج، إضافة منتجاتك، وتسيير محلك باحترافية كاملة.</p>
         </div>
 
+        {/* Tab Buttons */}
+        <div className="flex justify-center gap-4 bg-slate-950/40 p-1.5 rounded-2xl border border-slate-900/60 max-w-md mx-auto relative z-10">
+          <button
+            onClick={() => {
+              setActiveTutorialTab("computer");
+              setTutorialOpen(null);
+            }}
+            className={`flex-1 py-3 px-4 rounded-xl font-bold text-xs md:text-sm transition-all duration-300 flex items-center justify-center gap-2 cursor-pointer ${
+              activeTutorialTab === "computer"
+                ? "bg-gradient-to-r from-purple-600 to-indigo-600 text-white shadow-lg shadow-purple-900/20 scale-105"
+                : "text-slate-400 hover:text-slate-200 hover:bg-slate-900/40"
+            }`}
+          >
+            <Laptop className="w-4 h-4" />
+            <span>تطبيق الحاسوب (PC)</span>
+          </button>
+          <button
+            onClick={() => {
+              setActiveTutorialTab("phone");
+              setTutorialOpen(null);
+            }}
+            className={`flex-1 py-3 px-4 rounded-xl font-bold text-xs md:text-sm transition-all duration-300 flex items-center justify-center gap-2 cursor-pointer ${
+              activeTutorialTab === "phone"
+                ? "bg-gradient-to-r from-purple-600 to-indigo-600 text-white shadow-lg shadow-purple-900/20 scale-105"
+                : "text-slate-400 hover:text-slate-200 hover:bg-slate-900/40"
+            }`}
+          >
+            <Smartphone className="w-4 h-4" />
+            <span>تطبيق الهاتف (Mobile)</span>
+          </button>
+        </div>
+
         <div className="space-y-3.5">
-          {tutorials.map((tutorial, idx) => (
-            <div key={idx} className="bg-slate-950/60 border border-slate-900 rounded-xl overflow-hidden transition-all">
-              <button
-                onClick={() => setTutorialOpen(tutorialOpen === idx ? null : idx)}
-                className="w-full p-4 flex justify-between items-center text-right font-bold text-xs md:text-sm text-slate-200 hover:text-purple-400 transition-colors cursor-pointer"
-              >
-                <Play className={`w-3.5 h-3.5 text-purple-400 shrink-0 transition-transform ${tutorialOpen === idx ? "rotate-90 text-indigo-400 fill-indigo-400" : "fill-purple-400"}`} />
-                <span>{tutorial.title}</span>
-              </button>
-              
-              <AnimatePresence>
-                {tutorialOpen === idx && (
-                  <motion.div
-                    initial={{ height: 0, opacity: 0 }}
-                    animate={{ height: "auto", opacity: 1 }}
-                    exit={{ height: 0, opacity: 0 }}
-                    className="border-t border-slate-900 bg-slate-900/10 p-4 space-y-4"
-                  >
-                    <div className="relative w-full aspect-video rounded-xl bg-slate-950 border border-slate-900 overflow-hidden shadow-2xl">
-                      <video
-                        controls
-                        playsInline
-                        preload="metadata"
-                        className="w-full h-full object-cover"
-                        src={tutorial.videoUrl}
-                      >
-                        متصفحك لا يدعم تشغيل الفيديو
-                      </video>
-                    </div>
-                    {tutorial.desc && (
-                      <p className="text-xs md:text-sm text-slate-400 leading-relaxed px-1">
-                        {tutorial.desc}
-                      </p>
-                    )}
-                  </motion.div>
-                )}
-              </AnimatePresence>
-            </div>
-          ))}
+          {tutorials
+            .filter((t) => t.category === activeTutorialTab)
+            .map((tutorial, idx) => (
+              <div key={idx} className="bg-slate-950/60 border border-slate-900 rounded-xl overflow-hidden transition-all">
+                <button
+                  onClick={() => setTutorialOpen(tutorialOpen === idx ? null : idx)}
+                  className="w-full p-4 flex justify-between items-center text-right font-bold text-xs md:text-sm text-slate-200 hover:text-purple-400 transition-colors cursor-pointer"
+                >
+                  <Play className={`w-3.5 h-3.5 text-purple-400 shrink-0 transition-transform ${tutorialOpen === idx ? "rotate-90 text-indigo-400 fill-indigo-400" : "fill-purple-400"}`} />
+                  <span>{tutorial.title}</span>
+                </button>
+                
+                <AnimatePresence>
+                  {tutorialOpen === idx && (
+                    <motion.div
+                      initial={{ height: 0, opacity: 0 }}
+                      animate={{ height: "auto", opacity: 1 }}
+                      exit={{ height: 0, opacity: 0 }}
+                      className="border-t border-slate-900 bg-slate-900/10 p-4 space-y-4"
+                    >
+                      <div className="relative w-full aspect-video rounded-xl bg-slate-950 border border-slate-900 overflow-hidden shadow-2xl">
+                        <video
+                          controls
+                          playsInline
+                          preload="metadata"
+                          className="w-full h-full object-cover"
+                          src={tutorial.videoUrl}
+                        >
+                          متصفحك لا يدعم تشغيل الفيديو
+                        </video>
+                      </div>
+                      {tutorial.desc && (
+                        <p className="text-xs md:text-sm text-slate-400 leading-relaxed px-1">
+                          {tutorial.desc}
+                        </p>
+                      )}
+                    </motion.div>
+                  )}
+                </AnimatePresence>
+              </div>
+            ))}
         </div>
       </section>
 

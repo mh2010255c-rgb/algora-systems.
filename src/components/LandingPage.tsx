@@ -646,48 +646,55 @@ export default function LandingPage({ onSelectDemo, onSelectSupport, onSelectTri
     }
   ];
 
-  // 4. Video Tutorials Definition
+  // 4. Tutorial Definitions with Google Drive download links
   const tutorials = [
     {
       title: "كيفية تحميل وتثبيت لوجيسيال Algora Systems على الحاسوب",
-      desc: "شرح خطوة بخطوة لطريقة تحميل برنامج التثبيت (Setup)، تنصيبه على نظام ويندوز، وبدء الفترة التجريبية وتخطي جدار الحماية (Windows Defender).",
-      videoUrl: "/videos/demo.mp4",
+      desc: "اضغط على زر التحميل أدناه للحصول على ملف التثبيت (Setup) مباشرة. بعد التحميل، شغّل الملف وسيبدأ معالج التثبيت خطوة بخطوة تلقائياً.",
+      driveUrl: "https://drive.google.com/drive/folders/1GFDi3qJWiB0hPWpPf0p8oZcfT9yOsVl7",
+      driveLabel: "تحميل لوجيسيال Algora PC",
       category: "computer" as const
     },
     {
       title: "كيفية إضافة السلع والمنتجات وضبط كميات المخزون بالباركود والـ IMEI",
-      desc: "تعلم كيفية إضافة منتج جديد، تحديد فئة السلعة، إدخال سعر الشراء والبيع، وتوليد أو قراءة الباركود والرقم التسلسلي (IMEI) لضبط المخزون بدقة.",
-      videoUrl: "/videos/demo.mp4",
+      desc: "بعد تثبيت البرنامج، ابدأ بإضافة سلعك بسهولة. راجع دليل المستخدم أو تواصل مع فريق الدعم للمساعدة.",
+      driveUrl: "https://drive.google.com/drive/folders/1GFDi3qJWiB0hPWpPf0p8oZcfT9yOsVl7",
+      driveLabel: "تحميل لوجيسيال Algora PC",
       category: "computer" as const
     },
     {
       title: "إدارة ورشة الصيانة واستلام أجهزة الزبائن وتتبع العطل",
-      desc: "طريقة إدخال هاتف للصيانة، تشخيص العطل، تسجيل قطع الغيار المستخدمة، وتحديث حالة الطلب مع إرسال رسائل التنبيه للزبائن.",
-      videoUrl: "/videos/demo.mp4",
+      desc: "استخدم وحدة الصيانة المدمجة في البرنامج لإدارة الطلبات وتتبع العطل. حمّل البرنامج أولاً للبدء.",
+      driveUrl: "https://drive.google.com/drive/folders/1GFDi3qJWiB0hPWpPf0p8oZcfT9yOsVl7",
+      driveLabel: "تحميل لوجيسيال Algora PC",
       category: "computer" as const
     },
     {
       title: "كيفية تفعيل الاشتراك وإدخال مفتاح الترخيص بعد الدفع",
-      desc: "شرح يوضح كيفية دفع قيمة الاشتراك عبر طرق الدفع المحلية (بريدي موب أو CCP)، والحصول على مفتاح التفعيل لتنشيط الترخيص السنوي.",
-      videoUrl: "/videos/demo.mp4",
+      desc: "بعد الدفع سيصلك مفتاح الترخيص عبر الواتساب. شغّل البرنامج وأدخل المفتاح في خانة التفعيل.",
+      driveUrl: "https://drive.google.com/drive/folders/1GFDi3qJWiB0hPWpPf0p8oZcfT9yOsVl7",
+      driveLabel: "تحميل لوجيسيال Algora PC",
       category: "computer" as const
     },
     {
       title: "كيفية ربط تطبيق الهاتف وتفعيل المزامنة السحابية",
-      desc: "شرح طريقة ربط وإقران تطبيق الهاتف مع جهاز الكمبيوتر الخاص بك، لمزامنة البيانات والسلع والتقارير فورا وتلقائيا.",
-      videoUrl: "/videos/demo.mp4",
+      desc: "حمّل تطبيق الهاتف من الرابط أدناه، ثم افتح البرنامج على حاسوبك لمسح رمز QR ومزامنة البيانات.",
+      driveUrl: "https://drive.google.com/drive/folders/1GFDi3qJWiB0hPWpPf0p8oZcfT9yOsVl7",
+      driveLabel: "تحميل تطبيق Algora Mobile",
       category: "phone" as const
     },
     {
       title: "متابعة المبيعات والتقارير الفورية والأرباح من الهاتف",
-      desc: "تعلم كيفية استعراض تقارير المبيعات اليومية، الأرباح، وحالة صندوق المال (الجرار) عن بعد من أي مكان وفي أي وقت عبر الهاتف.",
-      videoUrl: "/videos/demo.mp4",
+      desc: "بعد تثبيت تطبيق الهاتف ومزامنته، يمكنك متابعة مبيعاتك وأرباحك من أي مكان وفي أي وقت.",
+      driveUrl: "https://drive.google.com/drive/folders/1GFDi3qJWiB0hPWpPf0p8oZcfT9yOsVl7",
+      driveLabel: "تحميل تطبيق Algora Mobile",
       category: "phone" as const
     },
     {
       title: "إجراء عمليات الجرد السريع وقراءة الباركود عبر كاميرا الهاتف",
-      desc: "شرح كيفية استخدام كاميرا هاتفك كقارئ باركود لمراجعة المخزون، أو إدخال السلع، والتحقق من أسعار المنتجات مباشرة.",
-      videoUrl: "/videos/demo.mp4",
+      desc: "استخدم كاميرا هاتفك كقارئ باركود مباشرة داخل التطبيق. حمّل التطبيق من الرابط أدناه للبدء.",
+      driveUrl: "https://drive.google.com/drive/folders/1GFDi3qJWiB0hPWpPf0p8oZcfT9yOsVl7",
+      driveLabel: "تحميل تطبيق Algora Mobile",
       category: "phone" as const
     }
   ];
@@ -2012,24 +2019,31 @@ export default function LandingPage({ onSelectDemo, onSelectSupport, onSelectTri
                       initial={{ height: 0, opacity: 0 }}
                       animate={{ height: "auto", opacity: 1 }}
                       exit={{ height: 0, opacity: 0 }}
-                      className="border-t border-slate-900 bg-slate-900/10 p-4 space-y-4"
+                      className="border-t border-slate-900 bg-slate-900/10 p-5 space-y-4"
                     >
-                      <div className="relative w-full aspect-video rounded-xl bg-slate-950 border border-slate-900 overflow-hidden shadow-2xl">
-                        <video
-                          controls
-                          playsInline
-                          preload="metadata"
-                          className="w-full h-full object-cover"
-                          src={tutorial.videoUrl}
-                        >
-                          متصفحك لا يدعم تشغيل الفيديو
-                        </video>
-                      </div>
                       {tutorial.desc && (
-                        <p className="text-xs md:text-sm text-slate-400 leading-relaxed px-1">
+                        <p className="text-xs md:text-sm text-slate-400 leading-relaxed text-right">
                           {tutorial.desc}
                         </p>
                       )}
+                      <div className="flex justify-center">
+                        <a
+                          href={tutorial.driveUrl}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="inline-flex items-center gap-3 px-6 py-3.5 bg-gradient-to-l from-purple-600 to-indigo-600 hover:from-purple-500 hover:to-indigo-500 text-white font-extrabold rounded-xl shadow-lg shadow-purple-900/30 transition-all duration-200 hover:scale-105 active:scale-100 text-sm"
+                        >
+                          <svg className="w-5 h-5 shrink-0" viewBox="0 0 87.3 78" xmlns="http://www.w3.org/2000/svg">
+                            <path d="m6.6 66.85 3.85 6.65c.8 1.4 1.95 2.5 3.3 3.3l13.75-23.8h-27.5c0 1.55.4 3.1 1.2 4.5z" fill="#0066da"/>
+                            <path d="m43.65 25-13.75-23.8c-1.35.8-2.5 1.9-3.3 3.3l-25.4 44a9.06 9.06 0 0 0 -1.2 4.5h27.5z" fill="#00ac47"/>
+                            <path d="m73.55 76.8c1.35-.8 2.5-1.9 3.3-3.3l1.6-2.75 7.65-13.25c.8-1.4 1.2-2.95 1.2-4.5h-27.502l5.852 11.5z" fill="#ea4335"/>
+                            <path d="m43.65 25 13.75-23.8c-1.35-.8-2.9-1.2-4.5-1.2h-18.5c-1.6 0-3.15.45-4.5 1.2z" fill="#00832d"/>
+                            <path d="m59.8 53h-32.3l-13.75 23.8c1.35.8 2.9 1.2 4.5 1.2h50.8c1.6 0 3.15-.45 4.5-1.2z" fill="#2684fc"/>
+                            <path d="m73.4 26.5-12.7-22c-.8-1.4-1.95-2.5-3.3-3.3l-13.75 23.8 16.15 27h27.45c0-1.55-.4-3.1-1.2-4.5z" fill="#ffba00"/>
+                          </svg>
+                          <span>{tutorial.driveLabel}</span>
+                        </a>
+                      </div>
                     </motion.div>
                   )}
                 </AnimatePresence>

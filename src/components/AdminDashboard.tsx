@@ -730,15 +730,14 @@ export default function AdminDashboard({ onLogout, theme, setTheme }: AdminDashb
     addLog("تم إرسال أمر طباعة جدول تسيير طلبات العملاء الحاليين.");
   };
 
-  // Filter Trial Requests
   const filteredTrials = trialRequests.filter(t => {
     const matchesSearch = 
-      t.storeName.toLowerCase().includes(searchQuery.toLowerCase()) ||
-      t.ownerName.toLowerCase().includes(searchQuery.toLowerCase()) ||
-      t.phone.includes(searchQuery) ||
-      t.city.toLowerCase().includes(searchQuery.toLowerCase());
+      (t.storeName || "").toLowerCase().includes(searchQuery.toLowerCase()) ||
+      (t.ownerName || "").toLowerCase().includes(searchQuery.toLowerCase()) ||
+      (t.phone || "").includes(searchQuery) ||
+      (t.city || "").toLowerCase().includes(searchQuery.toLowerCase());
 
-    const matchesCity = cityFilter === "all" || t.city.includes(cityFilter);
+    const matchesCity = cityFilter === "all" || (t.city || "").includes(cityFilter);
     const matchesStatus = statusFilter === "all" || t.status === statusFilter;
     const matchesProgram = programFilter === "all" || t.programType === programFilter;
 
@@ -748,10 +747,10 @@ export default function AdminDashboard({ onLogout, theme, setTheme }: AdminDashb
   // Filter Support Tickets
   const filteredTickets = supportTickets.filter(t => {
     const matchesSearch = 
-      t.storeName.toLowerCase().includes(searchQuery.toLowerCase()) ||
-      t.subject.toLowerCase().includes(searchQuery.toLowerCase()) ||
-      t.phone.includes(searchQuery) ||
-      t.message.toLowerCase().includes(searchQuery.toLowerCase());
+      (t.storeName || "").toLowerCase().includes(searchQuery.toLowerCase()) ||
+      (t.subject || "").toLowerCase().includes(searchQuery.toLowerCase()) ||
+      (t.phone || "").includes(searchQuery) ||
+      (t.message || "").toLowerCase().includes(searchQuery.toLowerCase());
 
     const matchesStatus = statusFilter === "all" || t.status === statusFilter;
 
@@ -760,21 +759,21 @@ export default function AdminDashboard({ onLogout, theme, setTheme }: AdminDashb
 
   // Get Unique Cities for Filtering
   const uniqueCities = Array.from(new Set(trialRequests.map(t => {
-    return t.city.split(" ")[0];
+    return (t.city || "").split(" ")[0];
   }))).filter(Boolean);
 
   const sortedTrials = [...filteredTrials].sort((a, b) => {
-    if (sortBy === "name_asc") return a.storeName.localeCompare(b.storeName, "ar");
-    if (sortBy === "name_desc") return b.storeName.localeCompare(a.storeName, "ar");
-    if (sortBy === "date_asc") return new Date(a.timestamp).getTime() - new Date(b.timestamp).getTime();
-    return new Date(b.timestamp).getTime() - new Date(a.timestamp).getTime();
+    if (sortBy === "name_asc") return (a.storeName || "").localeCompare(b.storeName || "", "ar");
+    if (sortBy === "name_desc") return (b.storeName || "").localeCompare(a.storeName || "", "ar");
+    if (sortBy === "date_asc") return new Date(a.timestamp || 0).getTime() - new Date(b.timestamp || 0).getTime();
+    return new Date(b.timestamp || 0).getTime() - new Date(a.timestamp || 0).getTime();
   });
 
   const sortedTickets = [...filteredTickets].sort((a, b) => {
-    if (sortBy === "name_asc") return a.storeName.localeCompare(b.storeName, "ar");
-    if (sortBy === "name_desc") return b.storeName.localeCompare(a.storeName, "ar");
-    if (sortBy === "date_asc") return new Date(a.timestamp).getTime() - new Date(b.timestamp).getTime();
-    return new Date(b.timestamp).getTime() - new Date(a.timestamp).getTime();
+    if (sortBy === "name_asc") return (a.storeName || "").localeCompare(b.storeName || "", "ar");
+    if (sortBy === "name_desc") return (b.storeName || "").localeCompare(a.storeName || "", "ar");
+    if (sortBy === "date_asc") return new Date(a.timestamp || 0).getTime() - new Date(b.timestamp || 0).getTime();
+    return new Date(b.timestamp || 0).getTime() - new Date(a.timestamp || 0).getTime();
   });
 
   // Authentication gate screen

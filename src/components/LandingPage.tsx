@@ -1508,23 +1508,23 @@ export default function LandingPage({ onSelectDemo, onSelectSupport, onSelectTri
         </div>
       </section>
 
-      {/* SYSTEM SCREENSHOTS & LIVE GALLERY SECTION - STYLED IN BEAUTIFUL WHITE */}
+      {/* SYSTEM SCREENSHOTS & LIVE GALLERY SECTION */}
       <section 
         id="screenshots-gallery-section" 
-        className="space-y-8 py-16 px-6 md:px-12 relative rounded-3xl border border-slate-200/80 bg-gradient-to-br from-white via-slate-50 to-purple-50/40 text-slate-900 shadow-sm pb-16 overflow-hidden"
+        className="space-y-8 py-16 px-6 md:px-12 relative overflow-hidden"
       >
-        <div className="absolute top-1/3 right-1/4 w-80 h-80 bg-purple-200/20 rounded-full blur-3xl pointer-events-none" />
-        <div className="absolute bottom-1/3 left-1/4 w-80 h-80 bg-indigo-200/20 rounded-full blur-3xl pointer-events-none" />
+        <div className="absolute top-1/3 right-1/4 w-80 h-80 bg-purple-600/10 rounded-full blur-3xl pointer-events-none" />
+        <div className="absolute bottom-1/3 left-1/4 w-80 h-80 bg-indigo-600/10 rounded-full blur-3xl pointer-events-none" />
 
         <div className="text-center space-y-3 relative z-10">
-          <div className="inline-flex items-center gap-1.5 px-3.5 py-1 bg-purple-100 border border-purple-200 rounded-full text-purple-700 text-xs font-black">
-            <Image className="w-4 h-4 text-purple-600" />
+          <div className="inline-flex items-center gap-1.5 px-3.5 py-1 bg-purple-500/10 border border-purple-500/20 rounded-full text-purple-400 text-xs font-black">
+            <Image className="w-4 h-4 text-purple-400" />
             <span>📸 لقطات حية من داخل النظام والتطبيق</span>
           </div>
-          <h2 className="text-xl md:text-3xl lg:text-4xl font-black text-slate-900">
+          <h2 className="text-xl md:text-3xl lg:text-4xl font-black text-white">
             معرض صور الواجهات الحقيقية
           </h2>
-          <p className="text-xs md:text-sm text-slate-600 max-w-2xl mx-auto leading-relaxed">
+          <p className="text-xs md:text-sm text-slate-400 max-w-2xl mx-auto leading-relaxed">
             تنقّل بين لقطات الشاشة الحقيقية للوجيسيال وتطبيق الهاتف المرفق لاستعراض قوة وسهولة الاستخدام.
           </p>
         </div>
@@ -1533,12 +1533,12 @@ export default function LandingPage({ onSelectDemo, onSelectSupport, onSelectTri
         <div className="max-w-6xl mx-auto relative z-10 px-0 md:px-4">
           
           {/* Main Frame Container */}
-          <div className="relative bg-white border-2 border-slate-200 rounded-3xl overflow-hidden shadow-xl hover:border-purple-300 transition-all duration-300">
+          <div className="relative bg-slate-900 border-2 border-slate-800 rounded-3xl overflow-hidden shadow-2xl hover:border-purple-500/50 transition-all duration-300">
             
             {/* Navigation Arrows */}
             <button
               onClick={() => scrollToSlide(activeSlideIndex === 0 ? systemImages.length - 1 : activeSlideIndex - 1)}
-              className="absolute right-4 top-1/2 -translate-y-1/2 z-20 w-10 h-10 md:w-11 md:h-11 rounded-full bg-white/90 hover:bg-white text-slate-800 hover:text-purple-600 border border-slate-200/80 hover:border-purple-300 hover:scale-105 transition-all shadow-md flex items-center justify-center cursor-pointer active:scale-95 group/btn"
+              className="absolute right-4 top-1/2 -translate-y-1/2 z-20 w-10 h-10 md:w-11 md:h-11 rounded-full bg-slate-900/90 hover:bg-slate-800 text-slate-300 hover:text-purple-400 border border-slate-700/80 hover:border-purple-500/50 hover:scale-105 transition-all shadow-md flex items-center justify-center cursor-pointer active:scale-95 group/btn"
               aria-label="الصورة السابقة"
             >
               <ChevronRight className="w-5 h-5 group-hover/btn:translate-x-0.5 transition-transform" />
@@ -1546,7 +1546,7 @@ export default function LandingPage({ onSelectDemo, onSelectSupport, onSelectTri
 
             <button
               onClick={() => scrollToSlide(activeSlideIndex === systemImages.length - 1 ? 0 : activeSlideIndex + 1)}
-              className="absolute left-4 top-1/2 -translate-y-1/2 z-20 w-10 h-10 md:w-11 md:h-11 rounded-full bg-white/90 hover:bg-white text-slate-800 hover:text-purple-600 border border-slate-200/80 hover:border-purple-300 hover:scale-105 transition-all shadow-md flex items-center justify-center cursor-pointer active:scale-95 group/btn"
+              className="absolute left-4 top-1/2 -translate-y-1/2 z-20 w-10 h-10 md:w-11 md:h-11 rounded-full bg-slate-900/90 hover:bg-slate-800 text-slate-300 hover:text-purple-400 border border-slate-700/80 hover:border-purple-500/50 hover:scale-105 transition-all shadow-md flex items-center justify-center cursor-pointer active:scale-95 group/btn"
               aria-label="الصورة التالية"
             >
               <ChevronLeft className="w-5 h-5 group-hover/btn:-translate-x-0.5 transition-transform" />
@@ -1565,7 +1565,7 @@ export default function LandingPage({ onSelectDemo, onSelectSupport, onSelectTri
               {systemImages.map((img) => (
                 <div
                   key={img.id}
-                  className="w-full shrink-0 snap-center relative aspect-video md:aspect-[16/9] min-h-[380px] sm:min-h-[500px] md:min-h-[580px] lg:min-h-[660px] bg-slate-50 flex items-center justify-center overflow-hidden"
+                  className="w-full shrink-0 snap-center relative aspect-video md:aspect-[16/9] min-h-[380px] sm:min-h-[500px] md:min-h-[580px] lg:min-h-[660px] bg-[#0A0A10] flex items-center justify-center overflow-hidden"
                 >
                   <div 
                     className="w-full h-full cursor-pointer relative"
@@ -1575,7 +1575,7 @@ export default function LandingPage({ onSelectDemo, onSelectSupport, onSelectTri
                       }
                     }}
                   >
-                    <div className="w-full h-full select-none overflow-hidden pointer-events-none flex items-center justify-center bg-slate-100">
+                    <div className="w-full h-full select-none overflow-hidden pointer-events-none flex items-center justify-center bg-[#0A0A10]">
                       {img.uploadedUrl ? (
                         <img 
                           src={img.uploadedUrl} 
@@ -1620,7 +1620,7 @@ export default function LandingPage({ onSelectDemo, onSelectSupport, onSelectTri
                 className={`h-2 rounded-full transition-all cursor-pointer ${
                   activeSlideIndex === idx 
                     ? "w-8 bg-purple-600 shadow-md shadow-purple-900/30" 
-                    : "w-2 bg-slate-300 hover:bg-slate-400"
+                    : "w-2 bg-slate-700 hover:bg-slate-600"
                 }`}
                 aria-label={`الذهاب للصورة رقم ${idx + 1}`}
               />
@@ -1628,12 +1628,12 @@ export default function LandingPage({ onSelectDemo, onSelectSupport, onSelectTri
           </div>
 
           {/* Active Image Captions */}
-          <div className="mt-6 p-6 bg-white border border-slate-200 rounded-2xl text-right space-y-2 shadow-sm">
-            <h3 className="font-extrabold text-sm md:text-base text-slate-900 flex items-center justify-end gap-2">
+          <div className="mt-6 p-6 bg-slate-900 border border-slate-800 rounded-2xl text-right space-y-2 shadow-sm">
+            <h3 className="font-extrabold text-sm md:text-base text-slate-100 flex items-center justify-end gap-2">
               <span>{systemImages[activeSlideIndex]?.title}</span>
-              <span className="w-1.5 h-1.5 bg-purple-600 rounded-full" />
+              <span className="w-1.5 h-1.5 bg-purple-500 rounded-full" />
             </h3>
-            <p className="text-xs md:text-sm text-slate-600 leading-relaxed font-semibold">
+            <p className="text-xs md:text-sm text-slate-400 leading-relaxed font-semibold">
               {systemImages[activeSlideIndex]?.description}
             </p>
           </div>

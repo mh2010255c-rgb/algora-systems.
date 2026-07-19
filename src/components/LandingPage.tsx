@@ -820,13 +820,15 @@ export default function LandingPage({ onSelectDemo, onSelectSupport, onSelectTri
               <ArrowLeft className="w-4 h-4 group-hover:-translate-x-1 transition-transform" />
             </a>
 
-            <button
-              onClick={onSelectDemo}
+            <a
+              href="https://wa.me/213553361047"
+              target="_blank"
+              rel="noopener noreferrer"
               className="py-3 px-6 bg-slate-950 hover:bg-slate-900 border border-slate-800 hover:border-slate-700 text-slate-200 font-bold rounded-xl transition-all text-xs md:text-sm flex items-center justify-center gap-2 cursor-pointer"
             >
-              <span>تجربة لوحة التحكم التفاعلية الحية</span>
-              <Smartphone className="w-4 h-4 text-purple-400" />
-            </button>
+              <span>اطلب نسختك التجريبية عبر واتساب</span>
+              <Smartphone className="w-4 h-4 text-emerald-400" />
+            </a>
           </motion.div>
 
           {/* Quick numbers/badges from poster */}

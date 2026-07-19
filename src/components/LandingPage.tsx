@@ -1535,10 +1535,10 @@ export default function LandingPage({ onSelectDemo, onSelectSupport, onSelectTri
           {/* Main Frame Container */}
           <div className="relative bg-slate-900 border-2 border-slate-800 rounded-3xl overflow-hidden shadow-2xl hover:border-purple-500/50 transition-all duration-300">
             
-            {/* Navigation Arrows */}
+            {/* Navigation Arrows (Desktop Only) */}
             <button
               onClick={() => scrollToSlide(activeSlideIndex === 0 ? systemImages.length - 1 : activeSlideIndex - 1)}
-              className="absolute right-4 top-1/2 -translate-y-1/2 z-20 w-10 h-10 md:w-11 md:h-11 rounded-full bg-slate-900/90 hover:bg-slate-800 text-slate-300 hover:text-purple-400 border border-slate-700/80 hover:border-purple-500/50 hover:scale-105 transition-all shadow-md flex items-center justify-center cursor-pointer active:scale-95 group/btn"
+              className="hidden md:flex absolute right-4 top-1/2 -translate-y-1/2 z-20 w-11 h-11 rounded-full bg-slate-900/90 hover:bg-slate-800 text-slate-300 hover:text-purple-400 border border-slate-700/80 hover:border-purple-500/50 hover:scale-105 transition-all shadow-md items-center justify-center cursor-pointer active:scale-95 group/btn"
               aria-label="الصورة السابقة"
             >
               <ChevronRight className="w-5 h-5 group-hover/btn:translate-x-0.5 transition-transform" />
@@ -1546,7 +1546,7 @@ export default function LandingPage({ onSelectDemo, onSelectSupport, onSelectTri
 
             <button
               onClick={() => scrollToSlide(activeSlideIndex === systemImages.length - 1 ? 0 : activeSlideIndex + 1)}
-              className="absolute left-4 top-1/2 -translate-y-1/2 z-20 w-10 h-10 md:w-11 md:h-11 rounded-full bg-slate-900/90 hover:bg-slate-800 text-slate-300 hover:text-purple-400 border border-slate-700/80 hover:border-purple-500/50 hover:scale-105 transition-all shadow-md flex items-center justify-center cursor-pointer active:scale-95 group/btn"
+              className="hidden md:flex absolute left-4 top-1/2 -translate-y-1/2 z-20 w-11 h-11 rounded-full bg-slate-900/90 hover:bg-slate-800 text-slate-300 hover:text-purple-400 border border-slate-700/80 hover:border-purple-500/50 hover:scale-105 transition-all shadow-md items-center justify-center cursor-pointer active:scale-95 group/btn"
               aria-label="الصورة التالية"
             >
               <ChevronLeft className="w-5 h-5 group-hover/btn:-translate-x-0.5 transition-transform" />
@@ -1611,20 +1611,42 @@ export default function LandingPage({ onSelectDemo, onSelectSupport, onSelectTri
             </div>
           </div>
 
-          {/* Dots Indicators Bar */}
-          <div className="flex items-center justify-center gap-2.5 mt-6">
-            {systemImages.map((_, idx) => (
-              <button
-                key={idx}
-                onClick={() => scrollToSlide(idx)}
-                className={`h-2 rounded-full transition-all cursor-pointer ${
-                  activeSlideIndex === idx 
-                    ? "w-8 bg-purple-600 shadow-md shadow-purple-900/30" 
-                    : "w-2 bg-slate-700 hover:bg-slate-600"
-                }`}
-                aria-label={`الذهاب للصورة رقم ${idx + 1}`}
-              />
-            ))}
+          {/* Mobile Navigation & Dots Indicators Bar */}
+          <div className="flex items-center justify-between md:justify-center mt-6">
+            
+            {/* Mobile Previous Button */}
+            <button
+              onClick={() => scrollToSlide(activeSlideIndex === 0 ? systemImages.length - 1 : activeSlideIndex - 1)}
+              className="md:hidden w-10 h-10 rounded-full bg-slate-900 text-slate-300 border border-slate-800 hover:border-purple-500/50 flex items-center justify-center cursor-pointer active:scale-95 transition-all"
+              aria-label="الصورة السابقة"
+            >
+              <ChevronRight className="w-5 h-5" />
+            </button>
+
+            {/* Dots */}
+            <div className="flex items-center gap-2.5">
+              {systemImages.map((_, idx) => (
+                <button
+                  key={idx}
+                  onClick={() => scrollToSlide(idx)}
+                  className={`h-2 rounded-full transition-all cursor-pointer ${
+                    activeSlideIndex === idx 
+                      ? "w-8 bg-purple-600 shadow-md shadow-purple-900/30" 
+                      : "w-2 bg-slate-700 hover:bg-slate-600"
+                  }`}
+                  aria-label={`الذهاب للصورة رقم ${idx + 1}`}
+                />
+              ))}
+            </div>
+
+            {/* Mobile Next Button */}
+            <button
+              onClick={() => scrollToSlide(activeSlideIndex === systemImages.length - 1 ? 0 : activeSlideIndex + 1)}
+              className="md:hidden w-10 h-10 rounded-full bg-slate-900 text-slate-300 border border-slate-800 hover:border-purple-500/50 flex items-center justify-center cursor-pointer active:scale-95 transition-all"
+              aria-label="الصورة التالية"
+            >
+              <ChevronLeft className="w-5 h-5" />
+            </button>
           </div>
 
           {/* Active Image Captions */}

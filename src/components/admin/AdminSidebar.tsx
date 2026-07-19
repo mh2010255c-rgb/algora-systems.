@@ -5,7 +5,7 @@ import {
 
 interface AdminSidebarProps {
   activeAdminSubTab: string;
-  setActiveAdminSubTab: (tab: "overview" | "trials" | "tickets" | "baridimob" | "logs" | "settings" | "whatsapp") => void;
+  setActiveAdminSubTab: (tab: "overview" | "trials" | "tickets" | "baridimob" | "logs" | "settings" | "whatsapp" | "confirmers") => void;
   stats: {
     pendingTrials: number;
     openTickets: number;
@@ -14,6 +14,7 @@ interface AdminSidebarProps {
   handleLogout: () => void;
   isMobileSidebarOpen: boolean;
   setIsMobileSidebarOpen: (open: boolean) => void;
+  userRole?: "admin" | "confirmer" | null;
 }
 
 export default function AdminSidebar({
@@ -23,7 +24,8 @@ export default function AdminSidebar({
   pendingPaymentsCount,
   handleLogout,
   isMobileSidebarOpen,
-  setIsMobileSidebarOpen
+  setIsMobileSidebarOpen,
+  userRole = "admin"
 }: AdminSidebarProps) {
   return (
     <aside 
@@ -91,67 +93,89 @@ export default function AdminSidebar({
             )}
           </button>
 
-          <button
-            onClick={() => { setActiveAdminSubTab("baridimob"); setIsMobileSidebarOpen(false); }}
-            className={`w-full flex items-center justify-between gap-3 px-4 py-3 rounded-xl text-xs font-black transition-all cursor-pointer ${
-              activeAdminSubTab === "baridimob"
-                ? "bg-gradient-to-l from-[#7C3AED] to-[#A855F7] text-white shadow-[0_4px_12px_rgba(124,58,237,0.25)]"
-                : "text-slate-400 hover:text-white hover:bg-[#121218]"
-            }`}
-          >
-            <div className="flex items-center gap-3">
-              <CreditCard className="w-4 h-4 shrink-0" />
-              <span>مدفوعات بريدي موب</span>
-            </div>
-            {pendingPaymentsCount > 0 && (
-              <span className="text-[9px] bg-[#22C55E]/15 text-[#22C55E] border border-[#22C55E]/30 px-1.5 py-0.5 rounded font-bold animate-pulse">{pendingPaymentsCount}</span>
-            )}
-          </button>
+          {userRole === "admin" && (
+            <button
+              onClick={() => { setActiveAdminSubTab("baridimob"); setIsMobileSidebarOpen(false); }}
+              className={`w-full flex items-center justify-between gap-3 px-4 py-3 rounded-xl text-xs font-black transition-all cursor-pointer ${
+                activeAdminSubTab === "baridimob"
+                  ? "bg-gradient-to-l from-[#7C3AED] to-[#A855F7] text-white shadow-[0_4px_12px_rgba(124,58,237,0.25)]"
+                  : "text-slate-400 hover:text-white hover:bg-[#121218]"
+              }`}
+            >
+              <div className="flex items-center gap-3">
+                <CreditCard className="w-4 h-4 shrink-0" />
+                <span>مدفوعات بريدي موب</span>
+              </div>
+              {pendingPaymentsCount > 0 && (
+                <span className="text-[9px] bg-[#22C55E]/15 text-[#22C55E] border border-[#22C55E]/30 px-1.5 py-0.5 rounded font-bold animate-pulse">{pendingPaymentsCount}</span>
+              )}
+            </button>
+          )}
         </div>
 
         {/* Group 3: إعدادات النظام */}
-        <div className="space-y-2">
-          <p className="text-[10px] font-black text-slate-500 uppercase tracking-wider pr-3">إعدادات النظام</p>
+        {userRole === "admin" && (
+          <div className="space-y-2">
+            <p className="text-[10px] font-black text-slate-500 uppercase tracking-wider pr-3">إعدادات النظام</p>
 
-          <button
-            onClick={() => { setActiveAdminSubTab("whatsapp"); setIsMobileSidebarOpen(false); }}
-            className={`w-full flex items-center justify-between gap-3 px-4 py-3 rounded-xl text-xs font-black transition-all cursor-pointer ${
-              activeAdminSubTab === "whatsapp"
-                ? "bg-gradient-to-l from-[#7C3AED] to-[#A855F7] text-white shadow-[0_4px_12px_rgba(124,58,237,0.25)]"
-                : "text-slate-400 hover:text-white hover:bg-[#121218]"
-            }`}
-          >
-            <div className="flex items-center gap-3">
-              <Activity className="w-4 h-4 shrink-0" />
-              <span>WhatsApp Automation</span>
-            </div>
-          </button>
+            <button
+              onClick={() => { setActiveAdminSubTab("whatsapp"); setIsMobileSidebarOpen(false); }}
+              className={`w-full flex items-center justify-between gap-3 px-4 py-3 rounded-xl text-xs font-black transition-all cursor-pointer ${
+                activeAdminSubTab === "whatsapp"
+                  ? "bg-gradient-to-l from-[#7C3AED] to-[#A855F7] text-white shadow-[0_4px_12px_rgba(124,58,237,0.25)]"
+                  : "text-slate-400 hover:text-white hover:bg-[#121218]"
+              }`}
+            >
+              <div className="flex items-center gap-3">
+                <Activity className="w-4 h-4 shrink-0" />
+                <span>WhatsApp Automation</span>
+              </div>
+            </button>
 
-          <button
-            onClick={() => { setActiveAdminSubTab("settings"); setIsMobileSidebarOpen(false); }}
-            className={`w-full flex items-center justify-between gap-3 px-4 py-3 rounded-xl text-xs font-black transition-all cursor-pointer ${
-              activeAdminSubTab === "settings"
-                ? "bg-gradient-to-l from-[#7C3AED] to-[#A855F7] text-white shadow-[0_4px_12px_rgba(124,58,237,0.25)]"
-                : "text-slate-400 hover:text-white hover:bg-[#121218]"
-            }`}
-          >
-            <div className="flex items-center gap-3">
-              <Sliders className="w-4 h-4 shrink-0" />
-              <span>الأسعار والتراخيص</span>
-            </div>
-          </button>
-        </div>
+            <button
+              onClick={() => { setActiveAdminSubTab("settings"); setIsMobileSidebarOpen(false); }}
+              className={`w-full flex items-center justify-between gap-3 px-4 py-3 rounded-xl text-xs font-black transition-all cursor-pointer ${
+                activeAdminSubTab === "settings"
+                  ? "bg-gradient-to-l from-[#7C3AED] to-[#A855F7] text-white shadow-[0_4px_12px_rgba(124,58,237,0.25)]"
+                  : "text-slate-400 hover:text-white hover:bg-[#121218]"
+              }`}
+            >
+              <div className="flex items-center gap-3">
+                <Sliders className="w-4 h-4 shrink-0" />
+                <span>الأسعار والتراخيص</span>
+              </div>
+            </button>
+
+            <button
+              onClick={() => { setActiveAdminSubTab("confirmers"); setIsMobileSidebarOpen(false); }}
+              className={`w-full flex items-center justify-between gap-3 px-4 py-3 rounded-xl text-xs font-black transition-all cursor-pointer ${
+                activeAdminSubTab === "confirmers"
+                  ? "bg-gradient-to-l from-[#7C3AED] to-[#A855F7] text-white shadow-[0_4px_12px_rgba(124,58,237,0.25)]"
+                  : "text-slate-400 hover:text-white hover:bg-[#121218]"
+              }`}
+            >
+              <div className="flex items-center gap-3">
+                <Lock className="w-4 h-4 shrink-0" />
+                <span>صلاحيات المؤكدات</span>
+              </div>
+            </button>
+          </div>
+        )}
       </div>
 
       {/* Bottom Logout Card */}
       <div className="p-4 border-t border-[rgba(255,255,255,0.06)] bg-[#121218] m-4 rounded-2xl">
         <div className="flex items-center gap-3 mb-3 text-right justify-end">
           <div className="text-right">
-            <p className="text-xs font-black text-white">مدير النظام</p>
-            <p className="text-[10px] text-slate-500 font-mono">admin@fonzon.com</p>
+            <p className="text-xs font-black text-white">
+              {userRole === "admin" ? "مدير النظام" : "مؤكدة الطلبيات"}
+            </p>
+            <p className="text-[10px] text-slate-500 font-mono">
+              {userRole === "admin" ? "admin@fonzon.com" : "agent@fonzon.com"}
+            </p>
           </div>
           <div className="w-10 h-10 rounded-full bg-[#7C3AED]/10 border border-[#7C3AED]/20 flex items-center justify-center text-[#A855F7] font-black font-mono">
-            AD
+            {userRole === "admin" ? "AD" : "AG"}
           </div>
         </div>
         <button

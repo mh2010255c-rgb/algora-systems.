@@ -19,6 +19,7 @@ import TicketsTab from "./admin/TicketsTab";
 import BaridimobTab from "./admin/BaridimobTab";
 import SettingsTab from "./admin/SettingsTab";
 import WhatsappTab from "./admin/WhatsappTab";
+import ConfirmersTab from "./admin/ConfirmersTab";
 
 interface TrialRequest {
   id: string;
@@ -32,6 +33,8 @@ interface TrialRequest {
   city: string;
   timestamp: string;
   status: "pending" | "contacted" | "demo_sent" | "approved" | "completed" | "canceled" | "whatsapp_sent" | "no_whatsapp";
+  confirmationStatus?: "pending" | "contacted" | "no_reply_1" | "no_reply_2" | "no_reply_3" | "whatsapp_sent" | "no_whatsapp" | "wrong_number" | "confirmed" | "canceled";
+  assignedConfirmerId?: string;
 }
 
 interface SupportTicket {
@@ -84,6 +87,8 @@ export default function AdminDashboard({ onLogout, theme, setTheme }: AdminDashb
     status: o.orderStatus,
     packagePrice: o.packagePrice,
     licenseKey: o.licenseKey,
+    confirmationStatus: o.confirmationStatus || "pending",
+    assignedConfirmerId: o.assignedConfirmerId || "",
   }));
 
   const supportTickets: SupportTicket[] = (rawSupportTickets || []).map((t: any) => ({
@@ -99,8 +104,13 @@ export default function AdminDashboard({ onLogout, theme, setTheme }: AdminDashb
   const loading = rawTrialRequests === undefined || rawSupportTickets === undefined;
   const [error, setError] = useState<string>("");
 
+  const rawConfirmers = useQuery(api.confirmers.list);
+
   // Active Tab inside Admin Panel
-  const [activeAdminSubTab, setActiveAdminSubTab] = useState<"overview" | "trials" | "tickets" | "baridimob" | "logs" | "settings" | "whatsapp">("trials");
+  const [activeAdminSubTab, setActiveAdminSubTab] = useState<"overview" | "trials" | "tickets" | "baridimob" | "logs" | "settings" | "whatsapp" | "confirmers">("trials");
+
+  const [userRole, setUserRole] = useState<"admin" | "confirmer" | null>("admin");
+  const [userPermissions, setUserPermissions] = useState<string[]>([]);
 
   // Mobile and responsive layout states
   const [isMobileSidebarOpen, setIsMobileSidebarOpen] = useState(false);
@@ -220,6 +230,17 @@ export default function AdminDashboard({ onLogout, theme, setTheme }: AdminDashb
     const adminSession = localStorage.getItem("algora_admin_logged");
     if (adminSession === "true") {
       setIsAuthenticated(true);
+      setUserRole("admin");
+      setUserPermissions([]);
+    } else {
+      const confirmerSession = localStorage.getItem("algora_confirmer_logged");
+      const confirmerRole = localStorage.getItem("algora_confirmer_role");
+      const confirmerPerms = localStorage.getItem("algora_confirmer_perms");
+      if (confirmerSession === "true") {
+        setIsAuthenticated(true);
+        setUserRole("confirmer");
+        setUserPermissions(confirmerPerms ? JSON.parse(confirmerPerms) : []);
+      }
     }
   }, []);
 
@@ -436,20 +457,52 @@ export default function AdminDashboard({ onLogout, theme, setTheme }: AdminDashb
   // Login handler
   const handleLogin = (e: React.FormEvent) => {
     e.preventDefault();
-    if (username.trim().toLowerCase() === "admin" && password === "hitham") {
+    const userClean = username.trim().toLowerCase();
+    
+    // Check main Admin
+    if (userClean === "admin" && password === "hitham") {
       localStorage.setItem("algora_admin_logged", "true");
+      setUserRole("admin");
+      setUserPermissions([]);
       setIsAuthenticated(true);
       setLoginError("");
       addLog("قام المشرف بتسجيل الدخول بأمان إلى لوحة التسيير الكبرى.");
-    } else {
-      setLoginError("اسم المستخدم أو كلمة المرور غير صحيحة.");
+      return;
     }
+    
+    // Check Confirmers
+    if (rawConfirmers) {
+      const match = rawConfirmers.find(c => c.username === userClean && c.password === password);
+      if (match) {
+        if (!match.isActive) {
+          setLoginError("هذا الحساب معطل حالياً. يرجى مراجعة المسؤول.");
+          return;
+        }
+        localStorage.setItem("algora_confirmer_logged", "true");
+        localStorage.setItem("algora_confirmer_role", "confirmer");
+        localStorage.setItem("algora_confirmer_perms", JSON.stringify(match.permissions));
+        
+        setUserRole("confirmer");
+        setUserPermissions(match.permissions);
+        setIsAuthenticated(true);
+        setLoginError("");
+        addLog(`قامت المؤكدة "${match.name}" بتسجيل الدخول بنجاح.`);
+        return;
+      }
+    }
+    
+    setLoginError("اسم المستخدم أو كلمة المرور غير صحيحة.");
   };
 
   // Logout handler
   const handleLogout = () => {
     localStorage.removeItem("algora_admin_logged");
+    localStorage.removeItem("algora_confirmer_logged");
+    localStorage.removeItem("algora_confirmer_role");
+    localStorage.removeItem("algora_confirmer_perms");
     setIsAuthenticated(false);
+    setUserRole(null);
+    setUserPermissions([]);
     setUsername("");
     setPassword("");
     onLogout?.();
@@ -468,6 +521,18 @@ export default function AdminDashboard({ onLogout, theme, setTheme }: AdminDashb
       addLog(`تم تغيير حالة تفعيل متجر "${storeName}" إلى: ${getStatusLabel(newStatus)}`);
     } catch (err) {
       alert("حدث خطأ في الاتصال بقاعدة البيانات");
+    }
+  };
+
+  // Update Generic Order Fields
+  const updateOrderFields = async (id: any, fields: any) => {
+    try {
+      await updateOrderMutation({
+        id,
+        updates: fields
+      });
+    } catch (err) {
+      console.error(err);
     }
   };
 
@@ -790,6 +855,7 @@ export default function AdminDashboard({ onLogout, theme, setTheme }: AdminDashb
         handleLogout={handleLogout}
         isMobileSidebarOpen={isMobileSidebarOpen}
         setIsMobileSidebarOpen={setIsMobileSidebarOpen}
+        userRole={userRole}
       />
 
       {/* Main Content Area */}
@@ -965,6 +1031,8 @@ export default function AdminDashboard({ onLogout, theme, setTheme }: AdminDashb
                     deleteTrialRequest={deleteTrialRequest}
                     createMockRequest={createMockRequest}
                     refreshData={fetchData}
+                    updateOrderFields={updateOrderFields}
+                    userPermissions={userPermissions}
                   />
                 )}
 
@@ -989,6 +1057,10 @@ export default function AdminDashboard({ onLogout, theme, setTheme }: AdminDashb
 
                 {activeAdminSubTab === "whatsapp" && (
                   <WhatsappTab />
+                )}
+
+                {activeAdminSubTab === "confirmers" && (
+                  <ConfirmersTab />
                 )}
 
                 {activeAdminSubTab === "logs" && (

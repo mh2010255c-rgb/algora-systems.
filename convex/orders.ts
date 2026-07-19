@@ -51,6 +51,8 @@ export const create = mutation({
       deviceType: args.packageType,
       createdAt: new Date().toISOString(),
       updatedAt: new Date().toISOString(),
+      confirmationStatus: "pending",
+      assignedConfirmerId: "",
     };
 
     const id = await ctx.db.insert("orders", newOrder);

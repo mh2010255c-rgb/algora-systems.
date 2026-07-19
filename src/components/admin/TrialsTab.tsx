@@ -22,6 +22,8 @@ interface TrialRequest {
   city: string;
   timestamp: string;
   status: "pending" | "contacted" | "demo_sent" | "approved" | "completed" | "canceled" | "whatsapp_sent" | "no_whatsapp";
+  confirmationStatus?: "pending" | "contacted" | "no_reply_1" | "no_reply_2" | "no_reply_3" | "whatsapp_sent" | "no_whatsapp" | "wrong_number" | "confirmed" | "canceled";
+  assignedConfirmerId?: string;
 }
 
 interface StatusDropdownProps {
@@ -229,6 +231,227 @@ function StatusDropdown({ currentStatus, onChange, storeName }: StatusDropdownPr
   );
 }
 
+interface ConfirmationDropdownProps {
+  currentStatus: "pending" | "contacted" | "no_reply_1" | "no_reply_2" | "no_reply_3" | "whatsapp_sent" | "no_whatsapp" | "wrong_number" | "confirmed" | "canceled";
+  onChange: (newStatus: "pending" | "contacted" | "no_reply_1" | "no_reply_2" | "no_reply_3" | "whatsapp_sent" | "no_whatsapp" | "wrong_number" | "confirmed" | "canceled") => void;
+  storeName?: string;
+  disabled?: boolean;
+}
+
+function ConfirmationDropdown({ currentStatus, onChange, storeName, disabled }: ConfirmationDropdownProps) {
+  const [isOpen, setIsOpen] = useState(false);
+  const [searchQuery, setSearchQuery] = useState("");
+  const containerRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    function handleClickOutside(event: MouseEvent) {
+      if (containerRef.current && !containerRef.current.contains(event.target as Node)) {
+        setIsOpen(false);
+      }
+    }
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => document.removeEventListener("mousedown", handleClickOutside);
+  }, []);
+
+  const options = [
+    {
+      id: "pending" as const,
+      label: "جديد ⏳",
+      desc: "بانتظار المتابعة والاتصال.",
+      icon: Clock,
+      btnClass: "bg-blue-500/10 border-blue-500/30 text-blue-400 hover:bg-blue-500/20 focus:ring-blue-500/30",
+      activeTextClass: "text-blue-400",
+      activeBgClass: "bg-blue-500/5 hover:bg-blue-500/10"
+    },
+    {
+      id: "contacted" as const,
+      label: "تم الاتصال ✅",
+      desc: "تم التواصل مع العميل بنجاح.",
+      icon: Phone,
+      btnClass: "bg-emerald-500/10 border-emerald-500/30 text-emerald-400 hover:bg-emerald-500/20 focus:ring-emerald-500/30",
+      activeTextClass: "text-emerald-400",
+      activeBgClass: "bg-emerald-500/5 hover:bg-emerald-500/10"
+    },
+    {
+      id: "no_reply_1" as const,
+      label: "لا يرد 1 📞",
+      desc: "المحاولة الأولى للاتصال دون رد.",
+      icon: AlertCircle,
+      btnClass: "bg-amber-500/10 border-amber-500/30 text-amber-400 hover:bg-amber-500/20 focus:ring-amber-500/30",
+      activeTextClass: "text-amber-400",
+      activeBgClass: "bg-amber-500/5 hover:bg-amber-500/10"
+    },
+    {
+      id: "no_reply_2" as const,
+      label: "لا يرد 2 📞",
+      desc: "المحاولة الثانية للاتصال دون رد.",
+      icon: AlertCircle,
+      btnClass: "bg-orange-500/10 border-orange-500/30 text-orange-400 hover:bg-orange-500/20 focus:ring-orange-500/30",
+      activeTextClass: "text-orange-400",
+      activeBgClass: "bg-orange-500/5 hover:bg-orange-500/10"
+    },
+    {
+      id: "no_reply_3" as const,
+      label: "لا يرد 3 📞",
+      desc: "المحاولة الثالثة للاتصال دون رد.",
+      icon: AlertCircle,
+      btnClass: "bg-rose-500/10 border-rose-500/30 text-rose-400 hover:bg-rose-500/20 focus:ring-rose-500/30",
+      activeTextClass: "text-rose-400",
+      activeBgClass: "bg-rose-500/5 hover:bg-rose-500/10"
+    },
+    {
+      id: "whatsapp_sent" as const,
+      label: "واتساب مرسل 💬",
+      desc: "تم إرسال رسالة واتساب للعميل.",
+      icon: MessageSquareCode,
+      btnClass: "bg-teal-500/10 border-teal-500/30 text-teal-400 hover:bg-teal-500/20 focus:ring-teal-500/30",
+      activeTextClass: "text-teal-400",
+      activeBgClass: "bg-teal-500/5 hover:bg-teal-500/10"
+    },
+    {
+      id: "no_whatsapp" as const,
+      label: "لا يوجد واتساب ⚠️",
+      desc: "الرقم لا يحتوي على حساب واتساب.",
+      icon: AlertCircle,
+      btnClass: "bg-slate-500/15 border-slate-500/30 text-slate-400 hover:bg-slate-500/20 focus:ring-slate-500/30",
+      activeTextClass: "text-slate-400",
+      activeBgClass: "bg-slate-500/5 hover:bg-slate-500/10"
+    },
+    {
+      id: "wrong_number" as const,
+      label: "رقم خاطئ ❌",
+      desc: "رقم الهاتف غير صحيح أو خارج الخدمة.",
+      icon: X,
+      btnClass: "bg-red-500/10 border-red-500/30 text-red-400 hover:bg-red-500/20 focus:ring-red-500/30",
+      activeTextClass: "text-red-400",
+      activeBgClass: "bg-red-500/5 hover:bg-red-500/10"
+    },
+    {
+      id: "confirmed" as const,
+      label: "مؤكدة 🟢",
+      desc: "تم تأكيد طلب العميل وتفاصيله.",
+      icon: CheckCircle2,
+      btnClass: "bg-purple-500/10 border-purple-500/30 text-purple-400 hover:bg-purple-500/20 focus:ring-purple-500/30",
+      activeTextClass: "text-purple-400",
+      activeBgClass: "bg-purple-500/5 hover:bg-purple-500/10"
+    },
+    {
+      id: "canceled" as const,
+      label: "ملغية 🔴",
+      desc: "تم إلغاء الطلب بالكامل.",
+      icon: X,
+      btnClass: "bg-rose-700/15 border-rose-700/30 text-rose-500 hover:bg-rose-700/25 focus:ring-rose-700/30",
+      activeTextClass: "text-rose-500",
+      activeBgClass: "bg-rose-700/5 hover:bg-rose-700/10"
+    }
+  ];
+
+  const currentOption = options.find(o => o.id === currentStatus) || options[0];
+  const IconComponent = currentOption.icon;
+
+  const filteredOptions = options.filter(opt => 
+    opt.label.toLowerCase().includes(searchQuery.toLowerCase()) ||
+    opt.desc.toLowerCase().includes(searchQuery.toLowerCase())
+  );
+
+  return (
+    <div className="relative inline-block text-right" ref={containerRef} onClick={(e) => e.stopPropagation()}>
+      <button
+        type="button"
+        disabled={disabled}
+        onClick={() => setIsOpen(!isOpen)}
+        className={`inline-flex items-center justify-center gap-1.5 px-2.5 py-1 text-[11px] font-black rounded-full border transition-all duration-200 shadow-sm focus:outline-none focus:ring-2 select-none cursor-pointer disabled:opacity-50 disabled:cursor-not-allowed ${currentOption.btnClass}`}
+      >
+        <IconComponent className="w-3 h-3 shrink-0" />
+        <span>{currentOption.label}</span>
+        <svg 
+          className={`w-3 h-3 transition-transform duration-200 shrink-0 ${isOpen ? "rotate-180" : ""}`} 
+          fill="none" 
+          viewBox="0 0 24 24" 
+          stroke="currentColor" 
+          strokeWidth="3"
+        >
+          <path strokeLinecap="round" strokeLinejoin="round" d="M19 9l-7 7-7-7" />
+        </svg>
+      </button>
+
+      <AnimatePresence>
+        {isOpen && (
+          <motion.div
+            initial={{ opacity: 0, scale: 0.95, y: -10 }}
+            animate={{ opacity: 1, scale: 1, y: 0 }}
+            exit={{ opacity: 0, scale: 0.95, y: -10 }}
+            transition={{ type: "spring", duration: 0.3 }}
+            style={{ borderRadius: "16px", backgroundColor: "var(--dropdown-bg, #16161F)", borderColor: "var(--dropdown-border, rgba(255,255,255,.08))", boxShadow: "0 20px 40px rgba(0,0,0,.45)" }}
+            className="absolute left-0 mt-2.5 w-72 border backdrop-blur-xl z-50 overflow-hidden py-2"
+          >
+            {options.length > 8 && (
+              <div className="px-3 pb-2 pt-1 border-b border-white/5">
+                <div className="relative flex items-center">
+                  <Search className="absolute right-3 w-3.5 h-3.5 text-slate-500 pointer-events-none" />
+                  <input
+                    type="text"
+                    value={searchQuery}
+                    onChange={(e) => setSearchQuery(e.target.value)}
+                    placeholder="ابحث عن حالة التأكيد..."
+                    className="w-full bg-[#0B0B12] border border-white/5 rounded-xl pr-9 pl-3 py-2 text-xs text-slate-300 placeholder:text-slate-600 focus:outline-none focus:ring-1 focus:ring-purple-500/50 text-right"
+                  />
+                </div>
+              </div>
+            )}
+
+            <div className="max-h-[300px] overflow-y-auto px-1.5 space-y-0.5">
+              {filteredOptions.length === 0 ? (
+                <div className="text-center py-4 text-xs text-slate-500">لا توجد نتائج</div>
+              ) : (
+                filteredOptions.map((opt) => {
+                  const OptIcon = opt.icon;
+                  const isSelected = opt.id === currentStatus;
+                  return (
+                    <button
+                      key={opt.id}
+                      type="button"
+                      onClick={() => {
+                        onChange(opt.id);
+                        setIsOpen(false);
+                      }}
+                      className={`w-full h-[46px] rounded-xl flex items-center justify-between px-3 text-right transition-all duration-200 group cursor-pointer ${
+                        isSelected 
+                          ? "bg-purple-500/10 text-purple-300" 
+                          : "text-slate-300 hover:bg-[#8B5CF6]/10 hover:text-white"
+                      }`}
+                    >
+                      <div className="flex items-center shrink-0 w-5">
+                        {isSelected && <Check className="w-4 h-4 text-purple-400" />}
+                      </div>
+
+                      <div className="flex items-center gap-3 flex-row-reverse text-right flex-1 min-w-0 pr-1">
+                        <div className={`w-8 h-8 rounded-lg flex items-center justify-center shrink-0 transition-all ${
+                          isSelected ? "bg-purple-500/20 text-purple-300" : "bg-white/5 text-slate-400 group-hover:bg-[#8B5CF6]/20 group-hover:text-[#A855F7]"
+                        }`}>
+                          <OptIcon className="w-4 h-4" />
+                        </div>
+                        <div className="space-y-0.5 text-right flex-1 min-w-0">
+                          <div className={`text-xs font-black truncate ${isSelected ? "text-purple-300" : "text-slate-200 group-hover:text-purple-300"}`}>
+                            {opt.label}
+                          </div>
+                          <div className="text-[10px] text-slate-500 font-medium truncate group-hover:text-slate-400 transition-colors">
+                            {opt.desc}
+                          </div>
+                        </div>
+                      </div>
+                    </button>
+                  );
+                })
+              )}
+            </div>
+          </motion.div>
+        )}
+      </AnimatePresence>
+    </div>
+  );
+}
+
 interface TrialsTabProps {
   sortedTrials: TrialRequest[];
   updateTrialStatus: (id: string, newStatus: "pending" | "contacted" | "demo_sent" | "approved" | "completed" | "canceled" | "whatsapp_sent" | "no_whatsapp") => void;
@@ -236,6 +459,8 @@ interface TrialsTabProps {
   deleteTrialRequest: (id: string) => void;
   createMockRequest: () => void;
   refreshData?: () => void;
+  updateOrderFields?: (id: string, fields: any) => Promise<void>;
+  userPermissions?: string[];
 }
 
 export default function TrialsTab({
@@ -244,8 +469,15 @@ export default function TrialsTab({
   openEditModal,
   deleteTrialRequest,
   createMockRequest,
-  refreshData
+  refreshData,
+  updateOrderFields,
+  userPermissions
 }: TrialsTabProps) {
+
+  const hasPermission = (permission: string) => {
+    if (!userPermissions) return true;
+    return userPermissions.includes(permission);
+  };
 
   // --- STATE MANAGEMENT ---
   const [searchQuery, setSearchQuery] = useState("");
@@ -1252,6 +1484,7 @@ export default function TrialsTab({
                   <th className="px-5 py-4 text-right">الباقة المختارة</th>
                   <th className="px-5 py-4 text-right">طريقة الدفع والمبلغ</th>
                   <th className="px-5 py-4 text-center">حالة الطلب</th>
+                  <th className="px-5 py-4 text-center">تأكيد الطلبية</th>
                   <th className="px-5 py-4 text-right">آخر تحديث</th>
                   <th className="px-5 py-4 text-left">الإجراءات السريعة</th>
                 </tr>
@@ -1259,7 +1492,7 @@ export default function TrialsTab({
               <tbody className="divide-y divide-[rgba(255,255,255,0.04)]">
                 {paginatedTrials.length === 0 ? (
                   <tr>
-                    <td colSpan={7} className="py-20 text-center text-slate-500 font-bold text-xs space-y-2 border border-white/10">
+                    <td colSpan={8} className="py-20 text-center text-slate-500 font-bold text-xs space-y-2 border border-white/10">
                       <FileText className="w-10 h-10 mx-auto text-slate-700" />
                       <p>لا توجد طلبات تطابق معايير الفلترة المحددة حالياً.</p>
                       <button 
@@ -1378,6 +1611,21 @@ export default function TrialsTab({
                           />
                         </td>
 
+                        {/* 5.5. Confirmer Status Dropdown */}
+                        <td className="px-5 py-4 text-center" onClick={(e) => e.stopPropagation()}>
+                          <ConfirmationDropdown
+                            currentStatus={req.confirmationStatus || "pending"}
+                            onChange={(newStatus) => {
+                              if (updateOrderFields) {
+                                updateOrderFields(req.id, { confirmationStatus: newStatus });
+                              }
+                              triggerToast(`تم تحديث حالة التأكيد إلى: ${newStatus} 📞`);
+                            }}
+                            storeName={req.storeName}
+                            disabled={!hasPermission("edit_confirmation")}
+                          />
+                        </td>
+
                         {/* 6. Last Active / Timestamp */}
                         <td className="px-5 py-4 font-mono text-xs text-slate-400">
                           <div>{new Date(req.timestamp).toLocaleDateString("ar-DZ", { day: "2-digit", month: "2-digit", year: "numeric" })}</div>
@@ -1389,15 +1637,17 @@ export default function TrialsTab({
                           <div className="flex items-center gap-1.5 justify-end">
                             
                             {/* WhatsApp Template URL */}
-                            <a
-                              href={generateWhatsAppLink(req.phone, req.ownerName, req.storeName, req.programType)}
-                              target="_blank"
-                              rel="noreferrer"
-                              className="p-1.5 bg-[#0B0B12] hover:bg-emerald-500/10 border border-emerald-500/20 text-emerald-400 rounded-lg transition-all cursor-pointer"
-                              title="مراسلة عبر واتساب"
-                            >
-                              <MessageSquareCode className="w-3.5 h-3.5" />
-                            </a>
+                            {hasPermission("whatsapp_access") && (
+                              <a
+                                href={generateWhatsAppLink(req.phone, req.ownerName, req.storeName, req.programType)}
+                                target="_blank"
+                                rel="noreferrer"
+                                className="p-1.5 bg-[#0B0B12] hover:bg-emerald-500/10 border border-emerald-500/20 text-emerald-400 rounded-lg transition-all cursor-pointer"
+                                title="مراسلة عبر واتساب"
+                              >
+                                <MessageSquareCode className="w-3.5 h-3.5" />
+                              </a>
+                            )}
 
                             {/* Direct Phone Call */}
                             <a
@@ -1431,55 +1681,61 @@ export default function TrialsTab({
                             </button>
 
                             {/* Edit Action */}
-                            <button
-                              onClick={() => openEditModal(req)}
-                              className="p-1.5 bg-[#0B0B12] hover:bg-purple-500/10 border border-purple-500/20 text-purple-400 rounded-lg transition-all cursor-pointer"
-                              title="تعديل تفاصيل الطلب"
-                            >
-                              <Edit className="w-3.5 h-3.5" />
-                            </button>
-
-                            {/* Status Quick Activation */}
-                            {req.status !== "approved" ? (
+                            {hasPermission("edit_status") && (
                               <button
-                                onClick={() => {
-                                  updateTrialStatus(req.id, "approved");
-                                  addLog(`تم تنشيط وتفعيل رخصة متجر "${req.storeName}" بنجاح.`);
-                                  triggerToast("تم تنشيط رخصة المتجر بنجاح 🟢");
-                                }}
-                                className="p-1.5 bg-[#0B0B12] hover:bg-emerald-500/20 border border-emerald-500/30 text-emerald-400 rounded-lg transition-all cursor-pointer"
-                                title="تنشيط وتسليم الرخصة فوراً"
+                                onClick={() => openEditModal(req)}
+                                className="p-1.5 bg-[#0B0B12] hover:bg-purple-500/10 border border-purple-500/20 text-purple-400 rounded-lg transition-all cursor-pointer"
+                                title="تعديل تفاصيل الطلب"
                               >
-                                <CheckSquare className="w-3.5 h-3.5" />
-                              </button>
-                            ) : (
-                              <button
-                                onClick={() => {
-                                  updateTrialStatus(req.id, "canceled");
-                                  addLog(`تم إلغاء وتجميد رخصة متجر "${req.storeName}".`);
-                                  triggerToast("تم إلغاء وتجميد الرخصة.");
-                                }}
-                                className="p-1.5 bg-[#0B0B12] hover:bg-rose-500/20 border border-rose-500/30 text-rose-400 rounded-lg transition-all cursor-pointer"
-                                title="إلغاء وتجميد رخصة العميل"
-                              >
-                                <X className="w-3.5 h-3.5" />
+                                <Edit className="w-3.5 h-3.5" />
                               </button>
                             )}
 
+                            {/* Status Quick Activation */}
+                            {hasPermission("edit_status") && (
+                              req.status !== "approved" ? (
+                                <button
+                                  onClick={() => {
+                                    updateTrialStatus(req.id, "approved");
+                                    addLog(`تم تنشيط وتفعيل رخصة متجر "${req.storeName}" بنجاح.`);
+                                    triggerToast("تم تنشيط رخصة المتجر بنجاح 🟢");
+                                  }}
+                                  className="p-1.5 bg-[#0B0B12] hover:bg-emerald-500/20 border border-emerald-500/30 text-emerald-400 rounded-lg transition-all cursor-pointer"
+                                  title="تنشيط وتسليم الرخصة فوراً"
+                                >
+                                  <CheckSquare className="w-3.5 h-3.5" />
+                                </button>
+                              ) : (
+                                <button
+                                  onClick={() => {
+                                    updateTrialStatus(req.id, "canceled");
+                                    addLog(`تم إلغاء وتجميد رخصة متجر "${req.storeName}".`);
+                                    triggerToast("تم إلغاء وتجميد الرخصة.");
+                                  }}
+                                  className="p-1.5 bg-[#0B0B12] hover:bg-rose-500/20 border border-rose-500/30 text-rose-400 rounded-lg transition-all cursor-pointer"
+                                  title="إلغاء وتجميد رخصة العميل"
+                                >
+                                  <X className="w-3.5 h-3.5" />
+                                </button>
+                              )
+                            )}
+
                             {/* Delete Action */}
-                            <button
-                              onClick={() => {
-                                if (confirm(`هل أنت متأكد من حذف طلب "${req.storeName}" بالكامل؟`)) {
-                                  deleteTrialRequest(req.id);
-                                  addLog(`تم حذف طلب "${req.storeName}" من جدول الإجراءات.`);
-                                  triggerToast("تم حذف الطلب بنجاح.");
-                                }
-                              }}
-                              className="p-1.5 bg-[#0B0B12] hover:bg-rose-500/20 border border-rose-500/30 text-rose-400 rounded-lg transition-all cursor-pointer"
-                              title="حذف طلب العميل"
-                            >
-                              <Trash2 className="w-3.5 h-3.5" />
-                            </button>
+                            {hasPermission("delete_orders") && (
+                              <button
+                                onClick={() => {
+                                  if (confirm(`هل أنت متأكد من حذف طلب "${req.storeName}" بالكامل؟`)) {
+                                    deleteTrialRequest(req.id);
+                                    addLog(`تم حذف طلب "${req.storeName}" من جدول الإجراءات.`);
+                                    triggerToast("تم حذف الطلب بنجاح.");
+                                  }
+                                }}
+                                className="p-1.5 bg-[#0B0B12] hover:bg-rose-500/20 border border-rose-500/30 text-rose-400 rounded-lg transition-all cursor-pointer"
+                                title="حذف طلب العميل"
+                              >
+                                <Trash2 className="w-3.5 h-3.5" />
+                              </button>
+                            )}
 
                           </div>
                         </td>
@@ -1733,6 +1989,33 @@ export default function TrialsTab({
                               triggerToast(`تم تحديث حالة الطلب إلى: ${statusNames[newStatus]} 🎯`);
                             }}
                             storeName={selectedRequest.storeName}
+                          />
+                        </div>
+                        <div className="col-span-2 pt-2.5 border-t border-white/5 flex items-center justify-between flex-row-reverse">
+                          <span className="text-slate-400 font-bold">حالة تأكيد المؤكدة:</span>
+                          <ConfirmationDropdown
+                            currentStatus={selectedRequest.confirmationStatus || "pending"}
+                            onChange={(newStatus) => {
+                              if (updateOrderFields) {
+                                updateOrderFields(selectedRequest.id, { confirmationStatus: newStatus });
+                              }
+                              setSelectedRequest(prev => prev ? { ...prev, confirmationStatus: newStatus } : null);
+                              const confirmationNames = {
+                                pending: "جديد ⏳",
+                                contacted: "تم الاتصال ✅",
+                                no_reply_1: "لا يرد 1 📞",
+                                no_reply_2: "لا يرد 2 📞",
+                                no_reply_3: "لا يرد 3 📞",
+                                whatsapp_sent: "واتساب مرسل 💬",
+                                no_whatsapp: "لا يوجد واتساب ⚠️",
+                                wrong_number: "رقم خاطئ ❌",
+                                confirmed: "مؤكدة 🟢",
+                                canceled: "ملغية 🔴"
+                              };
+                              triggerToast(`تم تحديث حالة التأكيد إلى: ${confirmationNames[newStatus]} 📞`);
+                            }}
+                            storeName={selectedRequest.storeName}
+                            disabled={!hasPermission("edit_confirmation")}
                           />
                         </div>
                       </div>

@@ -27,6 +27,8 @@ export default defineSchema({
     createdAt: v.string(),
     updatedAt: v.string(),
     activatedAt: v.optional(v.string()),
+    confirmationStatus: v.optional(v.string()), // "pending" | "contacted" | "no_reply_1" | "no_reply_2" | "no_reply_3" | "whatsapp_sent" | "no_whatsapp" | "wrong_number" | "confirmed" | "canceled"
+    assignedConfirmerId: v.optional(v.string()),
   }),
   tickets: defineTable({
     storeName: v.string(),
@@ -36,5 +38,13 @@ export default defineSchema({
     status: v.string(), // "open" | "resolved"
     createdAt: v.string(),
     updatedAt: v.optional(v.string()),
+  }),
+  confirmers: defineTable({
+    name: v.string(),
+    username: v.string(),
+    password: v.string(),
+    permissions: v.array(v.string()), // ["view_orders", "edit_status", "edit_confirmation", "delete_orders", "whatsapp_access"]
+    isActive: v.boolean(),
+    createdAt: v.string(),
   }),
 });

@@ -157,8 +157,7 @@ export default function LandingPage({ onSelectDemo, onSelectSupport, onSelectTri
   const [phone, setPhone] = useState("");
   const [phone2, setPhone2] = useState("");
   const [hasWhatsapp, setHasWhatsapp] = useState<"yes" | "no">("yes");
-  const [paymentMethod, setPaymentMethod] = useState("electronic");
-  const [electronicPaymentType, setElectronicPaymentType] = useState("ccp");
+  const [paymentMethod, setPaymentMethod] = useState("ccp");
   const [deliveryType, setDeliveryType] = useState("home");
   const [programType, setProgramType] = useState("both");
   const [city, setCity] = useState("");
@@ -712,9 +711,9 @@ export default function LandingPage({ onSelectDemo, onSelectSupport, onSelectTri
     setShowSuccessDownloads(false);
 
     try {
-      const finalPaymentMethod = paymentMethod === "electronic" 
-        ? `electronic - ${electronicPaymentType}`
-        : `cod - ${deliveryType}`;
+      const finalPaymentMethod = paymentMethod === "cod" 
+        ? `cod - ${deliveryType}`
+        : paymentMethod;
 
       const result = await registerTrial({
         storeName,
@@ -1310,16 +1309,17 @@ export default function LandingPage({ onSelectDemo, onSelectSupport, onSelectTri
                   </div>
                 </div>
 
-                {/* Payment Method Selector (White/Purple High-contrast buttons) */}
+                {/* Payment Method Selector */}
                 <div className="space-y-2">
                   <label className="block text-xs text-slate-600 font-bold mb-1 flex items-center justify-end gap-1.5">
                     <span>وسيلة الدفع المفضلة لتفعيل الاشتراك لاحقاً</span>
                     <CreditCard className="w-3.5 h-3.5 text-purple-600 shrink-0" />
                   </label>
-                  <div className="grid grid-cols-2 gap-2 text-right">
+                  <div className="grid grid-cols-1 md:grid-cols-3 gap-2 text-right">
                     {[
-                      { id: "electronic", name: "دفع إلكتروني", icon: "⚡", desc: "بريدي موب / CCP" },
-                      { id: "cod", name: "دفع عند الاستلام", icon: "🤝", desc: "نقداً عبر الوكيل" },
+                      { id: "ccp", name: "CCP", icon: "💳" },
+                      { id: "baridimob", name: "بريدي موب", icon: "📱" },
+                      { id: "cod", name: "دفع عند الاستلام", icon: "🤝" },
                     ].map((method) => {
                       const isSelected = paymentMethod === method.id;
                       return (
@@ -1327,47 +1327,20 @@ export default function LandingPage({ onSelectDemo, onSelectSupport, onSelectTri
                           key={method.id}
                           type="button"
                           onClick={() => setPaymentMethod(method.id)}
-                          className={`p-2.5 rounded-xl text-right transition-all border cursor-pointer ${
+                          className={`p-2.5 rounded-xl text-center transition-all border cursor-pointer ${
                             isSelected
                               ? "bg-gradient-to-l from-purple-600 to-indigo-600 border-purple-600 text-white shadow-md shadow-purple-600/20"
                               : "bg-slate-50 border-slate-200/80 text-slate-700 hover:bg-slate-100 hover:text-slate-900"
                           }`}
                         >
-                          <div className="flex items-center justify-center gap-2 py-1">
-                            <span className="text-xs shrink-0">{method.icon}</span>
+                          <div className="flex flex-col items-center justify-center gap-1.5 py-1">
+                            <span className="text-lg">{method.icon}</span>
                             <span className="text-xs font-black">{method.name}</span>
                           </div>
                         </button>
                       );
                     })}
                   </div>
-
-                  {paymentMethod === "electronic" && (
-                    <div className="grid grid-cols-2 md:grid-cols-4 gap-2 text-right mt-2">
-                      {[
-                        { id: "ccp", name: "CCP" },
-                        { id: "baridimob", name: "بريدي موب" },
-                        { id: "redotpay", name: "RedotPay" },
-                        { id: "binance", name: "Binance" },
-                      ].map((sub) => {
-                        const isSubSelected = electronicPaymentType === sub.id;
-                        return (
-                          <button
-                            key={sub.id}
-                            type="button"
-                            onClick={() => setElectronicPaymentType(sub.id)}
-                            className={`p-2 rounded-lg text-xs font-bold text-center transition-all border cursor-pointer ${
-                              isSubSelected
-                                ? "bg-purple-100 border-purple-500 text-purple-700 shadow-sm"
-                                : "bg-white border-slate-200 text-slate-600 hover:bg-slate-50"
-                            }`}
-                          >
-                            {sub.name}
-                          </button>
-                        );
-                      })}
-                    </div>
-                  )}
 
                   {paymentMethod === "cod" && (
                     <div className="grid grid-cols-2 gap-2 text-right mt-2">

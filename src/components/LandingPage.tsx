@@ -857,24 +857,28 @@ export default function LandingPage({ onSelectDemo, onSelectSupport, onSelectTri
         </div>
       </section>
 
+      {/* WHATSAPP CTA BADGE IN GAP */}
+      <div className="flex justify-center mt-12 mb-4 relative z-20">
+        <a
+          href="https://wa.me/213553361047?text=%D9%85%D8%B1%D8%AD%D8%A8%D8%A7%D9%8B%D8%8C%20%D8%A3%D9%86%D8%A7%20%D9%85%D9%87%D8%AA%D9%85%20%D8%A8%D9%86%D8%B8%D8%A7%D9%85%20Algora%20%D9%88%D8%A3%D8%B1%D9%8A%D8%AF%20%D8%A7%D9%84%D8%AD%D8%B5%D9%88%D9%84%20%D8%B9%D9%84%D9%89%20%D9%86%D8%B3%D8%AE%D8%AA%D9%8A%20%D8%A7%D9%84%D8%AA%D8%AC%D8%B1%D9%8A%D8%A8%D9%8A%D8%A9%20%D8%A7%D9%84%D9%85%D8%AC%D8%A7%D9%86%D9%8A%D8%A9"
+          target="_blank"
+          rel="noopener noreferrer"
+          className="group relative inline-flex items-center gap-2.5 px-6 py-3 bg-slate-900 border border-[#25D366]/40 rounded-xl hover:bg-slate-800 transition-all duration-300 shadow-[0_0_20px_rgba(37,211,102,0.15)] hover:shadow-[0_0_30px_rgba(37,211,102,0.3)] hover:-translate-y-1"
+        >
+          {/* Subtle pulse behind the icon */}
+          <div className="absolute right-6 w-5 h-5 bg-[#25D366] rounded-full blur-md opacity-30 group-hover:opacity-60 transition-opacity animate-pulse"></div>
+          
+          <Smartphone className="w-5 h-5 text-[#25D366] relative z-10" />
+          <span className="text-slate-100 text-[15px] font-bold relative z-10">اطلب نسختك التجريبية عبر واتساب</span>
+        </a>
+      </div>
+
       {/* 1.5 SYSTEM VIDEO DEMONSTRATION SECTION */}
       <section id="demo-video-section" className="relative py-6 overflow-hidden">
         {/* Decorative ambient blurred shapes */}
         <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[400px] bg-purple-900/10 rounded-full blur-3xl pointer-events-none" />
         
         <div className="max-w-7xl mx-auto px-2 md:px-6 space-y-8">
-          <div className="flex justify-center mt-2 mb-8 relative z-10">
-            <a
-              href="https://wa.me/213553361047?text=%D9%85%D8%B1%D8%AD%D8%A8%D8%A7%D9%8B%D8%8C%20%D8%A3%D9%86%D8%A7%20%D9%85%D9%87%D8%AA%D9%85%20%D8%A8%D9%86%D8%B8%D8%A7%D9%85%20Algora%20%D9%88%D8%A3%D8%B1%D9%8A%D8%AF%20%D8%A7%D9%84%D8%AD%D8%B5%D9%88%D9%84%20%D8%B9%D9%84%D9%89%20%D9%86%D8%B3%D8%AE%D8%AA%D9%8A%20%D8%A7%D9%84%D8%AA%D8%AC%D8%B1%D9%8A%D8%A8%D9%8A%D8%A9%20%D8%A7%D9%84%D9%85%D8%AC%D8%A7%D9%86%D9%8A%D8%A9"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="inline-flex items-center gap-2.5 px-6 py-3 bg-slate-900 border border-slate-800 rounded-xl hover:bg-slate-800 transition-colors shadow-sm"
-            >
-              <Smartphone className="w-5 h-5 text-emerald-400" />
-              <span className="text-slate-100 text-[15px] font-bold">اطلب نسختك التجريبية عبر واتساب</span>
-            </a>
-          </div>
-
           <div className="text-center space-y-3">
             <span className="inline-flex items-center gap-1.5 px-3.5 py-1 bg-indigo-500/10 border border-indigo-500/20 rounded-full text-indigo-400 text-xs font-black">
               <Video className="w-4 h-4" />

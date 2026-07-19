@@ -890,10 +890,16 @@ export default function App() {
           href="https://wa.me/213553361047?text=%D9%85%D8%B1%D8%AD%D8%A8%D8%A7%D9%8B%D8%8C%20%D8%A3%D9%86%D8%A7%20%D9%85%D9%87%D8%AA%D9%85%20%D8%A8%D9%86%D8%B8%D8%A7%D9%85%20Algora%20%D9%88%D8%A3%D8%B1%D9%8A%D8%AF%20%D8%A7%D9%84%D8%AD%D8%B5%D9%88%D9%84%20%D8%B9%D9%84%D9%89%20%D9%86%D8%B3%D8%AE%D8%AA%D9%8A%20%D8%A7%D9%84%D8%AA%D8%AC%D8%B1%D9%8A%D8%A8%D9%8A%D8%A9%20%D8%A7%D9%84%D9%85%D8%AC%D8%A7%D9%86%D9%8A%D8%A9"
           target="_blank"
           rel="noopener noreferrer"
-          className="fixed bottom-6 left-6 z-50 flex items-center justify-center p-3.5 bg-[#25D366] text-white rounded-full shadow-xl shadow-green-500/20 hover:bg-[#1ebd5a] hover:scale-110 hover:-translate-y-1 transition-all duration-300 group"
+          className="fixed bottom-6 left-6 z-50 group flex items-center justify-center"
           aria-label="تواصل معنا عبر واتساب"
         >
-          <svg className="w-7 h-7 fill-current" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+          {/* Pulsing background glow */}
+          <div className="absolute w-[50px] h-[50px] bg-[#25D366] rounded-full animate-ping opacity-30"></div>
+          
+          {/* White background for the phone icon inside the transparent SVG */}
+          <div className="absolute w-[44px] h-[44px] bg-white rounded-full"></div>
+          
+          <svg className="relative w-[65px] h-[65px] fill-[#25D366] drop-shadow-xl group-hover:scale-110 group-hover:-translate-y-1 transition-all duration-300" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
             <path d="M.057 24l1.687-6.163c-1.041-1.804-1.588-3.849-1.587-5.946C.06 5.348 5.397.01 12.008.01c3.202.001 6.212 1.246 8.477 3.514 2.266 2.268 3.507 5.28 3.505 8.484-.004 6.657-5.34 11.997-11.953 11.997-2.005-.001-3.973-.502-5.724-1.455L0 24zm6.59-4.846c1.6.95 3.188 1.449 4.825 1.451 5.436 0 9.86-4.37 9.864-9.799.002-2.623-1.023-5.086-2.885-6.948C16.59 2.016 14.11 1.008 11.99 1.008 6.556 1.008 2.13 5.379 2.127 10.81c-.001 1.76.46 3.473 1.336 4.985l-.997 3.638 3.75-.98c1.478.808 2.985 1.2 4.541 1.201h.003zm11.236-7.394c-.29-.144-1.711-.844-1.977-.94-.266-.097-.46-.144-.654.144-.194.288-.75.94-.919 1.13-.17.19-.338.213-.628.069-.29-.144-1.226-.452-2.336-1.443-.864-.77-1.447-1.722-1.617-2.011-.17-.29-.018-.447.127-.59.13-.13.29-.338.435-.506.145-.17.194-.288.29-.48.097-.193.048-.36-.024-.505-.072-.144-.654-1.577-.895-2.155-.236-.577-.496-.499-.679-.508-.176-.008-.377-.01-.58-.01-.202 0-.53.076-.807.38-.277.303-1.057 1.034-1.057 2.52 0 1.487 1.082 2.923 1.231 3.125.15.202 2.13 3.251 5.16 4.56.72.311 1.282.497 1.72.637.724.23 1.383.197 1.903.12.58-.087 1.712-.699 1.952-1.376.24-.678.24-1.258.17-1.376-.073-.118-.266-.192-.556-.338z"/>
           </svg>
         </a>

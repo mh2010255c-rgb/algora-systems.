@@ -829,10 +829,10 @@ export default function App() {
               <h5 className="font-extrabold text-slate-200">تواصل معنا مباشرة:</h5>
               <p className="text-slate-500 leading-relaxed">فريق الدعم والمهندسين متواجد بالجزائر لخدمتك.</p>
               <div className="flex flex-col gap-2">
-                <p className="font-mono text-slate-300 font-bold text-[13px] inline-block text-right" dir="ltr">هاتف: <a href="https://wa.me/213553361047" target="_blank" rel="noopener noreferrer" className="hover:underline hover:text-purple-400 transition-colors cursor-pointer">+213 553 36 10 47</a></p>
+                <p className="font-mono text-slate-300 font-bold text-[13px] inline-block text-right" dir="ltr">هاتف: <a href="https://wa.me/213553361047?text=%D9%85%D8%B1%D8%AD%D8%A8%D8%A7%D9%8B%D8%8C%20%D8%A3%D9%86%D8%A7%20%D9%85%D9%87%D8%AA%D9%85%20%D8%A8%D9%86%D8%B8%D8%A7%D9%85%20Algora%20%D9%88%D8%A3%D8%B1%D9%8A%D8%AF%20%D8%A7%D9%84%D8%AD%D8%B5%D9%88%D9%84%20%D8%B9%D9%84%D9%89%20%D9%86%D8%B3%D8%AE%D8%AA%D9%8A%20%D8%A7%D9%84%D8%AA%D8%AC%D8%B1%D9%8A%D8%A8%D9%8A%D8%A9%20%D8%A7%D9%84%D9%85%D8%AC%D8%A7%D9%86%D9%8A%D8%A9" target="_blank" rel="noopener noreferrer" className="hover:underline hover:text-purple-400 transition-colors cursor-pointer">+213 553 36 10 47</a></p>
                 <div>
                   <a
-                    href="https://wa.me/213553361047"
+                    href="https://wa.me/213553361047?text=%D9%85%D8%B1%D8%AD%D8%A8%D8%A7%D9%8B%D8%8C%20%D8%A3%D9%86%D8%A7%20%D9%85%D9%87%D8%AA%D9%85%20%D8%A8%D9%86%D8%B8%D8%A7%D9%85%20Algora%20%D9%88%D8%A3%D8%B1%D9%8A%D8%AF%20%D8%A7%D9%84%D8%AD%D8%B5%D9%88%D9%84%20%D8%B9%D9%84%D9%89%20%D9%86%D8%B3%D8%AE%D8%AA%D9%8A%20%D8%A7%D9%84%D8%AA%D8%AC%D8%B1%D9%8A%D8%A8%D9%8A%D8%A9%20%D8%A7%D9%84%D9%85%D8%AC%D8%A7%D9%86%D9%8A%D8%A9"
                     target="_blank"
                     rel="noopener noreferrer"
                     className="inline-flex items-center gap-1.5 px-3 py-1 bg-emerald-600 hover:bg-emerald-700 text-white rounded-lg text-[10px] font-black shadow transition-all cursor-pointer"
@@ -887,7 +887,7 @@ export default function App() {
       {/* FLOATING WHATSAPP BUTTON */}
       {activeTab !== "admin" && (
         <a
-          href="https://wa.me/213553361047"
+          href="https://wa.me/213553361047?text=%D9%85%D8%B1%D8%AD%D8%A8%D8%A7%D9%8B%D8%8C%20%D8%A3%D9%86%D8%A7%20%D9%85%D9%87%D8%AA%D9%85%20%D8%A8%D9%86%D8%B8%D8%A7%D9%85%20Algora%20%D9%88%D8%A3%D8%B1%D9%8A%D8%AF%20%D8%A7%D9%84%D8%AD%D8%B5%D9%88%D9%84%20%D8%B9%D9%84%D9%89%20%D9%86%D8%B3%D8%AE%D8%AA%D9%8A%20%D8%A7%D9%84%D8%AA%D8%AC%D8%B1%D9%8A%D8%A8%D9%8A%D8%A9%20%D8%A7%D9%84%D9%85%D8%AC%D8%A7%D9%86%D9%8A%D8%A9"
           target="_blank"
           rel="noopener noreferrer"
           className="fixed bottom-6 left-6 z-50 flex items-center justify-center p-3.5 bg-[#25D366] text-white rounded-full shadow-xl shadow-green-500/20 hover:bg-[#1ebd5a] hover:scale-110 hover:-translate-y-1 transition-all duration-300 group"

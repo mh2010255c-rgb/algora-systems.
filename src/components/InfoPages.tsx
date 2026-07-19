@@ -329,7 +329,7 @@ export default function InfoPages({ initialSection = "about", onSelectTrial }: I
           {/* Footer of the Content Column */}
           <div className="border-t border-slate-900 pt-6 mt-8 flex flex-col sm:flex-row justify-between items-center gap-4 text-xs">
             <div className="text-slate-500">
-              🇩🇿 دعم فني محلي فوري بالجزائر هاتفياً وعلى الواتساب: <a href="https://wa.me/213553361047" target="_blank" rel="noopener noreferrer" className="font-bold text-slate-300 font-mono inline-block hover:underline hover:text-purple-400 transition-colors cursor-pointer" dir="ltr">+213 553 36 10 47</a>
+              🇩🇿 دعم فني محلي فوري بالجزائر هاتفياً وعلى الواتساب: <a href="https://wa.me/213553361047?text=%D9%85%D8%B1%D8%AD%D8%A8%D8%A7%D9%8B%D8%8C%20%D8%A3%D9%86%D8%A7%20%D9%85%D9%87%D8%AA%D9%85%20%D8%A8%D9%86%D8%B8%D8%A7%D9%85%20Algora%20%D9%88%D8%A3%D8%B1%D9%8A%D8%AF%20%D8%A7%D9%84%D8%AD%D8%B5%D9%88%D9%84%20%D8%B9%D9%84%D9%89%20%D9%86%D8%B3%D8%AE%D8%AA%D9%8A%20%D8%A7%D9%84%D8%AA%D8%AC%D8%B1%D9%8A%D8%A8%D9%8A%D8%A9%20%D8%A7%D9%84%D9%85%D8%AC%D8%A7%D9%86%D9%8A%D8%A9" target="_blank" rel="noopener noreferrer" className="font-bold text-slate-300 font-mono inline-block hover:underline hover:text-purple-400 transition-colors cursor-pointer" dir="ltr">+213 553 36 10 47</a>
             </div>
             {onSelectTrial && (
               <button

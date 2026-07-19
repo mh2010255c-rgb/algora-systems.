@@ -996,9 +996,6 @@ export default function LandingPage({ onSelectDemo, onSelectSupport, onSelectTri
               <span>جرب نظامنا بالكامل 5 أيام مجاناً</span>
             </div>
             <h2 className="text-xl md:text-3xl font-black text-slate-900 leading-tight">اطلب تفعيل نسختك التجريبية المجانية في ثوانٍ معدودة</h2>
-            <p className="text-xs md:text-sm text-slate-600 leading-relaxed">
-              املأ الاستمارة الآن بالمعلومات الصحيحة لمحلك التجاري. سيقوم مهندسو الدعم الفني بالاتصال بك هاتفياً فورا عبر الهاتف أو واتساب لإرسال روابط تنزيل اللوجيسيال، وإنشاء بيانات الدخول الخاصة بك، ومساعدتك في تفعيل عتاد الكاشير.
-            </p>
             <div className="h-px bg-slate-200/60" />
 
             <div className="bg-slate-100/80 p-4 rounded-xl border border-slate-200 space-y-2 text-xs">

@@ -11,6 +11,23 @@ import SupportCenter from "./components/SupportCenter";
 import GreetingWizard from "./components/GreetingWizard";
 import InfoPages, { InfoSection } from "./components/InfoPages";
 import AdminDashboard from "./components/AdminDashboard";
+import { ErrorBoundary } from "react-error-boundary";
+
+function AdminErrorFallback({ error, resetErrorBoundary }: any) {
+  return (
+    <div className="min-h-screen bg-[#0B0B0F] flex items-center justify-center p-6 text-right" dir="rtl">
+      <div className="max-w-md w-full bg-red-950/20 border border-red-900/50 p-6 rounded-2xl">
+        <h2 className="text-xl font-bold text-red-500 mb-2">عذراً، حدث خطأ غير متوقع</h2>
+        <div className="bg-black/50 p-3 rounded-lg overflow-x-auto mb-4">
+          <pre className="text-red-400 text-xs text-left" dir="ltr">{error.message}</pre>
+        </div>
+        <button onClick={resetErrorBoundary} className="px-4 py-2 bg-red-600 hover:bg-red-700 text-white rounded-xl text-sm transition-colors">
+          حاول مرة أخرى
+        </button>
+      </div>
+    </div>
+  );
+}
 
 type ActiveTab = "home" | "demo" | "support" | "info" | "admin";
 
@@ -754,14 +771,16 @@ export default function App() {
               exit={{ opacity: 0, y: -15 }}
               transition={{ duration: 0.25 }}
             >
-              <AdminDashboard 
-                theme={theme}
-                setTheme={setTheme}
-                onLogout={() => {
-                  setActiveTab("home");
-                  window.history.pushState(null, "", "/");
-                }} 
-              />
+              <ErrorBoundary FallbackComponent={AdminErrorFallback}>
+                <AdminDashboard 
+                  theme={theme}
+                  setTheme={setTheme}
+                  onLogout={() => {
+                    setActiveTab("home");
+                    window.history.pushState(null, "", "/");
+                  }} 
+                />
+              </ErrorBoundary>
             </motion.div>
           )}
 

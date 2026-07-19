@@ -718,7 +718,7 @@ export default function TrialsTab({
   const getPrice = (val?: string) => {
     if (val === "pc" || val === "computer" || val === "p_pc_only") return 12000;
     if (val === "mobile" || val === "phone" || val === "p_mobile_only") return 12000;
-    if (val === "both" || val === "combo" || val === "p_both") return 22000;
+    if (val === "both" || val === "combo" || val === "p_both") return 20000;
     if (val === "monthly") return 2500;
     if (val === "annual") return 20000;
     if (val === "enterprise") return 35000;
@@ -1309,7 +1309,7 @@ export default function TrialsTab({
               <option value="trial">فترة تجريبية أساسية ⏳</option>
               <option value="pc">باقة لوجيسيال حاسوب فقط (12K) 💻</option>
               <option value="mobile">باقة تطبيق هاتف فقط (12K) 📱</option>
-              <option value="both">باقة تطبيق هاتف مع حاسوب معاً (22K) ✨</option>
+              <option value="both">باقة تطبيق هاتف مع حاسوب معاً (20K) ✨</option>
             </select>
           </div>
 
@@ -2523,7 +2523,7 @@ export default function TrialsTab({
                       <option value="trial">فترة تجريبية أساسية (5 أيام)</option>
                       <option value="pc">باقة لوجيسيال حاسوب فقط (12,000 دج)</option>
                       <option value="mobile">باقة تطبيق هاتف فقط (12,000 دج)</option>
-                      <option value="both">باقة تطبيق هاتف مع حاسوب معاً (22,000 دج)</option>
+                      <option value="both">باقة تطبيق هاتف مع حاسوب معاً (20,000 دج)</option>
                     </select>
                   </div>
 

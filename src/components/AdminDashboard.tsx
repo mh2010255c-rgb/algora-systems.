@@ -437,7 +437,7 @@ export default function AdminDashboard({ onLogout, theme, setTheme }: AdminDashb
       if (current.status !== "approved" && current.status !== "completed") return acc;
       if (current.programType === "pc" || current.programType === "computer" || current.programType === "p_pc_only") return acc + 12000;
       if (current.programType === "mobile" || current.programType === "phone" || current.programType === "p_mobile_only") return acc + 12000;
-      if (current.programType === "both" || current.programType === "combo" || current.programType === "p_both") return acc + 22000;
+      if (current.programType === "both" || current.programType === "combo" || current.programType === "p_both") return acc + 20000;
       if (current.programType === "annual") return acc + 20000;
       if (current.programType === "monthly") return acc + 2500;
       if (current.programType === "enterprise") return acc + 35000;
@@ -662,7 +662,7 @@ export default function AdminDashboard({ onLogout, theme, setTheme }: AdminDashb
         city: cityOnly,
         province: provinceOnly,
         packageType: rProg,
-        packagePrice: rProg === "both" ? 22000 : 12000,
+        packagePrice: rProg === "both" ? 20000 : 12000,
         paymentMethod: rPay,
         notes: "Mock request"
       });
@@ -1209,7 +1209,7 @@ export default function AdminDashboard({ onLogout, theme, setTheme }: AdminDashb
                       <option value="trial">فترة تجريبية أساسية (5 أيام)</option>
                       <option value="pc">باقة لوجيسيال حاسوب فقط (12,000 دج)</option>
                       <option value="mobile">باقة تطبيق هاتف فقط (12,000 دج)</option>
-                      <option value="both">باقة تطبيق هاتف مع حاسوب معاً (22,000 دج)</option>
+                      <option value="both">باقة تطبيق هاتف مع حاسوب معاً (20,000 دج)</option>
                     </select>
                   </div>
 

@@ -573,7 +573,8 @@ export default function LandingPage({ onSelectDemo, onSelectSupport, onSelectTri
     {
       id: "p_both",
       name: "باقة تطبيق هاتف مع حاسوب",
-      price: "22,000 دج",
+      price: "20,000 دج",
+      oldPrice: "22,000 دج",
       period: "سنة",
       badge: "الأكثر طلباً وتوفيراً 🔥",
       description: "التكامل والتحكم المطلق! لوجيسيال حاسوب متكامل لإدارة البيع مع تطبيق هاتف ذكي متزامن كلياً للمتابعة اللحظية.",
@@ -723,7 +724,7 @@ export default function LandingPage({ onSelectDemo, onSelectSupport, onSelectTri
         province,
         city,
         packageType: programType,
-        packagePrice: programType === "both" ? 22000 : 12000,
+        packagePrice: programType === "both" ? 20000 : 12000,
         paymentMethod: finalPaymentMethod,
         notes: notes || "",
       });
@@ -1247,7 +1248,7 @@ export default function LandingPage({ onSelectDemo, onSelectSupport, onSelectTri
                       { 
                         id: "both", 
                         name: "باقة تطبيق هاتف مع حاسوب معاً", 
-                        price: "22,000 دج / سنة", 
+                        price: "20,000 دج / سنة", 
                         icon: <Sparkles className="w-4 h-4" />,
                         desc: "التكامل والتحكم المطلق! (حاسوب + هاتف متزامن كلياً)",
                         badge: "الأكثر طلباً وتوفيراً 🔥" 
@@ -1460,6 +1461,11 @@ export default function LandingPage({ onSelectDemo, onSelectSupport, onSelectTri
 
                 <div className="flex items-baseline gap-1.5 justify-end">
                   <span className="text-2xl md:text-3xl font-black text-purple-400 font-mono">{plan.price}</span>
+                  {plan.oldPrice && (
+                    <span className="text-sm font-bold text-slate-500 line-through decoration-red-500/50 decoration-2 mr-2">
+                      {plan.oldPrice}
+                    </span>
+                  )}
                   <span className="text-xs text-slate-500">/ {plan.period}</span>
                 </div>
 

@@ -33,6 +33,7 @@ export interface SubscriptionPlan {
   id: string;
   name: string;
   price: string;
+  oldPrice?: string;
   period: string;
   badge?: string;
   description: string;

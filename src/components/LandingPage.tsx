@@ -863,20 +863,7 @@ export default function LandingPage({ onSelectDemo, onSelectSupport, onSelectTri
         <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[400px] bg-purple-900/10 rounded-full blur-3xl pointer-events-none" />
         
         <div className="max-w-7xl mx-auto px-2 md:px-6 space-y-8">
-          <div className="text-center space-y-3">
-            <span className="inline-flex items-center gap-1.5 px-3.5 py-1 bg-indigo-500/10 border border-indigo-500/20 rounded-full text-indigo-400 text-xs font-black">
-              <Video className="w-4 h-4" />
-              <span>فيديو توضيحي تفاعلي للنظام</span>
-            </span>
-            <h2 className="text-xl md:text-3xl lg:text-4xl font-black text-slate-100 leading-tight">
-              اكتشف ميزات Algora Systems في دقيقتين قبل تفعيل حسابك
-            </h2>
-            <p className="text-xs md:text-sm text-slate-400 max-w-2xl mx-auto leading-relaxed">
-              شاهد كيف يسهّل لك اللوجيسيال بيع السلع وإدخال الـ IMEI وإدارة ورشة الصيانة باحترافية كاملة.
-            </p>
-          </div>
-
-          <div className="flex justify-center mt-6 mb-4 relative z-10">
+          <div className="flex justify-center mt-2 mb-8 relative z-10">
             <a
               href="https://wa.me/213553361047?text=%D9%85%D8%B1%D8%AD%D8%A8%D8%A7%D9%8B%D8%8C%20%D8%A3%D9%86%D8%A7%20%D9%85%D9%87%D8%AA%D9%85%20%D8%A8%D9%86%D8%B8%D8%A7%D9%85%20Algora%20%D9%88%D8%A3%D8%B1%D9%8A%D8%AF%20%D8%A7%D9%84%D8%AD%D8%B5%D9%88%D9%84%20%D8%B9%D9%84%D9%89%20%D9%86%D8%B3%D8%AE%D8%AA%D9%8A%20%D8%A7%D9%84%D8%AA%D8%AC%D8%B1%D9%8A%D8%A8%D9%8A%D8%A9%20%D8%A7%D9%84%D9%85%D8%AC%D8%A7%D9%86%D9%8A%D8%A9"
               target="_blank"
@@ -890,6 +877,19 @@ export default function LandingPage({ onSelectDemo, onSelectSupport, onSelectTri
               </svg>
               <span className="relative z-10 tracking-wide text-[15px] sm:text-[17px]">اطلب نسختك الآن</span>
             </a>
+          </div>
+
+          <div className="text-center space-y-3">
+            <span className="inline-flex items-center gap-1.5 px-3.5 py-1 bg-indigo-500/10 border border-indigo-500/20 rounded-full text-indigo-400 text-xs font-black">
+              <Video className="w-4 h-4" />
+              <span>فيديو توضيحي تفاعلي للنظام</span>
+            </span>
+            <h2 className="text-xl md:text-3xl lg:text-4xl font-black text-slate-100 leading-tight">
+              اكتشف ميزات Algora Systems في دقيقتين قبل تفعيل حسابك
+            </h2>
+            <p className="text-xs md:text-sm text-slate-400 max-w-2xl mx-auto leading-relaxed">
+              شاهد كيف يسهّل لك اللوجيسيال بيع السلع وإدخال الـ IMEI وإدارة ورشة الصيانة باحترافية كاملة.
+            </p>
           </div>
 
           {/* Centered Video Player Display - Larger and with minimum height for mobile */}

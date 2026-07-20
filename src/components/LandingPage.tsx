@@ -347,25 +347,11 @@ export default function LandingPage({ onSelectDemo, onSelectSupport, onSelectTri
 
   const [systemImages, setSystemImages] = useState<any[]>([
     {
-      id: "img_splash",
-      title: "شاشة الترحيب والدخول الموحد بالنظام",
-      description: "بوابة دخول مشفرة وآمنة لحماية بيانات المحل التجاري وتأمين الكاشير والمسؤولين.",
-      category: "pos",
-      uploadedUrl: "/assets/fonzon_splash.png"
-    },
-    {
       id: "img_dashboard",
       title: "لوحة التحكم الرئيسية والإحصائيات الحية",
       description: "متابعة المبيعات اليومية، أرباح الصيانة، وحجم السيولة النقدية المتوفرة بالصندوق وأرقام النمو لحظياً.",
       category: "pos",
       uploadedUrl: "/assets/fonzon_dashboard.png"
-    },
-    {
-      id: "img_pos_cashier",
-      title: "واجهة البيع السريعة POS (الكاشير المطور)",
-      description: "البيع السريع بالبحث الفوري والتصنيف للمنتجات وإضافة الطلبات للسلة وإتمام الدفع كاش أو بطاقة.",
-      category: "pos",
-      uploadedUrl: "/assets/fonzon_pos.png"
     },
     {
       id: "img_pos",
@@ -382,34 +368,6 @@ export default function LandingPage({ onSelectDemo, onSelectSupport, onSelectTri
       uploadedUrl: "/assets/fonzon_add_device.png"
     },
     {
-      id: "img_accessories",
-      title: "متجر وقسم إدارة الملحقات والإكسسوارات",
-      description: "جرد وتصنيف الكابلات والشواحن والكفرات والسماعات وتنبيهات النواقص بالمخزن.",
-      category: "stock",
-      uploadedUrl: "/assets/fonzon_accessories.png"
-    },
-    {
-      id: "img_maintenance",
-      title: "لوحة الفحص الظاهري ورصد الأضرار بهيكل الهاتف",
-      description: "رسم تمثيلي يتيح للتقني رصد أماكن الكسور والخدوش قبل الاستلام الفعلي.",
-      category: "maintenance",
-      uploadedUrl: "/assets/fonzon_inspection.png"
-    },
-    {
-      id: "img_spare_parts",
-      title: "إدارة قطع الغيار والملحقات بالمخزن",
-      description: "تتبع وإدارة شاشات الهواتف والبطاريات والقطع المتوفرة وتكلفتها بدقة.",
-      category: "stock",
-      uploadedUrl: "/assets/fonzon_spare_parts.png"
-    },
-    {
-      id: "img_add_spare_part",
-      title: "إضافة قطعة غيار وتحديد تنبيه الحد الأدنى",
-      description: "تسجيل بيانات القطع المشتراة، سعر الشراء وسعر البيع وتعيين تنبيهات النفاد.",
-      category: "stock",
-      uploadedUrl: "/assets/fonzon_add_spare_part.png"
-    },
-    {
       id: "img_maintenance_list",
       title: "جدول تتبع طلبات وأوامر الصيانة الحية",
       description: "متابعة شاملة لجميع الأجهزة المستلمة وتوزيع الأدوار على تقنيي المحل والتقدم في العمل.",
@@ -417,121 +375,11 @@ export default function LandingPage({ onSelectDemo, onSelectSupport, onSelectTri
       uploadedUrl: "/assets/fonzon_maintenance_list.png"
     },
     {
-      id: "img_maintenance_ticket_1",
-      title: "إصدار أمر إصلاح وتذكرة صيانة للزبون",
-      description: "تسجيل عطل الهاتف والتقني المسؤول، وحفظ الحالة الظاهرية للجهاز عند الاستلام.",
-      category: "maintenance",
-      uploadedUrl: "/assets/fonzon_maintenance_ticket_1.png"
-    },
-    {
-      id: "img_maintenance_ticket_2",
-      title: "إتمام أمر الصيانة وتحديد التكلفة الإجمالية",
-      description: "تحديد قطع الغيار المستخدمة، تكلفة اليد العاملة والربح الصافي وإشعار العميل فوراً.",
-      category: "maintenance",
-      uploadedUrl: "/assets/fonzon_maintenance_ticket_2.png"
-    },
-    {
-      id: "img_invoices",
-      title: "لوحة تتبع الفواتير والضمان والمبيعات",
-      description: "مراقبة الفواتير الصادرة وتواريخها وتفاصيل الدفع وحالتها الضمانية للزبائن.",
-      category: "pos",
-      uploadedUrl: "/assets/fonzon_invoices.png"
-    },
-    {
-      id: "img_sales_log",
-      title: "سجل حركات المبيعات والعمليات السابقة",
-      description: "سجل كامل وتاريخي لجميع المنتجات والقطع المباعة وحالة السداد لكل عملية كاشير.",
-      category: "pos",
-      uploadedUrl: "/assets/fonzon_sales_log.png"
-    },
-    {
-      id: "img_customers",
-      title: "إدارة بيانات وحسابات زبائن المحل",
-      description: "تسجيل حسابات الزبائن وتتبع ديونهم (الكريدي) وسجل مدفوعاتهم مع إمكانية السداد الفوري.",
-      category: "mobile",
-      uploadedUrl: "/assets/fonzon_customers.png"
-    },
-    {
-      id: "img_loyalty",
-      title: "برنامج الولاء والخصومات والمكافآت",
-      description: "إعداد نقاط المكافأة التلقائية للعملاء الأوفياء والخصومات عند تكرار الشراء من متجرك.",
-      category: "mobile",
-      uploadedUrl: "/assets/fonzon_loyalty.png"
-    },
-    {
-      id: "img_suppliers",
-      title: "إدارة حسابات وديون الموردين والشركاء",
-      description: "تنظيم الفواتير الآجلة وتواريخ السداد مع الموردين ومتابعة المدفوعات.",
+      id: "img_spare_parts",
+      title: "متجر وقسم إدارة الملحقات وقطع الغيار",
+      description: "تتبع وإدارة شاشات الهواتف والبطاريات والإكسسوارات المتوفرة وتكلفتها بدقة.",
       category: "stock",
-      uploadedUrl: "/assets/fonzon_suppliers.png"
-    },
-    {
-      id: "img_add_supplier",
-      title: "إضافة مورد جديد للنظام وتقييمه",
-      description: "تسجيل بيانات الموردين ونوع البضاعة وشروط الدفع والتعامل المالي المباشر.",
-      category: "stock",
-      uploadedUrl: "/assets/fonzon_add_supplier.png"
-    },
-    {
-      id: "img_employees",
-      title: "إدارة صلاحيات وحسابات الموظفين والعمال",
-      description: "إضافة عمال المحل وتوزيع الصلاحيات (كاشير، تقني صيانة، مدير مخزن) وتتبع المبيعات.",
-      category: "pos",
-      uploadedUrl: "/assets/fonzon_employees.png"
-    },
-    {
-      id: "img_reports",
-      title: "التقارير التحليلية والرسوم البيانية للأداء",
-      description: "متابعة المبيعات اليومية والشهرية وتوزيع الأرباح ومر دودية الموظفين تفصيلياً.",
-      category: "pos",
-      uploadedUrl: "/assets/fonzon_reports.png"
-    },
-    {
-      id: "img_accounting",
-      title: "الحسابات العامة والمالية للمحل",
-      description: "متابعة شاملة للمصاريف، المداخيل، الأرباح الإجمالية والصافية وتوازن الصناديق.",
-      category: "pos",
-      uploadedUrl: "/assets/fonzon_accounting.png"
-    },
-    {
-      id: "img_accounting_pos",
-      title: "سجل مبيعات نقطة البيع بالمالية",
-      description: "عرض حركات وصافي مبيعات الكاشير المباشرة وتأثيرها على السيولة النقدية اليومية.",
-      category: "pos",
-      uploadedUrl: "/assets/fonzon_accounting_pos.png"
-    },
-    {
-      id: "img_expenses",
-      title: "تسجيل ومتابعة مصاريف المحل",
-      description: "تقييد كافة التكاليف التشغيلية (كراء، كهرباء، أجور عمال) لمطابقتها مع الأرباح.",
-      category: "pos",
-      uploadedUrl: "/assets/fonzon_expenses.png"
-    },
-    {
-      id: "img_expense_categories",
-      title: "تصنيف وتبويب بنود المصاريف",
-      description: "إنشاء وتبويب فئات المصاريف (الفواتير، المستلزمات المكتبية، الإعلانات) لتسهيل الفرز.",
-      category: "pos",
-      uploadedUrl: "/assets/fonzon_expense_categories.png"
-    },
-    {
-      id: "img_installments",
-      title: "تسيير عقود البيع بالتقسيط للزبائن",
-      description: "تتبع الأقساط الشهرية المحصلة والمتبقية وعقود التسهيل مع العملاء.",
-      category: "mobile",
-      uploadedUrl: "/assets/fonzon_installments.png"
-    },
-    {
-      id: "img_tracking",
-      title: "تتبع حالة التصليح المباشر للزبون وطباعة الوصل",
-      description: "توليد وتلقي وصل استلام حراري وميزة تتبع لحظية لخطوات تصليح الجهاز على الهاتف تزيد ثقة عملائك.",
-      category: "mobile",
-    },
-    {
-      id: "img_zakat",
-      title: "موديول تصفية وحساب زكاة المال وعائدات المحل",
-      description: "حساب وعاء الزكاة السنوي آلياً بناء على مخزونك المادي، ديونك وديون الموردين ومطابقتها مع النصاب الشرعي بالجزائر.",
-      category: "zakat",
+      uploadedUrl: "/assets/fonzon_spare_parts.png"
     }
   ]);
 

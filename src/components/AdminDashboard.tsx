@@ -89,6 +89,7 @@ export default function AdminDashboard({ onLogout, theme, setTheme }: AdminDashb
     licenseKey: o.licenseKey,
     confirmationStatus: o.confirmationStatus || "pending",
     assignedConfirmerId: o.assignedConfirmerId || "",
+    adminNotes: o.adminNotes || "",
   }));
 
   const supportTickets: SupportTicket[] = (rawSupportTickets || []).map((t: any) => ({

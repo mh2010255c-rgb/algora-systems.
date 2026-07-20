@@ -17,6 +17,7 @@ export default defineSchema({
     paymentStatus: v.string(), // "pending" | "verified" | "rejected"
     orderStatus: v.string(), // "pending" | "contacted" | "demo_sent" | "approved" | "completed" | "canceled"
     notes: v.optional(v.string()),
+    adminNotes: v.optional(v.string()),
     assignedAdmin: v.optional(v.string()),
     activationCode: v.optional(v.string()),
     licenseKey: v.optional(v.string()),

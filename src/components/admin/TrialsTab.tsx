@@ -24,6 +24,7 @@ interface TrialRequest {
   status: "pending" | "contacted" | "demo_sent" | "approved" | "completed" | "canceled" | "whatsapp_sent" | "no_whatsapp";
   confirmationStatus?: "pending" | "contacted" | "no_reply_1" | "no_reply_2" | "no_reply_3" | "whatsapp_sent" | "no_whatsapp" | "wrong_number" | "confirmed" | "canceled";
   assignedConfirmerId?: string;
+  adminNotes?: string;
 }
 
 interface StatusDropdownProps {
@@ -1485,6 +1486,7 @@ export default function TrialsTab({
                   <th className="px-5 py-4 text-right">طريقة الدفع والمبلغ</th>
                   <th className="px-5 py-4 text-center">حالة الطلب</th>
                   <th className="px-5 py-4 text-center">تأكيد الطلبية</th>
+                  <th className="px-5 py-4 text-right">ملاحظات الإدارة</th>
                   <th className="px-5 py-4 text-right">آخر تحديث</th>
                   <th className="px-5 py-4 text-left">الإجراءات السريعة</th>
                 </tr>
@@ -1623,6 +1625,23 @@ export default function TrialsTab({
                             }}
                             storeName={req.storeName}
                             disabled={!hasPermission("edit_confirmation")}
+                          />
+                        </td>
+
+                        {/* 5.6. Admin Notes / Customer Description */}
+                        <td className="px-5 py-4 text-right" onClick={(e) => e.stopPropagation()}>
+                          <textarea
+                            className="w-48 bg-[#1A1A24] border border-[rgba(255,255,255,0.06)] rounded-lg px-3 py-2 text-xs text-slate-300 placeholder-slate-600 focus:outline-none focus:border-[#8B5CF6] transition-colors resize-none overflow-hidden"
+                            rows={1}
+                            placeholder="اكتب ملاحظة (مهتم، متردد...)"
+                            defaultValue={req.adminNotes || ""}
+                            onBlur={(e) => {
+                              const newNotes = e.target.value.trim();
+                              if (newNotes !== (req.adminNotes || "") && updateOrderFields) {
+                                updateOrderFields(req.id, { adminNotes: newNotes });
+                                triggerToast("تم حفظ ملاحظة العميل بنجاح 📝");
+                              }
+                            }}
                           />
                         </td>
 

@@ -1274,6 +1274,22 @@ export default function LandingPage({ onSelectDemo, onSelectSupport, onSelectTri
 
       </section>
 
+      {/* WHATSAPP CTA BADGE IN GAP */}
+      <div className="flex justify-center mt-6 mb-10 relative z-20">
+        <a
+          href="https://wa.me/213553361047?text=%D9%85%D8%B1%D8%AD%D8%A8%D8%A7%D9%8B%D8%8C%20%D8%A3%D9%86%D8%A7%20%D9%85%D9%87%D8%AA%D9%85%20%D8%A8%D9%86%D8%B8%D8%A7%D9%85%20Algora%20%D9%88%D8%A3%D8%B1%D9%8A%D8%AF%20%D8%A7%D9%84%D8%AD%D8%B5%D9%88%D9%84%20%D8%B9%D9%84%D9%89%20%D9%86%D8%B3%D8%AE%D8%AA%D9%8A%20%D8%A7%D9%84%D8%AA%D8%AC%D8%B1%D9%8A%D8%A8%D9%8A%D8%A9%20%D8%A7%D9%84%D9%85%D8%AC%D8%A7%D9%86%D9%8A%D8%A9"
+          target="_blank"
+          rel="noopener noreferrer"
+          className="group relative inline-flex items-center gap-2.5 px-6 py-3 bg-slate-900 border border-[#25D366]/40 rounded-xl hover:bg-slate-800 transition-all duration-300 shadow-[0_0_25px_rgba(37,211,102,0.25)] hover:shadow-[0_0_35px_rgba(37,211,102,0.4)] hover:-translate-y-1"
+        >
+          {/* Subtle pulse behind the icon */}
+          <div className="absolute right-6 w-5 h-5 bg-[#25D366] rounded-full blur-md opacity-30 group-hover:opacity-60 transition-opacity animate-pulse"></div>
+          
+          <Smartphone className="w-5 h-5 text-[#25D366] relative z-10" />
+          <span className="text-slate-100 text-[15px] font-bold relative z-10">اطلب نسختك التجريبية عبر واتساب</span>
+        </a>
+      </div>
+
       {/* SUBSCRIPTION PLANS & PRICING TABLE (Placed directly under the trial request form) */}
       <section className="space-y-12 py-8 border-t border-b border-slate-900/80 bg-slate-950/20 rounded-3xl p-6 md:p-10 relative">
         <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-80 h-80 bg-purple-500/5 rounded-full blur-3xl pointer-events-none" />

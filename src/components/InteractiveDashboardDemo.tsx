@@ -1237,7 +1237,7 @@ export default function InteractiveDashboardDemo({ onShowGreeting }: Interactive
                 {/* Header of Invoice */}
                 <div className="text-center font-sans border-b border-dashed border-slate-300 pb-3 mb-3">
                   <h5 className="font-extrabold text-sm tracking-tight text-slate-950">محل فون زون PHONE ZONE</h5>
-                  <p className="text-[10px] text-slate-500 mt-0.5">الجزائر - هاتف: 0553361047</p>
+                  <p className="text-[10px] text-slate-500 mt-0.5">الجزائر - هاتف: 0671037202</p>
                   <p className="text-[9px] text-slate-400 mt-1">فاتورة مبيعات كاشير رقم: <span className="font-bold">{invoiceData.invoiceNo}</span></p>
                   <p className="text-[8px] text-slate-400 font-mono mt-0.5">{invoiceData.date}</p>
                 </div>

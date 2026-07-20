@@ -576,7 +576,7 @@ export default function WhatsappTab() {
                   <span>فحص الاتصال (Test Connection)</span>
                 </h3>
                 <p className="text-slate-400 text-[11px] leading-relaxed">
-                  أدخل رقم هاتفك الكامل مع رمز الدولة (مثال: +213553361047) لإرسال رسالة اختبارية برمجية فورية عبر الإعدادات النشطة أعلاه.
+                  أدخل رقم هاتفك الكامل مع رمز الدولة (مثال: +213671037202) لإرسال رسالة اختبارية برمجية فورية عبر الإعدادات النشطة أعلاه.
                 </p>
 
                 <div className="space-y-3 pt-2">
@@ -586,7 +586,7 @@ export default function WhatsappTab() {
                       type="text"
                       value={testPhone}
                       onChange={(e) => setTestPhone(e.target.value)}
-                      placeholder="0553361047"
+                      placeholder="0671037202"
                       className="w-full bg-[#0B0B12] border border-white/5 rounded-xl px-4 py-3 text-xs text-white placeholder:text-slate-600 focus:outline-none focus:ring-1 focus:ring-purple-500 font-mono text-left"
                       dir="ltr"
                     />

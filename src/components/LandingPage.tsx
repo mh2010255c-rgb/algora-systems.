@@ -606,7 +606,7 @@ export default function LandingPage({ onSelectDemo, onSelectSupport, onSelectTri
         phonePrimary: phone 
       }));
     } catch (err) {
-      setSubmitStatus({ error: "فشل الاتصال بالخادم. يرجى محاولة التسجيل مجدداً أو الاتصال بـ 0553361047" });
+      setSubmitStatus({ error: "فشل الاتصال بالخادم. يرجى محاولة التسجيل مجدداً أو الاتصال بـ 0671037202" });
     } finally {
       setIsSubmitting(false);
     }
@@ -669,7 +669,7 @@ export default function LandingPage({ onSelectDemo, onSelectSupport, onSelectTri
             </a>
 
             <a
-              href="https://wa.me/213553361047?text=%D9%85%D8%B1%D8%AD%D8%A8%D8%A7%D9%8B%D8%8C%20%D8%A3%D9%86%D8%A7%20%D9%85%D9%87%D8%AA%D9%85%20%D8%A8%D9%86%D8%B8%D8%A7%D9%85%20Algora%20%D9%88%D8%A3%D8%B1%D9%8A%D8%AF%20%D8%A7%D9%84%D8%AD%D8%B5%D9%88%D9%84%20%D8%B9%D9%84%D9%89%20%D9%86%D8%B3%D8%AE%D8%AA%D9%8A%20%D8%A7%D9%84%D8%AA%D8%AC%D8%B1%D9%8A%D8%A8%D9%8A%D8%A9%20%D8%A7%D9%84%D9%85%D8%AC%D8%A7%D9%86%D9%8A%D8%A9"
+              href="https://wa.me/213671037202?text=%D9%85%D8%B1%D8%AD%D8%A8%D8%A7%D9%8B%D8%8C%20%D8%A3%D9%86%D8%A7%20%D9%85%D9%87%D8%AA%D9%85%20%D8%A8%D9%86%D8%B8%D8%A7%D9%85%20Algora%20%D9%88%D8%A3%D8%B1%D9%8A%D8%AF%20%D8%A7%D9%84%D8%AD%D8%B5%D9%88%D9%84%20%D8%B9%D9%84%D9%89%20%D9%86%D8%B3%D8%AE%D8%AA%D9%8A%20%D8%A7%D9%84%D8%AA%D8%AC%D8%B1%D9%8A%D8%A8%D9%8A%D8%A9%20%D8%A7%D9%84%D9%85%D8%AC%D8%A7%D9%86%D9%8A%D8%A9"
               target="_blank"
               rel="noopener noreferrer"
               className="py-3 px-6 bg-slate-950 hover:bg-slate-900 border border-slate-800 hover:border-slate-700 text-slate-200 font-bold rounded-xl transition-all text-xs md:text-sm flex items-center justify-center gap-2 cursor-pointer"
@@ -709,7 +709,7 @@ export default function LandingPage({ onSelectDemo, onSelectSupport, onSelectTri
       {/* WHATSAPP CTA BADGE IN GAP */}
       <div className="flex justify-center -mt-4 mb-10 relative z-20">
         <a
-          href="https://wa.me/213553361047?text=%D9%85%D8%B1%D8%AD%D8%A8%D8%A7%D9%8B%D8%8C%20%D8%A3%D9%86%D8%A7%20%D9%85%D9%87%D8%AA%D9%85%20%D8%A8%D9%86%D8%B8%D8%A7%D9%85%20Algora%20%D9%88%D8%A3%D8%B1%D9%8A%D8%AF%20%D8%A7%D9%84%D8%AD%D8%B5%D9%88%D9%84%20%D8%B9%D9%84%D9%89%20%D9%86%D8%B3%D8%AE%D8%AA%D9%8A%20%D8%A7%D9%84%D8%AA%D8%AC%D8%B1%D9%8A%D8%A8%D9%8A%D8%A9%20%D8%A7%D9%84%D9%85%D8%AC%D8%A7%D9%86%D9%8A%D8%A9"
+          href="https://wa.me/213671037202?text=%D9%85%D8%B1%D8%AD%D8%A8%D8%A7%D9%8B%D8%8C%20%D8%A3%D9%86%D8%A7%20%D9%85%D9%87%D8%AA%D9%85%20%D8%A8%D9%86%D8%B8%D8%A7%D9%85%20Algora%20%D9%88%D8%A3%D8%B1%D9%8A%D8%AF%20%D8%A7%D9%84%D8%AD%D8%B5%D9%88%D9%84%20%D8%B9%D9%84%D9%89%20%D9%86%D8%B3%D8%AE%D8%AA%D9%8A%20%D8%A7%D9%84%D8%AA%D8%AC%D8%B1%D9%8A%D8%A8%D9%8A%D8%A9%20%D8%A7%D9%84%D9%85%D8%AC%D8%A7%D9%86%D9%8A%D8%A9"
           target="_blank"
           rel="noopener noreferrer"
           className="group relative inline-flex items-center gap-2.5 px-6 py-3 bg-slate-900 border border-[#25D366]/40 rounded-xl hover:bg-slate-800 transition-all duration-300 shadow-[0_0_25px_rgba(37,211,102,0.25)] hover:shadow-[0_0_35px_rgba(37,211,102,0.4)] hover:-translate-y-1"
@@ -1009,7 +1009,7 @@ export default function LandingPage({ onSelectDemo, onSelectSupport, onSelectTri
                       type="tel"
                       value={phone}
                       onChange={(e) => setPhone(e.target.value)}
-                      placeholder="مثال: 0553361047"
+                      placeholder="مثال: 0671037202"
                       className="w-full text-xs px-3 py-2.5 bg-slate-50 border border-slate-200 rounded-lg text-slate-900 placeholder:text-slate-400 focus:outline-none focus:border-purple-600 focus:bg-white transition-all text-right font-mono font-semibold"
                       required
                     />
@@ -1277,7 +1277,7 @@ export default function LandingPage({ onSelectDemo, onSelectSupport, onSelectTri
       {/* WHATSAPP CTA BADGE IN GAP */}
       <div className="flex justify-center mt-6 mb-10 relative z-20">
         <a
-          href="https://wa.me/213553361047?text=%D9%85%D8%B1%D8%AD%D8%A8%D8%A7%D9%8B%D8%8C%20%D8%A3%D9%86%D8%A7%20%D9%85%D9%87%D8%AA%D9%85%20%D8%A8%D9%86%D8%B8%D8%A7%D9%85%20Algora%20%D9%88%D8%A3%D8%B1%D9%8A%D8%AF%20%D8%A7%D9%84%D8%AD%D8%B5%D9%88%D9%84%20%D8%B9%D9%84%D9%89%20%D9%86%D8%B3%D8%AE%D8%AA%D9%8A%20%D8%A7%D9%84%D8%AA%D8%AC%D8%B1%D9%8A%D8%A8%D9%8A%D8%A9%20%D8%A7%D9%84%D9%85%D8%AC%D8%A7%D9%86%D9%8A%D8%A9"
+          href="https://wa.me/213671037202?text=%D9%85%D8%B1%D8%AD%D8%A8%D8%A7%D9%8B%D8%8C%20%D8%A3%D9%86%D8%A7%20%D9%85%D9%87%D8%AA%D9%85%20%D8%A8%D9%86%D8%B8%D8%A7%D9%85%20Algora%20%D9%88%D8%A3%D8%B1%D9%8A%D8%AF%20%D8%A7%D9%84%D8%AD%D8%B5%D9%88%D9%84%20%D8%B9%D9%84%D9%89%20%D9%86%D8%B3%D8%AE%D8%AA%D9%8A%20%D8%A7%D9%84%D8%AA%D8%AC%D8%B1%D9%8A%D8%A8%D9%8A%D8%A9%20%D8%A7%D9%84%D9%85%D8%AC%D8%A7%D9%86%D9%8A%D8%A9"
           target="_blank"
           rel="noopener noreferrer"
           className="group relative inline-flex items-center gap-2.5 px-6 py-3 bg-slate-900 border border-[#25D366]/40 rounded-xl hover:bg-slate-800 transition-all duration-300 shadow-[0_0_25px_rgba(37,211,102,0.25)] hover:shadow-[0_0_35px_rgba(37,211,102,0.4)] hover:-translate-y-1"
@@ -1795,7 +1795,7 @@ export default function LandingPage({ onSelectDemo, onSelectSupport, onSelectTri
         <div className="max-w-xl mx-auto bg-slate-950/30 border border-slate-900 p-4 rounded-xl text-center text-xs text-slate-400 space-y-1 relative z-10">
           <p className="font-extrabold text-slate-200">💡 هل تواجه صعوبة في التثبيت أو ربط الطابعات؟</p>
           <p className="leading-relaxed">
-            لا تقلق، فريق الدعم الفني الجزائري في خدمتك! اتصل بنا عبر الهاتف <a href="https://wa.me/213553361047?text=%D9%85%D8%B1%D8%AD%D8%A8%D8%A7%D9%8B%D8%8C%20%D8%A3%D9%86%D8%A7%20%D9%85%D9%87%D8%AA%D9%85%20%D8%A8%D9%86%D8%B8%D8%A7%D9%85%20Algora%20%D9%88%D8%A3%D8%B1%D9%8A%D8%AF%20%D8%A7%D9%84%D8%AD%D8%B5%D9%88%D9%84%20%D8%B9%D9%84%D9%89%20%D9%86%D8%B3%D8%AE%D8%AA%D9%8A%20%D8%A7%D9%84%D8%AA%D8%AC%D8%B1%D9%8A%D8%A8%D9%8A%D8%A9%20%D8%A7%D9%84%D9%85%D8%AC%D8%A7%D9%86%D9%8A%D8%A9" target="_blank" rel="noopener noreferrer" className="font-mono font-bold text-purple-400 text-[13px] inline-block hover:underline cursor-pointer" dir="ltr">+213 553 36 10 47</a> أو تواصل معنا عبر واتساب، وسيتصل بك أحد مهندسينا لتثبيت وتجهيز البرنامج على حاسوبك مجانًا بالكامل عبر <span className="font-bold text-indigo-400">AnyDesk</span>.
+            لا تقلق، فريق الدعم الفني الجزائري في خدمتك! اتصل بنا عبر الهاتف <a href="https://wa.me/213671037202?text=%D9%85%D8%B1%D8%AD%D8%A8%D8%A7%D9%8B%D8%8C%20%D8%A3%D9%86%D8%A7%20%D9%85%D9%87%D8%AA%D9%85%20%D8%A8%D9%86%D8%B8%D8%A7%D9%85%20Algora%20%D9%88%D8%A3%D8%B1%D9%8A%D8%AF%20%D8%A7%D9%84%D8%AD%D8%B5%D9%88%D9%84%20%D8%B9%D9%84%D9%89%20%D9%86%D8%B3%D8%AE%D8%AA%D9%8A%20%D8%A7%D9%84%D8%AA%D8%AC%D8%B1%D9%8A%D8%A8%D9%8A%D8%A9%20%D8%A7%D9%84%D9%85%D8%AC%D8%A7%D9%86%D9%8A%D8%A9" target="_blank" rel="noopener noreferrer" className="font-mono font-bold text-purple-400 text-[13px] inline-block hover:underline cursor-pointer" dir="ltr">+213 671 03 72 02</a> أو تواصل معنا عبر واتساب، وسيتصل بك أحد مهندسينا لتثبيت وتجهيز البرنامج على حاسوبك مجانًا بالكامل عبر <span className="font-bold text-indigo-400">AnyDesk</span>.
           </p>
         </div>
       </section>

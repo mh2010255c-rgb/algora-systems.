@@ -89,7 +89,7 @@ export default function SupportCenter() {
       const errorMsg: ChatMessage = {
         id: "error_" + Date.now(),
         role: "model",
-        content: "عذراً، حدث خطأ أثناء الاتصال بالخادم الذكي. يرجى تكرار المحاولة أو التواصل مع الدعم الفني الهاتفي المباشر على الرقم 0553361047.",
+        content: "عذراً، حدث خطأ أثناء الاتصال بالخادم الذكي. يرجى تكرار المحاولة أو التواصل مع الدعم الفني الهاتفي المباشر على الرقم 0671037202.",
         timestamp: new Date()
       };
       setMessages((prev) => [...prev, errorMsg]);
@@ -309,7 +309,7 @@ export default function SupportCenter() {
                     type="tel"
                     value={ticketPhone}
                     onChange={(e) => setTicketPhone(e.target.value)}
-                    placeholder="مثال: 0553361047"
+                    placeholder="مثال: 0671037202"
                     className="w-full text-xs pr-10 pl-3 py-2.5 bg-slate-900 border border-slate-800 rounded-lg text-slate-100 focus:outline-none focus:border-purple-500 font-mono text-right"
                     required
                   />
@@ -361,10 +361,10 @@ export default function SupportCenter() {
               <div className="flex gap-3 items-start justify-end">
                 <div className="text-right">
                   <h5 className="font-bold text-slate-200">الهاتف والواتساب المباشر:</h5>
-                  <p className="font-mono text-purple-400 font-bold text-[13px] mt-0.5 inline-block" dir="ltr">0553361047 / +213 553 36 10 47</p>
+                  <p className="font-mono text-purple-400 font-bold text-[13px] mt-0.5 inline-block" dir="ltr">0671037202 / +213 671 03 72 02</p>
                   <div className="mt-2.5">
                     <a
-                      href="https://wa.me/213553361047?text=%D9%85%D8%B1%D8%AD%D8%A8%D8%A7%D9%8B%D8%8C%20%D8%A3%D9%86%D8%A7%20%D9%85%D9%87%D8%AA%D9%85%20%D8%A8%D9%86%D8%B8%D8%A7%D9%85%20Algora%20%D9%88%D8%A3%D8%B1%D9%8A%D8%AF%20%D8%A7%D9%84%D8%AD%D8%B5%D9%88%D9%84%20%D8%B9%D9%84%D9%89%20%D9%86%D8%B3%D8%AE%D8%AA%D9%8A%20%D8%A7%D9%84%D8%AA%D8%AC%D8%B1%D9%8A%D8%A8%D9%8A%D8%A9%20%D8%A7%D9%84%D9%85%D8%AC%D8%A7%D9%86%D9%8A%D8%A9"
+                      href="https://wa.me/213671037202?text=%D9%85%D8%B1%D8%AD%D8%A8%D8%A7%D9%8B%D8%8C%20%D8%A3%D9%86%D8%A7%20%D9%85%D9%87%D8%AA%D9%85%20%D8%A8%D9%86%D8%B8%D8%A7%D9%85%20Algora%20%D9%88%D8%A3%D8%B1%D9%8A%D8%AF%20%D8%A7%D9%84%D8%AD%D8%B5%D9%88%D9%84%20%D8%B9%D9%84%D9%89%20%D9%86%D8%B3%D8%AE%D8%AA%D9%8A%20%D8%A7%D9%84%D8%AA%D8%AC%D8%B1%D9%8A%D8%A8%D9%8A%D8%A9%20%D8%A7%D9%84%D9%85%D8%AC%D8%A7%D9%86%D9%8A%D8%A9"
                       target="_blank"
                       rel="noopener noreferrer"
                       className="inline-flex items-center gap-1.5 px-3 py-1.5 bg-emerald-600 hover:bg-emerald-700 text-white rounded-xl text-[10px] font-black shadow transition-all cursor-pointer"

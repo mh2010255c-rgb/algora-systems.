@@ -972,16 +972,49 @@ export default function TrialsTab({
 
   // --- EXPORT TO CSV LOCAL IMPLEMENTATION ---
   const exportToCSV = () => {
-    let headers = "ID,اسم المحل,المالك,رقم الهاتف,المدينة/الولاية,الباقة,طريقة الدفع,الحالة,التاريخ\n";
+    // 1. Arrange headers to match the dashboard view roughly
+    let headers = "المحل;العميل (المالك);الولاية (المنطقة);باقة البرنامج;رقم الهاتف;رقم إضافي;واتساب;طريقة الدفع;حالة الطلب;حالة التأكيد;تاريخ الطلب;ملاحظات الإدارة\n";
+    
+    // 2. Map data to the new columns
     let rows = filteredAndSortedTrials.map(r => {
-      return `"${r.id}","${r.storeName}","${r.ownerName}","${r.phone}","${r.city}","${r.programType || "trial"}","${r.paymentMethod || "cash"}","${r.status}","${r.timestamp}"`;
+      // Escape quotes and handle commas by wrapping in double quotes
+      const store = `"${(r.storeName || '')}"`;
+      const client = `"${(r.ownerName || '')}"`;
+      const city = `"${r.city || ''}"`;
+      const packageType = `"${r.programType || 'trial'}"`;
+      const phone1 = `"${r.phone || ''}"`;
+      const phone2 = `"${r.phone2 || ''}"`;
+      const whatsapp = `"${r.hasWhatsapp === 'yes' ? 'نعم' : 'لا'}"`;
+      const payment = `"${r.paymentMethod || 'cash'}"`;
+      
+      // Translate statuses (optional, but good for Arabic export)
+      const statusMap: Record<string, string> = {
+        pending: "جديد", contacted: "تم التواصل", demo_sent: "تم إرسال نسخة تجريبية",
+        approved: "موافق", completed: "مكتمل", canceled: "ملغى",
+        whatsapp_sent: "تم إرسال واتساب", no_whatsapp: "لا يوجد واتساب"
+      };
+      const status = `"${statusMap[r.status] || r.status}"`;
+      
+      const confStatusMap: Record<string, string> = {
+        pending: "قيد الانتظار", contacted: "تم التواصل", no_reply_1: "لا يرد (1)",
+        no_reply_2: "لا يرد (2)", no_reply_3: "لا يرد (3)", confirmed: "مؤكد", 
+        wrong_number: "رقم خاطئ", canceled: "ملغى"
+      };
+      const confStatus = `"${r.confirmationStatus ? (confStatusMap[r.confirmationStatus] || r.confirmationStatus) : ''}"`;
+      
+      const date = `"${r.timestamp || ''}"`;
+      const notes = `"${(r.adminNotes || '').replace(/"/g, '""')}"`;
+
+      // Use semicolon instead of comma because Excel uses it in many locales
+      return [store, client, city, packageType, phone1, phone2, whatsapp, payment, status, confStatus, date, notes].join(";");
     }).join("\n");
     
+    // Add BOM for correct Arabic rendering in Excel
     const blob = new Blob(["\uFEFF" + headers + rows], { type: 'text/csv;charset=utf-8;' });
     const link = document.createElement("a");
     const url = URL.createObjectURL(blob);
     link.setAttribute("href", url);
-    link.setAttribute("download", `AlgoraPOS_Filter_Export_${new Date().toISOString().slice(0, 10)}.csv`);
+    link.setAttribute("download", `طلبيات_البرامج_والتراخيص_${new Date().toISOString().slice(0, 10)}.csv`);
     link.style.visibility = 'hidden';
     document.body.appendChild(link);
     link.click();

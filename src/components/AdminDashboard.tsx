@@ -708,16 +708,36 @@ export default function AdminDashboard({ onLogout, theme, setTheme }: AdminDashb
 
   // Export Table Data to CSV
   const exportToCSV = () => {
-    let headers = "ID,Store Name,Owner Name,Phone,Secondary Phone,City,Has Whatsapp,Program Type,Payment Method,Status,Timestamp\n";
+    // 1. Arrange headers to match the dashboard view
+    let headers = "المحل;العميل (المالك);الولاية (المنطقة);باقة البرنامج;رقم الهاتف;رقم إضافي;واتساب;طريقة الدفع;حالة الطلب;تاريخ الطلب\n";
+    
+    // 2. Map data to the new columns
     let rows = trialRequests.map(r => {
-      return `"${r.id}","${r.storeName}","${r.ownerName}","${r.phone}","${r.phone2 || ""}","${r.city}","${r.hasWhatsapp || "no"}","${r.programType || "trial"}","${r.paymentMethod || "cash"}","${r.status}","${r.timestamp}"`;
+      const store = `"${(r.storeName || '')}"`;
+      const client = `"${(r.ownerName || '')}"`;
+      const city = `"${r.city || ''}"`;
+      const packageType = `"${r.programType || 'trial'}"`;
+      const phone1 = `"${r.phone || ''}"`;
+      const phone2 = `"${r.phone2 || ''}"`;
+      const whatsapp = `"${r.hasWhatsapp === 'yes' ? 'نعم' : 'لا'}"`;
+      const payment = `"${r.paymentMethod || 'cash'}"`;
+      
+      const statusMap: Record<string, string> = {
+        pending: "جديد", contacted: "تم التواصل", demo_sent: "تم إرسال نسخة تجريبية",
+        approved: "موافق", completed: "مكتمل", canceled: "ملغى",
+        whatsapp_sent: "تم إرسال واتساب", no_whatsapp: "لا يوجد واتساب"
+      };
+      const status = `"${statusMap[r.status] || r.status}"`;
+      const date = `"${r.timestamp || ''}"`;
+
+      return [store, client, city, packageType, phone1, phone2, whatsapp, payment, status, date].join(";");
     }).join("\n");
     
-    const blob = new Blob([headers + rows], { type: 'text/csv;charset=utf-8;' });
+    const blob = new Blob(["\uFEFF" + headers + rows], { type: 'text/csv;charset=utf-8;' });
     const link = document.createElement("a");
     const url = URL.createObjectURL(blob);
     link.setAttribute("href", url);
-    link.setAttribute("download", `AlgoraPOS_Clients_List_${new Date().toISOString().slice(0, 10)}.csv`);
+    link.setAttribute("download", `طلبيات_البرامج_والتراخيص_${new Date().toISOString().slice(0, 10)}.csv`);
     link.style.visibility = 'hidden';
     document.body.appendChild(link);
     link.click();

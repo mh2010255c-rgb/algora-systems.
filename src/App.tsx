@@ -3,7 +3,7 @@ import { motion, AnimatePresence } from "motion/react";
 import { 
   Smartphone, Headphones, LayoutDashboard, Menu, X, Sparkles, 
   HelpCircle, MessageSquareCode, Award, ShieldCheck, PlayCircle, ArrowLeft, Info,
-  ChevronRight, ChevronLeft, Lock, Sun, Moon
+  ChevronRight, ChevronLeft, Lock, Sun, Moon, Download, Monitor
 } from "lucide-react";
 import LandingPage from "./components/LandingPage";
 import InteractiveDashboardDemo from "./components/InteractiveDashboardDemo";
@@ -745,7 +745,41 @@ export default function App() {
               animate={{ opacity: 1, y: 0 }}
               exit={{ opacity: 0, y: -15 }}
               transition={{ duration: 0.25 }}
+              className="space-y-8"
             >
+              {/* DOWNLOAD CARDS SECTION */}
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-6 max-w-4xl mx-auto">
+                <div className="bg-slate-900/80 border border-slate-800 rounded-2xl p-6 flex flex-col items-center justify-center text-center hover:bg-slate-850 hover:border-purple-500/30 transition-all group">
+                  <div className="w-16 h-16 rounded-2xl bg-purple-600/10 border border-purple-500/20 flex items-center justify-center mb-4 group-hover:scale-110 transition-transform">
+                    <Monitor className="w-8 h-8 text-purple-400" />
+                  </div>
+                  <h3 className="text-xl font-bold text-slate-100 mb-2">تطبيق الحاسوب (Windows)</h3>
+                  <p className="text-sm text-slate-400 mb-6">قم بتحميل وتثبيت نظام فون زون بالكامل على جهاز الحاسوب الخاص بك.</p>
+                  <a href="#" className="w-full py-3 bg-purple-600 hover:bg-purple-500 text-white rounded-xl font-bold flex items-center justify-center gap-2 transition-colors">
+                    <Download className="w-4 h-4" />
+                    <span>تنزيل نسخة الحاسوب</span>
+                  </a>
+                </div>
+                
+                <div className="bg-slate-900/80 border border-slate-800 rounded-2xl p-6 flex flex-col items-center justify-center text-center hover:bg-slate-850 hover:border-indigo-500/30 transition-all group">
+                  <div className="w-16 h-16 rounded-2xl bg-indigo-600/10 border border-indigo-500/20 flex items-center justify-center mb-4 group-hover:scale-110 transition-transform">
+                    <Smartphone className="w-8 h-8 text-indigo-400" />
+                  </div>
+                  <h3 className="text-xl font-bold text-slate-100 mb-2">تطبيق الهاتف (Android)</h3>
+                  <p className="text-sm text-slate-400 mb-6">قم بتنزيل تطبيق الهاتف لمتابعة مبيعاتك وتقارير متجرك من أي مكان.</p>
+                  <a href="#" className="w-full py-3 bg-indigo-600 hover:bg-indigo-500 text-white rounded-xl font-bold flex items-center justify-center gap-2 transition-colors">
+                    <Download className="w-4 h-4" />
+                    <span>تنزيل تطبيق الهاتف</span>
+                  </a>
+                </div>
+              </div>
+
+              {/* DEMO HEADER */}
+              <div className="text-center space-y-2 mt-12 mb-6">
+                <h2 className="text-2xl font-black text-slate-100">أو جرب النظام مباشرة على المتصفح</h2>
+                <p className="text-slate-400 text-sm">محاكاة تفاعلية حية بدون الحاجة للتنزيل</p>
+              </div>
+
               <InteractiveDashboardDemo onShowGreeting={() => setShowGreeting(true)} />
             </motion.div>
           )}

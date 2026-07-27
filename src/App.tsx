@@ -54,11 +54,13 @@ export default function App() {
     localStorage.setItem("theme", theme);
   }, [theme]);
 
-  // Trigger interactive greeting wizard on first load if not requested trial yet or route to admin
+  // Trigger interactive greeting wizard on first load if not requested trial yet or route to specific tabs
   useEffect(() => {
     const path = window.location.pathname.replace(/\/$/, "");
     if (path === "/admin" || path === "/admine") {
       setActiveTab("admin");
+    } else if (path === "/demo") {
+      setActiveTab("demo");
     } else {
       const hasRequested = localStorage.getItem("algora_trial_requested");
       if (!hasRequested) {

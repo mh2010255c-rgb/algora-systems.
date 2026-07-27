@@ -95,7 +95,7 @@ export default function App() {
   };
 
   return (
-    <div dir="rtl" className="min-h-screen bg-transparent text-slate-100 flex flex-col font-sans selection:bg-purple-600/30 selection:text-purple-300 antialiased overflow-x-hidden">
+    <div dir="rtl" className="min-h-screen bg-[#060813] text-slate-100 flex flex-col font-sans selection:bg-purple-600/30 selection:text-purple-300 antialiased overflow-x-hidden">
       
       {/* 1. BACKDROP OVERLAY FOR MOBILE SIDEBAR DRAWER */}
       <AnimatePresence>

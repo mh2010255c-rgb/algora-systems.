@@ -37,7 +37,7 @@ export default function DownloadCenter() {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.4 }}
-          className="bg-[#0f1225] border border-slate-800 rounded-3xl p-8 relative overflow-hidden flex flex-col shadow-2xl hover:border-blue-500/30 transition-all group"
+          className="bg-[#111327] border border-blue-900/10 rounded-3xl p-8 relative overflow-hidden flex flex-col shadow-2xl hover:border-blue-500/30 transition-all group"
         >
           {/* Top Badges & Icon */}
           <div className="flex justify-between items-start mb-8">
@@ -85,7 +85,7 @@ export default function DownloadCenter() {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.4, delay: 0.1 }}
-          className="bg-[#0f1225] border border-slate-800 rounded-3xl p-8 relative overflow-hidden flex flex-col shadow-2xl hover:border-pink-500/30 transition-all group"
+          className="bg-[#150e1f] border border-pink-900/10 rounded-3xl p-8 relative overflow-hidden flex flex-col shadow-2xl hover:border-pink-500/30 transition-all group"
         >
           {/* Top Badges & Icon */}
           <div className="flex justify-between items-start mb-8">

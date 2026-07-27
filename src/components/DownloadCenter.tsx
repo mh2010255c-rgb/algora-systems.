@@ -18,7 +18,7 @@ export default function DownloadCenter() {
         
         <h1 className="text-4xl md:text-5xl font-black mb-4 tracking-tight">
           <span className="text-white">مركز </span>
-          <span className="bg-gradient-to-l from-pink-500 to-purple-500 text-transparent bg-clip-text drop-shadow-[0_0_15px_rgba(236,72,153,0.5)]">التحميل</span>
+          <span className="bg-gradient-to-r from-purple-500 to-pink-500 text-transparent bg-clip-text drop-shadow-[0_0_15px_rgba(236,72,153,0.5)]">التحميل</span>
         </h1>
         
         <p className="text-slate-400 max-w-lg text-sm leading-relaxed">
@@ -37,7 +37,7 @@ export default function DownloadCenter() {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.4 }}
-          className="bg-[#111327] border border-blue-900/10 rounded-3xl p-8 relative overflow-hidden flex flex-col shadow-2xl hover:border-blue-500/30 transition-all group"
+          className="bg-[#0b0c16] border border-blue-900/10 rounded-3xl p-8 relative overflow-hidden flex flex-col shadow-2xl hover:border-blue-500/30 transition-all group"
         >
           {/* Top Badges & Icon */}
           <div className="flex justify-between items-start mb-8">
@@ -85,7 +85,7 @@ export default function DownloadCenter() {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.4, delay: 0.1 }}
-          className="bg-[#150e1f] border border-pink-900/10 rounded-3xl p-8 relative overflow-hidden flex flex-col shadow-2xl hover:border-pink-500/30 transition-all group"
+          className="bg-[#100a14] border border-pink-900/10 rounded-3xl p-8 relative overflow-hidden flex flex-col shadow-2xl hover:border-pink-500/30 transition-all group"
         >
           {/* Top Badges & Icon */}
           <div className="flex justify-between items-start mb-8">

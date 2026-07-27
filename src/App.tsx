@@ -97,6 +97,10 @@ export default function App() {
     }, 100);
   };
 
+  if (activeTab === "demo") {
+    return <DownloadCenter />;
+  }
+
   return (
     <div dir="rtl" className="min-h-screen bg-[#060813] text-slate-100 flex flex-col font-sans selection:bg-purple-600/30 selection:text-purple-300 antialiased overflow-x-hidden">
       
@@ -739,18 +743,7 @@ export default function App() {
             </motion.div>
           )}
 
-          {activeTab === "demo" && (
-            <motion.div
-              key="demo"
-              initial={{ opacity: 0, y: 15 }}
-              animate={{ opacity: 1, y: 0 }}
-              exit={{ opacity: 0, y: -15 }}
-              transition={{ duration: 0.25 }}
-              className="-mt-12 -mx-4 md:-mx-8"
-            >
-              <DownloadCenter />
-            </motion.div>
-          )}
+
 
           {activeTab === "support" && (
             <motion.div

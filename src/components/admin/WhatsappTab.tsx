@@ -313,44 +313,44 @@ export default function WhatsappTab() {
       {/* 1. Header & Section Selector */}
       <div className="flex flex-col md:flex-row justify-between items-start md:items-center gap-4 border-b border-white/5 pb-4">
         <div>
-          <h2 className="text-lg font-black text-white flex items-center gap-2 flex-row-reverse">
-            <span className="w-2.5 h-2.5 rounded-full bg-purple-500 animate-ping"></span>
+          <h2 className="text-lg font-black text-slate-900 flex items-center gap-2 flex-row-reverse">
+            <span className="w-2.5 h-2.5 rounded-full bg-blue-500 animate-ping"></span>
             <span>نظام إرسال رسائل الواتساب التلقائي (WhatsApp Automation)</span>
           </h2>
-          <p className="text-slate-400 text-[11px] mt-1">تسيير الحملات الترحيبية وتفعيل الاشتراكات عبر WhatsApp Business API والمزودين السحابيين.</p>
+          <p className="text-slate-600 text-[11px] mt-1">تسيير الحملات الترحيبية وتفعيل الاشتراكات عبر WhatsApp Business API والمزودين السحابيين.</p>
         </div>
 
         {/* Section Tabs Selector */}
         <div className="flex items-center gap-1.5 bg-[#0B0B12] p-1.5 rounded-xl border border-white/5">
           <button 
             onClick={() => setActiveSubSection("logs")}
-            className={`px-3 py-1.5 rounded-lg text-xs font-black transition-all cursor-pointer ${activeSubSection === "logs" ? "bg-purple-600 text-white" : "text-slate-400 hover:text-white"}`}
+            className={`px-3 py-1.5 rounded-lg text-xs font-black transition-all cursor-pointer ${activeSubSection === "logs" ? "bg-blue-600 text-slate-900" : "text-slate-600 hover:text-slate-900"}`}
           >
             السجلات والعمليات
           </button>
           <button 
             onClick={() => setActiveSubSection("templates")}
-            className={`px-3 py-1.5 rounded-lg text-xs font-black transition-all cursor-pointer ${activeSubSection === "templates" ? "bg-purple-600 text-white" : "text-slate-400 hover:text-white"}`}
+            className={`px-3 py-1.5 rounded-lg text-xs font-black transition-all cursor-pointer ${activeSubSection === "templates" ? "bg-blue-600 text-slate-900" : "text-slate-600 hover:text-slate-900"}`}
           >
             قوالب الرسائل
           </button>
           <button 
             onClick={() => setActiveSubSection("settings")}
-            className={`px-3 py-1.5 rounded-lg text-xs font-black transition-all cursor-pointer ${activeSubSection === "settings" ? "bg-purple-600 text-white" : "text-slate-400 hover:text-white"}`}
+            className={`px-3 py-1.5 rounded-lg text-xs font-black transition-all cursor-pointer ${activeSubSection === "settings" ? "bg-blue-600 text-slate-900" : "text-slate-600 hover:text-slate-900"}`}
           >
             الإعدادات والمزودين
           </button>
           <button 
             onClick={() => setActiveSubSection("stats")}
-            className={`px-3 py-1.5 rounded-lg text-xs font-black transition-all cursor-pointer ${activeSubSection === "stats" ? "bg-purple-600 text-white" : "text-slate-400 hover:text-white"}`}
+            className={`px-3 py-1.5 rounded-lg text-xs font-black transition-all cursor-pointer ${activeSubSection === "stats" ? "bg-blue-600 text-slate-900" : "text-slate-600 hover:text-slate-900"}`}
           >
             لوحة الإحصائيات
           </button>
           <button 
             onClick={() => setActiveSubSection("connection")}
-            className={`px-3 py-1.5 rounded-lg text-xs font-black transition-all cursor-pointer flex items-center gap-1.5 ${activeSubSection === "connection" ? "bg-purple-600 text-white" : "text-slate-400 hover:text-white"}`}
+            className={`px-3 py-1.5 rounded-lg text-xs font-black transition-all cursor-pointer flex items-center gap-1.5 ${activeSubSection === "connection" ? "bg-blue-600 text-slate-900" : "text-slate-600 hover:text-slate-900"}`}
           >
-            <span className={`w-2 h-2 rounded-full ${connectionStatus === "Connected" ? "bg-emerald-500 animate-pulse" : connectionStatus === "Connecting" ? "bg-amber-500 animate-pulse" : "bg-rose-500"}`}></span>
+            <span className={`w-2 h-2 rounded-full ${connectionStatus === "Connected" ? "bg-orange-500 animate-pulse" : connectionStatus === "Connecting" ? "bg-amber-500 animate-pulse" : "bg-rose-500"}`}></span>
             <span>WhatsApp Connection</span>
           </button>
         </div>
@@ -358,7 +358,7 @@ export default function WhatsappTab() {
 
       {loading ? (
         <div className="flex-1 flex flex-col items-center justify-center py-20 text-slate-500 text-xs gap-3">
-          <RefreshCw className="w-8 h-8 text-purple-500 animate-spin" />
+          <RefreshCw className="w-8 h-8 text-blue-600 animate-spin" />
           <span>جاري الاتصال بـ Firestore وتحميل بيانات الأتمتة...</span>
         </div>
       ) : (
@@ -373,8 +373,8 @@ export default function WhatsappTab() {
                   <CheckCircle className="w-5 h-5 text-emerald-400" />
                   <span className="text-[10px] text-slate-500 font-bold font-mono">Sent / Delivered</span>
                 </div>
-                <p className="text-2xl font-black text-white font-mono">{stats.sent}</p>
-                <p className="text-[10px] text-slate-400">إجمالي الرسائل المرسلة بنجاح</p>
+                <p className="text-2xl font-black text-slate-900 font-mono">{stats.sent}</p>
+                <p className="text-[10px] text-slate-600">إجمالي الرسائل المرسلة بنجاح</p>
               </div>
 
               <div className="bg-[#14141D] border border-white/5 p-5 rounded-2xl space-y-2">
@@ -382,36 +382,36 @@ export default function WhatsappTab() {
                   <AlertTriangle className="w-5 h-5 text-rose-400" />
                   <span className="text-[10px] text-slate-500 font-bold font-mono">Failed</span>
                 </div>
-                <p className="text-2xl font-black text-white font-mono">{stats.failed}</p>
-                <p className="text-[10px] text-slate-400">الرسائل الفاشلة (تجاوزت المحاولات)</p>
+                <p className="text-2xl font-black text-slate-900 font-mono">{stats.failed}</p>
+                <p className="text-[10px] text-slate-600">الرسائل الفاشلة (تجاوزت المحاولات)</p>
               </div>
 
               <div className="bg-[#14141D] border border-white/5 p-5 rounded-2xl space-y-2">
                 <div className="flex justify-between items-center">
-                  <MessageSquare className="w-5 h-5 text-purple-400" />
+                  <MessageSquare className="w-5 h-5 text-blue-600" />
                   <span className="text-[10px] text-slate-500 font-bold font-mono">Today</span>
                 </div>
-                <p className="text-2xl font-black text-white font-mono">{stats.todayCount}</p>
-                <p className="text-[10px] text-slate-400">رسائل تم معالجتها اليوم</p>
+                <p className="text-2xl font-black text-slate-900 font-mono">{stats.todayCount}</p>
+                <p className="text-[10px] text-slate-600">رسائل تم معالجتها اليوم</p>
               </div>
 
               <div className="bg-[#14141D] border border-white/5 p-5 rounded-2xl space-y-2">
                 <div className="flex justify-between items-center">
-                  <Play className="w-5 h-5 text-indigo-400" />
+                  <Play className="w-5 h-5 text-blue-400" />
                   <span className="text-[10px] text-slate-500 font-bold font-mono">Success Rate</span>
                 </div>
-                <p className="text-2xl font-black text-white font-mono">{stats.successRate}%</p>
-                <p className="text-[10px] text-slate-400">معدل نجاح تسليم الرسائل</p>
+                <p className="text-2xl font-black text-slate-900 font-mono">{stats.successRate}%</p>
+                <p className="text-[10px] text-slate-600">معدل نجاح تسليم الرسائل</p>
               </div>
 
               {/* Logger boxes */}
               <div className="md:col-span-3 xl:col-span-4 grid grid-cols-1 md:grid-cols-2 gap-6 pt-2">
                 <div className="bg-[#14141D] border border-white/5 p-5 rounded-2xl space-y-2">
-                  <h4 className="text-xs font-black text-white">آخر رسالة تم إرسالها</h4>
-                  <div className="bg-[#0B0B12] p-3 rounded-xl border border-white/5 text-xs text-slate-300 min-h-[60px] flex items-center justify-end font-mono">
+                  <h4 className="text-xs font-black text-slate-900">آخر رسالة تم إرسالها</h4>
+                  <div className="bg-[#0B0B12] p-3 rounded-xl border border-white/5 text-xs text-slate-700 min-h-[60px] flex items-center justify-end font-mono">
                     {logs.length > 0 ? (
                       <div className="w-full space-y-1">
-                        <div className="flex justify-between flex-row-reverse text-slate-400 text-[10px]">
+                        <div className="flex justify-between flex-row-reverse text-slate-600 text-[10px]">
                           <span>المستلم: {logs[0].customerName}</span>
                           <span>الوقت: {stats.lastMessageTime}</span>
                         </div>
@@ -439,13 +439,13 @@ export default function WhatsappTab() {
               {/* Settings Form */}
               <form onSubmit={handleSaveSettings} className="xl:col-span-8 bg-[#14141D] border border-white/5 rounded-2xl p-6 space-y-6">
                 <div className="flex justify-between items-center border-b border-white/5 pb-4">
-                  <h3 className="text-sm font-black text-white">إعدادات الاتصال والمزودين (WhatsApp Settings)</h3>
+                  <h3 className="text-sm font-black text-slate-900">إعدادات الاتصال والمزودين (WhatsApp Settings)</h3>
                   <div className="flex items-center gap-2">
-                    <span className="text-xs text-slate-400 font-bold">حالة الإرسال التلقائي:</span>
+                    <span className="text-xs text-slate-600 font-bold">حالة الإرسال التلقائي:</span>
                     <button
                       type="button"
                       onClick={() => setSettings(prev => ({ ...prev, enabled: !prev.enabled }))}
-                      className={`relative inline-flex h-6 w-11 items-center rounded-full transition-colors cursor-pointer ${settings.enabled ? "bg-purple-600" : "bg-slate-800"}`}
+                      className={`relative inline-flex h-6 w-11 items-center rounded-full transition-colors cursor-pointer ${settings.enabled ? "bg-blue-600" : "bg-slate-200"}`}
                     >
                       <span className={`inline-block h-4 w-4 transform rounded-full bg-white transition-transform ${settings.enabled ? "-translate-x-1" : "-translate-x-6"}`} />
                     </button>
@@ -456,11 +456,11 @@ export default function WhatsappTab() {
                   
                   {/* API Provider Selector */}
                   <div className="space-y-1.5">
-                    <label className="text-xs font-bold text-slate-300">مزود خدمة الواتساب (Provider)</label>
+                    <label className="text-xs font-bold text-slate-700">مزود خدمة الواتساب (Provider)</label>
                     <select
                       value={settings.provider}
                       onChange={(e) => setSettings(prev => ({ ...prev, provider: e.target.value as any }))}
-                      className="w-full bg-[#0B0B12] border border-white/5 rounded-xl px-4 py-3 text-xs text-white focus:outline-none focus:ring-1 focus:ring-purple-500"
+                      className="w-full bg-[#0B0B12] border border-white/5 rounded-xl px-4 py-3 text-xs text-slate-900 focus:outline-none focus:ring-1 focus:ring-blue-500"
                     >
                       <option value="ultramsg">UltraMsg API (الأسهل والأسرع)</option>
                       <option value="meta">Meta WhatsApp Cloud API (الرسمي)</option>
@@ -471,87 +471,87 @@ export default function WhatsappTab() {
 
                   {/* API Base URL */}
                   <div className="space-y-1.5">
-                    <label className="text-xs font-bold text-slate-300">رابط واجهة برمجة التطبيقات (API URL)</label>
+                    <label className="text-xs font-bold text-slate-700">رابط واجهة برمجة التطبيقات (API URL)</label>
                     <input
                       type="text"
                       value={settings.apiUrl}
                       onChange={(e) => setSettings(prev => ({ ...prev, apiUrl: e.target.value }))}
                       placeholder="https://api.ultramsg.com/..."
-                      className="w-full bg-[#0B0B12] border border-white/5 rounded-xl px-4 py-3 text-xs text-white placeholder:text-slate-600 focus:outline-none focus:ring-1 focus:ring-purple-500 font-mono text-left"
+                      className="w-full bg-[#0B0B12] border border-white/5 rounded-xl px-4 py-3 text-xs text-slate-900 placeholder:text-slate-600 focus:outline-none focus:ring-1 focus:ring-blue-500 font-mono text-left"
                       dir="ltr"
                     />
                   </div>
 
                   {/* Access Token */}
                   <div className="space-y-1.5">
-                    <label className="text-xs font-bold text-slate-300">مفتاح الوصول السري (Access Token / API Key)</label>
+                    <label className="text-xs font-bold text-slate-700">مفتاح الوصول السري (Access Token / API Key)</label>
                     <input
                       type="password"
                       value={settings.accessToken}
                       onChange={(e) => setSettings(prev => ({ ...prev, accessToken: e.target.value }))}
                       placeholder="أدخل الـ Token السري هنا..."
-                      className="w-full bg-[#0B0B12] border border-white/5 rounded-xl px-4 py-3 text-xs text-white placeholder:text-slate-600 focus:outline-none focus:ring-1 focus:ring-purple-500 font-mono text-left"
+                      className="w-full bg-[#0B0B12] border border-white/5 rounded-xl px-4 py-3 text-xs text-slate-900 placeholder:text-slate-600 focus:outline-none focus:ring-1 focus:ring-blue-500 font-mono text-left"
                       dir="ltr"
                     />
                   </div>
 
                   {/* Phone Number ID */}
                   <div className="space-y-1.5">
-                    <label className="text-xs font-bold text-slate-300">معرف الهاتف / رقم الجلسة (Phone Number ID / Instance ID)</label>
+                    <label className="text-xs font-bold text-slate-700">معرف الهاتف / رقم الجلسة (Phone Number ID / Instance ID)</label>
                     <input
                       type="text"
                       value={settings.phoneNumberId}
                       onChange={(e) => setSettings(prev => ({ ...prev, phoneNumberId: e.target.value }))}
                       placeholder="مثال: instance9938"
-                      className="w-full bg-[#0B0B12] border border-white/5 rounded-xl px-4 py-3 text-xs text-white placeholder:text-slate-600 focus:outline-none focus:ring-1 focus:ring-purple-500 font-mono text-left"
+                      className="w-full bg-[#0B0B12] border border-white/5 rounded-xl px-4 py-3 text-xs text-slate-900 placeholder:text-slate-600 focus:outline-none focus:ring-1 focus:ring-blue-500 font-mono text-left"
                       dir="ltr"
                     />
                   </div>
 
                   {/* Twilio From Number / Business Number */}
                   <div className="space-y-1.5">
-                    <label className="text-xs font-bold text-slate-300">رقم الإرسال المسجل (Sender Number / twilio From)</label>
+                    <label className="text-xs font-bold text-slate-700">رقم الإرسال المسجل (Sender Number / twilio From)</label>
                     <input
                       type="text"
                       value={settings.businessNumber}
                       onChange={(e) => setSettings(prev => ({ ...prev, businessNumber: e.target.value }))}
                       placeholder="+14155238886"
-                      className="w-full bg-[#0B0B12] border border-white/5 rounded-xl px-4 py-3 text-xs text-white placeholder:text-slate-600 focus:outline-none focus:ring-1 focus:ring-purple-500 font-mono text-left"
+                      className="w-full bg-[#0B0B12] border border-white/5 rounded-xl px-4 py-3 text-xs text-slate-900 placeholder:text-slate-600 focus:outline-none focus:ring-1 focus:ring-blue-500 font-mono text-left"
                       dir="ltr"
                     />
                   </div>
 
                   {/* Business Account ID / Webhook Secret */}
                   <div className="space-y-1.5">
-                    <label className="text-xs font-bold text-slate-300">سرية الويب هوك (Webhook Verify Token / Secret)</label>
+                    <label className="text-xs font-bold text-slate-700">سرية الويب هوك (Webhook Verify Token / Secret)</label>
                     <input
                       type="text"
                       value={settings.webhookSecret}
                       onChange={(e) => setSettings(prev => ({ ...prev, webhookSecret: e.target.value }))}
                       placeholder="Verify Token"
-                      className="w-full bg-[#0B0B12] border border-white/5 rounded-xl px-4 py-3 text-xs text-white placeholder:text-slate-600 focus:outline-none focus:ring-1 focus:ring-purple-500 font-mono text-left"
+                      className="w-full bg-[#0B0B12] border border-white/5 rounded-xl px-4 py-3 text-xs text-slate-900 placeholder:text-slate-600 focus:outline-none focus:ring-1 focus:ring-blue-500 font-mono text-left"
                       dir="ltr"
                     />
                   </div>
 
                   {/* Queue Size & Retry Attempts */}
                   <div className="space-y-1.5">
-                    <label className="text-xs font-bold text-slate-300">أقصى محاولات إعادة الإرسال عند الفشل (Retry Attempts)</label>
+                    <label className="text-xs font-bold text-slate-700">أقصى محاولات إعادة الإرسال عند الفشل (Retry Attempts)</label>
                     <input
                       type="number"
                       value={settings.retryAttempts}
                       onChange={(e) => setSettings(prev => ({ ...prev, retryAttempts: Number(e.target.value) }))}
-                      className="w-full bg-[#0B0B12] border border-white/5 rounded-xl px-4 py-3 text-xs text-white focus:outline-none focus:ring-1 focus:ring-purple-500 font-mono"
+                      className="w-full bg-[#0B0B12] border border-white/5 rounded-xl px-4 py-3 text-xs text-slate-900 focus:outline-none focus:ring-1 focus:ring-blue-500 font-mono"
                     />
                   </div>
 
                   <div className="space-y-1.5">
-                    <label className="text-xs font-bold text-slate-300">حجم طابور الرسائل (Queue Buffer Size)</label>
+                    <label className="text-xs font-bold text-slate-700">حجم طابور الرسائل (Queue Buffer Size)</label>
                     <input
                       type="number"
                       value={settings.queueSize}
                       onChange={(e) => setSettings(prev => ({ ...prev, queueSize: Number(e.target.value) }))}
-                      className="w-full bg-[#0B0B12] border border-white/5 rounded-xl px-4 py-3 text-xs text-white focus:outline-none focus:ring-1 focus:ring-purple-500 font-mono"
+                      className="w-full bg-[#0B0B12] border border-white/5 rounded-xl px-4 py-3 text-xs text-slate-900 focus:outline-none focus:ring-1 focus:ring-blue-500 font-mono"
                     />
                   </div>
 
@@ -561,7 +561,7 @@ export default function WhatsappTab() {
                   <button
                     type="submit"
                     disabled={submittingSettings}
-                    className="px-6 py-3 bg-purple-600 hover:bg-purple-500 disabled:opacity-50 text-white rounded-xl text-xs font-black flex items-center gap-2 cursor-pointer transition-all active:scale-95 shadow-lg shadow-purple-900/20"
+                    className="px-6 py-3 bg-blue-600 hover:bg-blue-500 disabled:opacity-50 text-slate-900 rounded-xl text-xs font-black flex items-center gap-2 cursor-pointer transition-all active:scale-95 shadow-lg shadow-blue-900/20"
                   >
                     <Settings className="w-4 h-4" />
                     <span>حفظ إعدادات الاتصال الحالية</span>
@@ -571,23 +571,23 @@ export default function WhatsappTab() {
 
               {/* Connection Tester */}
               <div className="xl:col-span-4 bg-[#14141D] border border-white/5 rounded-2xl p-6 space-y-4">
-                <h3 className="text-sm font-black text-white flex items-center gap-1.5 flex-row-reverse">
-                  <Send className="w-4 h-4 text-purple-400" />
+                <h3 className="text-sm font-black text-slate-900 flex items-center gap-1.5 flex-row-reverse">
+                  <Send className="w-4 h-4 text-blue-600" />
                   <span>فحص الاتصال (Test Connection)</span>
                 </h3>
-                <p className="text-slate-400 text-[11px] leading-relaxed">
+                <p className="text-slate-600 text-[11px] leading-relaxed">
                   أدخل رقم هاتفك الكامل مع رمز الدولة (مثال: +213671037202) لإرسال رسالة اختبارية برمجية فورية عبر الإعدادات النشطة أعلاه.
                 </p>
 
                 <div className="space-y-3 pt-2">
                   <div className="space-y-1.5">
-                    <label className="text-[10px] font-bold text-slate-300">رقم هاتف الاختبار</label>
+                    <label className="text-[10px] font-bold text-slate-700">رقم هاتف الاختبار</label>
                     <input
                       type="text"
                       value={testPhone}
                       onChange={(e) => setTestPhone(e.target.value)}
                       placeholder="0671037202"
-                      className="w-full bg-[#0B0B12] border border-white/5 rounded-xl px-4 py-3 text-xs text-white placeholder:text-slate-600 focus:outline-none focus:ring-1 focus:ring-purple-500 font-mono text-left"
+                      className="w-full bg-[#0B0B12] border border-white/5 rounded-xl px-4 py-3 text-xs text-slate-900 placeholder:text-slate-600 focus:outline-none focus:ring-1 focus:ring-blue-500 font-mono text-left"
                       dir="ltr"
                     />
                   </div>
@@ -596,7 +596,7 @@ export default function WhatsappTab() {
                     type="button"
                     onClick={handleTestConnection}
                     disabled={testingConnection}
-                    className="w-full py-3 bg-indigo-600 hover:bg-indigo-500 disabled:opacity-50 text-white rounded-xl text-xs font-black flex items-center justify-center gap-2 cursor-pointer transition-all active:scale-95 shadow-lg shadow-indigo-900/20"
+                    className="w-full py-3 bg-blue-600 hover:bg-blue-500 disabled:opacity-50 text-slate-900 rounded-xl text-xs font-black flex items-center justify-center gap-2 cursor-pointer transition-all active:scale-95 shadow-lg shadow-blue-900/20"
                   >
                     {testingConnection ? (
                       <RefreshCw className="w-4 h-4 animate-spin" />
@@ -617,7 +617,7 @@ export default function WhatsappTab() {
               
               {/* List of events templates */}
               <div className="xl:col-span-5 space-y-4">
-                <h3 className="text-xs font-black text-slate-400 px-1">قوالب الأحداث التلقائية (Event Templates)</h3>
+                <h3 className="text-xs font-black text-slate-600 px-1">قوالب الأحداث التلقائية (Event Templates)</h3>
                 
                 <div className="space-y-3">
                   {templates.map(t => (
@@ -626,18 +626,18 @@ export default function WhatsappTab() {
                       onClick={() => handleStartEditTemplate(t)}
                       className={`w-full text-right p-4 rounded-2xl border transition-all cursor-pointer block ${
                         editingTemplate?.id === t.id 
-                          ? "bg-purple-600/10 border-purple-500/30 shadow-lg shadow-purple-900/5" 
-                          : "bg-[#14141D] border-white/5 hover:border-purple-500/20"
+                          ? "bg-blue-600/5 border-blue-500/30 shadow-lg shadow-blue-900/5" 
+                          : "bg-[#14141D] border-white/5 hover:border-blue-500/20"
                       }`}
                     >
                       <div className="flex justify-between items-center mb-2">
-                        <span className={`px-2 py-0.5 rounded text-[8px] font-bold ${t.enabled ? "bg-emerald-500/10 text-emerald-400 border border-emerald-500/20" : "bg-slate-800 text-slate-500 border border-white/5"}`}>
+                        <span className={`px-2 py-0.5 rounded text-[8px] font-bold ${t.enabled ? "bg-orange-500/10 text-emerald-400 border border-emerald-500/20" : "bg-slate-200 text-slate-500 border border-white/5"}`}>
                           {t.enabled ? "نشط" : "معطل"}
                         </span>
-                        <h4 className="text-xs font-black text-white">{t.name}</h4>
+                        <h4 className="text-xs font-black text-slate-900">{t.name}</h4>
                       </div>
-                      <p className="text-[10px] text-slate-400 mb-2 truncate">{t.description}</p>
-                      <div className="bg-[#0B0B12] p-2.5 rounded-xl border border-white/5 text-[10px] text-slate-400 font-mono line-clamp-2 leading-relaxed">
+                      <p className="text-[10px] text-slate-600 mb-2 truncate">{t.description}</p>
+                      <div className="bg-[#0B0B12] p-2.5 rounded-xl border border-white/5 text-[10px] text-slate-600 font-mono line-clamp-2 leading-relaxed">
                         {t.message}
                       </div>
                     </button>
@@ -655,27 +655,27 @@ export default function WhatsappTab() {
                         <button
                           type="button"
                           onClick={() => setEditingTemplate(prev => prev ? ({ ...prev, enabled: !prev.enabled }) : null)}
-                          className={`relative inline-flex h-5 w-9 items-center rounded-full transition-colors cursor-pointer ${editingTemplate.enabled ? "bg-emerald-600" : "bg-slate-800"}`}
+                          className={`relative inline-flex h-5 w-9 items-center rounded-full transition-colors cursor-pointer ${editingTemplate.enabled ? "bg-emerald-600" : "bg-slate-200"}`}
                         >
                           <span className={`inline-block h-3.5 w-3.5 transform rounded-full bg-white transition-transform ${editingTemplate.enabled ? "-translate-x-0.5" : "-translate-x-5"}`} />
                         </button>
                       </div>
-                      <h3 className="text-sm font-black text-white">تعديل قالب: {editingTemplate.name}</h3>
+                      <h3 className="text-sm font-black text-slate-900">تعديل قالب: {editingTemplate.name}</h3>
                     </div>
 
                     <div className="space-y-1.5">
-                      <label className="text-xs font-bold text-slate-300">محتوى رسالة الواتساب</label>
+                      <label className="text-xs font-bold text-slate-700">محتوى رسالة الواتساب</label>
                       <textarea
                         value={templateMessageInput}
                         onChange={(e) => setTemplateMessageInput(e.target.value)}
                         rows={8}
-                        className="w-full bg-[#0B0B12] border border-white/5 rounded-xl p-4 text-xs text-slate-200 placeholder:text-slate-600 focus:outline-none focus:ring-1 focus:ring-purple-500 leading-relaxed font-mono text-right"
+                        className="w-full bg-[#0B0B12] border border-white/5 rounded-xl p-4 text-xs text-slate-800 placeholder:text-slate-600 focus:outline-none focus:ring-1 focus:ring-blue-500 leading-relaxed font-mono text-right"
                       />
                     </div>
 
                     {/* Helper variables */}
                     <div className="space-y-2">
-                      <p className="text-[10px] font-bold text-slate-400">انقر لنسخ المتغيرات المتاحة وإدراجها في نص الرسالة:</p>
+                      <p className="text-[10px] font-bold text-slate-600">انقر لنسخ المتغيرات المتاحة وإدراجها في نص الرسالة:</p>
                       <div className="flex flex-wrap gap-1.5 justify-end">
                         {templateVars.map(v => (
                           <button
@@ -698,7 +698,7 @@ export default function WhatsappTab() {
                       <button
                         type="button"
                         onClick={handleSaveTemplate}
-                        className="px-5 py-2.5 bg-purple-600 hover:bg-purple-500 text-white rounded-xl text-xs font-black flex items-center gap-2 cursor-pointer transition-all active:scale-95"
+                        className="px-5 py-2.5 bg-blue-600 hover:bg-blue-500 text-slate-900 rounded-xl text-xs font-black flex items-center gap-2 cursor-pointer transition-all active:scale-95"
                       >
                         <Check className="w-4 h-4" />
                         <span>حفظ وتطبيق القالب</span>
@@ -706,7 +706,7 @@ export default function WhatsappTab() {
                       <button
                         type="button"
                         onClick={() => setEditingTemplate(null)}
-                        className="px-5 py-2.5 bg-slate-800 hover:bg-slate-700 text-slate-300 rounded-xl text-xs font-black cursor-pointer transition-all active:scale-95"
+                        className="px-5 py-2.5 bg-slate-200 hover:bg-slate-700 text-slate-700 rounded-xl text-xs font-black cursor-pointer transition-all active:scale-95"
                       >
                         إلغاء
                       </button>
@@ -729,13 +729,13 @@ export default function WhatsappTab() {
               
               <div className="p-5 border-b border-white/5 flex items-center justify-between flex-row-reverse bg-[#0B0B12]/50">
                 <span className="text-[10px] text-slate-500 font-mono font-bold">إجمالي السجلات: {logs.length} عمليات إرسال</span>
-                <h3 className="text-sm font-black text-white">سجل إرسال وتتبع الرسائل التلقائية (WhatsApp Logs)</h3>
+                <h3 className="text-sm font-black text-slate-900">سجل إرسال وتتبع الرسائل التلقائية (WhatsApp Logs)</h3>
               </div>
 
               <div className="overflow-x-auto w-full max-h-[500px]">
                 <table className="w-full text-right text-xs border-collapse min-w-[900px]">
                   <thead>
-                    <tr className="bg-[#0B0B12] border-b border-white/5 text-slate-400 text-[10px] uppercase font-black tracking-wider">
+                    <tr className="bg-[#0B0B12] border-b border-white/5 text-slate-600 text-[10px] uppercase font-black tracking-wider">
                       <th className="px-5 py-4 text-right">العميل والمحل</th>
                       <th className="px-5 py-4 text-right">رقم الهاتف</th>
                       <th className="px-5 py-4 text-right">الحدث / القالب</th>
@@ -760,28 +760,28 @@ export default function WhatsappTab() {
                           <tr key={log.id} className="hover:bg-[#1C1C26]/30 transition-colors">
                             <td className="px-5 py-3.5">
                               <div className="space-y-0.5">
-                                <p className="font-black text-white">{log.customerName}</p>
+                                <p className="font-black text-slate-900">{log.customerName}</p>
                                 <p className="text-[9px] text-slate-500">ID: {log.messageId || "N/A"}</p>
                               </div>
                             </td>
-                            <td className="px-5 py-3.5 font-mono text-slate-300">{log.phone}</td>
+                            <td className="px-5 py-3.5 font-mono text-slate-700">{log.phone}</td>
                             <td className="px-5 py-3.5">
-                              <span className="px-2 py-0.5 bg-purple-500/10 border border-purple-500/20 rounded text-[9px] text-purple-300 font-bold">
+                              <span className="px-2 py-0.5 bg-blue-500/10 border border-blue-500/20 rounded text-[9px] text-blue-500 font-bold">
                                 {log.template}
                               </span>
                             </td>
-                            <td className="px-5 py-3.5 text-slate-400 font-mono capitalize">{log.provider}</td>
+                            <td className="px-5 py-3.5 text-slate-600 font-mono capitalize">{log.provider}</td>
                             <td className="px-5 py-3.5 text-center">
                               {log.status === "Read" ? (
                                 <span className="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full text-[9px] bg-blue-500/10 border border-blue-500/20 text-blue-300 font-bold">
                                   <span>تمت القراءة</span>
                                 </span>
                               ) : log.status === "Delivered" ? (
-                                <span className="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full text-[9px] bg-emerald-500/10 border border-emerald-500/20 text-emerald-300 font-bold">
+                                <span className="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full text-[9px] bg-orange-500/10 border border-emerald-500/20 text-emerald-300 font-bold">
                                   <span>تم التسليم</span>
                                 </span>
                               ) : log.status === "Sent" ? (
-                                <span className="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full text-[9px] bg-indigo-500/10 border border-indigo-500/20 text-indigo-300 font-bold">
+                                <span className="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full text-[9px] bg-blue-500/10 border border-blue-500/20 text-blue-300 font-bold">
                                   <span>تم الإرسال</span>
                                 </span>
                               ) : (
@@ -790,7 +790,7 @@ export default function WhatsappTab() {
                                 </span>
                               )}
                             </td>
-                            <td className="px-5 py-3.5 font-mono text-slate-400 text-[10px]">
+                            <td className="px-5 py-3.5 font-mono text-slate-600 text-[10px]">
                               <div>{new Date(log.sentAt || log.createdAt).toLocaleDateString("ar-DZ")}</div>
                               <div className="text-[9px] text-slate-500 mt-0.5">{new Date(log.sentAt || log.createdAt).toLocaleTimeString("ar-DZ")}</div>
                             </td>
@@ -824,11 +824,11 @@ export default function WhatsappTab() {
               
               <div className="xl:col-span-8 bg-[#14141D] border border-white/5 rounded-2xl p-6 space-y-6">
                 <div className="flex justify-between items-center border-b border-white/5 pb-4">
-                  <h3 className="text-sm font-black text-white">إعداد جلسة الاتصال عبر متصفح واتساب (WhatsApp Web Session)</h3>
+                  <h3 className="text-sm font-black text-slate-900">إعداد جلسة الاتصال عبر متصفح واتساب (WhatsApp Web Session)</h3>
                   <div className="flex items-center gap-2">
-                    <span className="text-xs text-slate-400 font-bold">حالة الجلسة:</span>
+                    <span className="text-xs text-slate-600 font-bold">حالة الجلسة:</span>
                     <span className={`px-2.5 py-1 rounded-lg text-[10px] font-black border uppercase tracking-wider ${
-                      connectionStatus === "Connected" ? "bg-emerald-500/10 border-emerald-500/20 text-emerald-400" :
+                      connectionStatus === "Connected" ? "bg-orange-500/10 border-emerald-500/20 text-emerald-400" :
                       connectionStatus === "Connecting" || connectionStatus === "Reconnecting" ? "bg-amber-500/10 border-amber-500/20 text-amber-400" :
                       "bg-rose-500/10 border-rose-500/20 text-rose-400"
                     }`}>
@@ -841,15 +841,15 @@ export default function WhatsappTab() {
                 <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
                   <div className="bg-[#0B0B12] p-4 rounded-xl border border-white/5 text-right space-y-1">
                     <span className="text-[10px] text-slate-500 block">اسم الحساب المتصل</span>
-                    <span className="text-xs font-black text-white">{connectedName || "غير متصل"}</span>
+                    <span className="text-xs font-black text-slate-900">{connectedName || "غير متصل"}</span>
                   </div>
                   <div className="bg-[#0B0B12] p-4 rounded-xl border border-white/5 text-right space-y-1">
                     <span className="text-[10px] text-slate-500 block">رقم الهاتف المتصل</span>
-                    <span className="text-xs font-black font-mono text-white" dir="ltr">{connectedPhone || "N/A"}</span>
+                    <span className="text-xs font-black font-mono text-slate-900" dir="ltr">{connectedPhone || "N/A"}</span>
                   </div>
                   <div className="bg-[#0B0B12] p-4 rounded-xl border border-white/5 text-right space-y-1">
                     <span className="text-[10px] text-slate-500 block">وقت آخر اتصال</span>
-                    <span className="text-xs font-black text-white">
+                    <span className="text-xs font-black text-slate-900">
                       {lastConnectedAt ? new Date(lastConnectedAt).toLocaleString("ar-DZ") : "لم يتصل بعد"}
                     </span>
                   </div>
@@ -858,12 +858,12 @@ export default function WhatsappTab() {
                 <div className="flex flex-col items-center justify-center p-8 bg-[#0B0B12] rounded-2xl border border-white/5 text-center min-h-[300px]">
                   {connectionStatus === "Connected" ? (
                     <div className="space-y-4">
-                      <div className="w-16 h-16 bg-emerald-500/10 border border-emerald-500/30 rounded-full flex items-center justify-center mx-auto text-emerald-400">
+                      <div className="w-16 h-16 bg-orange-500/10 border border-emerald-500/30 rounded-full flex items-center justify-center mx-auto text-emerald-400">
                         <CheckCircle className="w-8 h-8" />
                       </div>
                       <div>
-                        <h4 className="text-sm font-black text-white">تم تفعيل الاتصال برقمك الشخصي بنجاح 🟢</h4>
-                        <p className="text-slate-400 text-xs mt-1">النظام يرسل الإشعارات الترحيبية وتراخيص التفعيل آلياً من رقمك الآن.</p>
+                        <h4 className="text-sm font-black text-slate-900">تم تفعيل الاتصال برقمك الشخصي بنجاح 🟢</h4>
+                        <p className="text-slate-600 text-xs mt-1">النظام يرسل الإشعارات الترحيبية وتراخيص التفعيل آلياً من رقمك الآن.</p>
                       </div>
 
                       <div className="flex justify-center gap-2 pt-2">
@@ -880,7 +880,7 @@ export default function WhatsappTab() {
                             setConnecting(false);
                           }}
                           disabled={connecting}
-                          className="px-5 py-2.5 bg-indigo-600 hover:bg-indigo-500 disabled:opacity-50 text-white rounded-xl text-xs font-black cursor-pointer transition-all active:scale-95"
+                          className="px-5 py-2.5 bg-blue-600 hover:bg-blue-500 disabled:opacity-50 text-slate-900 rounded-xl text-xs font-black cursor-pointer transition-all active:scale-95"
                         >
                           إعادة الاتصال (Reconnect)
                         </button>
@@ -903,7 +903,7 @@ export default function WhatsappTab() {
                             }
                           }}
                           disabled={connecting}
-                          className="px-5 py-2.5 bg-rose-600 hover:bg-rose-500 disabled:opacity-50 text-white rounded-xl text-xs font-black cursor-pointer transition-all active:scale-95"
+                          className="px-5 py-2.5 bg-rose-600 hover:bg-rose-500 disabled:opacity-50 text-slate-900 rounded-xl text-xs font-black cursor-pointer transition-all active:scale-95"
                         >
                           تسجيل الخروج (Logout)
                         </button>
@@ -913,15 +913,15 @@ export default function WhatsappTab() {
                     <div className="space-y-6 w-full max-w-sm">
                       {qrCode ? (
                         <div className="space-y-4">
-                          <h4 className="text-xs font-black text-white">امسح رمز الاستجابة السريع (QR Code) لتسجيل الدخول:</h4>
+                          <h4 className="text-xs font-black text-slate-900">امسح رمز الاستجابة السريع (QR Code) لتسجيل الدخول:</h4>
                           <div className="bg-white p-4 rounded-2xl w-56 h-56 mx-auto flex items-center justify-center shadow-lg border border-white/10">
                             <img src={qrCode} alt="WhatsApp Web QR Code" className="w-full h-full object-contain" />
                           </div>
-                          <p className="text-[10px] text-slate-400">افتح واتساب على هاتفك &gt; الأجهزة المرتبطة &gt; ربط جهاز &gt; ثم وجه الكاميرا نحو الشاشة.</p>
+                          <p className="text-[10px] text-slate-600">افتح واتساب على هاتفك &gt; الأجهزة المرتبطة &gt; ربط جهاز &gt; ثم وجه الكاميرا نحو الشاشة.</p>
                         </div>
                       ) : (
                         <div className="space-y-4 py-8">
-                          <RefreshCw className="w-8 h-8 text-purple-500 animate-spin mx-auto animate-reverse" />
+                          <RefreshCw className="w-8 h-8 text-blue-600 animate-spin mx-auto animate-reverse" />
                           <p className="text-xs text-slate-500 font-bold">بانتظار توليد الـ QR Code من جلسة WhatsApp Web...</p>
                         </div>
                       )}
@@ -945,7 +945,7 @@ export default function WhatsappTab() {
                             }
                           }}
                           disabled={connecting || connectionStatus === "Connecting" || connectionStatus === "Reconnecting"}
-                          className="px-5 py-2.5 bg-purple-600 hover:bg-purple-500 disabled:opacity-50 text-white rounded-xl text-xs font-black cursor-pointer transition-all active:scale-95"
+                          className="px-5 py-2.5 bg-blue-600 hover:bg-blue-500 disabled:opacity-50 text-slate-900 rounded-xl text-xs font-black cursor-pointer transition-all active:scale-95"
                         >
                           ربط واتساب جديد (Connect)
                         </button>
@@ -962,7 +962,7 @@ export default function WhatsappTab() {
                             } catch (e) {}
                             setConnecting(false);
                           }}
-                          className="px-5 py-2.5 bg-slate-800 hover:bg-slate-700 text-slate-300 rounded-xl text-xs font-black cursor-pointer transition-all active:scale-95"
+                          className="px-5 py-2.5 bg-slate-200 hover:bg-slate-700 text-slate-700 rounded-xl text-xs font-black cursor-pointer transition-all active:scale-95"
                         >
                           تصفير الجلسة (Reset)
                         </button>
@@ -980,11 +980,11 @@ export default function WhatsappTab() {
 
               {/* Session Guide Panel */}
               <div className="xl:col-span-4 bg-[#14141D] border border-white/5 rounded-2xl p-6 space-y-4">
-                <h3 className="text-sm font-black text-white flex items-center gap-1.5 flex-row-reverse">
-                  <Shield className="w-4 h-4 text-purple-400" />
+                <h3 className="text-sm font-black text-slate-900 flex items-center gap-1.5 flex-row-reverse">
+                  <Shield className="w-4 h-4 text-blue-600" />
                   <span>دليل الأمان والمزامنة</span>
                 </h3>
-                <ul className="text-slate-400 text-[11px] leading-relaxed list-disc list-inside space-y-2.5 pr-2">
+                <ul className="text-slate-600 text-[11px] leading-relaxed list-disc list-inside space-y-2.5 pr-2">
                   <li>يتم تخزين بيانات الجلسة وسجلات الاتصال والـ cache تشفيرياً ومحلياً لضمان عدم اضطرارك لمسح الكود عند كل تشغيل للخادم.</li>
                   <li>في حال قطع الاتصال أو فصل الإنترنت عن هاتفك، سيقوم النظام تلقائياً بجدولة محاولات إعادة الاتصال بالخلفية كل 10 ثوانٍ.</li>
                   <li>تجنب تشغيل جلسات WhatsApp Web متعددة لنفس الرقم على متصفحات أخرى لتجنب تضارب التوثيق ومقاطعة الجلسة.</li>

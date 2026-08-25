@@ -52,7 +52,7 @@ export default function AdminHeader({
         {/* Mobile menu toggle */}
         <button
           onClick={() => setIsMobileSidebarOpen(!isMobileSidebarOpen)}
-          className="p-2 bg-[#121218] border border-[rgba(255,255,255,0.12)] rounded-xl text-slate-300 lg:hidden hover:border-[#7C3AED] hover:text-white transition-all cursor-pointer"
+          className="p-2 bg-[#121218] border border-[rgba(255,255,255,0.12)] rounded-xl text-slate-700 lg:hidden hover:border-[#7C3AED] hover:text-slate-900 transition-all cursor-pointer"
         >
           <Menu className="w-5 h-5" />
         </button>
@@ -64,7 +64,7 @@ export default function AdminHeader({
             <span>/</span>
             <span className="text-[#A855F7]">{getBreadcrumbTitle()}</span>
           </div>
-          <h1 className="text-sm sm:text-base font-black text-white">
+          <h1 className="text-sm sm:text-base font-black text-slate-900">
             {getPageTitle()}
           </h1>
         </div>
@@ -78,7 +78,7 @@ export default function AdminHeader({
           value={searchQuery}
           onChange={(e) => setSearchQuery(e.target.value)}
           placeholder="ابحث بالاسم، الولاية، أو رقم الهاتف..."
-          className="w-full bg-[#0B0B0F] border border-[rgba(255,255,255,0.06)] rounded-xl pr-11 pl-4 py-2.5 text-xs text-slate-200 text-right focus:outline-none focus:ring-2 focus:ring-[#7C3AED]/50 focus:border-[#7C3AED] transition-all placeholder:text-slate-650"
+          className="w-full bg-[#0B0B0F] border border-[rgba(255,255,255,0.06)] rounded-xl pr-11 pl-4 py-2.5 text-xs text-slate-800 text-right focus:outline-none focus:ring-2 focus:ring-[#7C3AED]/50 focus:border-[#7C3AED] transition-all placeholder:text-slate-650"
         />
       </div>
 
@@ -88,7 +88,7 @@ export default function AdminHeader({
         {setTheme && (
           <button
             onClick={() => setTheme(theme === "light" ? "dark" : "light")}
-            className="p-2.5 bg-[#0B0B0F] border border-[rgba(255,255,255,0.06)] hover:border-[#7C3AED] rounded-xl text-slate-400 hover:text-white transition-all cursor-pointer"
+            className="p-2.5 bg-[#0B0B0F] border border-[rgba(255,255,255,0.06)] hover:border-[#7C3AED] rounded-xl text-slate-600 hover:text-slate-900 transition-all cursor-pointer"
             title={theme === "light" ? "تفعيل الوضع الداكن" : "تفعيل الوضع المضيء"}
           >
             {theme === "light" ? (
@@ -100,7 +100,7 @@ export default function AdminHeader({
         )}
 
         {/* Notifications */}
-        <button className="p-2.5 bg-[#0B0B0F] border border-[rgba(255,255,255,0.06)] hover:border-[#7C3AED] rounded-xl text-slate-400 hover:text-white transition-all relative cursor-pointer">
+        <button className="p-2.5 bg-[#0B0B0F] border border-[rgba(255,255,255,0.06)] hover:border-[#7C3AED] rounded-xl text-slate-600 hover:text-slate-900 transition-all relative cursor-pointer">
           <Bell className="w-4 h-4" />
           <span className="absolute top-1 right-1 w-2 h-2 rounded-full bg-[#EF4444] animate-pulse"></span>
         </button>
@@ -117,11 +117,11 @@ export default function AdminHeader({
         {/* User Info & Avatar */}
         <div className="flex items-center gap-3">
           <div className="text-right hidden sm:block">
-            <p className="text-xs font-black text-slate-200">المدير العام</p>
+            <p className="text-xs font-black text-slate-800">المدير العام</p>
             <p className="text-[10px] text-slate-500 font-mono">mh2010255c@gmail.com</p>
           </div>
           <div className="w-10 h-10 rounded-xl bg-gradient-to-tr from-[#7C3AED] to-[#A855F7] p-px">
-            <div className="w-full h-full rounded-xl bg-[#121218] flex items-center justify-center font-black text-white text-xs">
+            <div className="w-full h-full rounded-xl bg-[#121218] flex items-center justify-center font-black text-slate-900 text-xs">
               FZ
             </div>
           </div>

@@ -187,22 +187,22 @@ export default function InteractiveDashboardDemo({ onShowGreeting }: Interactive
   const zakatDue = zakatBase >= nissabThreshold ? zakatBase * 0.025 : 0;
 
   return (
-    <div className="w-full bg-slate-900 border border-slate-800 rounded-2xl overflow-hidden shadow-2xl flex flex-col h-[750px] relative">
+    <div className="w-full bg-slate-100 border border-slate-200 rounded-2xl overflow-hidden shadow-2xl flex flex-col h-[750px] relative">
       
       {/* 1. Header of the System Dashboard */}
-      <div className="bg-slate-950 px-6 py-4 flex flex-wrap items-center justify-between border-b border-slate-800 gap-4">
+      <div className="bg-white px-6 py-4 flex flex-wrap items-center justify-between border-b border-slate-200 gap-4">
         <div className="flex items-center gap-3">
-          <div className="w-10 h-10 bg-purple-600 rounded-xl flex items-center justify-center font-bold text-white text-lg tracking-wider border border-purple-500/30">
+          <div className="w-10 h-10 bg-blue-600 rounded-xl flex items-center justify-center font-bold text-slate-900 text-lg tracking-wider border border-blue-500/30">
             A
           </div>
           <div>
             <div className="flex items-center gap-2">
               <span className="text-white font-extrabold text-base tracking-tight">Algora Systems</span>
-              <span className="px-2 py-0.5 bg-purple-500/10 border border-purple-500/20 text-purple-400 text-[10px] rounded-full font-bold">
+              <span className="px-2 py-0.5 bg-blue-500/10 border border-blue-500/20 text-blue-600 text-[10px] rounded-full font-bold">
                 محاكاة تفاعلية حية
               </span>
             </div>
-            <p className="text-xs text-slate-400">متجر الهواتف: <span className="text-slate-300 font-bold">فون زون (الجزائر)</span></p>
+            <p className="text-xs text-slate-600">متجر الهواتف: <span className="text-slate-700 font-bold">فون زون (الجزائر)</span></p>
           </div>
         </div>
 
@@ -222,12 +222,12 @@ export default function InteractiveDashboardDemo({ onShowGreeting }: Interactive
         <div className="flex items-center gap-3">
           <div className="text-left hidden sm:block">
             <div className="flex items-center gap-1.5 justify-end">
-              <span className="w-2 h-2 rounded-full bg-emerald-500"></span>
-              <p className="text-xs text-slate-200 font-bold">أحمد بن محمد</p>
+              <span className="w-2 h-2 rounded-full bg-orange-500"></span>
+              <p className="text-xs text-slate-800 font-bold">أحمد بن محمد</p>
             </div>
-            <p className="text-[10px] text-slate-400">المدير العام (المسؤول الرئيسي)</p>
+            <p className="text-[10px] text-slate-600">المدير العام (المسؤول الرئيسي)</p>
           </div>
-          <div className="w-10 h-10 rounded-full bg-purple-500/20 border border-purple-500/30 flex items-center justify-center text-purple-300 font-bold">
+          <div className="w-10 h-10 rounded-full bg-blue-500/20 border border-blue-500/30 flex items-center justify-center text-blue-500 font-bold">
             م
           </div>
         </div>
@@ -237,15 +237,15 @@ export default function InteractiveDashboardDemo({ onShowGreeting }: Interactive
       <div className="flex flex-1 overflow-hidden">
         
         {/* RIGHT SIDEBAR (RTL Arabic Layout) */}
-        <div className="w-16 md:w-56 bg-slate-950/70 border-l border-slate-800 flex flex-col py-4 select-none justify-between">
+        <div className="w-16 md:w-56 bg-white/70 border-l border-slate-200 flex flex-col py-4 select-none justify-between">
           <div className="space-y-1 px-2">
             
             <button
               onClick={() => setActiveTab("dashboard")}
               className={`w-full flex items-center justify-center md:justify-start gap-3 px-3 py-2.5 rounded-lg text-xs md:text-sm font-bold transition-all duration-200 ${
                 activeTab === "dashboard"
-                  ? "bg-purple-600 text-white shadow-lg shadow-purple-900/20"
-                  : "text-slate-400 hover:bg-slate-900 hover:text-slate-200"
+                  ? "bg-blue-600 text-slate-900 shadow-lg shadow-blue-900/20"
+                  : "text-slate-600 hover:bg-slate-100 hover:text-slate-800"
               }`}
             >
               <LayoutDashboard className="w-4 h-4 shrink-0" />
@@ -256,8 +256,8 @@ export default function InteractiveDashboardDemo({ onShowGreeting }: Interactive
               onClick={() => setActiveTab("inventory")}
               className={`w-full flex items-center justify-center md:justify-start gap-3 px-3 py-2.5 rounded-lg text-xs md:text-sm font-bold transition-all duration-200 ${
                 activeTab === "inventory"
-                  ? "bg-purple-600 text-white shadow-lg shadow-purple-900/20"
-                  : "text-slate-400 hover:bg-slate-900 hover:text-slate-200"
+                  ? "bg-blue-600 text-slate-900 shadow-lg shadow-blue-900/20"
+                  : "text-slate-600 hover:bg-slate-100 hover:text-slate-800"
               }`}
             >
               <Package className="w-4 h-4 shrink-0" />
@@ -268,8 +268,8 @@ export default function InteractiveDashboardDemo({ onShowGreeting }: Interactive
               onClick={() => setActiveTab("maintenance")}
               className={`w-full flex items-center justify-center md:justify-start gap-3 px-3 py-2.5 rounded-lg text-xs md:text-sm font-bold transition-all duration-200 ${
                 activeTab === "maintenance"
-                  ? "bg-purple-600 text-white shadow-lg shadow-purple-900/20"
-                  : "text-slate-400 hover:bg-slate-900 hover:text-slate-200"
+                  ? "bg-blue-600 text-slate-900 shadow-lg shadow-blue-900/20"
+                  : "text-slate-600 hover:bg-slate-100 hover:text-slate-800"
               }`}
             >
               <Wrench className="w-4 h-4 shrink-0" />
@@ -280,8 +280,8 @@ export default function InteractiveDashboardDemo({ onShowGreeting }: Interactive
               onClick={() => setActiveTab("pos")}
               className={`w-full flex items-center justify-center md:justify-start gap-3 px-3 py-2.5 rounded-lg text-xs md:text-sm font-bold transition-all duration-200 ${
                 activeTab === "pos"
-                  ? "bg-purple-600 text-white shadow-lg shadow-purple-900/20"
-                  : "text-slate-400 hover:bg-slate-900 hover:text-slate-200"
+                  ? "bg-blue-600 text-slate-900 shadow-lg shadow-blue-900/20"
+                  : "text-slate-600 hover:bg-slate-100 hover:text-slate-800"
               }`}
             >
               <ShoppingCart className="w-4 h-4 shrink-0" />
@@ -292,8 +292,8 @@ export default function InteractiveDashboardDemo({ onShowGreeting }: Interactive
               onClick={() => setActiveTab("zakat")}
               className={`w-full flex items-center justify-center md:justify-start gap-3 px-3 py-2.5 rounded-lg text-xs md:text-sm font-bold transition-all duration-200 ${
                 activeTab === "zakat"
-                  ? "bg-purple-600 text-white shadow-lg shadow-purple-900/20"
-                  : "text-slate-400 hover:bg-slate-900 hover:text-slate-200"
+                  ? "bg-blue-600 text-slate-900 shadow-lg shadow-blue-900/20"
+                  : "text-slate-600 hover:bg-slate-100 hover:text-slate-800"
               }`}
             >
               <Scale className="w-4 h-4 shrink-0 text-amber-500" />
@@ -305,10 +305,10 @@ export default function InteractiveDashboardDemo({ onShowGreeting }: Interactive
           <div className="px-2 space-y-2">
             <button
               onClick={onShowGreeting}
-              className="w-full flex items-center justify-center md:justify-start gap-3 px-3 py-2.5 rounded-lg text-xs md:text-sm font-extrabold transition-all duration-200 text-slate-400 hover:bg-slate-900 hover:text-slate-200 border border-slate-850/60"
+              className="w-full flex items-center justify-center md:justify-start gap-3 px-3 py-2.5 rounded-lg text-xs md:text-sm font-extrabold transition-all duration-200 text-slate-600 hover:bg-slate-100 hover:text-slate-800 border border-slate-200/60"
             >
-              <HelpCircle className="w-4 h-4 shrink-0 text-purple-400" />
-              <span className="hidden md:block text-slate-300">مرشد النظام</span>
+              <HelpCircle className="w-4 h-4 shrink-0 text-blue-600" />
+              <span className="hidden md:block text-slate-700">مرشد النظام</span>
             </button>
 
             <button
@@ -327,7 +327,7 @@ export default function InteractiveDashboardDemo({ onShowGreeting }: Interactive
         </div>
 
         {/* MAIN STAGE SECTION */}
-        <div className="flex-1 bg-slate-900/50 p-4 md:p-6 overflow-y-auto text-right">
+        <div className="flex-1 bg-slate-100/50 p-4 md:p-6 overflow-y-auto text-right">
           
           <AnimatePresence mode="wait">
             
@@ -338,49 +338,49 @@ export default function InteractiveDashboardDemo({ onShowGreeting }: Interactive
                 initial={{ opacity: 0, y: 10 }}
                 animate={{ opacity: 1, y: 0 }}
                 exit={{ opacity: 0, y: -10 }}
-                className="space-y-6 text-slate-100"
+                className="space-y-6 text-slate-900"
               >
                 <div className="flex items-center justify-between">
                   <h3 className="text-lg md:text-xl font-extrabold flex items-center gap-2">
-                    <LayoutDashboard className="w-5 h-5 text-purple-400" />
+                    <LayoutDashboard className="w-5 h-5 text-blue-600" />
                     أداء المتجر المباشر (لوحة التحكم)
                   </h3>
-                  <p className="text-xs text-slate-400">تحديث فوري لليوم: {new Date().toLocaleDateString("ar-DZ")}</p>
+                  <p className="text-xs text-slate-600">تحديث فوري لليوم: {new Date().toLocaleDateString("ar-DZ")}</p>
                 </div>
 
                 {/* KPI Cards Grid */}
                 <div className="grid grid-cols-2 lg:grid-cols-4 gap-4">
-                  <div className="bg-slate-950/80 p-4 rounded-xl border border-slate-800/80">
-                    <div className="flex items-center justify-between text-slate-400 text-[11px] md:text-xs">
+                  <div className="bg-white/80 p-4 rounded-xl border border-slate-200/80">
+                    <div className="flex items-center justify-between text-slate-600 text-[11px] md:text-xs">
                       <span>حالة الكاشير اليوم</span>
-                      <span className="w-2.5 h-2.5 rounded-full bg-emerald-500 animate-pulse"></span>
+                      <span className="w-2.5 h-2.5 rounded-full bg-orange-500 animate-pulse"></span>
                     </div>
                     <p className="text-base md:text-lg font-black text-emerald-400 mt-2">نـشـط</p>
                     <p className="text-[10px] text-slate-500 mt-1">تحديث تلقائي مستمر</p>
                   </div>
 
-                  <div className="bg-slate-950/80 p-4 rounded-xl border border-slate-800/80">
-                    <div className="flex items-center justify-between text-slate-400 text-[11px] md:text-xs">
+                  <div className="bg-white/80 p-4 rounded-xl border border-slate-200/80">
+                    <div className="flex items-center justify-between text-slate-600 text-[11px] md:text-xs">
                       <span>أجهزة في الصيانة حالياً</span>
-                      <Wrench className="w-4 h-4 text-purple-400" />
+                      <Wrench className="w-4 h-4 text-blue-600" />
                     </div>
-                    <p className="text-base md:text-lg font-black text-purple-300 mt-2">{todayRepairsCount} أجهزة</p>
+                    <p className="text-base md:text-lg font-black text-blue-500 mt-2">{todayRepairsCount} أجهزة</p>
                     <p className="text-[10px] text-slate-500 mt-1">منها {repairs.filter(r => r.status === "ready").length} جاهزة للتسليم</p>
                   </div>
 
-                  <div className="bg-slate-950/80 p-4 rounded-xl border border-slate-800/80">
-                    <div className="flex items-center justify-between text-slate-400 text-[11px] md:text-xs">
+                  <div className="bg-white/80 p-4 rounded-xl border border-slate-200/80">
+                    <div className="flex items-center justify-between text-slate-600 text-[11px] md:text-xs">
                       <span>مبيعات اليوم الافتراضية</span>
-                      <DollarSign className="w-4 h-4 text-purple-400" />
+                      <DollarSign className="w-4 h-4 text-blue-600" />
                     </div>
-                    <p className="text-base md:text-lg font-black text-slate-100 mt-2">{totalSalesDemo.toLocaleString("ar-DZ")} دج</p>
+                    <p className="text-base md:text-lg font-black text-slate-900 mt-2">{totalSalesDemo.toLocaleString("ar-DZ")} دج</p>
                     <p className="text-[10px] text-emerald-400 mt-1">▲ 12% مقارنة بالأسبوع الماضي</p>
                   </div>
 
-                  <div className="bg-slate-950/80 p-4 rounded-xl border border-slate-800/80">
-                    <div className="flex items-center justify-between text-slate-400 text-[11px] md:text-xs">
+                  <div className="bg-white/80 p-4 rounded-xl border border-slate-200/80">
+                    <div className="flex items-center justify-between text-slate-600 text-[11px] md:text-xs">
                       <span>صافي أرباح المحل (اليوم)</span>
-                      <Percent className="w-4 h-4 text-emerald-500" />
+                      <Percent className="w-4 h-4 text-orange-500" />
                     </div>
                     <p className="text-base md:text-lg font-black text-emerald-400 mt-2">12,500.00 دج</p>
                     <p className="text-[10px] text-slate-500 mt-1">أرباح مبيعات وصيانة الهواتف</p>
@@ -391,16 +391,16 @@ export default function InteractiveDashboardDemo({ onShowGreeting }: Interactive
                 <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
                   
                   {/* Left Column - Custom Styled SVG Line Graph */}
-                  <div className="lg:col-span-2 bg-slate-950/70 border border-slate-800/80 rounded-xl p-4 flex flex-col justify-between">
+                  <div className="lg:col-span-2 bg-white/70 border border-slate-200/80 rounded-xl p-4 flex flex-col justify-between">
                     <div>
-                      <h4 className="font-bold text-sm text-slate-300 mb-2">إحصائيات المبيعات والأرباح (الأيام الـ7 الأخيرة)</h4>
-                      <p className="text-[10px] text-slate-400">تتبع ذكي يوضح المبيعات (بالبنفسجي) والأرباح الصافية (بالأخضر)</p>
+                      <h4 className="font-bold text-sm text-slate-700 mb-2">إحصائيات المبيعات والأرباح (الأيام الـ7 الأخيرة)</h4>
+                      <p className="text-[10px] text-slate-600">تتبع ذكي يوضح المبيعات (بالبنفسجي) والأرباح الصافية (بالأخضر)</p>
                     </div>
 
                     {/* Responsive Simulated Graph */}
                     <div className="w-full h-44 my-4 flex items-end justify-between relative px-2">
-                      <div className="absolute inset-x-0 top-1/2 h-px bg-slate-800/40"></div>
-                      <div className="absolute inset-x-0 top-1/4 h-px bg-slate-800/20"></div>
+                      <div className="absolute inset-x-0 top-1/2 h-px bg-slate-200/40"></div>
+                      <div className="absolute inset-x-0 top-1/4 h-px bg-slate-200/20"></div>
                       
                       {/* Interactive Graph bars or paths. We will draw custom curved SVGs */}
                       <svg className="absolute inset-0 w-full h-full" viewBox="0 0 400 150" preserveAspectRatio="none">
@@ -457,13 +457,13 @@ export default function InteractiveDashboardDemo({ onShowGreeting }: Interactive
                       </div>
                     </div>
 
-                    <div className="flex items-center justify-between text-xs text-slate-400 border-t border-slate-800/80 pt-3 mt-1.5 font-bold">
+                    <div className="flex items-center justify-between text-xs text-slate-600 border-t border-slate-200/80 pt-3 mt-1.5 font-bold">
                       <div className="flex items-center gap-2">
-                        <span className="w-2.5 h-2.5 rounded-full bg-purple-500"></span>
+                        <span className="w-2.5 h-2.5 rounded-full bg-blue-500"></span>
                         <span>المبيعات: 135,000 دج (الأسبوع)</span>
                       </div>
                       <div className="flex items-center gap-2">
-                        <span className="w-2.5 h-2.5 rounded-full bg-emerald-500"></span>
+                        <span className="w-2.5 h-2.5 rounded-full bg-orange-500"></span>
                         <span>صافي الأرباح: 42,000 دج (الأسبوع)</span>
                       </div>
                     </div>
@@ -473,7 +473,7 @@ export default function InteractiveDashboardDemo({ onShowGreeting }: Interactive
                   <div className="space-y-4">
                     
                     {/* Stock Warning Box */}
-                    <div className="bg-slate-950/80 border border-slate-800 rounded-xl p-4">
+                    <div className="bg-white/80 border border-slate-200 rounded-xl p-4">
                       <div className="flex items-center justify-between text-amber-500 text-xs font-bold mb-3">
                         <span className="flex items-center gap-1.5">
                           <BadgeAlert className="w-4 h-4 animate-bounce" />
@@ -484,10 +484,10 @@ export default function InteractiveDashboardDemo({ onShowGreeting }: Interactive
 
                       <div className="space-y-2 max-h-36 overflow-y-auto">
                         {products.filter(p => p.quantity <= 3).map(p => (
-                          <div key={p.id} className="p-2 bg-slate-900/80 border border-slate-800 rounded-lg flex justify-between items-center text-xs">
+                          <div key={p.id} className="p-2 bg-slate-100/80 border border-slate-200 rounded-lg flex justify-between items-center text-xs">
                             <div>
-                              <p className="font-bold text-slate-200">{p.name}</p>
-                              <p className="text-[10px] text-slate-400">قسم: {p.category === "parts" ? "قطع الغيار" : "الهواتف"}</p>
+                              <p className="font-bold text-slate-800">{p.name}</p>
+                              <p className="text-[10px] text-slate-600">قسم: {p.category === "parts" ? "قطع الغيار" : "الهواتف"}</p>
                             </div>
                             <span className="text-red-400 bg-red-500/10 border border-red-500/20 px-1.5 py-0.5 rounded text-[10px] font-mono">
                               متبقي: {p.quantity} قطع
@@ -498,23 +498,23 @@ export default function InteractiveDashboardDemo({ onShowGreeting }: Interactive
                     </div>
 
                     {/* Printer and Hardware Integration Status Widget */}
-                    <div className="bg-slate-950/80 border border-slate-800 rounded-xl p-4">
-                      <h4 className="font-bold text-xs text-slate-300 mb-3 flex items-center gap-1.5">
-                        <Printer className="w-4 h-4 text-purple-400" />
+                    <div className="bg-white/80 border border-slate-200 rounded-xl p-4">
+                      <h4 className="font-bold text-xs text-slate-700 mb-3 flex items-center gap-1.5">
+                        <Printer className="w-4 h-4 text-blue-600" />
                         حالة اتصال الأجهزة والملحقات
                       </h4>
                       <div className="space-y-2 text-xs">
                         <div className="flex justify-between items-center">
-                          <span className="text-slate-400">طابعة الفواتير الحرارية (XP-80)</span>
-                          <span className="text-emerald-400 font-bold bg-emerald-500/10 px-2 py-0.5 rounded text-[10px]">متصل (80mm)</span>
+                          <span className="text-slate-600">طابعة الفواتير الحرارية (XP-80)</span>
+                          <span className="text-emerald-400 font-bold bg-orange-500/10 px-2 py-0.5 rounded text-[10px]">متصل (80mm)</span>
                         </div>
                         <div className="flex justify-between items-center">
-                          <span className="text-slate-400">ماسح الباركود اللاسلكي (USB)</span>
-                          <span className="text-emerald-400 font-bold bg-emerald-500/10 px-2 py-0.5 rounded text-[10px]">جاهز للعمل</span>
+                          <span className="text-slate-600">ماسح الباركود اللاسلكي (USB)</span>
+                          <span className="text-emerald-400 font-bold bg-orange-500/10 px-2 py-0.5 rounded text-[10px]">جاهز للعمل</span>
                         </div>
                         <div className="flex justify-between items-center">
-                          <span className="text-slate-400">النسخ الاحتياطي السحابي اليومي</span>
-                          <span className="text-purple-400 font-bold bg-purple-500/10 px-2 py-0.5 rounded text-[10px]">تلقائي (مفعل)</span>
+                          <span className="text-slate-600">النسخ الاحتياطي السحابي اليومي</span>
+                          <span className="text-blue-600 font-bold bg-blue-500/10 px-2 py-0.5 rounded text-[10px]">تلقائي (مفعل)</span>
                         </div>
                       </div>
                     </div>
@@ -524,14 +524,14 @@ export default function InteractiveDashboardDemo({ onShowGreeting }: Interactive
                 </div>
 
                 {/* Banner calling them to try the POS */}
-                <div className="bg-gradient-to-r from-purple-900/30 to-slate-950/80 border border-purple-500/20 rounded-xl p-4 flex flex-col md:flex-row justify-between items-center gap-4">
+                <div className="bg-gradient-to-r from-blue-900/30 to-slate-50/80 border border-blue-500/20 rounded-xl p-4 flex flex-col md:flex-row justify-between items-center gap-4">
                   <div className="text-center md:text-right space-y-1">
-                    <p className="text-sm font-bold text-purple-300">💡 هل تريد تجربة المبيعات وإصدار الفواتير؟</p>
-                    <p className="text-xs text-slate-400">افتح موديول "الكاشير ونقطة البيع" لاختيار السلع، طباعة كشف حراري حقيقي وتجربة دقة التسيير.</p>
+                    <p className="text-sm font-bold text-blue-500">💡 هل تريد تجربة المبيعات وإصدار الفواتير؟</p>
+                    <p className="text-xs text-slate-600">افتح موديول "الكاشير ونقطة البيع" لاختيار السلع، طباعة كشف حراري حقيقي وتجربة دقة التسيير.</p>
                   </div>
                   <button 
                     onClick={() => setActiveTab("pos")}
-                    className="px-4 py-2 bg-purple-600 hover:bg-purple-500 text-white text-xs font-bold rounded-lg transition-all"
+                    className="px-4 py-2 bg-blue-600 hover:bg-blue-500 text-slate-900 text-xs font-bold rounded-lg transition-all"
                   >
                     فتح واجهة نقطة البيع الكاشير
                   </button>
@@ -547,17 +547,17 @@ export default function InteractiveDashboardDemo({ onShowGreeting }: Interactive
                 initial={{ opacity: 0, y: 10 }}
                 animate={{ opacity: 1, y: 0 }}
                 exit={{ opacity: 0, y: -10 }}
-                className="space-y-6 text-slate-100"
+                className="space-y-6 text-slate-900"
               >
                 <div className="flex flex-col md:flex-row md:items-center justify-between gap-4">
                   <div>
                     <h3 className="text-lg md:text-xl font-extrabold flex items-center gap-2">
-                      <Package className="w-5 h-5 text-purple-400" />
+                      <Package className="w-5 h-5 text-blue-600" />
                       إدارة مخزون الهواتف وقطع الغيار بدقة تامة
                     </h3>
-                    <p className="text-xs text-slate-400">تسجيل كميات الهواتف بالـ IMEI وقطع الصيانة مع تحديد أسعار الجملة والتجزئة فورا.</p>
+                    <p className="text-xs text-slate-600">تسجيل كميات الهواتف بالـ IMEI وقطع الصيانة مع تحديد أسعار الجملة والتجزئة فورا.</p>
                   </div>
-                  <div className="text-xs font-mono bg-slate-950 px-3 py-1.5 rounded-lg border border-slate-800 text-slate-300">
+                  <div className="text-xs font-mono bg-white px-3 py-1.5 rounded-lg border border-slate-200 text-slate-700">
                     إجمالي المنتجات المسجلة: {products.length} أصناف
                   </div>
                 </div>
@@ -566,32 +566,32 @@ export default function InteractiveDashboardDemo({ onShowGreeting }: Interactive
                 <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
                   
                   {/* Left Column - Simulation Form */}
-                  <div className="bg-slate-950/80 border border-slate-800 rounded-xl p-4 h-fit">
-                    <h4 className="font-bold text-sm text-slate-300 mb-3 border-b border-slate-800 pb-2 flex items-center gap-1.5">
-                      <Plus className="w-4 h-4 text-purple-400" />
+                  <div className="bg-white/80 border border-slate-200 rounded-xl p-4 h-fit">
+                    <h4 className="font-bold text-sm text-slate-700 mb-3 border-b border-slate-200 pb-2 flex items-center gap-1.5">
+                      <Plus className="w-4 h-4 text-blue-600" />
                       إضافة منتج جديد للمخزون (تجربة)
                     </h4>
 
                     <form onSubmit={handleAddProduct} className="space-y-4 text-right">
                       <div>
-                        <label className="block text-xs text-slate-400 font-bold mb-1">اسم السلعة / الموديل</label>
+                        <label className="block text-xs text-slate-600 font-bold mb-1">اسم السلعة / الموديل</label>
                         <input 
                           type="text" 
                           value={newProdName}
                           onChange={(e) => setNewProdName(e.target.value)}
                           placeholder="مثال: شاشة Redmi Note 12 Original"
-                          className="w-full text-xs px-3 py-2 bg-slate-900 border border-slate-800 rounded-lg text-slate-100 focus:outline-none focus:border-purple-500"
+                          className="w-full text-xs px-3 py-2 bg-slate-100 border border-slate-200 rounded-lg text-slate-900 focus:outline-none focus:border-blue-500"
                           required
                         />
                       </div>
 
                       <div className="grid grid-cols-2 gap-3">
                         <div>
-                          <label className="block text-xs text-slate-400 font-bold mb-1">التصنيف</label>
+                          <label className="block text-xs text-slate-600 font-bold mb-1">التصنيف</label>
                           <select 
                             value={newProdCat}
                             onChange={(e: any) => setNewProdCat(e.target.value)}
-                            className="w-full text-xs px-3 py-2 bg-slate-900 border border-slate-800 rounded-lg text-slate-100 focus:outline-none focus:border-purple-500"
+                            className="w-full text-xs px-3 py-2 bg-slate-100 border border-slate-200 rounded-lg text-slate-900 focus:outline-none focus:border-blue-500"
                           >
                             <option value="phones">هواتف ذكية</option>
                             <option value="parts">قطع غيار وصيانة</option>
@@ -599,13 +599,13 @@ export default function InteractiveDashboardDemo({ onShowGreeting }: Interactive
                           </select>
                         </div>
                         <div>
-                          <label className="block text-xs text-slate-400 font-bold mb-1">الكمية الأولية</label>
+                          <label className="block text-xs text-slate-600 font-bold mb-1">الكمية الأولية</label>
                           <input 
                             type="number" 
                             min="1"
                             value={newProdQty}
                             onChange={(e) => setNewProdQty(Number(e.target.value))}
-                            className="w-full text-xs px-3 py-2 bg-slate-900 border border-slate-800 rounded-lg text-slate-100 focus:outline-none"
+                            className="w-full text-xs px-3 py-2 bg-slate-100 border border-slate-200 rounded-lg text-slate-900 focus:outline-none"
                             required
                           />
                         </div>
@@ -613,22 +613,22 @@ export default function InteractiveDashboardDemo({ onShowGreeting }: Interactive
 
                       <div className="grid grid-cols-2 gap-3">
                         <div>
-                          <label className="block text-xs text-slate-400 font-bold mb-1">سعر الشراء (دج)</label>
+                          <label className="block text-xs text-slate-600 font-bold mb-1">سعر الشراء (دج)</label>
                           <input 
                             type="number" 
                             value={newProdBuy}
                             onChange={(e) => setNewProdBuy(Number(e.target.value))}
-                            className="w-full text-xs px-3 py-2 bg-slate-900 border border-slate-800 rounded-lg text-slate-100 focus:outline-none"
+                            className="w-full text-xs px-3 py-2 bg-slate-100 border border-slate-200 rounded-lg text-slate-900 focus:outline-none"
                             required
                           />
                         </div>
                         <div>
-                          <label className="block text-xs text-slate-400 font-bold mb-1">سعر البيع (دج)</label>
+                          <label className="block text-xs text-slate-600 font-bold mb-1">سعر البيع (دج)</label>
                           <input 
                             type="number" 
                             value={newProdSell}
                             onChange={(e) => setNewProdSell(Number(e.target.value))}
-                            className="w-full text-xs px-3 py-2 bg-slate-900 border border-slate-800 rounded-lg text-slate-100 focus:outline-none"
+                            className="w-full text-xs px-3 py-2 bg-slate-100 border border-slate-200 rounded-lg text-slate-900 focus:outline-none"
                             required
                           />
                         </div>
@@ -636,7 +636,7 @@ export default function InteractiveDashboardDemo({ onShowGreeting }: Interactive
 
                       <button
                         type="submit"
-                        className="w-full py-2.5 bg-purple-600 hover:bg-purple-500 text-white font-bold text-xs rounded-lg transition-colors flex items-center justify-center gap-1.5"
+                        className="w-full py-2.5 bg-blue-600 hover:bg-blue-500 text-slate-900 font-bold text-xs rounded-lg transition-colors flex items-center justify-center gap-1.5"
                       >
                         <Plus className="w-4 h-4" />
                         إضافة للمخزون وتحديث الأرباح الافتراضية
@@ -646,10 +646,10 @@ export default function InteractiveDashboardDemo({ onShowGreeting }: Interactive
 
                   {/* Right Column - Inventory Table */}
                   <div className="lg:col-span-2 space-y-4">
-                    <div className="bg-slate-950/80 border border-slate-800 rounded-xl p-4 overflow-x-auto">
+                    <div className="bg-white/80 border border-slate-200 rounded-xl p-4 overflow-x-auto">
                       <table className="w-full text-right text-xs">
                         <thead>
-                          <tr className="border-b border-slate-800 text-slate-400">
+                          <tr className="border-b border-slate-200 text-slate-600">
                             <th className="pb-3 pt-1">اسم المنتج</th>
                             <th className="pb-3 pt-1">التصنيف</th>
                             <th className="pb-3 pt-1 font-mono">الكمية</th>
@@ -660,8 +660,8 @@ export default function InteractiveDashboardDemo({ onShowGreeting }: Interactive
                         </thead>
                         <tbody className="divide-y divide-slate-850">
                           {products.map((p) => (
-                            <tr key={p.id} className="hover:bg-slate-900/40">
-                              <td className="py-3 font-bold text-slate-200">
+                            <tr key={p.id} className="hover:bg-slate-50/40">
+                              <td className="py-3 font-bold text-slate-800">
                                 <div>
                                   <span>{p.name}</span>
                                   {p.imei && (
@@ -672,18 +672,18 @@ export default function InteractiveDashboardDemo({ onShowGreeting }: Interactive
                               <td className="py-3">
                                 <span className={`px-2 py-0.5 rounded text-[10px] ${
                                   p.category === "phones" ? "bg-blue-500/10 text-blue-400" :
-                                  p.category === "parts" ? "bg-purple-500/10 text-purple-400" : "bg-emerald-500/10 text-emerald-400"
+                                  p.category === "parts" ? "bg-blue-500/10 text-blue-600" : "bg-orange-500/10 text-emerald-400"
                                 }`}>
                                   {p.category === "phones" ? "هواتف" : p.category === "parts" ? "قطع صيانة" : "إكسسوار"}
                                 </span>
                               </td>
                               <td className="py-3 font-mono font-bold">
-                                <span className={p.quantity <= 3 ? "text-red-400 font-black" : "text-slate-300"}>
+                                <span className={p.quantity <= 3 ? "text-red-400 font-black" : "text-slate-700"}>
                                   {p.quantity} قطع
                                 </span>
                               </td>
-                              <td className="py-3 font-mono text-slate-400">{(p.buyPrice).toLocaleString()} دج</td>
-                              <td className="py-3 font-mono font-bold text-slate-200">{(p.sellPrice).toLocaleString()} دج</td>
+                              <td className="py-3 font-mono text-slate-600">{(p.buyPrice).toLocaleString()} دج</td>
+                              <td className="py-3 font-mono font-bold text-slate-800">{(p.sellPrice).toLocaleString()} دج</td>
                               <td className="py-3 font-mono font-bold text-emerald-400">+{(p.sellPrice - p.buyPrice).toLocaleString()} دج</td>
                             </tr>
                           ))}
@@ -704,20 +704,20 @@ export default function InteractiveDashboardDemo({ onShowGreeting }: Interactive
                 initial={{ opacity: 0, y: 10 }}
                 animate={{ opacity: 1, y: 0 }}
                 exit={{ opacity: 0, y: -10 }}
-                className="space-y-6 text-slate-100"
+                className="space-y-6 text-slate-900"
               >
                 <div>
                   <h3 className="text-lg md:text-xl font-extrabold flex items-center gap-2">
-                    <Wrench className="w-5 h-5 text-purple-400" />
+                    <Wrench className="w-5 h-5 text-blue-600" />
                     قسم تسيير عمليات الصيانة (التصليح) الاحترافي
                   </h3>
-                  <p className="text-xs text-slate-400">تسجيل أجهزة الزبائن وتتبع حالة الإصلاح وحساب قطع الغيار المستعملة من المخزون تلقائياً.</p>
+                  <p className="text-xs text-slate-600">تسجيل أجهزة الزبائن وتتبع حالة الإصلاح وحساب قطع الغيار المستعملة من المخزون تلقائياً.</p>
                 </div>
 
-                <div className="bg-slate-950/80 border border-slate-800 rounded-xl p-4 overflow-x-auto">
+                <div className="bg-white/80 border border-slate-200 rounded-xl p-4 overflow-x-auto">
                   <table className="w-full text-right text-xs">
                     <thead>
-                      <tr className="border-b border-slate-800 text-slate-400">
+                      <tr className="border-b border-slate-200 text-slate-600">
                         <th className="pb-3 pt-1">الرقم</th>
                         <th className="pb-3 pt-1">الزبون والهاتف</th>
                         <th className="pb-3 pt-1">الجهاز والعطل</th>
@@ -729,30 +729,30 @@ export default function InteractiveDashboardDemo({ onShowGreeting }: Interactive
                     </thead>
                     <tbody className="divide-y divide-slate-850">
                       {repairs.map((rep) => (
-                        <tr key={rep.id} className="hover:bg-slate-900/40">
-                          <td className="py-3 font-mono font-bold text-slate-400">{rep.id}</td>
+                        <tr key={rep.id} className="hover:bg-slate-50/40">
+                          <td className="py-3 font-mono font-bold text-slate-600">{rep.id}</td>
                           <td className="py-3">
                             <div>
-                              <p className="font-bold text-slate-200">{rep.clientName}</p>
-                              <p className="text-[10px] text-slate-400 font-mono">{rep.clientPhone}</p>
+                              <p className="font-bold text-slate-800">{rep.clientName}</p>
+                              <p className="text-[10px] text-slate-600 font-mono">{rep.clientPhone}</p>
                             </div>
                           </td>
                           <td className="py-3">
                             <div>
-                              <p className="font-bold text-purple-300">{rep.device}</p>
-                              <p className="text-[10px] text-slate-400">{rep.notes}</p>
+                              <p className="font-bold text-blue-500">{rep.device}</p>
+                              <p className="text-[10px] text-slate-600">{rep.notes}</p>
                             </div>
                           </td>
-                          <td className="py-3 font-mono font-bold text-slate-200">{rep.cost.toLocaleString()} دج</td>
-                          <td className="py-3 font-mono text-slate-400">{rep.partsCost.toLocaleString()} دج</td>
+                          <td className="py-3 font-mono font-bold text-slate-800">{rep.cost.toLocaleString()} دج</td>
+                          <td className="py-3 font-mono text-slate-600">{rep.partsCost.toLocaleString()} دج</td>
                           <td className="py-3">
                             <select
                               value={rep.status}
                               onChange={(e) => updateRepairStatus(rep.id, e.target.value as any)}
-                              className={`text-[11px] font-bold px-2 py-1 bg-slate-900 border border-slate-800 rounded focus:outline-none focus:border-purple-500 cursor-pointer ${
+                              className={`text-[11px] font-bold px-2 py-1 bg-slate-100 border border-slate-200 rounded focus:outline-none focus:border-blue-500 cursor-pointer ${
                                 rep.status === "pending" ? "text-amber-400" :
                                 rep.status === "repairing" ? "text-blue-400" :
-                                rep.status === "ready" ? "text-emerald-400 bg-emerald-500/10" : "text-slate-400"
+                                rep.status === "ready" ? "text-emerald-400 bg-orange-500/10" : "text-slate-600"
                               }`}
                             >
                               <option value="pending">⏳ انتظار القطع / الفحص</option>
@@ -766,7 +766,7 @@ export default function InteractiveDashboardDemo({ onShowGreeting }: Interactive
                               onClick={() => {
                                 alert(`تنبيه محاكاة: تم إرسال رسالة SMS تلقائية للزبون "${rep.clientName}" عبر نظام إشعارات Algora Systems لإخباره بأن جهازه (${rep.device}) حالته الآن: [${rep.status === "ready" ? "جاهز للتسليم ومصلّح بنجاح" : rep.status}]`);
                               }}
-                              className="px-2 py-1 bg-purple-600 hover:bg-purple-500 text-white font-bold rounded text-[10px] flex items-center gap-1 transition-colors"
+                              className="px-2 py-1 bg-blue-600 hover:bg-blue-500 text-slate-900 font-bold rounded text-[10px] flex items-center gap-1 transition-colors"
                             >
                               <Send className="w-3 h-3" />
                               إرسال SMS/واتس
@@ -779,10 +779,10 @@ export default function InteractiveDashboardDemo({ onShowGreeting }: Interactive
                 </div>
 
                 {/* Info block about repairs automation */}
-                <div className="bg-slate-950/40 p-4 border border-slate-800 rounded-xl flex items-start gap-3">
-                  <Info className="w-5 h-5 text-purple-400 shrink-0 mt-0.5" />
-                  <p className="text-xs text-slate-400 leading-relaxed">
-                    <span className="text-slate-200 font-bold block mb-1">الربط الآلي للمخزون مع الصيانة:</span>
+                <div className="bg-white/40 p-4 border border-slate-200 rounded-xl flex items-start gap-3">
+                  <Info className="w-5 h-5 text-blue-600 shrink-0 mt-0.5" />
+                  <p className="text-xs text-slate-600 leading-relaxed">
+                    <span className="text-slate-800 font-bold block mb-1">الربط الآلي للمخزون مع الصيانة:</span>
                     عند اختيار قطعة غيار مستعملة في الصيانة، يقوم نظام Algora Systems باقتطاعها مباشرة من مخزن قطع الغيار وتحديث كمياتها وإضافتها لتكلفة الفاتورة تلقائياً من دون تدخل يدوي، مما يمنع الأخطاء وسرقة القطع نهائياً.
                   </p>
                 </div>
@@ -797,15 +797,15 @@ export default function InteractiveDashboardDemo({ onShowGreeting }: Interactive
                 initial={{ opacity: 0, y: 10 }}
                 animate={{ opacity: 1, y: 0 }}
                 exit={{ opacity: 0, y: -10 }}
-                className="space-y-6 text-slate-100 h-full flex flex-col"
+                className="space-y-6 text-slate-900 h-full flex flex-col"
               >
                 <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
                   <div>
                     <h3 className="text-lg md:text-xl font-extrabold flex items-center gap-2">
-                      <ShoppingCart className="w-5 h-5 text-purple-400" />
+                      <ShoppingCart className="w-5 h-5 text-blue-600" />
                       واجهة المبيعات السريعة (الكاشير ونقطة البيع POS)
                     </h3>
-                    <p className="text-xs text-slate-400">انقر على السلع لإضافتها لفاتورة البيع الحرارية وتجربة الطباعة المباشرة.</p>
+                    <p className="text-xs text-slate-600">انقر على السلع لإضافتها لفاتورة البيع الحرارية وتجربة الطباعة المباشرة.</p>
                   </div>
                 </div>
 
@@ -822,7 +822,7 @@ export default function InteractiveDashboardDemo({ onShowGreeting }: Interactive
                           placeholder="ابحث بالاسم أو امسح الباركود..."
                           value={posSearch}
                           onChange={(e) => setPosSearch(e.target.value)}
-                          className="w-full text-xs px-3 py-2.5 pr-9 bg-slate-950 border border-slate-800 rounded-lg text-slate-100 focus:outline-none focus:border-purple-500 text-right"
+                          className="w-full text-xs px-3 py-2.5 pr-9 bg-white border border-slate-200 rounded-lg text-slate-900 focus:outline-none focus:border-blue-500 text-right"
                         />
                         <Search className="w-4 h-4 text-slate-500 absolute top-3 right-3" />
                       </div>
@@ -835,7 +835,7 @@ export default function InteractiveDashboardDemo({ onShowGreeting }: Interactive
                             alert(`باركود محاكى 📱 تم مسح السلعة: [${randomAcc.name}] بنجاح وإضافتها للفاتورة!`);
                           }
                         }}
-                        className="px-3 bg-purple-600 hover:bg-purple-500 text-white rounded-lg text-xs font-bold flex items-center gap-1.5 transition-colors shrink-0"
+                        className="px-3 bg-blue-600 hover:bg-blue-500 text-slate-900 rounded-lg text-xs font-bold flex items-center gap-1.5 transition-colors shrink-0"
                       >
                         <ScanLine className="w-4 h-4" />
                         محاكاة المسح (Barcode)
@@ -851,24 +851,24 @@ export default function InteractiveDashboardDemo({ onShowGreeting }: Interactive
                             key={p.id}
                             onClick={() => addToCart(p)}
                             disabled={p.quantity <= 0}
-                            className={`p-3 bg-slate-950 hover:bg-purple-950/20 border border-slate-850 hover:border-purple-500/40 rounded-xl text-right transition-all duration-150 flex flex-col justify-between h-28 group relative ${
+                            className={`p-3 bg-white hover:bg-blue-950/20 border border-slate-850 hover:border-blue-500/40 rounded-xl text-right transition-all duration-150 flex flex-col justify-between h-28 group relative ${
                               p.quantity <= 0 ? "opacity-50 cursor-not-allowed" : ""
                             }`}
                           >
                             <div>
                               <span className={`text-[9px] px-1.5 py-0.5 rounded ${
                                 p.category === "phones" ? "bg-blue-500/10 text-blue-400" :
-                                p.category === "parts" ? "bg-purple-500/10 text-purple-400" : "bg-emerald-500/10 text-emerald-400"
+                                p.category === "parts" ? "bg-blue-500/10 text-blue-600" : "bg-orange-500/10 text-emerald-400"
                               }`}>
                                 {p.category === "phones" ? "هواتف" : p.category === "parts" ? "قطع غيار" : "إكسسوار"}
                               </span>
-                              <h4 className="font-bold text-slate-200 text-xs mt-2 group-hover:text-purple-300 transition-colors line-clamp-2">
+                              <h4 className="font-bold text-slate-800 text-xs mt-2 group-hover:text-blue-500 transition-colors line-clamp-2">
                                 {p.name}
                               </h4>
                             </div>
                             
                             <div className="flex justify-between items-center w-full mt-1">
-                              <span className="font-mono font-black text-purple-400 text-[11px] md:text-xs">
+                              <span className="font-mono font-black text-blue-600 text-[11px] md:text-xs">
                                 {(p.sellPrice).toLocaleString()} دج
                               </span>
                               <span className="text-[10px] text-slate-500">
@@ -877,7 +877,7 @@ export default function InteractiveDashboardDemo({ onShowGreeting }: Interactive
                             </div>
 
                             {p.quantity <= 0 && (
-                              <div className="absolute inset-0 bg-slate-950/80 flex items-center justify-center rounded-xl text-[10px] text-red-400 font-bold">
+                              <div className="absolute inset-0 bg-white/80 flex items-center justify-center rounded-xl text-[10px] text-red-400 font-bold">
                                 نفد المخزون!
                               </div>
                             )}
@@ -888,14 +888,14 @@ export default function InteractiveDashboardDemo({ onShowGreeting }: Interactive
                   </div>
 
                   {/* Right Column: Billing / Invoice Cart Summary (2/5 width) */}
-                  <div className="lg:col-span-2 bg-slate-950 border border-slate-850 rounded-xl p-4 flex flex-col h-[420px] justify-between">
+                  <div className="lg:col-span-2 bg-white border border-slate-850 rounded-xl p-4 flex flex-col h-[420px] justify-between">
                     <div>
                       <div className="flex items-center justify-between border-b border-slate-850 pb-2 mb-3">
-                        <h4 className="font-bold text-sm text-slate-200 flex items-center gap-1.5">
-                          <ShoppingCart className="w-4 h-4 text-purple-400" />
+                        <h4 className="font-bold text-sm text-slate-800 flex items-center gap-1.5">
+                          <ShoppingCart className="w-4 h-4 text-blue-600" />
                           الفاتورة الحالية
                         </h4>
-                        <span className="text-[10px] bg-purple-500/10 border border-purple-500/20 text-purple-400 rounded-full px-2 py-0.5 font-bold font-mono">
+                        <span className="text-[10px] bg-blue-500/10 border border-blue-500/20 text-blue-600 rounded-full px-2 py-0.5 font-bold font-mono">
                           {cart.reduce((acc, c) => acc + c.qty, 0)} قطع
                         </span>
                       </div>
@@ -910,22 +910,22 @@ export default function InteractiveDashboardDemo({ onShowGreeting }: Interactive
                           </div>
                         ) : (
                           cart.map((item) => (
-                            <div key={item.product.id} className="bg-slate-900 p-2 border border-slate-800 rounded-lg flex justify-between items-center gap-2">
+                            <div key={item.product.id} className="bg-slate-100 p-2 border border-slate-200 rounded-lg flex justify-between items-center gap-2">
                               <div className="grow text-right">
-                                <p className="font-bold text-slate-200 text-xs line-clamp-1">{item.product.name}</p>
-                                <p className="text-[10px] font-mono text-purple-400 font-bold">{(item.product.sellPrice).toLocaleString()} دج</p>
+                                <p className="font-bold text-slate-800 text-xs line-clamp-1">{item.product.name}</p>
+                                <p className="text-[10px] font-mono text-blue-600 font-bold">{(item.product.sellPrice).toLocaleString()} دج</p>
                               </div>
                               <div className="flex items-center gap-2 shrink-0">
                                 <button
                                   onClick={() => updateCartQty(item.product.id, -1)}
-                                  className="w-5 h-5 bg-slate-800 hover:bg-slate-700 rounded text-slate-300 font-bold text-xs"
+                                  className="w-5 h-5 bg-slate-200 hover:bg-slate-700 rounded text-slate-700 font-bold text-xs"
                                 >
                                   -
                                 </button>
-                                <span className="font-mono text-xs font-bold text-slate-100 min-w-[12px] text-center">{item.qty}</span>
+                                <span className="font-mono text-xs font-bold text-slate-900 min-w-[12px] text-center">{item.qty}</span>
                                 <button
                                   onClick={() => updateCartQty(item.product.id, 1)}
-                                  className="w-5 h-5 bg-slate-800 hover:bg-slate-700 rounded text-slate-300 font-bold text-xs"
+                                  className="w-5 h-5 bg-slate-200 hover:bg-slate-700 rounded text-slate-700 font-bold text-xs"
                                 >
                                   +
                                 </button>
@@ -947,14 +947,14 @@ export default function InteractiveDashboardDemo({ onShowGreeting }: Interactive
                       
                       {/* Payment Method Selector (Algeria support) */}
                       <div>
-                        <span className="block text-[10px] text-slate-400 font-bold mb-1.5">طريقة الدفع في الجزائر:</span>
+                        <span className="block text-[10px] text-slate-600 font-bold mb-1.5">طريقة الدفع في الجزائر:</span>
                         <div className="grid grid-cols-3 gap-2">
                           <button
                             onClick={() => setPaymentMethod("baridimob")}
                             className={`py-1 text-[10px] font-bold border rounded transition-all duration-150 ${
                               paymentMethod === "baridimob"
-                                ? "bg-purple-600/20 border-purple-500 text-purple-300"
-                                : "bg-slate-900 border-slate-800 text-slate-400"
+                                ? "bg-blue-600/10 border-blue-500 text-blue-500"
+                                : "bg-slate-100 border-slate-200 text-slate-600"
                             }`}
                           >
                             بريدي موب
@@ -963,8 +963,8 @@ export default function InteractiveDashboardDemo({ onShowGreeting }: Interactive
                             onClick={() => setPaymentMethod("cash")}
                             className={`py-1 text-[10px] font-bold border rounded transition-all duration-150 ${
                               paymentMethod === "cash"
-                                ? "bg-purple-600/20 border-purple-500 text-purple-300"
-                                : "bg-slate-900 border-slate-800 text-slate-400"
+                                ? "bg-blue-600/10 border-blue-500 text-blue-500"
+                                : "bg-slate-100 border-slate-200 text-slate-600"
                             }`}
                           >
                             كاش (نقدي)
@@ -973,8 +973,8 @@ export default function InteractiveDashboardDemo({ onShowGreeting }: Interactive
                             onClick={() => setPaymentMethod("ccp")}
                             className={`py-1 text-[10px] font-bold border rounded transition-all duration-150 ${
                               paymentMethod === "ccp"
-                                ? "bg-purple-600/20 border-purple-500 text-purple-300"
-                                : "bg-slate-900 border-slate-800 text-slate-400"
+                                ? "bg-blue-600/10 border-blue-500 text-blue-500"
+                                : "bg-slate-100 border-slate-200 text-slate-600"
                             }`}
                           >
                             CCP جاري
@@ -982,8 +982,8 @@ export default function InteractiveDashboardDemo({ onShowGreeting }: Interactive
                         </div>
                       </div>
 
-                      <div className="flex justify-between items-center text-xs font-bold bg-slate-900 p-2 rounded-lg border border-slate-800">
-                        <span className="text-slate-400">الإجمالي الصافي:</span>
+                      <div className="flex justify-between items-center text-xs font-bold bg-slate-100 p-2 rounded-lg border border-slate-200">
+                        <span className="text-slate-600">الإجمالي الصافي:</span>
                         <span className="font-mono text-sm font-black text-emerald-400">
                           {cart.reduce((acc, item) => acc + item.product.sellPrice * item.qty, 0).toLocaleString()} دج
                         </span>
@@ -994,8 +994,8 @@ export default function InteractiveDashboardDemo({ onShowGreeting }: Interactive
                         disabled={cart.length === 0}
                         className={`w-full py-2.5 rounded-lg font-bold text-xs flex items-center justify-center gap-1.5 transition-all ${
                           cart.length > 0
-                            ? "bg-gradient-to-l from-emerald-600 to-teal-600 hover:from-emerald-500 hover:to-teal-500 text-white shadow-md cursor-pointer"
-                            : "bg-slate-800 text-slate-500 cursor-not-allowed"
+                            ? "bg-gradient-to-l from-emerald-600 to-teal-600 hover:from-emerald-500 hover:to-teal-500 text-slate-900 shadow-md cursor-pointer"
+                            : "bg-slate-200 text-slate-500 cursor-not-allowed"
                         }`}
                       >
                         <Printer className="w-4 h-4" />
@@ -1017,7 +1017,7 @@ export default function InteractiveDashboardDemo({ onShowGreeting }: Interactive
                 initial={{ opacity: 0, y: 10 }}
                 animate={{ opacity: 1, y: 0 }}
                 exit={{ opacity: 0, y: -10 }}
-                className="space-y-6 text-slate-100"
+                className="space-y-6 text-slate-900"
               >
                 <div className="flex items-center gap-2">
                   <div className="p-2 bg-amber-500/15 rounded-lg text-amber-500 border border-amber-500/20">
@@ -1027,80 +1027,80 @@ export default function InteractiveDashboardDemo({ onShowGreeting }: Interactive
                     <h3 className="text-lg md:text-xl font-extrabold text-amber-400">
                       مقياس وحاسبة الزكاة الذكية المدمجة للمحلات
                     </h3>
-                    <p className="text-xs text-slate-400">أول لوجيسيال يدعم تسيير حساب الزكاة تلقائياً وفقاً لقيم وموازين وزارة الشؤون الدينية والأوقاف الجزائرية.</p>
+                    <p className="text-xs text-slate-600">أول لوجيسيال يدعم تسيير حساب الزكاة تلقائياً وفقاً لقيم وموازين وزارة الشؤون الدينية والأوقاف الجزائرية.</p>
                   </div>
                 </div>
 
                 <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
                   
                   {/* Calculations & Inputs panel */}
-                  <div className="lg:col-span-2 bg-slate-950/80 border border-slate-800 rounded-xl p-5 space-y-4">
-                    <h4 className="font-bold text-sm text-slate-200 border-b border-slate-800 pb-2">تفاصيل وعناصر وعاء الزكاة لمحلك التجاري</h4>
+                  <div className="lg:col-span-2 bg-white/80 border border-slate-200 rounded-xl p-5 space-y-4">
+                    <h4 className="font-bold text-sm text-slate-800 border-b border-slate-200 pb-2">تفاصيل وعناصر وعاء الزكاة لمحلك التجاري</h4>
                     
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-4 text-xs text-right">
                       
                       <div>
-                        <label className="block text-slate-400 mb-1 font-bold">1. قيمة السلع المتاحة للبيع حالياً (بسعر الشراء):</label>
-                        <div className="p-2.5 bg-slate-900 border border-slate-800 text-slate-200 font-mono font-bold rounded-lg flex justify-between">
+                        <label className="block text-slate-600 mb-1 font-bold">1. قيمة السلع المتاحة للبيع حالياً (بسعر الشراء):</label>
+                        <div className="p-2.5 bg-slate-100 border border-slate-200 text-slate-800 font-mono font-bold rounded-lg flex justify-between">
                           <span>{totalStockValue.toLocaleString()} دج</span>
-                          <span className="text-[10px] text-purple-400 font-sans font-normal">(محسوبة من المخزن حالياً)</span>
+                          <span className="text-[10px] text-blue-600 font-sans font-normal">(محسوبة من المخزن حالياً)</span>
                         </div>
                       </div>
 
                       <div>
-                        <label className="block text-slate-400 mb-1 font-bold">2. السيولة النقدية المتوفرة (كاش + بريدي موب + CCP):</label>
+                        <label className="block text-slate-600 mb-1 font-bold">2. السيولة النقدية المتوفرة (كاش + بريدي موب + CCP):</label>
                         <div className="flex gap-2 items-center">
                           <input
                             type="number"
                             value={zakatCash}
                             onChange={(e) => setZakatCash(Number(e.target.value))}
-                            className="w-full p-2 bg-slate-900 border border-slate-800 font-mono font-bold text-slate-100 rounded-lg text-right"
+                            className="w-full p-2 bg-slate-100 border border-slate-200 font-mono font-bold text-slate-900 rounded-lg text-right"
                           />
-                          <span className="text-xs text-slate-400">دج</span>
+                          <span className="text-xs text-slate-600">دج</span>
                         </div>
                       </div>
 
                       <div>
-                        <label className="block text-slate-400 mb-1 font-bold">3. ديون مرجوة السداد عند الزبائن (كريدي للزبائن):</label>
+                        <label className="block text-slate-600 mb-1 font-bold">3. ديون مرجوة السداد عند الزبائن (كريدي للزبائن):</label>
                         <div className="flex gap-2 items-center">
                           <input
                             type="number"
                             value={zakatDebtToUs}
                             onChange={(e) => setZakatDebtToUs(Number(e.target.value))}
-                            className="w-full p-2 bg-slate-900 border border-slate-800 font-mono font-bold text-slate-100 rounded-lg text-right"
+                            className="w-full p-2 bg-slate-100 border border-slate-200 font-mono font-bold text-slate-900 rounded-lg text-right"
                           />
-                          <span className="text-xs text-slate-400">دج</span>
+                          <span className="text-xs text-slate-600">دج</span>
                         </div>
                       </div>
 
                       <div>
-                        <label className="block text-slate-400 mb-1 font-bold">4. ديون عليك لصالح الموردين (تطرح من الوعاء):</label>
+                        <label className="block text-slate-600 mb-1 font-bold">4. ديون عليك لصالح الموردين (تطرح من الوعاء):</label>
                         <div className="flex gap-2 items-center">
                           <input
                             type="number"
                             value={zakatDebtToSuppliers}
                             onChange={(e) => setZakatDebtToSuppliers(Number(e.target.value))}
-                            className="w-full p-2 bg-slate-900 border border-slate-800 font-mono font-bold text-slate-100 rounded-lg text-right"
+                            className="w-full p-2 bg-slate-100 border border-slate-200 font-mono font-bold text-slate-900 rounded-lg text-right"
                           />
-                          <span className="text-xs text-slate-400">دج</span>
+                          <span className="text-xs text-slate-600">دج</span>
                         </div>
                       </div>
 
                     </div>
 
-                    <div className="h-px bg-slate-800/80 my-4" />
+                    <div className="h-px bg-slate-200/80 my-4" />
 
-                    <div className="bg-slate-900 p-4 rounded-xl border border-slate-800 space-y-2 text-xs">
+                    <div className="bg-slate-100 p-4 rounded-xl border border-slate-200 space-y-2 text-xs">
                       <div className="flex justify-between font-bold">
-                        <span className="text-slate-400">وعاء الزكاة الخاضع للحساب (صافي المال النامي):</span>
-                        <span className="font-mono text-slate-200">{zakatBase.toLocaleString()} دج</span>
+                        <span className="text-slate-600">وعاء الزكاة الخاضع للحساب (صافي المال النامي):</span>
+                        <span className="font-mono text-slate-800">{zakatBase.toLocaleString()} دج</span>
                       </div>
                       <div className="flex justify-between font-bold">
-                        <span className="text-slate-400">نصاب الزكاة بالجزائر لعام 1445/1446 هـ (تقديري):</span>
+                        <span className="text-slate-600">نصاب الزكاة بالجزائر لعام 1445/1446 هـ (تقديري):</span>
                         <span className="font-mono text-amber-500">{nissabThreshold.toLocaleString()} دج</span>
                       </div>
-                      <div className="flex justify-between font-bold border-t border-slate-800 pt-2 mt-2">
-                        <span className="text-slate-300">هل بلغ مالك النصاب ومر عليه الحول؟</span>
+                      <div className="flex justify-between font-bold border-t border-slate-200 pt-2 mt-2">
+                        <span className="text-slate-700">هل بلغ مالك النصاب ومر عليه الحول؟</span>
                         <span className={zakatBase >= nissabThreshold ? "text-emerald-400" : "text-amber-500"}>
                           {zakatBase >= nissabThreshold ? "✅ نعم، بلغت النصاب" : "❌ لم تبلغ النصاب هذا العام"}
                         </span>
@@ -1109,16 +1109,16 @@ export default function InteractiveDashboardDemo({ onShowGreeting }: Interactive
                   </div>
 
                   {/* Results panel */}
-                  <div className="bg-gradient-to-br from-amber-950/20 to-slate-950 border border-amber-500/20 rounded-xl p-5 flex flex-col justify-between text-right">
+                  <div className="bg-gradient-to-br from-amber-950/20 to-slate-50 border border-amber-500/20 rounded-xl p-5 flex flex-col justify-between text-right">
                     <div className="space-y-3">
                       <h4 className="font-bold text-amber-400 text-sm">كشف الزكاة السنوي المستحق</h4>
-                      <p className="text-xs text-slate-400 leading-relaxed">
-                        بموجب فقه المعاملات المالية، تخرج الزكاة بنسبة <span className="text-slate-200 font-bold">2.5%</span> (ربع العشر) من إجمالي وعاء مال التجارة النامي إذا بلغ النصاب وحال عليه الحول برأس السنة القمرية.
+                      <p className="text-xs text-slate-600 leading-relaxed">
+                        بموجب فقه المعاملات المالية، تخرج الزكاة بنسبة <span className="text-slate-800 font-bold">2.5%</span> (ربع العشر) من إجمالي وعاء مال التجارة النامي إذا بلغ النصاب وحال عليه الحول برأس السنة القمرية.
                       </p>
                     </div>
 
-                    <div className="my-6 bg-slate-900/60 p-4 border border-slate-800 rounded-xl text-center space-y-1">
-                      <span className="text-slate-400 text-[10px] block uppercase font-bold tracking-wider">الزكاة الواجب إخراجها للمصارف الشرعية</span>
+                    <div className="my-6 bg-slate-50/60 p-4 border border-slate-200 rounded-xl text-center space-y-1">
+                      <span className="text-slate-600 text-[10px] block uppercase font-bold tracking-wider">الزكاة الواجب إخراجها للمصارف الشرعية</span>
                       <p className="text-2xl font-black text-amber-400 font-mono">
                         {zakatDue.toLocaleString("ar-DZ")} دج
                       </p>
@@ -1142,49 +1142,49 @@ export default function InteractiveDashboardDemo({ onShowGreeting }: Interactive
                 initial={{ opacity: 0, y: 10 }}
                 animate={{ opacity: 1, y: 0 }}
                 exit={{ opacity: 0, y: -10 }}
-                className="space-y-6 text-slate-100"
+                className="space-y-6 text-slate-900"
               >
                 <div className="text-center max-w-lg mx-auto space-y-2">
-                  <div className="inline-flex p-3 bg-purple-500/15 border border-purple-500/30 text-purple-400 rounded-full mb-2">
+                  <div className="inline-flex p-3 bg-blue-500/15 border border-blue-500/30 text-blue-600 rounded-full mb-2">
                     <Award className="w-8 h-8" />
                   </div>
-                  <h3 className="text-lg md:text-xl font-extrabold text-slate-200">الترخيص والتفعيل الرسمي لنظام Algora Systems</h3>
-                  <p className="text-xs text-slate-400">
+                  <h3 className="text-lg md:text-xl font-extrabold text-slate-800">الترخيص والتفعيل الرسمي لنظام Algora Systems</h3>
+                  <p className="text-xs text-slate-600">
                     أنت مسجل حالياً في الفترة التجريبية المجانية. تفعيل اشتراكك يضمن الحفاظ على كافة مبيعاتك المسجلة، مخزونك وقاعدة بيانات زبائنك دون انقطاع.
                   </p>
                 </div>
 
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-6 max-w-2xl mx-auto pt-4 text-right">
-                  <div className="bg-slate-950 border border-slate-850 p-5 rounded-2xl space-y-4">
-                    <span className="px-2 py-0.5 bg-purple-500/10 border border-purple-500/20 text-purple-400 text-[10px] rounded font-bold">باقة تسيير الصيانة والمخزون</span>
-                    <h4 className="text-base font-bold text-slate-200">الاشتراك السنوي الاحترافي</h4>
-                    <p className="text-xs text-slate-400 leading-relaxed">أفضل خيار لمحلات الهواتف والصيانة في الجزائر، يشتمل على كامل موديول الـ POS، قطع غيار الصيانة، تتبع IMEI والدعم المباشر.</p>
+                  <div className="bg-white border border-slate-850 p-5 rounded-2xl space-y-4">
+                    <span className="px-2 py-0.5 bg-blue-500/10 border border-blue-500/20 text-blue-600 text-[10px] rounded font-bold">باقة تسيير الصيانة والمخزون</span>
+                    <h4 className="text-base font-bold text-slate-800">الاشتراك السنوي الاحترافي</h4>
+                    <p className="text-xs text-slate-600 leading-relaxed">أفضل خيار لمحلات الهواتف والصيانة في الجزائر، يشتمل على كامل موديول الـ POS، قطع غيار الصيانة، تتبع IMEI والدعم المباشر.</p>
                     
-                    <div className="h-px bg-slate-900" />
+                    <div className="h-px bg-slate-100" />
                     <div className="flex justify-between items-baseline font-mono font-black text-emerald-400 text-lg">
                       <span>20,000 دج / سنة</span>
                       <span className="text-[10px] font-sans font-normal text-slate-500">سعر توفيري للغاية</span>
                     </div>
 
-                    <ul className="text-[11px] text-slate-400 space-y-2">
+                    <ul className="text-[11px] text-slate-600 space-y-2">
                       <li className="flex items-center gap-1.5 justify-end"><span>مستخدمين غير محدودين وعمال متعددين</span> <Check className="w-3.5 h-3.5 text-emerald-400 shrink-0" /></li>
                       <li className="flex items-center gap-1.5 justify-end"><span>النسخ الاحتياطي السحابي التلقائي لقاعدة البيانات</span> <Check className="w-3.5 h-3.5 text-emerald-400 shrink-0" /></li>
                       <li className="flex items-center gap-1.5 justify-end"><span>دعم فني مباشر بالهاتف والواتساب 24/7</span> <Check className="w-3.5 h-3.5 text-emerald-400 shrink-0" /></li>
                     </ul>
                   </div>
 
-                  <div className="bg-gradient-to-br from-slate-950 via-slate-950 to-purple-950/20 border border-purple-500/30 p-5 rounded-2xl flex flex-col justify-between">
+                  <div className="bg-gradient-to-br from-white via-slate-950 to-blue-950/20 border border-blue-500/30 p-5 rounded-2xl flex flex-col justify-between">
                     <div className="space-y-4">
-                      <h4 className="text-base font-bold text-purple-400">طرق الدفع المتوفرة في الجزائر 🇩🇿</h4>
-                      <p className="text-xs text-slate-400 leading-relaxed">
+                      <h4 className="text-base font-bold text-blue-600">طرق الدفع المتوفرة في الجزائر 🇩🇿</h4>
+                      <p className="text-xs text-slate-600 leading-relaxed">
                         ندعم الدفع بكافة السبل المحلية السريعة، فور الدفع يقوم مهندسو دعمنا بتفعيل حسابك مباشرة عن بعد دون انقطاع:
                       </p>
                       
                       <div className="grid grid-cols-2 gap-2 text-[10px] font-bold">
-                        <div className="p-2 bg-slate-900 border border-slate-850 rounded text-center text-slate-300">CCP بريد الجزائر</div>
-                        <div className="p-2 bg-slate-900 border border-slate-850 rounded text-center text-slate-300">تطبيق BaridiMob</div>
-                        <div className="p-2 bg-slate-900 border border-slate-850 rounded text-center text-slate-300">بطاقة RedotPay</div>
-                        <div className="p-2 bg-slate-900 border border-slate-850 rounded text-center text-slate-300">نقداً مع الوكلاء</div>
+                        <div className="p-2 bg-slate-100 border border-slate-850 rounded text-center text-slate-700">CCP بريد الجزائر</div>
+                        <div className="p-2 bg-slate-100 border border-slate-850 rounded text-center text-slate-700">تطبيق BaridiMob</div>
+                        <div className="p-2 bg-slate-100 border border-slate-850 rounded text-center text-slate-700">بطاقة RedotPay</div>
+                        <div className="p-2 bg-slate-100 border border-slate-850 rounded text-center text-slate-700">نقداً مع الوكلاء</div>
                       </div>
                     </div>
 
@@ -1195,7 +1195,7 @@ export default function InteractiveDashboardDemo({ onShowGreeting }: Interactive
                           const el = document.getElementById("trial-form-section");
                           if (el) el.scrollIntoView({ behavior: "smooth" });
                         }}
-                        className="w-full py-2.5 bg-purple-600 hover:bg-purple-500 text-white font-bold text-xs rounded-xl flex items-center justify-center gap-1.5 transition-colors"
+                        className="w-full py-2.5 bg-blue-600 hover:bg-blue-500 text-slate-900 font-bold text-xs rounded-xl flex items-center justify-center gap-1.5 transition-colors"
                       >
                         اضغط لملء نموذج تفعيل الترخيص
                       </a>
@@ -1218,7 +1218,7 @@ export default function InteractiveDashboardDemo({ onShowGreeting }: Interactive
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
-            className="absolute inset-0 bg-slate-950/90 flex items-center justify-center z-50 p-4"
+            className="absolute inset-0 bg-white/90 flex items-center justify-center z-50 p-4"
           >
             <motion.div 
               initial={{ scale: 0.95, y: 15 }}
@@ -1238,8 +1238,8 @@ export default function InteractiveDashboardDemo({ onShowGreeting }: Interactive
                 <div className="text-center font-sans border-b border-dashed border-slate-300 pb-3 mb-3">
                   <h5 className="font-extrabold text-sm tracking-tight text-slate-950">محل فون زون PHONE ZONE</h5>
                   <p className="text-[10px] text-slate-500 mt-0.5">الجزائر - هاتف: 0671037202</p>
-                  <p className="text-[9px] text-slate-400 mt-1">فاتورة مبيعات كاشير رقم: <span className="font-bold">{invoiceData.invoiceNo}</span></p>
-                  <p className="text-[8px] text-slate-400 font-mono mt-0.5">{invoiceData.date}</p>
+                  <p className="text-[9px] text-slate-600 mt-1">فاتورة مبيعات كاشير رقم: <span className="font-bold">{invoiceData.invoiceNo}</span></p>
+                  <p className="text-[8px] text-slate-600 font-mono mt-0.5">{invoiceData.date}</p>
                 </div>
 
                 {/* Bill details */}
@@ -1288,8 +1288,8 @@ export default function InteractiveDashboardDemo({ onShowGreeting }: Interactive
                 </div>
 
                 <div className="text-center font-sans text-[9px] text-slate-500 space-y-1">
-                  <p className="font-bold text-purple-900">شكراً لزيارتكم • وعليكم بالبركة 🤝</p>
-                  <p className="text-[8px] text-slate-400">برنامج Algora Systems • www.algora.dz</p>
+                  <p className="font-bold text-blue-900">شكراً لزيارتكم • وعليكم بالبركة 🤝</p>
+                  <p className="text-[8px] text-slate-600">برنامج Algora Systems • www.algora.dz</p>
                 </div>
               </div>
 
@@ -1298,7 +1298,7 @@ export default function InteractiveDashboardDemo({ onShowGreeting }: Interactive
                   onClick={() => {
                     window.print();
                   }}
-                  className="grow py-2 bg-slate-900 hover:bg-slate-800 text-white font-bold rounded-lg text-[10px] transition-colors flex items-center justify-center gap-1 shrink-0"
+                  className="grow py-2 bg-slate-100 hover:bg-slate-200 text-slate-900 font-bold rounded-lg text-[10px] transition-colors flex items-center justify-center gap-1 shrink-0"
                 >
                   <Printer className="w-3.5 h-3.5" />
                   طباعة فعلية
@@ -1308,7 +1308,7 @@ export default function InteractiveDashboardDemo({ onShowGreeting }: Interactive
                     setShowInvoice(false);
                     alert("فاتورة محاكاة حرارية: تم إرسال أمر الطباعة بنجاح لطابعة XP-80 الحرارية المتصلة عبر شبكة المحل الافتراضية بنظام Algora!");
                   }}
-                  className="grow py-2 bg-purple-600 hover:bg-purple-500 text-white font-bold rounded-lg text-[10px] transition-colors"
+                  className="grow py-2 bg-blue-600 hover:bg-blue-500 text-slate-900 font-bold rounded-lg text-[10px] transition-colors"
                 >
                   تأكيد وإغلاق الفاتورة
                 </button>

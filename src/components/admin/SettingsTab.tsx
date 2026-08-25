@@ -119,15 +119,15 @@ export default function SettingsTab({
   return (
     <div className="p-6 space-y-6 text-right">
       <div>
-        <h4 className="text-sm font-black text-white">التحكم في تسعيرات الرخص وتوليد مفاتيح التفعيل المشفرة</h4>
-        <p className="text-[11px] text-slate-400 mt-1">اضبط الأسعار المعروضة لأصحاب المتاجر في صفحة تفعيل الطلبات أو ولد أكواد تفعيل رخص فورية يدوياً.</p>
+        <h4 className="text-sm font-black text-slate-900">التحكم في تسعيرات الرخص وتوليد مفاتيح التفعيل المشفرة</h4>
+        <p className="text-[11px] text-slate-600 mt-1">اضبط الأسعار المعروضة لأصحاب المتاجر في صفحة تفعيل الطلبات أو ولد أكواد تفعيل رخص فورية يدوياً.</p>
       </div>
 
       <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
         
         {/* Price range sliders */}
         <div className="bg-[#0B0B0F] p-5 rounded-xl border border-[rgba(255,255,255,0.06)] space-y-3">
-          <div className="flex justify-between text-xs font-black text-slate-300 flex-row-reverse">
+          <div className="flex justify-between text-xs font-black text-slate-700 flex-row-reverse">
             <span>الباقة الشهرية أساسية</span>
             <span className="font-mono text-[#7C3AED]">{monthlyPrice.toLocaleString()} دج</span>
           </div>
@@ -146,7 +146,7 @@ export default function SettingsTab({
         </div>
 
         <div className="bg-[#0B0B0F] p-5 rounded-xl border border-[rgba(255,255,255,0.06)] space-y-3">
-          <div className="flex justify-between text-xs font-black text-slate-300 flex-row-reverse">
+          <div className="flex justify-between text-xs font-black text-slate-700 flex-row-reverse">
             <span>الباقة السنوية (الأكثر طلباً)</span>
             <span className="font-mono text-[#7C3AED]">{annualPrice.toLocaleString()} دج</span>
           </div>
@@ -165,7 +165,7 @@ export default function SettingsTab({
         </div>
 
         <div className="bg-[#0B0B0F] p-5 rounded-xl border border-[rgba(255,255,255,0.06)] space-y-3">
-          <div className="flex justify-between text-xs font-black text-slate-300 flex-row-reverse">
+          <div className="flex justify-between text-xs font-black text-slate-700 flex-row-reverse">
             <span>باقة الموزعين الكبرى</span>
             <span className="font-mono text-[#7C3AED]">{enterprisePrice.toLocaleString()} دج</span>
           </div>
@@ -186,23 +186,23 @@ export default function SettingsTab({
       </div>
 
       {/* Gemini API Key Configuration Section */}
-      <div className="pt-6 border-t border-slate-800 space-y-4">
+      <div className="pt-6 border-t border-slate-200 space-y-4">
         <div>
-          <h5 className="text-xs font-black text-white">إعداد وتنشيط المساعد الذكي (Gemini AI Client)</h5>
-          <p className="text-[11px] text-slate-400 mt-1">
+          <h5 className="text-xs font-black text-slate-900">إعداد وتنشيط المساعد الذكي (Gemini AI Client)</h5>
+          <p className="text-[11px] text-slate-600 mt-1">
             اربط موقعك بمفتاح API الخاص بـ Gemini لتنشيط المساعد الذكي وخدمة الزوار وإجابة أسئلتهم في الوقت الفعلي.
           </p>
         </div>
 
         <form onSubmit={handleSaveGeminiKey} className="grid grid-cols-1 md:grid-cols-4 gap-4 items-end bg-[#0B0B0F] p-5 rounded-xl border border-[rgba(255,255,255,0.06)] text-right">
           <div className="space-y-1.5 md:col-span-3">
-            <label className="block text-xs font-black text-slate-300">مفتاح API الخاص بـ Gemini (Gemini API Key):</label>
+            <label className="block text-xs font-black text-slate-700">مفتاح API الخاص بـ Gemini (Gemini API Key):</label>
             <input
               type="password"
               value={apiKeyVal}
               onChange={(e) => setApiKeyVal(e.target.value)}
               placeholder={keyStatus.configured ? `مفتاح API نشط حالياً (${keyStatus.keyLength} حرفاً) — أدخل مفتاحاً جديداً لتغييره` : "مثال: AIzaSy..."}
-              className="w-full bg-[#121218] border border-[rgba(255,255,255,0.06)] rounded-xl px-4 py-2.5 text-xs text-slate-100 placeholder:text-slate-600 text-left focus:outline-none focus:ring-1 focus:ring-[#7C3AED]"
+              className="w-full bg-[#121218] border border-[rgba(255,255,255,0.06)] rounded-xl px-4 py-2.5 text-xs text-slate-900 placeholder:text-slate-600 text-left focus:outline-none focus:ring-1 focus:ring-[#7C3AED]"
               required
             />
           </div>
@@ -210,7 +210,7 @@ export default function SettingsTab({
           <button
             type="submit"
             disabled={isSavingKey}
-            className="py-2.5 px-4 bg-emerald-600 hover:bg-emerald-500 text-white font-black text-xs rounded-xl shadow transition-all cursor-pointer text-center flex items-center justify-center gap-1.5"
+            className="py-2.5 px-4 bg-emerald-600 hover:bg-orange-500 text-slate-900 font-black text-xs rounded-xl shadow transition-all cursor-pointer text-center flex items-center justify-center gap-1.5"
           >
             {isSavingKey ? "جاري الحفظ والربط..." : "حفظ وتفعيل المفتاح ⚡"}
           </button>
@@ -222,10 +222,10 @@ export default function SettingsTab({
       </div>
 
       {/* Telegram Notification Configuration Section */}
-      <div className="pt-6 border-t border-slate-800 space-y-4">
+      <div className="pt-6 border-t border-slate-200 space-y-4">
         <div>
-          <h5 className="text-xs font-black text-white">إعداد وتنشيط إشعارات تيليجرام (Telegram Notifications Bot)</h5>
-          <p className="text-[11px] text-slate-400 mt-1">
+          <h5 className="text-xs font-black text-slate-900">إعداد وتنشيط إشعارات تيليجرام (Telegram Notifications Bot)</h5>
+          <p className="text-[11px] text-slate-600 mt-1">
             اربط موقعك ببوت تيليجرام لتصلك إشعارات فورية مباشرة على هاتفك عند تسجيل أي طلب تجربة مجانية جديد.
           </p>
         </div>
@@ -233,25 +233,25 @@ export default function SettingsTab({
         <form onSubmit={handleSaveTelegramConfig} className="space-y-4 bg-[#0B0B0F] p-5 rounded-xl border border-[rgba(255,255,255,0.06)] text-right">
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
             <div className="space-y-1.5">
-              <label className="block text-xs font-black text-slate-300">رمز توكن البوت (Bot Token):</label>
+              <label className="block text-xs font-black text-slate-700">رمز توكن البوت (Bot Token):</label>
               <input
                 type="password"
                 value={telegramToken}
                 onChange={(e) => setTelegramToken(e.target.value)}
                 placeholder={telegramStatus.configured ? `البوت مفعل حالياً — أدخل توكن جديداً لتغييره` : "أدخل الرمز المميز للبوت (Token)"}
-                className="w-full bg-[#121218] border border-[rgba(255,255,255,0.06)] rounded-xl px-4 py-2.5 text-xs text-slate-100 placeholder:text-slate-600 text-left focus:outline-none focus:ring-1 focus:ring-[#7C3AED]"
+                className="w-full bg-[#121218] border border-[rgba(255,255,255,0.06)] rounded-xl px-4 py-2.5 text-xs text-slate-900 placeholder:text-slate-600 text-left focus:outline-none focus:ring-1 focus:ring-[#7C3AED]"
                 required={!telegramStatus.configured}
               />
             </div>
             
             <div className="space-y-1.5">
-              <label className="block text-xs font-black text-slate-300">معرّف الدردشة المستلمة (Chat ID):</label>
+              <label className="block text-xs font-black text-slate-700">معرّف الدردشة المستلمة (Chat ID):</label>
               <input
                 type="text"
                 value={telegramChatId}
                 onChange={(e) => setTelegramChatId(e.target.value)}
                 placeholder={telegramStatus.configured ? `الدردشة الحالية: ${telegramStatus.chatId}` : "أدخل معرف الدردشة أو رقم المجموعة (Chat ID)"}
-                className="w-full bg-[#121218] border border-[rgba(255,255,255,0.06)] rounded-xl px-4 py-2.5 text-xs text-slate-100 placeholder:text-slate-600 text-right focus:outline-none focus:ring-1 focus:ring-[#7C3AED]"
+                className="w-full bg-[#121218] border border-[rgba(255,255,255,0.06)] rounded-xl px-4 py-2.5 text-xs text-slate-900 placeholder:text-slate-600 text-right focus:outline-none focus:ring-1 focus:ring-[#7C3AED]"
                 required
               />
             </div>
@@ -261,41 +261,41 @@ export default function SettingsTab({
             <button
               type="submit"
               disabled={isSavingTelegram}
-              className="py-2.5 px-6 bg-purple-600 hover:bg-purple-500 text-white font-black text-xs rounded-xl shadow transition-all cursor-pointer text-center flex items-center justify-center gap-1.5"
+              className="py-2.5 px-6 bg-blue-600 hover:bg-blue-500 text-slate-900 font-black text-xs rounded-xl shadow transition-all cursor-pointer text-center flex items-center justify-center gap-1.5"
             >
               {isSavingTelegram ? "جاري الحفظ والربط..." : "حفظ وربط البوت 🚀"}
             </button>
             
             {telegramSaveMsg && (
-              <p className={`text-[11px] font-bold ${telegramSaveMsg.includes("❌") ? "text-rose-500" : "text-emerald-500"}`}>{telegramSaveMsg}</p>
+              <p className={`text-[11px] font-bold ${telegramSaveMsg.includes("❌") ? "text-rose-500" : "text-orange-500"}`}>{telegramSaveMsg}</p>
             )}
           </div>
         </form>
       </div>
 
       {/* Generator Section */}
-      <div className="pt-6 border-t border-slate-800 space-y-4">
-        <h5 className="text-xs font-black text-white">توليد أكواد التفعيل المشفرة الفورية (Activation Keys)</h5>
+      <div className="pt-6 border-t border-slate-200 space-y-4">
+        <h5 className="text-xs font-black text-slate-900">توليد أكواد التفعيل المشفرة الفورية (Activation Keys)</h5>
         
         <form onSubmit={handleGenerateLicenseKey} className="grid grid-cols-1 md:grid-cols-4 gap-4 items-end bg-[#0B0B0F] p-5 rounded-xl border border-[rgba(255,255,255,0.06)] text-right">
           <div className="space-y-1.5 md:col-span-2">
-            <label className="block text-xs font-black text-slate-300">اسم المتجر بالكامل:</label>
+            <label className="block text-xs font-black text-slate-700">اسم المتجر بالكامل:</label>
             <input
               type="text"
               required
               value={licStore}
               onChange={(e) => setLicStore(e.target.value)}
               placeholder="مثال: صيانة ميكرو وهران"
-              className="w-full bg-[#121218] border border-[rgba(255,255,255,0.06)] rounded-xl px-4 py-2.5 text-xs text-slate-100 placeholder:text-slate-600 text-right focus:outline-none focus:ring-1 focus:ring-[#7C3AED]"
+              className="w-full bg-[#121218] border border-[rgba(255,255,255,0.06)] rounded-xl px-4 py-2.5 text-xs text-slate-900 placeholder:text-slate-600 text-right focus:outline-none focus:ring-1 focus:ring-[#7C3AED]"
             />
           </div>
 
           <div className="space-y-1.5">
-            <label className="block text-xs font-black text-slate-300">الترخيص المطلوب:</label>
+            <label className="block text-xs font-black text-slate-700">الترخيص المطلوب:</label>
             <select
               value={licDuration}
               onChange={(e) => setLicDuration(e.target.value as any)}
-              className="w-full bg-[#121218] border border-[rgba(255,255,255,0.06)] rounded-xl px-4 py-2.5 text-xs text-slate-300 text-right focus:outline-none focus:ring-1 focus:ring-[#7C3AED] cursor-pointer"
+              className="w-full bg-[#121218] border border-[rgba(255,255,255,0.06)] rounded-xl px-4 py-2.5 text-xs text-slate-700 text-right focus:outline-none focus:ring-1 focus:ring-[#7C3AED] cursor-pointer"
             >
               <option value="12_months">سنة كاملة (12 شهراً)</option>
               <option value="1_month">شهر واحد (30 يوماً)</option>
@@ -304,7 +304,7 @@ export default function SettingsTab({
 
           <button
             type="submit"
-            className="py-2.5 px-4 bg-[#7C3AED] hover:bg-[#A855F7] text-white font-black text-xs rounded-xl shadow transition-all cursor-pointer text-center"
+            className="py-2.5 px-4 bg-[#7C3AED] hover:bg-[#A855F7] text-slate-900 font-black text-xs rounded-xl shadow transition-all cursor-pointer text-center"
           >
             توليد المفتاح المشفر 🔑
           </button>
@@ -314,7 +314,7 @@ export default function SettingsTab({
           <div className="p-4 bg-[#7C3AED]/10 border border-[#7C3AED]/30 rounded-xl flex flex-col md:flex-row justify-between items-center gap-4 animate-pulse flex-row-reverse">
             <div className="text-right">
               <p className="text-[10px] text-[#A855F7] font-bold">مفتاح الترخيص الرقمي المولد للنسخ والتسليم:</p>
-              <p className="text-sm font-mono text-white mt-1 select-all font-bold tracking-wider">{generatedKey}</p>
+              <p className="text-sm font-mono text-slate-900 mt-1 select-all font-bold tracking-wider">{generatedKey}</p>
             </div>
             <button
               type="button"
@@ -322,7 +322,7 @@ export default function SettingsTab({
                 navigator.clipboard.writeText(generatedKey);
                 alert("تم نسخ الكود المولد بنجاح!");
               }}
-              className="px-4 py-2 bg-[#7C3AED] hover:bg-[#A855F7] text-white font-black text-xs rounded-lg transition-all cursor-pointer shadow-md"
+              className="px-4 py-2 bg-[#7C3AED] hover:bg-[#A855F7] text-slate-900 font-black text-xs rounded-lg transition-all cursor-pointer shadow-md"
             >
               نسخ كود التفعيل 📋
             </button>

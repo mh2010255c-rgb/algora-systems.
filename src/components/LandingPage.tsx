@@ -419,6 +419,23 @@ export default function LandingPage({ onSelectDemo, onSelectSupport, onSelectTri
   // 2. Subscription Plans Definition (Local prices, CCP/Baridimob support)
   const plans: SubscriptionPlan[] = [
     {
+      id: "p_mobile_only",
+      name: "باقة تطبيق هاتف فقط",
+      price: "12,000 دج",
+      period: "سنة",
+      description: "تطبيق أندرويد و آيفون مخصص لإدارة محلك ومتابعة مبيعاتك ومخزونك أينما كنت مباشرة من هاتفك.",
+      features: [
+        "تطبيق هاتف ذكي (أندرويد / iOS)",
+        "متابعة المخزن وحالة الأجهزة مباشرة",
+        "مراقبة الكاشير والعمال عن بعد",
+        "تقارير وإشعارات حية ومباشرة",
+        "إضافة وتعديل المنتجات بالهاتف",
+        "تحديثات مجانية مستمرة للبرنامج"
+      ],
+      ctaText: "اطلب باقة الهاتف",
+      color: "border-slate-200 hover:border-slate-700 bg-white/40"
+    },
+    {
       id: "p_both",
       name: "باقة تطبيق هاتف مع حاسوب",
       price: "20,000 دج",
@@ -436,24 +453,7 @@ export default function LandingPage({ onSelectDemo, onSelectSupport, onSelectTri
         "نسخ احتياطي يومي مجدول تلقائياً"
       ],
       ctaText: "اطلب الباقة الكاملة الآن",
-      color: "border-purple-500/50 hover:border-purple-500 bg-gradient-to-b from-purple-950/20 via-slate-950 to-slate-950 relative shadow-xl shadow-purple-900/10"
-    },
-    {
-      id: "p_mobile_only",
-      name: "باقة تطبيق هاتف فقط",
-      price: "12,000 دج",
-      period: "سنة",
-      description: "تطبيق أندرويد و آيفون مخصص لإدارة محلك ومتابعة مبيعاتك ومخزونك أينما كنت مباشرة من هاتفك.",
-      features: [
-        "تطبيق هاتف ذكي (أندرويد / iOS)",
-        "متابعة المخزن وحالة الأجهزة مباشرة",
-        "مراقبة الكاشير والعمال عن بعد",
-        "تقارير وإشعارات حية ومباشرة",
-        "إضافة وتعديل المنتجات بالهاتف",
-        "تحديثات مجانية مستمرة للبرنامج"
-      ],
-      ctaText: "اطلب باقة الهاتف",
-      color: "border-slate-800 hover:border-slate-700 bg-slate-950/40"
+      color: "border-blue-500 border-2 bg-gradient-to-b from-blue-50 to-white relative shadow-2xl shadow-blue-900/10 md:scale-105 z-10"
     },
     {
       id: "p_pc_only",
@@ -470,7 +470,7 @@ export default function LandingPage({ onSelectDemo, onSelectSupport, onSelectTri
         "نسخ احتياطي سحابي تلقائي"
       ],
       ctaText: "اطلب باقة الحاسوب",
-      color: "border-slate-800 hover:border-slate-700 bg-slate-950/40"
+      color: "border-slate-200 hover:border-slate-700 bg-white/40"
     }
   ];
 
@@ -616,17 +616,23 @@ export default function LandingPage({ onSelectDemo, onSelectSupport, onSelectTri
     <div className="space-y-24 pb-16 text-right">
       
       {/* 1. HERO SECTION (Welcoming Introduction) */}
-      <section className="relative py-12 md:py-20 overflow-hidden">
-        {/* Ambient glow backgrounds */}
-        <div className="absolute top-1/4 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[350px] h-[350px] bg-purple-600/10 rounded-full blur-3xl pointer-events-none"></div>
-        <div className="absolute bottom-10 right-10 w-[200px] h-[200px] bg-indigo-600/15 rounded-full blur-2xl pointer-events-none"></div>
+      <section className="relative py-12 md:py-32 overflow-hidden bg-white">
+        {/* Clean Blue Background Effects */}
+        <div className="absolute inset-0 z-0 pointer-events-none overflow-hidden">
+          {/* Top subtle blue glow */}
+          <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[800px] h-[300px] bg-blue-500/10 blur-[100px] rounded-full"></div>
+          
+          {/* Bottom corners blue glow */}
+          <div className="absolute bottom-[-10%] right-[-5%] w-[400px] h-[400px] bg-blue-600/5 blur-[120px] rounded-full"></div>
+          <div className="absolute bottom-[-10%] left-[-5%] w-[400px] h-[400px] bg-blue-400/5 blur-[120px] rounded-full"></div>
+        </div>
 
-        <div className="max-w-4xl mx-auto text-center space-y-6 px-4">
+        <div className="max-w-4xl mx-auto text-center space-y-6 px-4 relative z-10">
           <motion.div 
             initial={{ opacity: 0, scale: 0.9 }}
             animate={{ opacity: 1, scale: 1 }}
             transition={{ duration: 0.4 }}
-            className="inline-flex items-center gap-1.5 px-3 py-1 bg-purple-500/10 border border-purple-500/25 rounded-full text-purple-400 text-xs font-bold"
+            className="inline-flex items-center gap-1.5 px-3 py-1 bg-blue-500/10 border border-blue-500/25 rounded-full text-blue-600 text-xs font-bold"
           >
             <Sparkles className="w-3.5 h-3.5 animate-pulse text-amber-400" />
             <span>النسخة المتكاملة لإدارة محلات الهواتف والصيانة في الجزائر 🇩🇿</span>
@@ -636,16 +642,16 @@ export default function LandingPage({ onSelectDemo, onSelectSupport, onSelectTri
             initial={{ opacity: 0, y: 15 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.4, delay: 0.1 }}
-            className="text-3xl md:text-5xl lg:text-6xl font-black text-slate-100 leading-tight tracking-tight"
+            className="text-3xl md:text-5xl lg:text-6xl font-black text-slate-900 leading-tight tracking-tight"
           >
-            سيّر محلك بذكاء واحترافية وضاعف مبيعاتك مع <span className="text-transparent bg-clip-text bg-gradient-to-l from-purple-400 via-violet-400 to-indigo-300">Algora Systems</span>
+            سيّر محلك بذكاء واحترافية وضاعف مبيعاتك مع <span className="text-transparent bg-clip-text bg-gradient-to-l from-blue-500 via-violet-400 to-blue-300">Algora Systems</span>
           </motion.h1>
 
           <motion.p 
             initial={{ opacity: 0, y: 15 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.4, delay: 0.2 }}
-            className="text-sm md:text-base text-slate-400 max-w-2xl mx-auto leading-relaxed"
+            className="text-sm md:text-base text-slate-600 max-w-2xl mx-auto leading-relaxed"
           >
             لوجيسيال متكامل وسهل الاستخدام صمم خصيصاً للتجار الجزائريين لتنظيم المبيعات، ضبط كميات المخزون بالباركود والـ IMEI، تتبع أجهزة الصيانة، وإشعار الزبائن، مع توافق تام مع طرق الدفع المحلية (بريدي موب، CCP).
           </motion.p>
@@ -662,7 +668,7 @@ export default function LandingPage({ onSelectDemo, onSelectSupport, onSelectTri
                 const el = document.getElementById("trial-form-section");
                 if (el) el.scrollIntoView({ behavior: "smooth" });
               }}
-              className="py-3 px-6 bg-gradient-to-l from-purple-600 to-indigo-600 hover:from-purple-500 hover:to-indigo-500 text-white font-black rounded-xl shadow-lg shadow-purple-900/40 transition-all text-xs md:text-sm flex items-center justify-center gap-2 cursor-pointer group"
+              className="py-3 px-6 bg-gradient-to-l from-blue-600 to-blue-500 hover:from-blue-500 hover:to-blue-400 text-white font-black rounded-xl shadow-lg shadow-blue-900/40 transition-all text-xs md:text-sm flex items-center justify-center gap-2 cursor-pointer group"
             >
               جرب النظام مجاناً لمدة 5 أيام
               <ArrowLeft className="w-4 h-4 group-hover:-translate-x-1 transition-transform" />
@@ -672,7 +678,7 @@ export default function LandingPage({ onSelectDemo, onSelectSupport, onSelectTri
               href="https://wa.me/213671037202?text=%D9%85%D8%B1%D8%AD%D8%A8%D8%A7%D9%8B%D8%8C%20%D8%A3%D9%86%D8%A7%20%D9%85%D9%87%D8%AA%D9%85%20%D8%A8%D9%86%D8%B8%D8%A7%D9%85%20Algora%20%D9%88%D8%A3%D8%B1%D9%8A%D8%AF%20%D8%A7%D9%84%D8%AD%D8%B5%D9%88%D9%84%20%D8%B9%D9%84%D9%89%20%D9%86%D8%B3%D8%AE%D8%AA%D9%8A%20%D8%A7%D9%84%D8%AA%D8%AC%D8%B1%D9%8A%D8%A8%D9%8A%D8%A9%20%D8%A7%D9%84%D9%85%D8%AC%D8%A7%D9%86%D9%8A%D8%A9"
               target="_blank"
               rel="noopener noreferrer"
-              className="py-3 px-6 bg-slate-950 hover:bg-slate-900 border border-slate-800 hover:border-slate-700 text-slate-200 font-bold rounded-xl transition-all text-xs md:text-sm flex items-center justify-center gap-2 cursor-pointer"
+              className="py-3 px-6 bg-white hover:bg-slate-100 border border-slate-200 hover:border-slate-700 text-slate-800 font-bold rounded-xl transition-all text-xs md:text-sm flex items-center justify-center gap-2 cursor-pointer"
             >
               <span>اطلب نسختك التجريبية عبر واتساب</span>
               <Smartphone className="w-4 h-4 text-emerald-400" />
@@ -686,21 +692,21 @@ export default function LandingPage({ onSelectDemo, onSelectSupport, onSelectTri
             transition={{ duration: 0.6, delay: 0.4 }}
             className="grid grid-cols-2 md:grid-cols-4 gap-4 max-w-3xl mx-auto pt-10 text-center"
           >
-            <div className="bg-slate-950/60 p-4 rounded-xl border border-slate-900">
-              <span className="text-xl md:text-2xl font-black text-purple-400 font-mono">+40%</span>
-              <p className="text-[10px] md:text-xs text-slate-400 mt-1 font-bold">زيادة في المبيعات</p>
+            <div className="bg-white/60 p-4 rounded-xl border border-slate-200">
+              <span className="text-xl md:text-2xl font-black text-blue-600 font-mono">+40%</span>
+              <p className="text-[10px] md:text-xs text-slate-600 mt-1 font-bold">زيادة في المبيعات</p>
             </div>
-            <div className="bg-slate-950/60 p-4 rounded-xl border border-slate-900">
-              <span className="text-xl md:text-2xl font-black text-purple-400 font-mono">-70%</span>
-              <p className="text-[10px] md:text-xs text-slate-400 mt-1 font-bold">أخطاء وجرد أقل للسلع</p>
+            <div className="bg-white/60 p-4 rounded-xl border border-slate-200">
+              <span className="text-xl md:text-2xl font-black text-blue-600 font-mono">-70%</span>
+              <p className="text-[10px] md:text-xs text-slate-600 mt-1 font-bold">أخطاء وجرد أقل للسلع</p>
             </div>
-            <div className="bg-slate-950/60 p-4 rounded-xl border border-slate-900">
-              <span className="text-xl md:text-2xl font-black text-purple-400 font-mono">24/7</span>
-              <p className="text-[10px] md:text-xs text-slate-400 mt-1 font-bold">دعم فني وتواصل محلي</p>
+            <div className="bg-white/60 p-4 rounded-xl border border-slate-200">
+              <span className="text-xl md:text-2xl font-black text-blue-600 font-mono">24/7</span>
+              <p className="text-[10px] md:text-xs text-slate-600 mt-1 font-bold">دعم فني وتواصل محلي</p>
             </div>
-            <div className="bg-slate-950/60 p-4 rounded-xl border border-slate-900">
-              <span className="text-xl md:text-2xl font-black text-purple-400 font-mono">100%</span>
-              <p className="text-[10px] md:text-xs text-slate-400 mt-1 font-bold">متوافق مع طابعات الجزائر</p>
+            <div className="bg-white/60 p-4 rounded-xl border border-slate-200">
+              <span className="text-xl md:text-2xl font-black text-blue-600 font-mono">100%</span>
+              <p className="text-[10px] md:text-xs text-slate-600 mt-1 font-bold">متوافق مع طابعات الجزائر</p>
             </div>
           </motion.div>
         </div>
@@ -712,37 +718,37 @@ export default function LandingPage({ onSelectDemo, onSelectSupport, onSelectTri
           href="https://wa.me/213671037202?text=%D9%85%D8%B1%D8%AD%D8%A8%D8%A7%D9%8B%D8%8C%20%D8%A3%D9%86%D8%A7%20%D9%85%D9%87%D8%AA%D9%85%20%D8%A8%D9%86%D8%B8%D8%A7%D9%85%20Algora%20%D9%88%D8%A3%D8%B1%D9%8A%D8%AF%20%D8%A7%D9%84%D8%AD%D8%B5%D9%88%D9%84%20%D8%B9%D9%84%D9%89%20%D9%86%D8%B3%D8%AE%D8%AA%D9%8A%20%D8%A7%D9%84%D8%AA%D8%AC%D8%B1%D9%8A%D8%A8%D9%8A%D8%A9%20%D8%A7%D9%84%D9%85%D8%AC%D8%A7%D9%86%D9%8A%D8%A9"
           target="_blank"
           rel="noopener noreferrer"
-          className="group relative inline-flex items-center gap-2.5 px-6 py-3 bg-slate-900 border border-[#25D366]/40 rounded-xl hover:bg-slate-800 transition-all duration-300 shadow-[0_0_25px_rgba(37,211,102,0.25)] hover:shadow-[0_0_35px_rgba(37,211,102,0.4)] hover:-translate-y-1"
+          className="group relative inline-flex items-center gap-2.5 px-6 py-3 bg-slate-100 border border-[#25D366]/40 rounded-xl hover:bg-slate-200 transition-all duration-300 shadow-[0_0_25px_rgba(37,211,102,0.25)] hover:shadow-[0_0_35px_rgba(37,211,102,0.4)] hover:-translate-y-1"
         >
           {/* Subtle pulse behind the icon */}
           <div className="absolute right-6 w-5 h-5 bg-[#25D366] rounded-full blur-md opacity-30 group-hover:opacity-60 transition-opacity animate-pulse"></div>
           
           <Smartphone className="w-5 h-5 text-[#25D366] relative z-10" />
-          <span className="text-slate-100 text-[15px] font-bold relative z-10">اطلب نسختك التجريبية عبر واتساب</span>
+          <span className="text-slate-900 text-[15px] font-bold relative z-10">اطلب نسختك التجريبية عبر واتساب</span>
         </a>
       </div>
 
       {/* 1.5 SYSTEM VIDEO DEMONSTRATION SECTION */}
       <section id="demo-video-section" className="relative py-6 overflow-hidden">
         {/* Decorative ambient blurred shapes */}
-        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[400px] bg-purple-900/10 rounded-full blur-3xl pointer-events-none" />
+        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[400px] bg-blue-900/10 rounded-full blur-3xl pointer-events-none" />
         
         <div className="max-w-7xl mx-auto px-2 md:px-6 space-y-8">
           <div className="text-center space-y-3">
-            <span className="inline-flex items-center gap-1.5 px-3.5 py-1 bg-indigo-500/10 border border-indigo-500/20 rounded-full text-indigo-400 text-xs font-black">
+            <span className="inline-flex items-center gap-1.5 px-3.5 py-1 bg-blue-500/10 border border-blue-500/20 rounded-full text-blue-400 text-xs font-black">
               <Video className="w-4 h-4" />
               <span>فيديو توضيحي تفاعلي للنظام</span>
             </span>
-            <h2 className="text-xl md:text-3xl lg:text-4xl font-black text-slate-100 leading-tight">
+            <h2 className="text-xl md:text-3xl lg:text-4xl font-black text-slate-900 leading-tight">
               اكتشف ميزات Algora Systems في دقيقتين قبل تفعيل حسابك
             </h2>
-            <p className="text-xs md:text-sm text-slate-400 max-w-2xl mx-auto leading-relaxed">
+            <p className="text-xs md:text-sm text-slate-600 max-w-2xl mx-auto leading-relaxed">
               شاهد كيف يسهّل لك اللوجيسيال بيع السلع وإدخال الـ IMEI وإدارة ورشة الصيانة باحترافية كاملة.
             </p>
           </div>
 
           {/* Centered Video Player Display - Larger and with minimum height for mobile */}
-          <div className="relative w-full aspect-video min-h-[420px] sm:min-h-[480px] md:min-h-[520px] lg:min-h-[600px] xl:min-h-[680px] 2xl:min-h-[780px] rounded-2xl bg-slate-950 border border-slate-900 overflow-hidden shadow-2xl group transition-all duration-300">
+          <div className="relative w-full aspect-video min-h-[420px] sm:min-h-[480px] md:min-h-[520px] lg:min-h-[600px] xl:min-h-[680px] 2xl:min-h-[780px] rounded-2xl bg-white border border-slate-200 overflow-hidden shadow-2xl group transition-all duration-300">
             
             {/* YouTube Link or Direct Link Handler */}
             {videoSrc.includes("youtube.com") || videoSrc.includes("youtu.be") ? (
@@ -780,19 +786,19 @@ export default function LandingPage({ onSelectDemo, onSelectSupport, onSelectTri
                   {/* Mute/Unmute control */}
                   <button
                     onClick={handleMuteUnmute}
-                    className="w-10 h-10 rounded-full bg-slate-900/90 hover:bg-slate-800 text-slate-300 flex items-center justify-center cursor-pointer border border-slate-800/80"
+                    className="w-10 h-10 rounded-full bg-slate-100/90 hover:bg-slate-200 text-slate-700 flex items-center justify-center cursor-pointer border border-slate-200/80"
                     title={isMuted ? "تشغيل الصوت" : "كتم الصوت"}
                   >
-                    {isMuted ? <VolumeX className="w-5 h-5" /> : <Volume2 className="w-5 h-5 text-purple-400" />}
+                    {isMuted ? <VolumeX className="w-5 h-5" /> : <Volume2 className="w-5 h-5 text-blue-600" />}
                   </button>
 
                   {/* Fullscreen control */}
                   <button
                     onClick={handleFullscreen}
-                    className="w-10 h-10 rounded-full bg-slate-900/90 hover:bg-slate-800 text-slate-300 flex items-center justify-center cursor-pointer border border-slate-800/80"
+                    className="w-10 h-10 rounded-full bg-slate-100/90 hover:bg-slate-200 text-slate-700 flex items-center justify-center cursor-pointer border border-slate-200/80"
                     title="ملء الشاشة"
                   >
-                    <Maximize2 className="w-5 h-5 text-indigo-400" />
+                    <Maximize2 className="w-5 h-5 text-blue-400" />
                   </button>
                 </div>
 
@@ -800,7 +806,7 @@ export default function LandingPage({ onSelectDemo, onSelectSupport, onSelectTri
                 {!isPlaying && (
                   <button
                     onClick={handlePlayPause}
-                    className="absolute inset-0 m-auto w-20 h-20 rounded-full bg-purple-600/95 hover:bg-purple-500 hover:scale-110 text-white flex items-center justify-center shadow-2xl shadow-purple-950/50 cursor-pointer transition-all active:scale-95 border border-purple-500/20"
+                    className="absolute inset-0 m-auto w-20 h-20 rounded-full bg-blue-600/95 hover:bg-blue-500 hover:scale-110 text-slate-900 flex items-center justify-center shadow-2xl shadow-blue-950/50 cursor-pointer transition-all active:scale-95 border border-blue-500/20"
                   >
                     <Play className="w-9 h-9 fill-white translate-x-0.5" />
                   </button>
@@ -820,7 +826,7 @@ export default function LandingPage({ onSelectDemo, onSelectSupport, onSelectTri
                 const el = document.getElementById("trial-form-section");
                 if (el) el.scrollIntoView({ behavior: "smooth" });
               }}
-              className="px-8 py-4 bg-gradient-to-l from-purple-600 to-indigo-600 hover:from-purple-500 hover:to-indigo-500 text-white font-extrabold text-sm md:text-base rounded-2xl flex items-center justify-center gap-2 transition-all shadow-xl hover:shadow-purple-500/25 active:scale-95 cursor-pointer"
+              className="px-8 py-4 bg-gradient-to-l from-blue-600 to-blue-500 hover:from-blue-500 hover:to-blue-400 text-white font-extrabold text-sm md:text-base rounded-2xl flex items-center justify-center gap-2 transition-all shadow-xl hover:shadow-blue-500/25 active:scale-95 cursor-pointer"
             >
               <Award className="w-5 h-5" />
               <span>اطلب نسختك التجريبية المجانية الآن ⚡</span>
@@ -831,23 +837,23 @@ export default function LandingPage({ onSelectDemo, onSelectSupport, onSelectTri
         </div>
       </section>
       {/* 7. FREE TRIAL REQUEST FORM SECTION - DESIGNED IN BEAUTIFUL WHITE / LIGHT GRAY */}
-      <section id="trial-form-section" ref={trialFormRef} className="bg-gradient-to-br from-white via-slate-50 to-purple-50/40 border border-slate-200/80 rounded-3xl p-6 md:p-10 relative overflow-hidden text-right shadow-sm text-slate-900">
+      <section id="trial-form-section" ref={trialFormRef} className="bg-gradient-to-br from-white via-slate-50 to-blue-50/40 border border-slate-200/80 rounded-3xl p-6 md:p-10 relative overflow-hidden text-right shadow-sm text-slate-900">
         
         {/* Soft elegant ambient glows for light mode */}
-        <div className="absolute top-1/2 left-10 -translate-y-1/2 w-72 h-72 bg-purple-200/20 rounded-full blur-3xl pointer-events-none"></div>
+        <div className="absolute top-1/2 left-10 -translate-y-1/2 w-72 h-72 bg-blue-200/20 rounded-full blur-3xl pointer-events-none"></div>
         
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 items-center">
           
           <div className="space-y-4">
-            <div className="inline-flex items-center gap-1 bg-purple-50 border border-purple-200 px-3 py-1 rounded-full text-purple-600 text-xs font-bold">
-              <Award className="w-3.5 h-3.5 text-purple-600" />
+            <div className="inline-flex items-center gap-1 bg-blue-50 border border-blue-200 px-3 py-1 rounded-full text-blue-600 text-xs font-bold">
+              <Award className="w-3.5 h-3.5 text-blue-600" />
               <span>جرب نظامنا بالكامل 5 أيام مجاناً</span>
             </div>
             <h2 className="text-xl md:text-3xl font-black text-slate-900 leading-tight">اطلب تفعيل نسختك التجريبية المجانية في ثوانٍ معدودة</h2>
             <div className="h-px bg-slate-200/60" />
 
             <div className="bg-slate-100/80 p-4 rounded-xl border border-slate-200 space-y-2 text-xs">
-              <p className="font-bold text-purple-700">⚡ ماذا يشتمل طلب التجربة المجانية؟</p>
+              <p className="font-bold text-blue-700">⚡ ماذا يشتمل طلب التجربة المجانية؟</p>
               <ul className="space-y-1.5 text-slate-600">
                 <li className="flex items-center gap-2 justify-end"><span>5 أيام كاملة دون أي التزام أو دفع مسبق</span> <Check className="w-3.5 h-3.5 text-emerald-600 shrink-0" /></li>
                 <li className="flex items-center gap-2 justify-end"><span>دعم فني كامل هاتفياً وعبر AnyDesk للتثبيت مجاناً</span> <Check className="w-3.5 h-3.5 text-emerald-600 shrink-0" /></li>
@@ -882,9 +888,9 @@ export default function LandingPage({ onSelectDemo, onSelectSupport, onSelectTri
                   </div>
 
                   <div className="w-full bg-white/95 p-4 rounded-xl border border-emerald-100/50 space-y-3.5 text-right shadow-inner">
-                    <h4 className="text-xs font-black text-purple-950 flex items-center justify-end gap-1.5">
+                    <h4 className="text-xs font-black text-blue-950 flex items-center justify-end gap-1.5">
                       <span>هل ترغب في تحميل البرنامج وتجربته فوراً الآن؟</span>
-                      <Sparkles className="w-4 h-4 text-purple-600 shrink-0" />
+                      <Sparkles className="w-4 h-4 text-blue-600 shrink-0" />
                     </h4>
                     <p className="text-[10px] text-slate-500 leading-relaxed font-bold">
                       لقد وفرنا لك روابط تحميل مباشرة للنسخة التجريبية (للكمبيوتر والهاتف) لتبدأ بالاستكشاف والتجربة فوراً قبل حتى أن يتصل بك الدعم!
@@ -896,7 +902,7 @@ export default function LandingPage({ onSelectDemo, onSelectSupport, onSelectTri
                         onClick={() => {
                           setShowSuccessDownloads(true);
                         }}
-                        className="w-full py-2.5 bg-gradient-to-l from-purple-600 to-indigo-600 hover:from-purple-500 hover:to-indigo-500 text-white font-extrabold text-xs rounded-lg flex items-center justify-center gap-2 transition-all shadow-md shadow-purple-900/10 cursor-pointer active:scale-95"
+                        className="w-full py-2.5 bg-gradient-to-l from-blue-600 to-blue-500 hover:from-blue-500 hover:to-blue-400 text-white font-extrabold text-xs rounded-lg flex items-center justify-center gap-2 transition-all shadow-md shadow-blue-900/10 cursor-pointer active:scale-95"
                       >
                         <Download className="w-4 h-4 animate-pulse" />
                         <span>نعم، أريد تحميل النسخة التجريبية الآن 📥</span>
@@ -909,7 +915,7 @@ export default function LandingPage({ onSelectDemo, onSelectSupport, onSelectTri
                       >
                         <p className="text-[10px] text-emerald-800 font-bold mb-1.5 flex items-center justify-end gap-1">
                           <span>اختر الملف لبدء التحميل فوراً (بدون الانتقال لأسفل الصفحة):</span>
-                          <span className="w-1.5 h-1.5 rounded-full bg-emerald-500"></span>
+                          <span className="w-1.5 h-1.5 rounded-full bg-orange-500"></span>
                         </p>
                         
                         {/* Windows Link */}
@@ -918,7 +924,7 @@ export default function LandingPage({ onSelectDemo, onSelectSupport, onSelectTri
                           onClick={() => {
                             startDownload("Setup.exe");
                           }}
-                          className="w-full py-2 px-3 bg-purple-600 hover:bg-purple-500 text-white font-bold text-xs rounded-lg flex items-center justify-between gap-2 transition-all cursor-pointer active:scale-95"
+                          className="w-full py-2 px-3 bg-blue-600 hover:bg-blue-500 text-slate-900 font-bold text-xs rounded-lg flex items-center justify-between gap-2 transition-all cursor-pointer active:scale-95"
                         >
                           <span className="font-mono text-[9px] opacity-75">Windows • 84 MB</span>
                           <span className="flex items-center gap-1">
@@ -933,7 +939,7 @@ export default function LandingPage({ onSelectDemo, onSelectSupport, onSelectTri
                           onClick={() => {
                             startDownload("app-debug.apk");
                           }}
-                          className="w-full py-2 px-3 bg-indigo-600 hover:bg-indigo-500 text-white font-bold text-xs rounded-lg flex items-center justify-between gap-2 transition-all cursor-pointer active:scale-95"
+                          className="w-full py-2 px-3 bg-blue-600 hover:bg-blue-500 text-slate-900 font-bold text-xs rounded-lg flex items-center justify-between gap-2 transition-all cursor-pointer active:scale-95"
                         >
                           <span className="font-mono text-[9px] opacity-75">Android APK • 18 MB</span>
                           <span className="flex items-center gap-1">
@@ -948,7 +954,7 @@ export default function LandingPage({ onSelectDemo, onSelectSupport, onSelectTri
                           onClick={() => {
                             startDownload("Algora_QuickStart_Guide.pdf");
                           }}
-                          className="w-full py-2 px-3 bg-amber-600 hover:bg-amber-500 text-white font-bold text-xs rounded-lg flex items-center justify-between gap-2 transition-all cursor-pointer active:scale-95"
+                          className="w-full py-2 px-3 bg-amber-600 hover:bg-amber-500 text-slate-900 font-bold text-xs rounded-lg flex items-center justify-between gap-2 transition-all cursor-pointer active:scale-95"
                         >
                           <span className="font-mono text-[9px] opacity-75">PDF • 2.4 MB</span>
                           <span className="flex items-center gap-1">
@@ -985,7 +991,7 @@ export default function LandingPage({ onSelectDemo, onSelectSupport, onSelectTri
                     value={storeName}
                     onChange={(e) => setStoreName(e.target.value)}
                     placeholder="مثال: البهجة موبايل"
-                    className="w-full text-xs px-3 py-2.5 bg-slate-50 border border-slate-200 rounded-lg text-slate-900 placeholder:text-slate-400 focus:outline-none focus:border-purple-600 focus:bg-white transition-all font-semibold"
+                    className="w-full text-xs px-3 py-2.5 bg-slate-50 border border-slate-200 rounded-lg text-slate-900 placeholder:text-slate-600 focus:outline-none focus:border-blue-600 focus:bg-white transition-all font-semibold"
                     required
                   />
                 </div>
@@ -997,7 +1003,7 @@ export default function LandingPage({ onSelectDemo, onSelectSupport, onSelectTri
                     value={ownerName}
                     onChange={(e) => setOwnerName(e.target.value)}
                     placeholder="مثال: يوسف جيلالي"
-                    className="w-full text-xs px-3 py-2.5 bg-slate-50 border border-slate-200 rounded-lg text-slate-900 placeholder:text-slate-400 focus:outline-none focus:border-purple-600 focus:bg-white transition-all font-semibold"
+                    className="w-full text-xs px-3 py-2.5 bg-slate-50 border border-slate-200 rounded-lg text-slate-900 placeholder:text-slate-600 focus:outline-none focus:border-blue-600 focus:bg-white transition-all font-semibold"
                     required
                   />
                 </div>
@@ -1010,7 +1016,7 @@ export default function LandingPage({ onSelectDemo, onSelectSupport, onSelectTri
                       value={phone}
                       onChange={(e) => setPhone(e.target.value)}
                       placeholder="مثال: 0671037202"
-                      className="w-full text-xs px-3 py-2.5 bg-slate-50 border border-slate-200 rounded-lg text-slate-900 placeholder:text-slate-400 focus:outline-none focus:border-purple-600 focus:bg-white transition-all text-right font-mono font-semibold"
+                      className="w-full text-xs px-3 py-2.5 bg-slate-50 border border-slate-200 rounded-lg text-slate-900 placeholder:text-slate-600 focus:outline-none focus:border-blue-600 focus:bg-white transition-all text-right font-mono font-semibold"
                       required
                     />
                   </div>
@@ -1021,7 +1027,7 @@ export default function LandingPage({ onSelectDemo, onSelectSupport, onSelectTri
                       value={phone2}
                       onChange={(e) => setPhone2(e.target.value)}
                       placeholder="مثال: 0666123456"
-                      className="w-full text-xs px-3 py-2.5 bg-slate-50 border border-slate-200 rounded-lg text-slate-900 placeholder:text-slate-400 focus:outline-none focus:border-purple-600 focus:bg-white transition-all text-right font-mono font-semibold"
+                      className="w-full text-xs px-3 py-2.5 bg-slate-50 border border-slate-200 rounded-lg text-slate-900 placeholder:text-slate-600 focus:outline-none focus:border-blue-600 focus:bg-white transition-all text-right font-mono font-semibold"
                     />
                   </div>
                 </div>
@@ -1038,7 +1044,7 @@ export default function LandingPage({ onSelectDemo, onSelectSupport, onSelectTri
                         setProvince(wilaya ? wilaya.name_ar : "");
                         setCity(""); // reset city
                       }}
-                      className="w-full text-xs px-3 py-2.5 bg-slate-50 border border-slate-200 rounded-lg text-slate-900 focus:outline-none focus:border-purple-600 focus:bg-white transition-all font-semibold appearance-none cursor-pointer"
+                      className="w-full text-xs px-3 py-2.5 bg-slate-50 border border-slate-200 rounded-lg text-slate-900 focus:outline-none focus:border-blue-600 focus:bg-white transition-all font-semibold appearance-none cursor-pointer"
                       required
                     >
                       <option value="" disabled>اختر الولاية...</option>
@@ -1054,7 +1060,7 @@ export default function LandingPage({ onSelectDemo, onSelectSupport, onSelectTri
                     <select
                       value={city}
                       onChange={(e) => setCity(e.target.value)}
-                      className="w-full text-xs px-3 py-2.5 bg-slate-50 border border-slate-200 rounded-lg text-slate-900 focus:outline-none focus:border-purple-600 focus:bg-white transition-all font-semibold appearance-none cursor-pointer disabled:opacity-50 disabled:cursor-not-allowed"
+                      className="w-full text-xs px-3 py-2.5 bg-slate-50 border border-slate-200 rounded-lg text-slate-900 focus:outline-none focus:border-blue-600 focus:bg-white transition-all font-semibold appearance-none cursor-pointer disabled:opacity-50 disabled:cursor-not-allowed"
                       required
                       disabled={!selectedWilayaCode}
                     >
@@ -1072,7 +1078,7 @@ export default function LandingPage({ onSelectDemo, onSelectSupport, onSelectTri
                 <div className="space-y-2">
                   <label className="block text-xs text-slate-600 font-bold mb-1 flex items-center justify-end gap-1.5">
                     <span>باقة البرنامج المطلوب تفعيله</span>
-                    <Sparkles className="w-3.5 h-3.5 text-purple-600 shrink-0" />
+                    <Sparkles className="w-3.5 h-3.5 text-blue-600 shrink-0" />
                   </label>
                   <div className="space-y-2 text-right">
                     {[
@@ -1107,17 +1113,17 @@ export default function LandingPage({ onSelectDemo, onSelectSupport, onSelectTri
                           onClick={() => setProgramType(pkg.id)}
                           className={`w-full p-3 rounded-xl text-right transition-all border flex items-start gap-3 cursor-pointer ${
                             isSelected
-                              ? "bg-purple-50/75 border-purple-500 ring-1 ring-purple-500/30 text-slate-900 shadow-md shadow-purple-600/5"
+                              ? "bg-blue-50/75 border-blue-500 ring-1 ring-blue-500/30 text-slate-900 shadow-md shadow-blue-600/5"
                               : "bg-slate-50 border-slate-200/80 text-slate-700 hover:bg-slate-100/80 hover:border-slate-300"
                           }`}
                         >
-                          <div className={`p-2 rounded-lg shrink-0 mt-0.5 ${isSelected ? "bg-purple-600 text-white" : "bg-slate-200/70 text-slate-600"}`}>
+                          <div className={`p-2 rounded-lg shrink-0 mt-0.5 ${isSelected ? "bg-blue-600 text-slate-900" : "bg-slate-200/70 text-slate-600"}`}>
                             {pkg.icon}
                           </div>
                           <div className="flex-1 space-y-0.5 min-w-0">
                             <div className="flex items-center justify-between gap-2">
                               <span className="text-xs font-black text-slate-900">{pkg.name}</span>
-                              <span className={`text-[11px] font-black shrink-0 ${isSelected ? "text-purple-700" : "text-purple-600"}`}>
+                              <span className={`text-[11px] font-black shrink-0 ${isSelected ? "text-blue-700" : "text-blue-600"}`}>
                                 {pkg.price}
                               </span>
                             </div>
@@ -1129,7 +1135,7 @@ export default function LandingPage({ onSelectDemo, onSelectSupport, onSelectTri
                             )}
                           </div>
                           <div className="self-center shrink-0">
-                            <div className={`w-4 h-4 rounded-full border flex items-center justify-center ${isSelected ? "border-purple-600 bg-purple-600 text-white" : "border-slate-300 bg-white"}`}>
+                            <div className={`w-4 h-4 rounded-full border flex items-center justify-center ${isSelected ? "border-blue-600 bg-blue-600 text-slate-900" : "border-slate-300 bg-white"}`}>
                               {isSelected && <Check className="w-2.5 h-2.5 stroke-[3]" />}
                             </div>
                           </div>
@@ -1151,7 +1157,7 @@ export default function LandingPage({ onSelectDemo, onSelectSupport, onSelectTri
                       onClick={() => setHasWhatsapp("yes")}
                       className={`py-2 text-xs font-extrabold rounded-lg transition-all cursor-pointer ${
                         hasWhatsapp === "yes"
-                          ? "bg-emerald-600 border-emerald-600 text-white shadow-md shadow-emerald-600/10"
+                          ? "bg-emerald-600 border-emerald-600 text-slate-900 shadow-md shadow-emerald-600/10"
                           : "bg-white border-slate-200 text-slate-500 hover:text-slate-700 hover:bg-slate-100"
                       } border`}
                     >
@@ -1162,7 +1168,7 @@ export default function LandingPage({ onSelectDemo, onSelectSupport, onSelectTri
                       onClick={() => setHasWhatsapp("no")}
                       className={`py-2 text-xs font-extrabold rounded-lg transition-all cursor-pointer ${
                         hasWhatsapp === "no"
-                          ? "bg-slate-700 border-slate-700 text-white shadow-md shadow-slate-700/10"
+                          ? "bg-slate-700 border-slate-700 text-slate-900 shadow-md shadow-slate-700/10"
                           : "bg-white border-slate-200 text-slate-500 hover:text-slate-700 hover:bg-slate-100"
                       } border`}
                     >
@@ -1175,7 +1181,7 @@ export default function LandingPage({ onSelectDemo, onSelectSupport, onSelectTri
                 <div className="space-y-2">
                   <label className="block text-xs text-slate-600 font-bold mb-1 flex items-center justify-end gap-1.5">
                     <span>وسيلة الدفع المفضلة لتفعيل الاشتراك لاحقاً</span>
-                    <CreditCard className="w-3.5 h-3.5 text-purple-600 shrink-0" />
+                    <CreditCard className="w-3.5 h-3.5 text-blue-600 shrink-0" />
                   </label>
                   <div className="grid grid-cols-1 md:grid-cols-3 gap-2 text-right">
                     {[
@@ -1191,7 +1197,7 @@ export default function LandingPage({ onSelectDemo, onSelectSupport, onSelectTri
                           onClick={() => setPaymentMethod(method.id)}
                           className={`p-2.5 rounded-xl text-center transition-all border cursor-pointer ${
                             isSelected
-                              ? "bg-gradient-to-l from-purple-600 to-indigo-600 border-purple-600 text-white shadow-md shadow-purple-600/20"
+                              ? "bg-gradient-to-l from-blue-600 to-blue-500 border-blue-600 text-slate-900 shadow-md shadow-blue-600/20"
                               : "bg-slate-50 border-slate-200/80 text-slate-700 hover:bg-slate-100 hover:text-slate-900"
                           }`}
                         >
@@ -1218,7 +1224,7 @@ export default function LandingPage({ onSelectDemo, onSelectSupport, onSelectTri
                             onClick={() => setDeliveryType(sub.id)}
                             className={`p-2 rounded-lg text-xs font-bold text-center transition-all border cursor-pointer ${
                               isSubSelected
-                                ? "bg-purple-100 border-purple-500 text-purple-700 shadow-sm"
+                                ? "bg-blue-100 border-blue-500 text-blue-700 shadow-sm"
                                 : "bg-white border-slate-200 text-slate-600 hover:bg-slate-50"
                             }`}
                           >
@@ -1237,7 +1243,7 @@ export default function LandingPage({ onSelectDemo, onSelectSupport, onSelectTri
                     onChange={(e) => setNotes(e.target.value)}
                     placeholder="اكتب أي ملاحظات إضافية هنا..."
                     rows={2}
-                    className="w-full text-xs px-3 py-2 bg-slate-50 border border-slate-200 rounded-lg text-slate-900 placeholder:text-slate-400 focus:outline-none focus:border-purple-600 focus:bg-white transition-all font-semibold resize-none"
+                    className="w-full text-xs px-3 py-2 bg-slate-50 border border-slate-200 rounded-lg text-slate-900 placeholder:text-slate-600 focus:outline-none focus:border-blue-600 focus:bg-white transition-all font-semibold resize-none"
                   />
                 </div>
 
@@ -1245,7 +1251,7 @@ export default function LandingPage({ onSelectDemo, onSelectSupport, onSelectTri
                   <button
                     type="submit"
                     disabled={isSubmitting}
-                    className="w-full py-3 bg-gradient-to-l from-purple-600 to-indigo-600 hover:from-purple-500 hover:to-indigo-500 text-white font-black text-xs md:text-sm rounded-xl flex items-center justify-center gap-1.5 transition-all shadow-md hover:shadow-lg hover:shadow-purple-600/10 cursor-pointer active:scale-95"
+                    className="w-full py-3 bg-gradient-to-l from-blue-600 to-blue-500 hover:from-blue-500 hover:to-blue-400 text-white font-black text-xs md:text-sm rounded-xl flex items-center justify-center gap-1.5 transition-all shadow-md hover:shadow-lg hover:shadow-blue-600/10 cursor-pointer active:scale-95"
                   >
                     {isSubmitting ? (
                       <>
@@ -1261,7 +1267,7 @@ export default function LandingPage({ onSelectDemo, onSelectSupport, onSelectTri
                   </button>
                 </div>
 
-                <p className="text-[10px] text-slate-400 text-center font-semibold">
+                <p className="text-[10px] text-slate-600 text-center font-semibold">
                   🔒 معلومات محلك محمية بالكامل ولا يتم مشاركتها أبداً مع جهات خارجية.
                 </p>
 
@@ -1280,26 +1286,26 @@ export default function LandingPage({ onSelectDemo, onSelectSupport, onSelectTri
           href="https://wa.me/213671037202?text=%D9%85%D8%B1%D8%AD%D8%A8%D8%A7%D9%8B%D8%8C%20%D8%A3%D9%86%D8%A7%20%D9%85%D9%87%D8%AA%D9%85%20%D8%A8%D9%86%D8%B8%D8%A7%D9%85%20Algora%20%D9%88%D8%A3%D8%B1%D9%8A%D8%AF%20%D8%A7%D9%84%D8%AD%D8%B5%D9%88%D9%84%20%D8%B9%D9%84%D9%89%20%D9%86%D8%B3%D8%AE%D8%AA%D9%8A%20%D8%A7%D9%84%D8%AA%D8%AC%D8%B1%D9%8A%D8%A8%D9%8A%D8%A9%20%D8%A7%D9%84%D9%85%D8%AC%D8%A7%D9%86%D9%8A%D8%A9"
           target="_blank"
           rel="noopener noreferrer"
-          className="group relative inline-flex items-center gap-2.5 px-6 py-3 bg-slate-900 border border-[#25D366]/40 rounded-xl hover:bg-slate-800 transition-all duration-300 shadow-[0_0_25px_rgba(37,211,102,0.25)] hover:shadow-[0_0_35px_rgba(37,211,102,0.4)] hover:-translate-y-1"
+          className="group relative inline-flex items-center gap-2.5 px-6 py-3 bg-slate-100 border border-[#25D366]/40 rounded-xl hover:bg-slate-200 transition-all duration-300 shadow-[0_0_25px_rgba(37,211,102,0.25)] hover:shadow-[0_0_35px_rgba(37,211,102,0.4)] hover:-translate-y-1"
         >
           {/* Subtle pulse behind the icon */}
           <div className="absolute right-6 w-5 h-5 bg-[#25D366] rounded-full blur-md opacity-30 group-hover:opacity-60 transition-opacity animate-pulse"></div>
           
           <Smartphone className="w-5 h-5 text-[#25D366] relative z-10" />
-          <span className="text-slate-100 text-[15px] font-bold relative z-10">اطلب نسختك التجريبية عبر واتساب</span>
+          <span className="text-slate-900 text-[15px] font-bold relative z-10">اطلب نسختك التجريبية عبر واتساب</span>
         </a>
       </div>
 
       {/* SUBSCRIPTION PLANS & PRICING TABLE (Placed directly under the trial request form) */}
-      <section className="space-y-12 py-8 border-t border-b border-slate-900/80 bg-slate-950/20 rounded-3xl p-6 md:p-10 relative">
-        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-80 h-80 bg-purple-500/5 rounded-full blur-3xl pointer-events-none" />
+      <section className="space-y-12 py-8 border-t border-b border-slate-200/80 bg-white/40 rounded-3xl p-6 md:p-10 relative">
+        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-80 h-80 bg-blue-500/5 rounded-full blur-3xl pointer-events-none" />
         
         <div className="text-center space-y-2 relative z-10">
-          <div className="inline-flex items-center gap-1.5 px-3 py-1 bg-purple-500/10 border border-purple-500/20 rounded-full text-purple-400 text-xs font-black">
+          <div className="inline-flex items-center gap-1.5 px-3 py-1 bg-blue-500/10 border border-blue-500/20 rounded-full text-blue-600 text-xs font-black">
             <span>🏷️ خطط الترخيص والاشتراك السنوي</span>
           </div>
-          <h2 className="text-xl md:text-3xl font-black text-slate-100">أسعار الاشتراكات وباقات الترخيص المتاحة</h2>
-          <p className="text-xs md:text-sm text-slate-400 max-w-lg mx-auto leading-relaxed">خطط تسعير واضحة، اقتصادية ومناسبة تماماً لحجم ونوع نشاطك التجاري دون رسوم خفية.</p>
+          <h2 className="text-xl md:text-3xl font-black text-slate-900">أسعار الاشتراكات وباقات الترخيص المتاحة</h2>
+          <p className="text-xs md:text-sm text-slate-600 max-w-lg mx-auto leading-relaxed">خطط تسعير واضحة، اقتصادية ومناسبة تماماً لحجم ونوع نشاطك التجاري دون رسوم خفية.</p>
         </div>
 
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 items-stretch relative z-10">
@@ -1308,20 +1314,20 @@ export default function LandingPage({ onSelectDemo, onSelectSupport, onSelectTri
               
               <div className="space-y-4">
                 {plan.badge && (
-                  <span className="absolute top-2 left-2 bg-gradient-to-r from-purple-600 to-indigo-600 border border-purple-500 text-white font-extrabold text-[9px] rounded-full px-2.5 py-1 tracking-wider animate-pulse">
+                  <span className="absolute top-2 left-2 bg-gradient-to-r from-blue-600 to-blue-500 border border-blue-500 text-white font-extrabold text-[9px] rounded-full px-2.5 py-1 tracking-wider animate-pulse">
                     {plan.badge}
                   </span>
                 )}
                 
                 <div className="pt-2">
-                  <h3 className="font-extrabold text-base md:text-lg text-slate-100">{plan.name}</h3>
-                  <p className="text-[11px] text-slate-400 leading-relaxed mt-1.5">{plan.description}</p>
+                  <h3 className="font-extrabold text-base md:text-lg text-slate-900">{plan.name}</h3>
+                  <p className="text-[11px] text-slate-600 leading-relaxed mt-1.5">{plan.description}</p>
                 </div>
 
-                <div className="h-px bg-slate-900/80" />
+                <div className="h-px bg-slate-100/80" />
 
                 <div className="flex items-baseline gap-1.5 justify-end">
-                  <span className="text-2xl md:text-3xl font-black text-purple-400 font-mono">{plan.price}</span>
+                  <span className="text-2xl md:text-3xl font-black text-blue-600 font-mono">{plan.price}</span>
                   {plan.oldPrice && (
                     <span className="text-sm font-bold text-slate-500 line-through decoration-red-500/50 decoration-2 mr-2">
                       {plan.oldPrice}
@@ -1330,12 +1336,12 @@ export default function LandingPage({ onSelectDemo, onSelectSupport, onSelectTri
                   <span className="text-xs text-slate-500">/ {plan.period}</span>
                 </div>
 
-                <div className="h-px bg-slate-900/80" />
+                <div className="h-px bg-slate-100/80" />
 
-                <ul className="text-xs text-slate-300 space-y-3">
+                <ul className="text-xs text-slate-700 space-y-3">
                   {plan.features.map((feat, idx) => (
                     <li key={idx} className="flex items-center gap-2 justify-end">
-                      <span className="text-right text-slate-400">{feat}</span>
+                      <span className="text-right text-slate-600">{feat}</span>
                       <Check className="w-4 h-4 text-emerald-400 shrink-0" />
                     </li>
                   ))}
@@ -1351,8 +1357,8 @@ export default function LandingPage({ onSelectDemo, onSelectSupport, onSelectTri
                   }}
                   className={`w-full py-3 rounded-xl font-bold text-xs flex items-center justify-center gap-1.5 transition-all text-center ${
                     plan.id === "p_both"
-                      ? "bg-gradient-to-l from-purple-600 to-indigo-600 hover:from-purple-500 hover:to-indigo-500 text-white shadow-lg shadow-purple-900/40 cursor-pointer"
-                      : "bg-slate-900 hover:bg-slate-800 border border-slate-800 hover:border-slate-700 text-slate-200 cursor-pointer"
+                      ? "bg-gradient-to-l from-blue-600 to-blue-500 hover:from-blue-500 hover:to-blue-400 text-white shadow-lg shadow-blue-900/40 cursor-pointer"
+                      : "bg-slate-100 hover:bg-slate-200 border border-slate-200 hover:border-slate-700 text-slate-800 cursor-pointer"
                   }`}
                 >
                   {plan.ctaText}
@@ -1369,18 +1375,18 @@ export default function LandingPage({ onSelectDemo, onSelectSupport, onSelectTri
         id="screenshots-gallery-section" 
         className="space-y-8 py-16 px-6 md:px-12 relative overflow-hidden"
       >
-        <div className="absolute top-1/3 right-1/4 w-80 h-80 bg-purple-600/10 rounded-full blur-3xl pointer-events-none" />
-        <div className="absolute bottom-1/3 left-1/4 w-80 h-80 bg-indigo-600/10 rounded-full blur-3xl pointer-events-none" />
+        <div className="absolute top-1/3 right-1/4 w-80 h-80 bg-blue-600/5 rounded-full blur-3xl pointer-events-none" />
+        <div className="absolute bottom-1/3 left-1/4 w-80 h-80 bg-blue-600/10 rounded-full blur-3xl pointer-events-none" />
 
         <div className="text-center space-y-3 relative z-10">
-          <div className="inline-flex items-center gap-1.5 px-3.5 py-1 bg-purple-500/10 border border-purple-500/20 rounded-full text-purple-400 text-xs font-black">
-            <Image className="w-4 h-4 text-purple-400" />
+          <div className="inline-flex items-center gap-1.5 px-3.5 py-1 bg-blue-500/10 border border-blue-500/20 rounded-full text-blue-600 text-xs font-black">
+            <Image className="w-4 h-4 text-blue-600" />
             <span>📸 لقطات حية من داخل النظام والتطبيق</span>
           </div>
-          <h2 className="text-xl md:text-3xl lg:text-4xl font-black text-white">
+          <h2 className="text-xl md:text-3xl lg:text-4xl font-black text-slate-900">
             معرض صور الواجهات الحقيقية
           </h2>
-          <p className="text-xs md:text-sm text-slate-400 max-w-2xl mx-auto leading-relaxed">
+          <p className="text-xs md:text-sm text-slate-600 max-w-2xl mx-auto leading-relaxed">
             تنقّل بين لقطات الشاشة الحقيقية للوجيسيال وتطبيق الهاتف المرفق لاستعراض قوة وسهولة الاستخدام.
           </p>
         </div>
@@ -1389,12 +1395,12 @@ export default function LandingPage({ onSelectDemo, onSelectSupport, onSelectTri
         <div className="max-w-6xl mx-auto relative z-10 px-0 md:px-4">
           
           {/* Main Frame Container */}
-          <div className="relative bg-slate-900 border-2 border-slate-800 rounded-3xl overflow-hidden shadow-2xl hover:border-purple-500/50 transition-all duration-300">
+          <div className="relative bg-slate-100 border-2 border-slate-200 rounded-3xl overflow-hidden shadow-2xl hover:border-blue-500/50 transition-all duration-300">
             
             {/* Navigation Arrows (Desktop Only) */}
             <button
               onClick={() => scrollToSlide(activeSlideIndex === 0 ? systemImages.length - 1 : activeSlideIndex - 1)}
-              className="hidden md:flex absolute right-4 top-1/2 -translate-y-1/2 z-20 w-11 h-11 rounded-full bg-slate-900/90 hover:bg-slate-800 text-slate-300 hover:text-purple-400 border border-slate-700/80 hover:border-purple-500/50 hover:scale-105 transition-all shadow-md items-center justify-center cursor-pointer active:scale-95 group/btn"
+              className="hidden md:flex absolute right-4 top-1/2 -translate-y-1/2 z-20 w-11 h-11 rounded-full bg-slate-100/90 hover:bg-slate-200 text-slate-700 hover:text-blue-600 border border-slate-700/80 hover:border-blue-500/50 hover:scale-105 transition-all shadow-md items-center justify-center cursor-pointer active:scale-95 group/btn"
               aria-label="الصورة السابقة"
             >
               <ChevronRight className="w-5 h-5 group-hover/btn:translate-x-0.5 transition-transform" />
@@ -1402,7 +1408,7 @@ export default function LandingPage({ onSelectDemo, onSelectSupport, onSelectTri
 
             <button
               onClick={() => scrollToSlide(activeSlideIndex === systemImages.length - 1 ? 0 : activeSlideIndex + 1)}
-              className="hidden md:flex absolute left-4 top-1/2 -translate-y-1/2 z-20 w-11 h-11 rounded-full bg-slate-900/90 hover:bg-slate-800 text-slate-300 hover:text-purple-400 border border-slate-700/80 hover:border-purple-500/50 hover:scale-105 transition-all shadow-md items-center justify-center cursor-pointer active:scale-95 group/btn"
+              className="hidden md:flex absolute left-4 top-1/2 -translate-y-1/2 z-20 w-11 h-11 rounded-full bg-slate-100/90 hover:bg-slate-200 text-slate-700 hover:text-blue-600 border border-slate-700/80 hover:border-blue-500/50 hover:scale-105 transition-all shadow-md items-center justify-center cursor-pointer active:scale-95 group/btn"
               aria-label="الصورة التالية"
             >
               <ChevronLeft className="w-5 h-5 group-hover/btn:-translate-x-0.5 transition-transform" />
@@ -1449,7 +1455,7 @@ export default function LandingPage({ onSelectDemo, onSelectSupport, onSelectTri
                     
                     {/* Category Pill Tag */}
                     <div className="absolute top-4 right-4 z-20">
-                      <span className="px-3 py-1 bg-purple-600/95 backdrop-blur-md rounded-full text-[10px] font-black text-white shadow-lg border border-purple-500/30">
+                      <span className="px-3 py-1 bg-blue-600/95 backdrop-blur-md rounded-full text-[10px] font-black text-slate-900 shadow-lg border border-blue-500/30">
                         {img.category === "pos" ? "الكواشير ولوحة التحكم" : img.category === "stock" ? "إدارة المخزن" : img.category === "maintenance" ? "ورشة الصيانة" : img.category === "zakat" ? "الزكاة والمالية" : "تتبع الزبون"}
                       </span>
                     </div>
@@ -1457,7 +1463,7 @@ export default function LandingPage({ onSelectDemo, onSelectSupport, onSelectTri
 
                     {/* Maximize Fullscreen Overlay on Hover */}
                     <div className="absolute inset-0 bg-black/45 opacity-0 hover:opacity-100 transition-opacity duration-300 flex items-center justify-center pointer-events-none">
-                      <div className="p-3.5 bg-purple-600 text-white rounded-full shadow-lg transform scale-90 hover:scale-100 transition-transform duration-300">
+                      <div className="p-3.5 bg-blue-600 text-slate-900 rounded-full shadow-lg transform scale-90 hover:scale-100 transition-transform duration-300">
                         <Maximize2 className="w-5 h-5" />
                       </div>
                     </div>
@@ -1473,7 +1479,7 @@ export default function LandingPage({ onSelectDemo, onSelectSupport, onSelectTri
             {/* Mobile Previous Button */}
             <button
               onClick={() => scrollToSlide(activeSlideIndex === 0 ? systemImages.length - 1 : activeSlideIndex - 1)}
-              className="md:hidden w-10 h-10 rounded-full bg-slate-900 text-slate-300 border border-slate-800 hover:border-purple-500/50 flex items-center justify-center cursor-pointer active:scale-95 transition-all"
+              className="md:hidden w-10 h-10 rounded-full bg-slate-100 text-slate-700 border border-slate-200 hover:border-blue-500/50 flex items-center justify-center cursor-pointer active:scale-95 transition-all"
               aria-label="الصورة السابقة"
             >
               <ChevronRight className="w-5 h-5" />
@@ -1487,7 +1493,7 @@ export default function LandingPage({ onSelectDemo, onSelectSupport, onSelectTri
                   onClick={() => scrollToSlide(idx)}
                   className={`h-2 rounded-full transition-all cursor-pointer ${
                     activeSlideIndex === idx 
-                      ? "w-8 bg-purple-600 shadow-md shadow-purple-900/30" 
+                      ? "w-8 bg-blue-600 shadow-md shadow-blue-900/10" 
                       : "w-2 bg-slate-700 hover:bg-slate-600"
                   }`}
                   aria-label={`الذهاب للصورة رقم ${idx + 1}`}
@@ -1498,7 +1504,7 @@ export default function LandingPage({ onSelectDemo, onSelectSupport, onSelectTri
             {/* Mobile Next Button */}
             <button
               onClick={() => scrollToSlide(activeSlideIndex === systemImages.length - 1 ? 0 : activeSlideIndex + 1)}
-              className="md:hidden w-10 h-10 rounded-full bg-slate-900 text-slate-300 border border-slate-800 hover:border-purple-500/50 flex items-center justify-center cursor-pointer active:scale-95 transition-all"
+              className="md:hidden w-10 h-10 rounded-full bg-slate-100 text-slate-700 border border-slate-200 hover:border-blue-500/50 flex items-center justify-center cursor-pointer active:scale-95 transition-all"
               aria-label="الصورة التالية"
             >
               <ChevronLeft className="w-5 h-5" />
@@ -1506,12 +1512,12 @@ export default function LandingPage({ onSelectDemo, onSelectSupport, onSelectTri
           </div>
 
           {/* Active Image Captions */}
-          <div className="mt-6 p-6 bg-slate-900 border border-slate-800 rounded-2xl text-right space-y-2 shadow-sm">
-            <h3 className="font-extrabold text-sm md:text-base text-slate-100 flex items-center justify-end gap-2">
+          <div className="mt-6 p-6 bg-slate-100 border border-slate-200 rounded-2xl text-right space-y-2 shadow-sm">
+            <h3 className="font-extrabold text-sm md:text-base text-slate-900 flex items-center justify-end gap-2">
               <span>{systemImages[activeSlideIndex]?.title}</span>
-              <span className="w-1.5 h-1.5 bg-purple-500 rounded-full" />
+              <span className="w-1.5 h-1.5 bg-blue-500 rounded-full" />
             </h3>
-            <p className="text-xs md:text-sm text-slate-400 leading-relaxed font-semibold">
+            <p className="text-xs md:text-sm text-slate-600 leading-relaxed font-semibold">
               {systemImages[activeSlideIndex]?.description}
             </p>
           </div>
@@ -1529,18 +1535,18 @@ export default function LandingPage({ onSelectDemo, onSelectSupport, onSelectTri
               onClick={() => setSelectedLightboxImage(null)}
             >
               <div 
-                className="relative max-w-5xl w-full bg-slate-950 border border-slate-900 rounded-3xl overflow-hidden shadow-2xl flex flex-col"
+                className="relative max-w-5xl w-full bg-white border border-slate-200 rounded-3xl overflow-hidden shadow-2xl flex flex-col"
                 onClick={(e) => e.stopPropagation()} // prevent closing
               >
                 <button
                   id="close-lightbox-btn"
                   onClick={() => setSelectedLightboxImage(null)}
-                  className="absolute top-4 left-4 p-2.5 bg-slate-900/80 hover:bg-slate-800 text-slate-300 hover:text-white rounded-full cursor-pointer z-10 border border-slate-800"
+                  className="absolute top-4 left-4 p-2.5 bg-slate-100/80 hover:bg-slate-200 text-slate-700 hover:text-slate-900 rounded-full cursor-pointer z-10 border border-slate-200"
                 >
                   <X className="w-5 h-5" />
                 </button>
 
-                <div className="aspect-video bg-slate-900 overflow-hidden relative flex items-center justify-center bg-slate-950">
+                <div className="aspect-video bg-slate-100 overflow-hidden relative flex items-center justify-center bg-white">
                   {selectedLightboxImage.uploadedUrl ? (
                     <img 
                       src={selectedLightboxImage.uploadedUrl} 
@@ -1553,12 +1559,12 @@ export default function LandingPage({ onSelectDemo, onSelectSupport, onSelectTri
                   )}
                 </div>
 
-                <div className="p-6 bg-slate-950 border-t border-slate-900 space-y-2 text-right">
-                  <span className="px-2.5 py-1 bg-purple-500/10 border border-purple-500/20 text-purple-400 rounded-lg text-[10px] font-black inline-block">
+                <div className="p-6 bg-white border-t border-slate-200 space-y-2 text-right">
+                  <span className="px-2.5 py-1 bg-blue-500/10 border border-blue-500/20 text-blue-600 rounded-lg text-[10px] font-black inline-block">
                     {selectedLightboxImage.category === "pos" ? "الكواشير" : selectedLightboxImage.category === "stock" ? "المخازن" : selectedLightboxImage.category === "maintenance" ? "الصيانة" : selectedLightboxImage.category === "zakat" ? "الزكاة والمالية" : "تتبع الزبون"}
                   </span>
-                  <h3 className="font-extrabold text-sm md:text-base text-slate-100">{selectedLightboxImage.title}</h3>
-                  <p className="text-xs text-slate-400 leading-relaxed">{selectedLightboxImage.description}</p>
+                  <h3 className="font-extrabold text-sm md:text-base text-slate-900">{selectedLightboxImage.title}</h3>
+                  <p className="text-xs text-slate-600 leading-relaxed">{selectedLightboxImage.description}</p>
                 </div>
               </div>
             </motion.div>
@@ -1568,17 +1574,17 @@ export default function LandingPage({ onSelectDemo, onSelectSupport, onSelectTri
 
       {/* 2. CORE FEATURES (Organized Sales and Inventory) */}
       <section className="space-y-12 py-6 relative">
-        <div className="absolute top-1/4 left-1/2 -translate-x-1/2 w-80 h-80 bg-purple-500/5 rounded-full blur-3xl pointer-events-none" />
+        <div className="absolute top-1/4 left-1/2 -translate-x-1/2 w-80 h-80 bg-blue-500/5 rounded-full blur-3xl pointer-events-none" />
         
         <div className="text-center space-y-3 relative z-10">
-          <div className="inline-flex items-center gap-1.5 px-3 py-1 bg-purple-500/10 border border-purple-500/20 rounded-full text-purple-400 text-xs font-black">
+          <div className="inline-flex items-center gap-1.5 px-3 py-1 bg-blue-500/10 border border-blue-500/20 rounded-full text-blue-600 text-xs font-black">
             <Sparkles className="w-3.5 h-3.5" />
             <span>قوة الأداء والتكامل في لوجيسيال واحد</span>
           </div>
-          <h2 className="text-xl md:text-3xl font-black text-slate-100 tracking-tight">
+          <h2 className="text-xl md:text-3xl font-black text-slate-900 tracking-tight">
             تحكم كامل ومطلق في كافة جوانب متجرك
           </h2>
-          <p className="text-xs md:text-sm text-slate-400 max-w-lg mx-auto leading-relaxed">
+          <p className="text-xs md:text-sm text-slate-600 max-w-lg mx-auto leading-relaxed">
             صُممت أقسام وموديلات البرنامج بدقة بالغة لتغطي متطلبات محلات الهواتف والصيانة بالتفصيل.
           </p>
         </div>
@@ -1587,13 +1593,13 @@ export default function LandingPage({ onSelectDemo, onSelectSupport, onSelectTri
           {[
             {
               title: "تسيير المخزون بالـ IMEI",
-              icon: <Smartphone className="w-5 h-5 text-purple-400 group-hover:text-purple-300" />,
+              icon: <Smartphone className="w-5 h-5 text-blue-600 group-hover:text-blue-500" />,
               badge: "ذكي وآمن",
               desc: "تسجيل وجرد الهواتف بالرقم التسلسلي الفريد للـ IMEI للوقاية التامة من بيع الهواتف الخاطئة أو تبديل العلب، وتنبيهات فورية عند وصول السلع للحد الأدنى للوقاية من نفاد المخزون."
             },
             {
               title: "موديول صيانة احترافي متكامل",
-              icon: <Wrench className="w-5 h-5 text-indigo-400 group-hover:text-indigo-300" />,
+              icon: <Wrench className="w-5 h-5 text-blue-400 group-hover:text-blue-300" />,
               badge: "الأكثر مبيعاً",
               desc: "تسجيل الهواتف المطلوب إصلاحها، تتبع حالة الصيانة (انتظار، قيد التصليح، جاهز)، وخصم قطع الغيار المستعملة تلقائياً، مع حساب دقيق لربح اليد العاملة والقطع المستخدمة."
             },
@@ -1624,32 +1630,32 @@ export default function LandingPage({ onSelectDemo, onSelectSupport, onSelectTri
           ].map((feature, idx) => (
             <div 
               key={idx}
-              className="group relative bg-slate-950/40 hover:bg-slate-900/40 border border-slate-900/80 hover:border-purple-500/30 rounded-2xl p-6 transition-all duration-300 hover:-translate-y-1.5 shadow-xl hover:shadow-purple-950/10 overflow-hidden text-right flex flex-col justify-between"
+              className="group relative bg-white/40 hover:bg-slate-50/40 border border-slate-200/80 hover:border-blue-500/30 rounded-2xl p-6 transition-all duration-300 hover:-translate-y-1.5 shadow-xl hover:shadow-blue-950/10 overflow-hidden text-right flex flex-col justify-between"
             >
               {/* Decorative corner light */}
-              <div className="absolute -right-10 -top-10 w-24 h-24 bg-gradient-to-br from-purple-600/5 to-indigo-600/5 rounded-full blur-xl group-hover:scale-150 transition-all duration-500 pointer-events-none" />
+              <div className="absolute -right-10 -top-10 w-24 h-24 bg-gradient-to-br from-blue-600/5 to-blue-500/5 rounded-full blur-xl group-hover:scale-150 transition-all duration-500 pointer-events-none" />
               
               {/* Left visual accent indicator */}
-              <div className="absolute top-0 right-0 h-full w-[3px] bg-gradient-to-b from-purple-500/80 to-indigo-500/80 opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none" />
+              <div className="absolute top-0 right-0 h-full w-[3px] bg-gradient-to-b from-blue-500/80 to-blue-500/80 opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none" />
               
               <div className="space-y-4">
                 {/* Header card row */}
                 <div className="flex items-start justify-between gap-4">
-                  <span className="px-2 py-0.5 bg-slate-900/80 border border-slate-800 rounded-full text-[9px] text-slate-400 font-bold group-hover:border-purple-500/20 group-hover:text-purple-300 transition-all duration-300">
+                  <span className="px-2 py-0.5 bg-slate-100/80 border border-slate-200 rounded-full text-[9px] text-slate-600 font-bold group-hover:border-blue-500/20 group-hover:text-blue-500 transition-all duration-300">
                     {feature.badge}
                   </span>
                   
-                  <div className="w-12 h-12 rounded-xl bg-slate-900 border border-slate-800/80 flex items-center justify-center group-hover:border-purple-500/20 group-hover:bg-purple-950/20 transition-all duration-300 shadow-inner">
+                  <div className="w-12 h-12 rounded-xl bg-slate-100 border border-slate-200/80 flex items-center justify-center group-hover:border-blue-500/20 group-hover:bg-blue-950/20 transition-all duration-300 shadow-inner">
                     {feature.icon}
                   </div>
                 </div>
 
                 {/* Info */}
                 <div className="space-y-2">
-                  <h4 className="font-extrabold text-slate-100 group-hover:text-purple-300 transition-colors duration-200 text-base md:text-lg">
+                  <h4 className="font-extrabold text-slate-900 group-hover:text-blue-500 transition-colors duration-200 text-base md:text-lg">
                     {feature.title}
                   </h4>
-                  <p className="text-slate-400 text-xs leading-relaxed group-hover:text-slate-300 transition-colors duration-200">
+                  <p className="text-slate-600 text-xs leading-relaxed group-hover:text-slate-700 transition-colors duration-200">
                     {feature.desc}
                   </p>
                 </div>
@@ -1664,19 +1670,19 @@ export default function LandingPage({ onSelectDemo, onSelectSupport, onSelectTri
 
 
       {/* 7.5 DOWNLOAD TRIAL VERSION SECTION (Added for user request) */}
-      <section id="download-trial-section" className="space-y-12 py-12 border-t border-slate-900/80 relative">
-        <div className="absolute top-1/4 right-1/4 w-80 h-80 bg-purple-600/5 rounded-full blur-3xl pointer-events-none" />
-        <div className="absolute bottom-10 left-10 w-64 h-64 bg-indigo-600/5 rounded-full blur-3xl pointer-events-none" />
+      <section id="download-trial-section" className="space-y-12 py-12 border-t border-slate-200/80 relative">
+        <div className="absolute top-1/4 right-1/4 w-80 h-80 bg-blue-600/5 rounded-full blur-3xl pointer-events-none" />
+        <div className="absolute bottom-10 left-10 w-64 h-64 bg-blue-600/5 rounded-full blur-3xl pointer-events-none" />
 
         <div className="text-center space-y-3 relative z-10">
-          <div className="inline-flex items-center gap-1.5 px-3 py-1 bg-purple-500/10 border border-purple-500/20 rounded-full text-purple-400 text-xs font-black">
+          <div className="inline-flex items-center gap-1.5 px-3 py-1 bg-blue-500/10 border border-blue-500/20 rounded-full text-blue-600 text-xs font-black">
             <Download className="w-3.5 h-3.5" />
             <span>تحميل مباشر وسريع للبرنامج</span>
           </div>
-          <h2 className="text-xl md:text-3xl font-black text-slate-100 tracking-tight">
+          <h2 className="text-xl md:text-3xl font-black text-slate-900 tracking-tight">
             تحميل النسخة التجريبية المجانية لـ Algora Systems
           </h2>
-          <p className="text-xs md:text-sm text-slate-400 max-w-xl mx-auto leading-relaxed">
+          <p className="text-xs md:text-sm text-slate-600 max-w-xl mx-auto leading-relaxed">
             اختر نسخة البرنامج المناسبة لجهازك وتابع مع دليل الاستخدام والبدء السريع. جميع ملفاتنا آمنة وخالية من أي برمجيات ضارة.
           </p>
         </div>
@@ -1684,23 +1690,23 @@ export default function LandingPage({ onSelectDemo, onSelectSupport, onSelectTri
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6 relative z-10 max-w-5xl mx-auto">
           
           {/* Windows App Download Card */}
-          <div className="bg-slate-950/50 hover:bg-slate-900/50 border border-slate-900 hover:border-purple-500/20 p-6 rounded-2xl transition-all duration-300 hover:-translate-y-1 text-right flex flex-col justify-between space-y-6">
+          <div className="bg-white/90 hover:bg-slate-100/50 border border-slate-200 hover:border-blue-500/20 p-6 rounded-2xl transition-all duration-300 hover:-translate-y-1 text-right flex flex-col justify-between space-y-6">
             <div className="space-y-4">
               <div className="flex items-center justify-between">
-                <span className="px-2 py-0.5 bg-purple-500/10 border border-purple-500/20 rounded-full text-[9px] text-purple-300 font-bold">
+                <span className="px-2 py-0.5 bg-blue-500/10 border border-blue-500/20 rounded-full text-[9px] text-blue-500 font-bold">
                   نظام تشغيل Windows
                 </span>
-                <div className="w-10 h-10 rounded-xl bg-purple-950/30 border border-purple-900/30 flex items-center justify-center text-purple-400">
+                <div className="w-10 h-10 rounded-xl bg-blue-950/30 border border-blue-900/30 flex items-center justify-center text-blue-600">
                   <Laptop className="w-5 h-5" />
                 </div>
               </div>
               <div className="space-y-1">
-                <h4 className="font-extrabold text-slate-100 text-sm md:text-base">لوجيسيال الكمبيوتر والـ POS</h4>
-                <p className="text-[11px] text-slate-400 leading-relaxed">
+                <h4 className="font-extrabold text-slate-900 text-sm md:text-base">لوجيسيال الكمبيوتر والـ POS</h4>
+                <p className="text-[11px] text-slate-600 leading-relaxed">
                   برنامج مبيعات متكامل للكمبيوتر يدعم قراءة الباركود، تسيير الصيانة، طباعة الفواتير ووصل الضمان الحراري.
                 </p>
               </div>
-              <div className="pt-2 border-t border-slate-900 flex justify-between items-center text-[10px] text-slate-500 font-mono font-bold">
+              <div className="pt-2 border-t border-slate-200 flex justify-between items-center text-[10px] text-slate-500 font-mono font-bold">
                 <span>الإصدار: v4.2.5</span>
                 <span>الحجم: 84 MB</span>
               </div>
@@ -1709,7 +1715,7 @@ export default function LandingPage({ onSelectDemo, onSelectSupport, onSelectTri
               onClick={() => {
                 startDownload("Setup.exe");
               }}
-              className="w-full py-3 bg-purple-600 hover:bg-purple-500 text-white font-black text-xs rounded-xl flex items-center justify-center gap-2 cursor-pointer transition-all active:scale-95 shadow-lg shadow-purple-900/20"
+              className="w-full py-3 bg-blue-600 hover:bg-blue-500 text-slate-900 font-black text-xs rounded-xl flex items-center justify-center gap-2 cursor-pointer transition-all active:scale-95 shadow-lg shadow-blue-900/20"
             >
               <Download className="w-4 h-4" />
               <span>تحميل مباشر للكمبيوتر</span>
@@ -1717,23 +1723,23 @@ export default function LandingPage({ onSelectDemo, onSelectSupport, onSelectTri
           </div>
 
           {/* Android App Download Card */}
-          <div className="bg-slate-950/50 hover:bg-slate-900/50 border border-slate-900 hover:border-purple-500/20 p-6 rounded-2xl transition-all duration-300 hover:-translate-y-1 text-right flex flex-col justify-between space-y-6">
+          <div className="bg-white/90 hover:bg-slate-100/50 border border-slate-200 hover:border-blue-500/20 p-6 rounded-2xl transition-all duration-300 hover:-translate-y-1 text-right flex flex-col justify-between space-y-6">
             <div className="space-y-4">
               <div className="flex items-center justify-between">
-                <span className="px-2 py-0.5 bg-indigo-500/10 border border-indigo-500/20 rounded-full text-[9px] text-indigo-300 font-bold">
+                <span className="px-2 py-0.5 bg-blue-500/10 border border-blue-500/20 rounded-full text-[9px] text-blue-300 font-bold">
                   نظام Android / APK
                 </span>
-                <div className="w-10 h-10 rounded-xl bg-indigo-950/30 border border-indigo-900/30 flex items-center justify-center text-indigo-400">
+                <div className="w-10 h-10 rounded-xl bg-blue-950/30 border border-blue-900/30 flex items-center justify-center text-blue-400">
                   <Smartphone className="w-5 h-5" />
                 </div>
               </div>
               <div className="space-y-1">
-                <h4 className="font-extrabold text-slate-100 text-sm md:text-base">تطبيق الهاتف والتابلت</h4>
-                <p className="text-[11px] text-slate-400 leading-relaxed">
+                <h4 className="font-extrabold text-slate-900 text-sm md:text-base">تطبيق الهاتف والتابلت</h4>
+                <p className="text-[11px] text-slate-600 leading-relaxed">
                   تابع مبيعات محلك، أرباحك وحركة الصيانة بشكل فوري ومباشر من هاتفك أو تابلت أندرويد في أي مكان.
                 </p>
               </div>
-              <div className="pt-2 border-t border-slate-900 flex justify-between items-center text-[10px] text-slate-500 font-mono font-bold">
+              <div className="pt-2 border-t border-slate-200 flex justify-between items-center text-[10px] text-slate-500 font-mono font-bold">
                 <span>الإصدار: v2.1.0</span>
                 <span>الحجم: 18 MB</span>
               </div>
@@ -1742,7 +1748,7 @@ export default function LandingPage({ onSelectDemo, onSelectSupport, onSelectTri
               onClick={() => {
                 startDownload("app-debug.apk");
               }}
-              className="w-full py-3 bg-indigo-600 hover:bg-indigo-500 text-white font-black text-xs rounded-xl flex items-center justify-center gap-2 cursor-pointer transition-all active:scale-95 shadow-lg shadow-indigo-900/20"
+              className="w-full py-3 bg-blue-600 hover:bg-blue-500 text-slate-900 font-black text-xs rounded-xl flex items-center justify-center gap-2 cursor-pointer transition-all active:scale-95 shadow-lg shadow-blue-900/20"
             >
               <Download className="w-4 h-4" />
               <span>تحميل تطبيق الهاتف (APK)</span>
@@ -1750,7 +1756,7 @@ export default function LandingPage({ onSelectDemo, onSelectSupport, onSelectTri
           </div>
 
           {/* Video Guide Card */}
-          <div className="bg-slate-950/50 hover:bg-slate-900/50 border border-slate-900 hover:border-purple-500/20 p-6 rounded-2xl transition-all duration-300 hover:-translate-y-1 text-right flex flex-col justify-between space-y-6">
+          <div className="bg-white/90 hover:bg-slate-100/50 border border-slate-200 hover:border-blue-500/20 p-6 rounded-2xl transition-all duration-300 hover:-translate-y-1 text-right flex flex-col justify-between space-y-6">
             <div className="space-y-4">
               <div className="flex items-center justify-between">
                 <span className="px-2 py-0.5 bg-amber-500/10 border border-amber-500/20 rounded-full text-[9px] text-amber-300 font-bold">
@@ -1761,12 +1767,12 @@ export default function LandingPage({ onSelectDemo, onSelectSupport, onSelectTri
                 </div>
               </div>
               <div className="space-y-1">
-                <h4 className="font-extrabold text-slate-100 text-sm md:text-base">فيديو شرح وتثبيت البرنامج</h4>
-                <p className="text-[11px] text-slate-400 leading-relaxed">
+                <h4 className="font-extrabold text-slate-900 text-sm md:text-base">فيديو شرح وتثبيت البرنامج</h4>
+                <p className="text-[11px] text-slate-600 leading-relaxed">
                   فيديو مبسط باللغة العربية يشرح خطوة بخطوة كيفية تثبيت اللوجيسيال، وتفعيل النسخة التجريبية وبدء العمل على الكاشير.
                 </p>
               </div>
-              <div className="pt-2 border-t border-slate-900 flex justify-between items-center text-[10px] text-slate-500 font-mono font-bold">
+              <div className="pt-2 border-t border-slate-200 flex justify-between items-center text-[10px] text-slate-500 font-mono font-bold">
                 <span>الصيغة: MP4 فيديو</span>
                 <span>المدة: 1:46 دقيقة</span>
               </div>
@@ -1782,7 +1788,7 @@ export default function LandingPage({ onSelectDemo, onSelectSupport, onSelectTri
                   setIsPlaying(true);
                 }
               }}
-              className="w-full py-3 bg-amber-600 hover:bg-amber-500 text-white font-black text-xs rounded-xl flex items-center justify-center gap-2 cursor-pointer transition-all active:scale-95 shadow-lg shadow-amber-900/20"
+              className="w-full py-3 bg-amber-600 hover:bg-amber-500 text-slate-900 font-black text-xs rounded-xl flex items-center justify-center gap-2 cursor-pointer transition-all active:scale-95 shadow-lg shadow-amber-900/20"
             >
               <Play className="w-4 h-4 fill-white" />
               <span>شاهد فيديو الشرح (MP4)</span>
@@ -1792,10 +1798,10 @@ export default function LandingPage({ onSelectDemo, onSelectSupport, onSelectTri
         </div>
 
         {/* Local support hint */}
-        <div className="max-w-xl mx-auto bg-slate-950/30 border border-slate-900 p-4 rounded-xl text-center text-xs text-slate-400 space-y-1 relative z-10">
-          <p className="font-extrabold text-slate-200">💡 هل تواجه صعوبة في التثبيت أو ربط الطابعات؟</p>
+        <div className="max-w-xl mx-auto bg-white/30 border border-slate-200 p-4 rounded-xl text-center text-xs text-slate-600 space-y-1 relative z-10">
+          <p className="font-extrabold text-slate-800">💡 هل تواجه صعوبة في التثبيت أو ربط الطابعات؟</p>
           <p className="leading-relaxed">
-            لا تقلق، فريق الدعم الفني الجزائري في خدمتك! اتصل بنا عبر الهاتف <a href="https://wa.me/213671037202?text=%D9%85%D8%B1%D8%AD%D8%A8%D8%A7%D9%8B%D8%8C%20%D8%A3%D9%86%D8%A7%20%D9%85%D9%87%D8%AA%D9%85%20%D8%A8%D9%86%D8%B8%D8%A7%D9%85%20Algora%20%D9%88%D8%A3%D8%B1%D9%8A%D8%AF%20%D8%A7%D9%84%D8%AD%D8%B5%D9%88%D9%84%20%D8%B9%D9%84%D9%89%20%D9%86%D8%B3%D8%AE%D8%AA%D9%8A%20%D8%A7%D9%84%D8%AA%D8%AC%D8%B1%D9%8A%D8%A8%D9%8A%D8%A9%20%D8%A7%D9%84%D9%85%D8%AC%D8%A7%D9%86%D9%8A%D8%A9" target="_blank" rel="noopener noreferrer" className="font-mono font-bold text-purple-400 text-[13px] inline-block hover:underline cursor-pointer" dir="ltr">+213 671 03 72 02</a> أو تواصل معنا عبر واتساب، وسيتصل بك أحد مهندسينا لتثبيت وتجهيز البرنامج على حاسوبك مجانًا بالكامل عبر <span className="font-bold text-indigo-400">AnyDesk</span>.
+            لا تقلق، فريق الدعم الفني الجزائري في خدمتك! اتصل بنا عبر الهاتف <a href="https://wa.me/213671037202?text=%D9%85%D8%B1%D8%AD%D8%A8%D8%A7%D9%8B%D8%8C%20%D8%A3%D9%86%D8%A7%20%D9%85%D9%87%D8%AA%D9%85%20%D8%A8%D9%86%D8%B8%D8%A7%D9%85%20Algora%20%D9%88%D8%A3%D8%B1%D9%8A%D8%AF%20%D8%A7%D9%84%D8%AD%D8%B5%D9%88%D9%84%20%D8%B9%D9%84%D9%89%20%D9%86%D8%B3%D8%AE%D8%AA%D9%8A%20%D8%A7%D9%84%D8%AA%D8%AC%D8%B1%D9%8A%D8%A8%D9%8A%D8%A9%20%D8%A7%D9%84%D9%85%D8%AC%D8%A7%D9%86%D9%8A%D8%A9" target="_blank" rel="noopener noreferrer" className="font-mono font-bold text-blue-600 text-[13px] inline-block hover:underline cursor-pointer" dir="ltr">+213 671 03 72 02</a> أو تواصل معنا عبر واتساب، وسيتصل بك أحد مهندسينا لتثبيت وتجهيز البرنامج على حاسوبك مجانًا بالكامل عبر <span className="font-bold text-blue-400">AnyDesk</span>.
           </p>
         </div>
       </section>
@@ -1803,18 +1809,18 @@ export default function LandingPage({ onSelectDemo, onSelectSupport, onSelectTri
       {/* 8. FAQs ACCORDION */}
       <section className="space-y-8 max-w-3xl mx-auto text-right">
         <div className="text-center space-y-2">
-          <h2 className="text-xl md:text-3xl font-black text-slate-100">الأسئلة الشائعة حول لوجيسيال Algora</h2>
-          <p className="text-xs md:text-sm text-slate-400">إجابات سريعة وتفصيلية عن الأسئلة الأكثر طرحاً من قبل أصحاب محلات الهواتف الجزائريين.</p>
+          <h2 className="text-xl md:text-3xl font-black text-slate-900">الأسئلة الشائعة حول لوجيسيال Algora</h2>
+          <p className="text-xs md:text-sm text-slate-600">إجابات سريعة وتفصيلية عن الأسئلة الأكثر طرحاً من قبل أصحاب محلات الهواتف الجزائريين.</p>
         </div>
 
         <div className="space-y-3.5">
           {faqs.map((faq, idx) => (
-            <div key={idx} className="bg-slate-950/60 border border-slate-900 rounded-xl overflow-hidden transition-all">
+            <div key={idx} className="bg-white/60 border border-slate-200 rounded-xl overflow-hidden transition-all">
               <button
                 onClick={() => setFaqOpen(faqOpen === idx ? null : idx)}
-                className="w-full p-4 flex justify-between items-center text-right font-bold text-xs md:text-sm text-slate-200 hover:text-purple-400 transition-colors cursor-pointer"
+                className="w-full p-4 flex justify-between items-center text-right font-bold text-xs md:text-sm text-slate-800 hover:text-blue-600 transition-colors cursor-pointer"
               >
-                <HelpCircle className={`w-4 h-4 text-purple-400 shrink-0 transition-transform ${faqOpen === idx ? "rotate-180" : ""}`} />
+                <HelpCircle className={`w-4 h-4 text-blue-600 shrink-0 transition-transform ${faqOpen === idx ? "rotate-180" : ""}`} />
                 <span>{faq.q}</span>
               </button>
               
@@ -1824,9 +1830,9 @@ export default function LandingPage({ onSelectDemo, onSelectSupport, onSelectTri
                     initial={{ height: 0, opacity: 0 }}
                     animate={{ height: "auto", opacity: 1 }}
                     exit={{ height: 0, opacity: 0 }}
-                    className="border-t border-slate-900 bg-slate-900/10"
+                    className="border-t border-slate-200 bg-slate-100/10"
                   >
-                    <p className="p-4 text-xs md:text-sm text-slate-400 leading-relaxed">
+                    <p className="p-4 text-xs md:text-sm text-slate-600 leading-relaxed">
                       {faq.a}
                     </p>
                   </motion.div>
@@ -1840,16 +1846,16 @@ export default function LandingPage({ onSelectDemo, onSelectSupport, onSelectTri
       {/* 9. TUTORIALS ACCORDION */}
       <section className="space-y-8 max-w-3xl mx-auto text-right">
         <div className="text-center space-y-2">
-          <span className="inline-flex items-center gap-1.5 px-3 py-1 bg-purple-500/10 border border-purple-500/20 rounded-full text-purple-400 text-xs font-black">
+          <span className="inline-flex items-center gap-1.5 px-3 py-1 bg-blue-500/10 border border-blue-500/20 rounded-full text-blue-600 text-xs font-black">
             <Video className="w-3.5 h-3.5" />
             <span>شروحات استخدام النظام بالفيديو</span>
           </span>
-          <h2 className="text-xl md:text-3xl font-black text-slate-100">دروس تعليمية مصورة خطوة بخطوة</h2>
-          <p className="text-xs md:text-sm text-slate-400">شاهد بالفيديو كيفية تثبيت البرنامج، إضافة منتجاتك، وتسيير محلك باحترافية كاملة.</p>
+          <h2 className="text-xl md:text-3xl font-black text-slate-900">دروس تعليمية مصورة خطوة بخطوة</h2>
+          <p className="text-xs md:text-sm text-slate-600">شاهد بالفيديو كيفية تثبيت البرنامج، إضافة منتجاتك، وتسيير محلك باحترافية كاملة.</p>
         </div>
 
         {/* Tab Buttons */}
-        <div className="flex justify-center gap-4 bg-slate-950/40 p-1.5 rounded-2xl border border-slate-900/60 max-w-md mx-auto relative z-10">
+        <div className="flex justify-center gap-4 bg-white/40 p-1.5 rounded-2xl border border-slate-200/60 max-w-md mx-auto relative z-10">
           <button
             onClick={() => {
               setActiveTutorialTab("computer");
@@ -1857,8 +1863,8 @@ export default function LandingPage({ onSelectDemo, onSelectSupport, onSelectTri
             }}
             className={`flex-1 py-3 px-4 rounded-xl font-bold text-xs md:text-sm transition-all duration-300 flex items-center justify-center gap-2 cursor-pointer ${
               activeTutorialTab === "computer"
-                ? "bg-gradient-to-r from-purple-600 to-indigo-600 text-white shadow-lg shadow-purple-900/20 scale-105"
-                : "text-slate-400 hover:text-slate-200 hover:bg-slate-900/40"
+                ? "bg-gradient-to-r from-blue-600 to-blue-500 text-slate-900 shadow-lg shadow-blue-900/20 scale-105"
+                : "text-slate-600 hover:text-slate-800 hover:bg-slate-50/40"
             }`}
           >
             <Laptop className="w-4 h-4" />
@@ -1871,8 +1877,8 @@ export default function LandingPage({ onSelectDemo, onSelectSupport, onSelectTri
             }}
             className={`flex-1 py-3 px-4 rounded-xl font-bold text-xs md:text-sm transition-all duration-300 flex items-center justify-center gap-2 cursor-pointer ${
               activeTutorialTab === "phone"
-                ? "bg-gradient-to-r from-purple-600 to-indigo-600 text-white shadow-lg shadow-purple-900/20 scale-105"
-                : "text-slate-400 hover:text-slate-200 hover:bg-slate-900/40"
+                ? "bg-gradient-to-r from-blue-600 to-blue-500 text-slate-900 shadow-lg shadow-blue-900/20 scale-105"
+                : "text-slate-600 hover:text-slate-800 hover:bg-slate-50/40"
             }`}
           >
             <Smartphone className="w-4 h-4" />
@@ -1884,12 +1890,12 @@ export default function LandingPage({ onSelectDemo, onSelectSupport, onSelectTri
           {tutorials
             .filter((t) => t.category === activeTutorialTab)
             .map((tutorial, idx) => (
-              <div key={idx} className="bg-slate-950/60 border border-slate-900 rounded-xl overflow-hidden transition-all">
+              <div key={idx} className="bg-white/60 border border-slate-200 rounded-xl overflow-hidden transition-all">
                 <button
                   onClick={() => setTutorialOpen(tutorialOpen === idx ? null : idx)}
-                  className="w-full p-4 flex justify-between items-center text-right font-bold text-xs md:text-sm text-slate-200 hover:text-purple-400 transition-colors cursor-pointer"
+                  className="w-full p-4 flex justify-between items-center text-right font-bold text-xs md:text-sm text-slate-800 hover:text-blue-600 transition-colors cursor-pointer"
                 >
-                  <Play className={`w-3.5 h-3.5 text-purple-400 shrink-0 transition-transform ${tutorialOpen === idx ? "rotate-90 text-indigo-400 fill-indigo-400" : "fill-purple-400"}`} />
+                  <Play className={`w-3.5 h-3.5 text-blue-600 shrink-0 transition-transform ${tutorialOpen === idx ? "rotate-90 text-blue-400 fill-blue-400" : "fill-blue-500"}`} />
                   <span>{tutorial.title}</span>
                 </button>
                 
@@ -1899,10 +1905,10 @@ export default function LandingPage({ onSelectDemo, onSelectSupport, onSelectTri
                       initial={{ height: 0, opacity: 0 }}
                       animate={{ height: "auto", opacity: 1 }}
                       exit={{ height: 0, opacity: 0 }}
-                      className="border-t border-slate-900 bg-slate-900/10 p-5 space-y-4"
+                      className="border-t border-slate-200 bg-slate-100/10 p-5 space-y-4"
                     >
                       {tutorial.desc && (
-                        <p className="text-xs md:text-sm text-slate-400 leading-relaxed text-right">
+                        <p className="text-xs md:text-sm text-slate-600 leading-relaxed text-right">
                           {tutorial.desc}
                         </p>
                       )}
@@ -1911,7 +1917,7 @@ export default function LandingPage({ onSelectDemo, onSelectSupport, onSelectTri
                           href={tutorial.driveUrl}
                           target="_blank"
                           rel="noopener noreferrer"
-                          className="inline-flex items-center gap-3 px-6 py-3.5 bg-gradient-to-l from-purple-600 to-indigo-600 hover:from-purple-500 hover:to-indigo-500 text-white font-extrabold rounded-xl shadow-lg shadow-purple-900/30 transition-all duration-200 hover:scale-105 active:scale-100 text-sm"
+                          className="inline-flex items-center gap-3 px-6 py-3.5 bg-gradient-to-l from-blue-600 to-blue-500 hover:from-blue-500 hover:to-blue-400 text-white font-extrabold rounded-xl shadow-lg shadow-blue-900/10 transition-all duration-200 hover:scale-105 active:scale-100 text-sm"
                         >
                           <svg className="w-5 h-5 shrink-0" viewBox="0 0 87.3 78" xmlns="http://www.w3.org/2000/svg">
                             <path d="m6.6 66.85 3.85 6.65c.8 1.4 1.95 2.5 3.3 3.3l13.75-23.8h-27.5c0 1.55.4 3.1 1.2 4.5z" fill="#0066da"/>
@@ -1940,12 +1946,12 @@ export default function LandingPage({ onSelectDemo, onSelectSupport, onSelectTri
             animate={{ opacity: 1, y: 0, scale: 1 }}
             exit={{ opacity: 0, y: 20, scale: 0.95 }}
             transition={{ duration: 0.3, ease: "easeOut" }}
-            className="fixed bottom-6 right-6 z-50 max-w-sm w-full bg-slate-900/95 backdrop-blur-md border border-slate-800 p-4 rounded-xl shadow-2xl flex items-start gap-3 text-right text-slate-100"
+            className="fixed bottom-6 right-6 z-50 max-w-sm w-full bg-slate-100/95 backdrop-blur-md border border-slate-200 p-4 rounded-xl shadow-2xl flex items-start gap-3 text-right text-slate-900"
             dir="rtl"
           >
             <div className="shrink-0 pt-0.5">
               {downloadToast.type === "info" && (
-                <Loader2 className="w-5 h-5 text-purple-400 animate-spin" />
+                <Loader2 className="w-5 h-5 text-blue-600 animate-spin" />
               )}
               {downloadToast.type === "success" && (
                 <CheckCircle2 className="w-5 h-5 text-emerald-400" />
@@ -1963,7 +1969,7 @@ export default function LandingPage({ onSelectDemo, onSelectSupport, onSelectTri
 
             <button
               onClick={() => setDownloadToast(null)}
-              className="shrink-0 p-1 hover:bg-slate-800 rounded-lg text-slate-400 hover:text-slate-200 transition-colors"
+              className="shrink-0 p-1 hover:bg-slate-200 rounded-lg text-slate-600 hover:text-slate-800 transition-colors"
             >
               <X className="w-4 h-4" />
             </button>

@@ -46,7 +46,7 @@ export default function OverviewTab({
         {/* Chart workspace (2/3 width) */}
         <div className="lg:col-span-2 space-y-4 text-right">
           <div className="flex items-center justify-between flex-row-reverse">
-            <h4 className="text-sm font-black text-white">منحنى تطور الطلبات والتحويلات المالية بالجزائر</h4>
+            <h4 className="text-sm font-black text-slate-900">منحنى تطور الطلبات والتحويلات المالية بالجزائر</h4>
             <div className="flex items-center gap-3 text-[10px] text-slate-500 font-bold flex-row-reverse">
               <span className="flex items-center gap-1"><span className="w-2 h-2 rounded-full bg-[#7C3AED]"></span>الطلبات</span>
               <span className="flex items-center gap-1"><span className="w-2 h-2 rounded-full bg-[#06B6D4]"></span>المبيعات والـ CCP</span>
@@ -85,14 +85,14 @@ export default function OverviewTab({
 
         {/* Sidebar/Timeline inside overview (1/3 width) */}
         <div className="space-y-4 text-right">
-          <h4 className="text-sm font-black text-white">آخر الطلبات المسجلة فورا</h4>
+          <h4 className="text-sm font-black text-slate-900">آخر الطلبات المسجلة فورا</h4>
           <div className="bg-[#0B0B0F] p-4 rounded-xl border border-[rgba(255,255,255,0.06)] h-52 overflow-y-auto space-y-3.5 scrollbar-thin">
             {trialRequests.slice(0, 5).map((req) => (
               <div key={req.id} className="relative flex items-start gap-2.5 text-right justify-end flex-row-reverse">
                 <div className={`w-2 h-2 rounded-full mt-1.5 shrink-0 ${req.status === 'approved' ? 'bg-[#22C55E]' : 'bg-[#F59E0B]'}`}></div>
                 <div className="text-right flex-1 min-w-0">
-                  <p className="text-xs font-black text-white truncate">{req.storeName}</p>
-                  <p className="text-[10px] text-slate-400 mt-0.5">{req.ownerName} • {req.city}</p>
+                  <p className="text-xs font-black text-slate-900 truncate">{req.storeName}</p>
+                  <p className="text-[10px] text-slate-600 mt-0.5">{req.ownerName} • {req.city}</p>
                 </div>
                 <span className="text-[9px] text-slate-500 font-mono shrink-0">{new Date(req.timestamp).toLocaleTimeString("ar-DZ", {hour: '2-digit', minute:'2-digit'})}</span>
               </div>
@@ -105,11 +105,11 @@ export default function OverviewTab({
       {/* AI Assistant Advices */}
       <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
         <div className="bg-[#0B0B0F] p-4 rounded-xl border border-[rgba(255,255,255,0.06)] space-y-2 text-right">
-          <h5 className="text-xs font-black text-white flex items-center gap-1.5 justify-start flex-row-reverse">
+          <h5 className="text-xs font-black text-slate-900 flex items-center gap-1.5 justify-start flex-row-reverse">
             <Sparkles className="w-3.5 h-3.5 text-[#A855F7]" />
             <span>توصيات الذكاء الاصطناعي للمشرف</span>
           </h5>
-          <div className="space-y-1.5 text-[10px] leading-relaxed text-slate-400 font-medium">
+          <div className="space-y-1.5 text-[10px] leading-relaxed text-slate-600 font-medium">
             <p>💡 <strong className="text-[#06B6D4]">أعلى ولاية:</strong> الجزائر العاصمة تحقق أعلى نسبة تأكيد اشتراكات بـ 98% اليوم.</p>
             <p>📈 <strong className="text-[#7C3AED]">الباقة الأفضل:</strong> الباقة السنوية تشكل 68% من إجمالي مبيعات التحويلات المؤكدة.</p>
             <p>🎯 <strong className="text-[#F59E0B]">أوقات الذروة:</strong> تشير البيانات إلى زيادة الطلبات بنسبة 40% بين 4:00 إلى 8:00 مساءً.</p>
@@ -117,13 +117,13 @@ export default function OverviewTab({
         </div>
 
         <div className="bg-[#0B0B0F] p-4 rounded-xl border border-[rgba(255,255,255,0.06)] space-y-2 text-right">
-          <h5 className="text-xs font-black text-white flex items-center gap-1.5 justify-start flex-row-reverse">
+          <h5 className="text-xs font-black text-slate-900 flex items-center gap-1.5 justify-start flex-row-reverse">
             <Activity className="w-3.5 h-3.5 text-[#22C55E]" />
             <span>سجل النشاطات المباشر</span>
           </h5>
           <div className="h-20 overflow-y-auto space-y-1.5 text-[9px] font-mono text-slate-500 scrollbar-thin text-right">
             {activityLogs.map((log, index) => (
-              <div key={index} className="truncate border-b border-slate-900 pb-0.5 last:border-0">{log}</div>
+              <div key={index} className="truncate border-b border-slate-200 pb-0.5 last:border-0">{log}</div>
             ))}
           </div>
         </div>

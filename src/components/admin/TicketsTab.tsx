@@ -28,7 +28,7 @@ export default function TicketsTab({
     return (
       <div className="py-20 text-center space-y-3 text-slate-500 text-xs">
         <FileText className="w-12 h-12 mx-auto text-slate-750" />
-        <p className="font-black text-sm text-slate-400">لا توجد تذاكر دعم فني تطابق البحث.</p>
+        <p className="font-black text-sm text-slate-600">لا توجد تذاكر دعم فني تطابق البحث.</p>
         <button 
           onClick={createMockTicket}
           className="px-4 py-2 bg-transparent border border-[#7C3AED] text-[#7C3AED] hover:bg-[#7C3AED]/10 font-bold text-xs rounded-xl transition-all cursor-pointer"
@@ -43,7 +43,7 @@ export default function TicketsTab({
     <div className="overflow-x-auto w-full">
       <table className="w-full text-right text-xs border-collapse min-w-[1000px]">
         <thead>
-          <tr className="bg-[#0B0B0F] border-b border-[rgba(255,255,255,0.06)] text-slate-400 text-[10px] uppercase font-black tracking-wider">
+          <tr className="bg-[#0B0B0F] border-b border-[rgba(255,255,255,0.06)] text-slate-600 text-[10px] uppercase font-black tracking-wider">
             <th className="px-6 py-4 text-right">صورة المنتج</th>
             <th className="px-6 py-4 text-right">المتجر وصاحب الشكوى</th>
             <th className="px-6 py-4 text-right">الموضوع والمسألة</th>
@@ -59,32 +59,32 @@ export default function TicketsTab({
               
               {/* image column */}
               <td className="px-6 py-4">
-                <div className="w-11 h-11 rounded-lg bg-gradient-to-tr from-indigo-500/20 to-[#7C3AED]/20 border border-[rgba(255,255,255,0.06)] flex items-center justify-center shrink-0">
-                  <HelpCircle className="w-5 h-5 text-indigo-400 group-hover:rotate-12 transition-transform" />
+                <div className="w-11 h-11 rounded-lg bg-gradient-to-tr from-blue-500/20 to-[#7C3AED]/20 border border-[rgba(255,255,255,0.06)] flex items-center justify-center shrink-0">
+                  <HelpCircle className="w-5 h-5 text-blue-400 group-hover:rotate-12 transition-transform" />
                 </div>
               </td>
 
               {/* store name & contact */}
-              <td className="px-6 py-4 font-black text-white text-sm">
+              <td className="px-6 py-4 font-black text-slate-900 text-sm">
                 <div>{tkt.storeName}</div>
-                <div className="text-[10px] text-slate-400 mt-0.5 font-mono">{tkt.phone}</div>
+                <div className="text-[10px] text-slate-600 mt-0.5 font-mono">{tkt.phone}</div>
               </td>
 
               {/* subject */}
-              <td className="px-6 py-4 font-bold text-slate-200">
+              <td className="px-6 py-4 font-bold text-slate-800">
                 {tkt.subject}
               </td>
 
               {/* message content */}
-              <td className="px-6 py-4 text-slate-400 max-w-xs truncate" title={tkt.message}>
+              <td className="px-6 py-4 text-slate-600 max-w-xs truncate" title={tkt.message}>
                 {tkt.message}
               </td>
 
               {/* status */}
               <td className="px-6 py-4 text-center">
                 {tkt.status === "resolved" ? (
-                  <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-black bg-emerald-500/10 border border-emerald-500/30 text-emerald-400">
-                    <span className="w-1.5 h-1.5 rounded-full bg-emerald-500"></span>
+                  <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-black bg-orange-500/10 border border-emerald-500/30 text-emerald-400">
+                    <span className="w-1.5 h-1.5 rounded-full bg-orange-500"></span>
                     <span>متوفر (محلولة)</span>
                   </span>
                 ) : (

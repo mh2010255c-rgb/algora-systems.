@@ -99,18 +99,18 @@ function StatusDropdown({ currentStatus, onChange, storeName }: StatusDropdownPr
       label: "تم الدفع",
       desc: "تم استلام قيمة الاشتراك.",
       icon: CreditCard,
-      btnClass: "bg-emerald-500/10 border-emerald-500/30 text-emerald-400 hover:bg-emerald-500/20 focus:ring-emerald-500/30",
+      btnClass: "bg-orange-500/10 border-emerald-500/30 text-emerald-400 hover:bg-orange-500/20 focus:ring-emerald-500/30",
       activeTextClass: "text-emerald-400",
-      activeBgClass: "bg-emerald-500/5 hover:bg-emerald-500/10"
+      activeBgClass: "bg-orange-500/5 hover:bg-orange-500/10"
     },
     {
       id: "approved" as const,
       label: "مفعل",
       desc: "تم إرسال الترخيص وتفعيل النظام.",
       icon: CheckCircle2,
-      btnClass: "bg-purple-500/10 border-purple-500/30 text-purple-400 hover:bg-purple-500/20 focus:ring-purple-500/30",
-      activeTextClass: "text-purple-400",
-      activeBgClass: "bg-purple-500/5 hover:bg-purple-500/10"
+      btnClass: "bg-blue-500/10 border-blue-500/30 text-blue-600 hover:bg-blue-500/20 focus:ring-blue-500/30",
+      activeTextClass: "text-blue-600",
+      activeBgClass: "bg-blue-500/5 hover:bg-blue-500/10"
     },
     {
       id: "canceled" as const,
@@ -171,7 +171,7 @@ function StatusDropdown({ currentStatus, onChange, storeName }: StatusDropdownPr
                     value={searchQuery}
                     onChange={(e) => setSearchQuery(e.target.value)}
                     placeholder="ابحث عن حالة..."
-                    className="w-full bg-[#0B0B12] border border-white/5 rounded-xl pr-9 pl-3 py-2 text-xs text-slate-300 placeholder:text-slate-600 focus:outline-none focus:ring-1 focus:ring-purple-500/50 text-right"
+                    className="w-full bg-[#0B0B12] border border-white/5 rounded-xl pr-9 pl-3 py-2 text-xs text-slate-700 placeholder:text-slate-600 focus:outline-none focus:ring-1 focus:ring-blue-500/50 text-right"
                   />
                 </div>
               </div>
@@ -195,27 +195,27 @@ function StatusDropdown({ currentStatus, onChange, storeName }: StatusDropdownPr
                       }}
                       className={`w-full h-[46px] rounded-xl flex items-center justify-between px-3 text-right transition-all duration-200 group cursor-pointer ${
                         isSelected 
-                          ? "bg-purple-500/10 text-purple-300" 
-                          : "text-slate-300 hover:bg-[#8B5CF6]/10 hover:text-white"
+                          ? "bg-blue-500/10 text-blue-500" 
+                          : "text-slate-700 hover:bg-[#8B5CF6]/10 hover:text-slate-900"
                       }`}
                     >
                       {/* Left: Checkmark */}
                       <div className="flex items-center shrink-0 w-5">
-                        {isSelected && <Check className="w-4 h-4 text-purple-400" />}
+                        {isSelected && <Check className="w-4 h-4 text-blue-600" />}
                       </div>
 
                       {/* Right: Icon + Text */}
                       <div className="flex items-center gap-3 flex-row-reverse text-right flex-1 min-w-0 pr-1">
                         <div className={`w-8 h-8 rounded-lg flex items-center justify-center shrink-0 transition-all ${
-                          isSelected ? "bg-purple-500/20 text-purple-300" : "bg-white/5 text-slate-400 group-hover:bg-[#8B5CF6]/20 group-hover:text-[#A855F7]"
+                          isSelected ? "bg-blue-500/20 text-blue-500" : "bg-white/5 text-slate-600 group-hover:bg-[#8B5CF6]/20 group-hover:text-[#A855F7]"
                         }`}>
                           <OptIcon className="w-4 h-4" />
                         </div>
                         <div className="space-y-0.5 text-right flex-1 min-w-0">
-                          <div className={`text-xs font-black truncate ${isSelected ? "text-purple-300" : "text-slate-200 group-hover:text-purple-300"}`}>
+                          <div className={`text-xs font-black truncate ${isSelected ? "text-blue-500" : "text-slate-800 group-hover:text-blue-500"}`}>
                             {opt.label}
                           </div>
-                          <div className="text-[10px] text-slate-500 font-medium truncate group-hover:text-slate-400 transition-colors">
+                          <div className="text-[10px] text-slate-500 font-medium truncate group-hover:text-slate-600 transition-colors">
                             {opt.desc}
                           </div>
                         </div>
@@ -269,9 +269,9 @@ function ConfirmationDropdown({ currentStatus, onChange, storeName, disabled }: 
       label: "تم الاتصال ✅",
       desc: "تم التواصل مع العميل بنجاح.",
       icon: Phone,
-      btnClass: "bg-emerald-500/10 border-emerald-500/30 text-emerald-400 hover:bg-emerald-500/20 focus:ring-emerald-500/30",
+      btnClass: "bg-orange-500/10 border-emerald-500/30 text-emerald-400 hover:bg-orange-500/20 focus:ring-emerald-500/30",
       activeTextClass: "text-emerald-400",
-      activeBgClass: "bg-emerald-500/5 hover:bg-emerald-500/10"
+      activeBgClass: "bg-orange-500/5 hover:bg-orange-500/10"
     },
     {
       id: "no_reply_1" as const,
@@ -314,8 +314,8 @@ function ConfirmationDropdown({ currentStatus, onChange, storeName, disabled }: 
       label: "لا يوجد واتساب ⚠️",
       desc: "الرقم لا يحتوي على حساب واتساب.",
       icon: AlertCircle,
-      btnClass: "bg-slate-500/15 border-slate-500/30 text-slate-400 hover:bg-slate-500/20 focus:ring-slate-500/30",
-      activeTextClass: "text-slate-400",
+      btnClass: "bg-slate-500/15 border-slate-500/30 text-slate-600 hover:bg-slate-500/20 focus:ring-slate-500/30",
+      activeTextClass: "text-slate-600",
       activeBgClass: "bg-slate-500/5 hover:bg-slate-500/10"
     },
     {
@@ -332,9 +332,9 @@ function ConfirmationDropdown({ currentStatus, onChange, storeName, disabled }: 
       label: "مؤكدة 🟢",
       desc: "تم تأكيد طلب العميل وتفاصيله.",
       icon: CheckCircle2,
-      btnClass: "bg-purple-500/10 border-purple-500/30 text-purple-400 hover:bg-purple-500/20 focus:ring-purple-500/30",
-      activeTextClass: "text-purple-400",
-      activeBgClass: "bg-purple-500/5 hover:bg-purple-500/10"
+      btnClass: "bg-blue-500/10 border-blue-500/30 text-blue-600 hover:bg-blue-500/20 focus:ring-blue-500/30",
+      activeTextClass: "text-blue-600",
+      activeBgClass: "bg-blue-500/5 hover:bg-blue-500/10"
     },
     {
       id: "canceled" as const,
@@ -395,7 +395,7 @@ function ConfirmationDropdown({ currentStatus, onChange, storeName, disabled }: 
                     value={searchQuery}
                     onChange={(e) => setSearchQuery(e.target.value)}
                     placeholder="ابحث عن حالة التأكيد..."
-                    className="w-full bg-[#0B0B12] border border-white/5 rounded-xl pr-9 pl-3 py-2 text-xs text-slate-300 placeholder:text-slate-600 focus:outline-none focus:ring-1 focus:ring-purple-500/50 text-right"
+                    className="w-full bg-[#0B0B12] border border-white/5 rounded-xl pr-9 pl-3 py-2 text-xs text-slate-700 placeholder:text-slate-600 focus:outline-none focus:ring-1 focus:ring-blue-500/50 text-right"
                   />
                 </div>
               </div>
@@ -418,25 +418,25 @@ function ConfirmationDropdown({ currentStatus, onChange, storeName, disabled }: 
                       }}
                       className={`w-full h-[46px] rounded-xl flex items-center justify-between px-3 text-right transition-all duration-200 group cursor-pointer ${
                         isSelected 
-                          ? "bg-purple-500/10 text-purple-300" 
-                          : "text-slate-300 hover:bg-[#8B5CF6]/10 hover:text-white"
+                          ? "bg-blue-500/10 text-blue-500" 
+                          : "text-slate-700 hover:bg-[#8B5CF6]/10 hover:text-slate-900"
                       }`}
                     >
                       <div className="flex items-center shrink-0 w-5">
-                        {isSelected && <Check className="w-4 h-4 text-purple-400" />}
+                        {isSelected && <Check className="w-4 h-4 text-blue-600" />}
                       </div>
 
                       <div className="flex items-center gap-3 flex-row-reverse text-right flex-1 min-w-0 pr-1">
                         <div className={`w-8 h-8 rounded-lg flex items-center justify-center shrink-0 transition-all ${
-                          isSelected ? "bg-purple-500/20 text-purple-300" : "bg-white/5 text-slate-400 group-hover:bg-[#8B5CF6]/20 group-hover:text-[#A855F7]"
+                          isSelected ? "bg-blue-500/20 text-blue-500" : "bg-white/5 text-slate-600 group-hover:bg-[#8B5CF6]/20 group-hover:text-[#A855F7]"
                         }`}>
                           <OptIcon className="w-4 h-4" />
                         </div>
                         <div className="space-y-0.5 text-right flex-1 min-w-0">
-                          <div className={`text-xs font-black truncate ${isSelected ? "text-purple-300" : "text-slate-200 group-hover:text-purple-300"}`}>
+                          <div className={`text-xs font-black truncate ${isSelected ? "text-blue-500" : "text-slate-800 group-hover:text-blue-500"}`}>
                             {opt.label}
                           </div>
-                          <div className="text-[10px] text-slate-500 font-medium truncate group-hover:text-slate-400 transition-colors">
+                          <div className="text-[10px] text-slate-500 font-medium truncate group-hover:text-slate-600 transition-colors">
                             {opt.desc}
                           </div>
                         </div>
@@ -948,7 +948,7 @@ export default function TrialsTab({
       return "border-r-4 border-r-rose-500 bg-rose-500/5 hover:bg-rose-500/10";
     }
     if (req.status === "completed" || req.status === "approved") {
-      return "border-r-4 border-r-emerald-500 bg-emerald-500/5 hover:bg-emerald-500/10";
+      return "border-r-4 border-r-emerald-500 bg-orange-500/5 hover:bg-orange-500/10";
     }
     return "hover:bg-[#1C1C26]/50 border-r-4 border-r-transparent";
   };
@@ -1042,15 +1042,15 @@ export default function TrialsTab({
         );
       case "completed":
         return (
-          <span className="inline-flex items-center gap-1 px-2.5 py-1 rounded-full text-[11px] font-black bg-emerald-500/10 border border-emerald-500/30 text-emerald-400">
-            <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse"></span>
+          <span className="inline-flex items-center gap-1 px-2.5 py-1 rounded-full text-[11px] font-black bg-orange-500/10 border border-emerald-500/30 text-emerald-400">
+            <span className="w-1.5 h-1.5 rounded-full bg-orange-500 animate-pulse"></span>
             <span>تم الدفع</span>
           </span>
         );
       case "approved":
         return (
-          <span className="inline-flex items-center gap-1 px-2.5 py-1 rounded-full text-[11px] font-black bg-purple-500/10 border border-purple-500/30 text-purple-400">
-            <span className="w-1.5 h-1.5 rounded-full bg-purple-500 animate-pulse"></span>
+          <span className="inline-flex items-center gap-1 px-2.5 py-1 rounded-full text-[11px] font-black bg-blue-500/10 border border-blue-500/30 text-blue-600">
+            <span className="w-1.5 h-1.5 rounded-full bg-blue-500 animate-pulse"></span>
             <span>مفعل</span>
           </span>
         );
@@ -1063,7 +1063,7 @@ export default function TrialsTab({
         );
       default:
         return (
-          <span className="inline-flex items-center gap-1 px-2.5 py-1 rounded-full text-[11px] font-black bg-slate-500/10 border border-slate-500/30 text-slate-400">
+          <span className="inline-flex items-center gap-1 px-2.5 py-1 rounded-full text-[11px] font-black bg-slate-500/10 border border-slate-500/30 text-slate-600">
             <span>{status}</span>
           </span>
         );
@@ -1102,12 +1102,12 @@ export default function TrialsTab({
             value={searchQuery}
             onChange={(e) => setSearchQuery(e.target.value)}
             placeholder="البحث الذكي بالاسم، الهاتف، المحل، الولاية، الباقة، أو رقم الطلب (Ctrl+F)..."
-            className="w-full bg-[#0B0B12] border border-[rgba(255,255,255,0.06)] rounded-xl pr-12 pl-4 py-3 text-xs md:text-sm text-slate-100 placeholder:text-slate-500 text-right focus:outline-none focus:ring-2 focus:ring-[#8B5CF6]/50 transition-all font-medium"
+            className="w-full bg-[#0B0B12] border border-[rgba(255,255,255,0.06)] rounded-xl pr-12 pl-4 py-3 text-xs md:text-sm text-slate-900 placeholder:text-slate-500 text-right focus:outline-none focus:ring-2 focus:ring-[#8B5CF6]/50 transition-all font-medium"
           />
           {searchQuery && (
             <button 
               onClick={() => setSearchQuery("")} 
-              className="absolute left-4 top-1/2 -translate-y-1/2 text-slate-500 hover:text-white text-xs cursor-pointer"
+              className="absolute left-4 top-1/2 -translate-y-1/2 text-slate-500 hover:text-slate-900 text-xs cursor-pointer"
             >
               <X className="w-4 h-4" />
             </button>
@@ -1119,7 +1119,7 @@ export default function TrialsTab({
           {/* Refresh Action */}
           <button
             onClick={handleRefresh}
-            className="p-3 bg-[#0B0B12] hover:bg-[#1C1C26] border border-[rgba(255,255,255,0.06)] rounded-xl text-slate-300 hover:text-[#8B5CF6] transition-all cursor-pointer"
+            className="p-3 bg-[#0B0B12] hover:bg-[#1C1C26] border border-[rgba(255,255,255,0.06)] rounded-xl text-slate-700 hover:text-[#8B5CF6] transition-all cursor-pointer"
             title="تحديث البيانات الفوري (Ctrl+R)"
           >
             <RefreshCw className="w-4 h-4" />
@@ -1128,7 +1128,7 @@ export default function TrialsTab({
           {/* Export CSV */}
           <button
             onClick={exportToCSV}
-            className="px-4 py-2.5 bg-[#0B0B12] hover:bg-[#1C1C26] border border-[rgba(255,255,255,0.06)] rounded-xl text-xs font-black text-slate-300 hover:text-emerald-400 flex items-center gap-2 transition-all cursor-pointer"
+            className="px-4 py-2.5 bg-[#0B0B12] hover:bg-[#1C1C26] border border-[rgba(255,255,255,0.06)] rounded-xl text-xs font-black text-slate-700 hover:text-emerald-400 flex items-center gap-2 transition-all cursor-pointer"
             title="تصدير لملف إكسل متوافق"
           >
             <Download className="w-4 h-4 text-emerald-400" />
@@ -1138,7 +1138,7 @@ export default function TrialsTab({
           {/* Print */}
           <button
             onClick={() => window.print()}
-            className="px-4 py-2.5 bg-[#0B0B12] hover:bg-[#1C1C26] border border-[rgba(255,255,255,0.06)] rounded-xl text-xs font-black text-slate-300 hover:text-[#A855F7] flex items-center gap-2 transition-all cursor-pointer"
+            className="px-4 py-2.5 bg-[#0B0B12] hover:bg-[#1C1C26] border border-[rgba(255,255,255,0.06)] rounded-xl text-xs font-black text-slate-700 hover:text-[#A855F7] flex items-center gap-2 transition-all cursor-pointer"
             title="طباعة التراخيص والطلبات (Ctrl+P)"
           >
             <Printer className="w-4 h-4 text-[#A855F7]" />
@@ -1152,7 +1152,7 @@ export default function TrialsTab({
                 triggerToast("لا توجد إشعارات جديدة غير مقروءة.");
                 addLog("تم مراجعة مركز الإشعارات الفورية.");
               }}
-              className="p-3 bg-[#0B0B12] hover:bg-[#1C1C26] border border-[rgba(255,255,255,0.06)] rounded-xl text-slate-300 hover:text-[#F59E0B] transition-all cursor-pointer"
+              className="p-3 bg-[#0B0B12] hover:bg-[#1C1C26] border border-[rgba(255,255,255,0.06)] rounded-xl text-slate-700 hover:text-[#F59E0B] transition-all cursor-pointer"
             >
               <Bell className="w-4 h-4 text-[#F59E0B]" />
               <span className="absolute top-1.5 left-1.5 w-2.5 h-2.5 bg-rose-500 rounded-full animate-ping"></span>
@@ -1173,19 +1173,19 @@ export default function TrialsTab({
           className="bg-[#14141D] border border-[rgba(255,255,255,0.06)] p-4 rounded-[18px] relative overflow-hidden flex flex-col justify-between"
         >
           <div className="flex items-center justify-between">
-            <span className="text-[11px] font-black text-slate-400">إجمالي الطلبات</span>
+            <span className="text-[11px] font-black text-slate-600">إجمالي الطلبات</span>
             <div className="p-1.5 bg-[#8B5CF6]/10 text-[#8B5CF6] rounded-lg">
               <Layers className="w-4 h-4" />
             </div>
           </div>
           <div className="mt-2">
-            <div className="text-xl md:text-2xl font-black text-white">{stats.total}</div>
+            <div className="text-xl md:text-2xl font-black text-slate-900">{stats.total}</div>
             <div className="text-[10px] text-emerald-400 flex items-center gap-1 mt-0.5">
               <TrendingUp className="w-3.5 h-3.5" />
               <span>+{stats.totalToday} اليوم</span>
             </div>
           </div>
-          <div className="w-full bg-slate-800/50 h-1 rounded-full mt-3 overflow-hidden">
+          <div className="w-full bg-slate-200/50 h-1 rounded-full mt-3 overflow-hidden">
             <div className="bg-[#8B5CF6] h-full" style={{ width: "85%" }}></div>
           </div>
         </motion.div>
@@ -1196,19 +1196,19 @@ export default function TrialsTab({
           className="bg-[#14141D] border border-[rgba(255,255,255,0.06)] p-4 rounded-[18px] relative overflow-hidden flex flex-col justify-between"
         >
           <div className="flex items-center justify-between">
-            <span className="text-[11px] font-black text-slate-400">طلبات جديدة</span>
+            <span className="text-[11px] font-black text-slate-600">طلبات جديدة</span>
             <div className="p-1.5 bg-blue-500/10 text-blue-400 rounded-lg">
               <Clock className="w-4 h-4" />
             </div>
           </div>
           <div className="mt-2">
-            <div className="text-xl md:text-2xl font-black text-white">{stats.newCount}</div>
+            <div className="text-xl md:text-2xl font-black text-slate-900">{stats.newCount}</div>
             <div className="text-[10px] text-blue-400 flex items-center gap-1 mt-0.5">
               <span className="w-1.5 h-1.5 rounded-full bg-blue-400 animate-pulse"></span>
               <span>نشط حالياً</span>
             </div>
           </div>
-          <div className="w-full bg-slate-800/50 h-1 rounded-full mt-3 overflow-hidden">
+          <div className="w-full bg-slate-200/50 h-1 rounded-full mt-3 overflow-hidden">
             <div className="bg-blue-500 h-full" style={{ width: `${(stats.newCount / (stats.total || 1)) * 100}%` }}></div>
           </div>
         </motion.div>
@@ -1219,18 +1219,18 @@ export default function TrialsTab({
           className="bg-[#14141D] border border-[rgba(255,255,255,0.06)] p-4 rounded-[18px] relative overflow-hidden flex flex-col justify-between"
         >
           <div className="flex items-center justify-between">
-            <span className="text-[11px] font-black text-slate-400">قيد المراجعة</span>
+            <span className="text-[11px] font-black text-slate-600">قيد المراجعة</span>
             <div className="p-1.5 bg-amber-500/10 text-amber-400 rounded-lg">
               <Activity className="w-4 h-4" />
             </div>
           </div>
           <div className="mt-2">
-            <div className="text-xl md:text-2xl font-black text-white">{stats.reviewCount}</div>
+            <div className="text-xl md:text-2xl font-black text-slate-900">{stats.reviewCount}</div>
             <div className="text-[10px] text-amber-400 flex items-center gap-1 mt-0.5">
               <span>قيد التواصل</span>
             </div>
           </div>
-          <div className="w-full bg-slate-800/50 h-1 rounded-full mt-3 overflow-hidden">
+          <div className="w-full bg-slate-200/50 h-1 rounded-full mt-3 overflow-hidden">
             <div className="bg-amber-500 h-full" style={{ width: `${(stats.reviewCount / (stats.total || 1)) * 100}%` }}></div>
           </div>
         </motion.div>
@@ -1241,19 +1241,19 @@ export default function TrialsTab({
           className="bg-[#14141D] border border-[rgba(255,255,255,0.06)] p-4 rounded-[18px] relative overflow-hidden flex flex-col justify-between"
         >
           <div className="flex items-center justify-between">
-            <span className="text-[11px] font-black text-slate-400">بانتظار الاتصال</span>
+            <span className="text-[11px] font-black text-slate-600">بانتظار الاتصال</span>
             <div className="p-1.5 bg-[#F59E0B]/10 text-[#F59E0B] rounded-lg">
               <Phone className="w-4 h-4" />
             </div>
           </div>
           <div className="mt-2">
-            <div className="text-xl md:text-2xl font-black text-white">{stats.needsContactCount}</div>
+            <div className="text-xl md:text-2xl font-black text-slate-900">{stats.needsContactCount}</div>
             <div className="text-[10px] text-rose-400 flex items-center gap-1 mt-0.5">
               <AlertCircle className="w-3.5 h-3.5" />
               <span>تحتاج رعاية فورية</span>
             </div>
           </div>
-          <div className="w-full bg-slate-800/50 h-1 rounded-full mt-3 overflow-hidden">
+          <div className="w-full bg-slate-200/50 h-1 rounded-full mt-3 overflow-hidden">
             <div className="bg-[#F59E0B] h-full" style={{ width: "45%" }}></div>
           </div>
         </motion.div>
@@ -1264,18 +1264,18 @@ export default function TrialsTab({
           className="bg-[#14141D] border border-[rgba(255,255,255,0.06)] p-4 rounded-[18px] relative overflow-hidden flex flex-col justify-between"
         >
           <div className="flex items-center justify-between">
-            <span className="text-[11px] font-black text-slate-400">مفعلة ونشطة</span>
+            <span className="text-[11px] font-black text-slate-600">مفعلة ونشطة</span>
             <div className="p-1.5 bg-[#22C55E]/10 text-[#22C55E] rounded-lg">
               <CheckSquare className="w-4 h-4" />
             </div>
           </div>
           <div className="mt-2">
-            <div className="text-xl md:text-2xl font-black text-white">{stats.activatedCount}</div>
+            <div className="text-xl md:text-2xl font-black text-slate-900">{stats.activatedCount}</div>
             <div className="text-[10px] text-emerald-400 flex items-center gap-1 mt-0.5">
               <span>مضمونة وآمنة</span>
             </div>
           </div>
-          <div className="w-full bg-slate-800/50 h-1 rounded-full mt-3 overflow-hidden">
+          <div className="w-full bg-slate-200/50 h-1 rounded-full mt-3 overflow-hidden">
             <div className="bg-[#22C55E] h-full" style={{ width: `${(stats.activatedCount / (stats.total || 1)) * 100}%` }}></div>
           </div>
         </motion.div>
@@ -1286,7 +1286,7 @@ export default function TrialsTab({
           className="bg-[#14141D] border border-[rgba(255,255,255,0.06)] p-4 rounded-[18px] relative overflow-hidden flex flex-col justify-between col-span-2 md:col-span-1"
         >
           <div className="flex items-center justify-between">
-            <span className="text-[11px] font-black text-slate-400">إجمالي الإيرادات</span>
+            <span className="text-[11px] font-black text-slate-600">إجمالي الإيرادات</span>
             <div className="p-1.5 bg-[#A855F7]/10 text-[#A855F7] rounded-lg">
               <CreditCard className="w-4 h-4" />
             </div>
@@ -1297,7 +1297,7 @@ export default function TrialsTab({
               <span>+{formatCurrency(stats.revenueToday)} اليوم</span>
             </div>
           </div>
-          <div className="w-full bg-slate-800/50 h-1 rounded-full mt-3 overflow-hidden">
+          <div className="w-full bg-slate-200/50 h-1 rounded-full mt-3 overflow-hidden">
             <div className="bg-emerald-400 h-full" style={{ width: "92%" }}></div>
           </div>
         </motion.div>
@@ -1311,18 +1311,18 @@ export default function TrialsTab({
         
         <div className="flex items-center gap-2 border-b border-white/5 pb-2">
           <Sliders className="w-4 h-4 text-[#8B5CF6]" />
-          <h3 className="text-xs font-black text-white">شريط أدوات الفلترة والتحكم بالطلبات</h3>
+          <h3 className="text-xs font-black text-slate-900">شريط أدوات الفلترة والتحكم بالطلبات</h3>
         </div>
 
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-3">
           
           {/* City Filter */}
           <div className="space-y-1">
-            <label className="block text-[10px] font-black text-slate-400">تصفية بالولاية:</label>
+            <label className="block text-[10px] font-black text-slate-600">تصفية بالولاية:</label>
             <select
               value={cityFilter}
               onChange={(e) => setCityFilter(e.target.value)}
-              className="w-full bg-[#0B0B12] border border-[rgba(255,255,255,0.06)] rounded-xl px-3 py-2 text-xs text-slate-300 focus:outline-none focus:ring-1 focus:ring-[#8B5CF6] cursor-pointer"
+              className="w-full bg-[#0B0B12] border border-[rgba(255,255,255,0.06)] rounded-xl px-3 py-2 text-xs text-slate-700 focus:outline-none focus:ring-1 focus:ring-[#8B5CF6] cursor-pointer"
             >
               <option value="all">📍 جميع الولايات ({uniqueCities.length})</option>
               {uniqueCities.map(city => (
@@ -1333,11 +1333,11 @@ export default function TrialsTab({
 
           {/* Package Filter */}
           <div className="space-y-1">
-            <label className="block text-[10px] font-black text-slate-400">تصفية بالباقة:</label>
+            <label className="block text-[10px] font-black text-slate-600">تصفية بالباقة:</label>
             <select
               value={programFilter}
               onChange={(e) => setProgramFilter(e.target.value)}
-              className="w-full bg-[#0B0B12] border border-[rgba(255,255,255,0.06)] rounded-xl px-3 py-2 text-xs text-slate-300 focus:outline-none focus:ring-1 focus:ring-[#8B5CF6] cursor-pointer"
+              className="w-full bg-[#0B0B12] border border-[rgba(255,255,255,0.06)] rounded-xl px-3 py-2 text-xs text-slate-700 focus:outline-none focus:ring-1 focus:ring-[#8B5CF6] cursor-pointer"
             >
               <option value="all">📦 جميع الباقات</option>
               <option value="trial">فترة تجريبية أساسية ⏳</option>
@@ -1349,11 +1349,11 @@ export default function TrialsTab({
 
           {/* Status Filter */}
           <div className="space-y-1">
-            <label className="block text-[10px] font-black text-slate-400">تصفية بالحالة:</label>
+            <label className="block text-[10px] font-black text-slate-600">تصفية بالحالة:</label>
             <select
               value={statusFilter}
               onChange={(e) => setStatusFilter(e.target.value)}
-              className="w-full bg-[#0B0B12] border border-[rgba(255,255,255,0.06)] rounded-xl px-3 py-2 text-xs text-slate-300 focus:outline-none focus:ring-1 focus:ring-[#8B5CF6] cursor-pointer"
+              className="w-full bg-[#0B0B12] border border-[rgba(255,255,255,0.06)] rounded-xl px-3 py-2 text-xs text-slate-700 focus:outline-none focus:ring-1 focus:ring-[#8B5CF6] cursor-pointer"
             >
               <option value="all">🔔 جميع الحالات</option>
               <option value="pending">⏳ جديد / قيد الانتظار</option>
@@ -1366,11 +1366,11 @@ export default function TrialsTab({
 
           {/* Date Filter */}
           <div className="space-y-1">
-            <label className="block text-[10px] font-black text-slate-400">تاريخ الطلبات:</label>
+            <label className="block text-[10px] font-black text-slate-600">تاريخ الطلبات:</label>
             <select
               value={dateFilter}
               onChange={(e) => setDateFilter(e.target.value)}
-              className="w-full bg-[#0B0B12] border border-[rgba(255,255,255,0.06)] rounded-xl px-3 py-2 text-xs text-slate-300 focus:outline-none focus:ring-1 focus:ring-[#8B5CF6] cursor-pointer"
+              className="w-full bg-[#0B0B12] border border-[rgba(255,255,255,0.06)] rounded-xl px-3 py-2 text-xs text-slate-700 focus:outline-none focus:ring-1 focus:ring-[#8B5CF6] cursor-pointer"
             >
               <option value="all">📅 كل الفترات الزمنية</option>
               <option value="today">اليوم (آخر 24 ساعة)</option>
@@ -1381,11 +1381,11 @@ export default function TrialsTab({
 
           {/* Sort Selector */}
           <div className="space-y-1">
-            <label className="block text-[10px] font-black text-slate-400">ترتيب العرض حسب:</label>
+            <label className="block text-[10px] font-black text-slate-600">ترتيب العرض حسب:</label>
             <select
               value={sortBy}
               onChange={(e) => setSortBy(e.target.value as any)}
-              className="w-full bg-[#0B0B12] border border-[rgba(255,255,255,0.06)] rounded-xl px-3 py-2 text-xs text-slate-300 focus:outline-none focus:ring-1 focus:ring-[#8B5CF6] cursor-pointer"
+              className="w-full bg-[#0B0B12] border border-[rgba(255,255,255,0.06)] rounded-xl px-3 py-2 text-xs text-slate-700 focus:outline-none focus:ring-1 focus:ring-[#8B5CF6] cursor-pointer"
             >
               <option value="newest">🕒 الأحدث تسجيلاً</option>
               <option value="oldest">🕒 الأقدم تسجيلاً</option>
@@ -1403,7 +1403,7 @@ export default function TrialsTab({
           {/* Checkboxes Group */}
           <div className="flex flex-wrap items-center gap-x-5 gap-y-2">
             
-            <label className="inline-flex items-center gap-2 cursor-pointer text-slate-300 hover:text-white select-none">
+            <label className="inline-flex items-center gap-2 cursor-pointer text-slate-700 hover:text-slate-900 select-none">
               <input
                 type="checkbox"
                 checked={showOnlyNew}
@@ -1413,7 +1413,7 @@ export default function TrialsTab({
               <span className="text-xs font-bold">الطلبات الجديدة فقط</span>
             </label>
 
-            <label className="inline-flex items-center gap-2 cursor-pointer text-slate-300 hover:text-white select-none">
+            <label className="inline-flex items-center gap-2 cursor-pointer text-slate-700 hover:text-slate-900 select-none">
               <input
                 type="checkbox"
                 checked={showOnlyToday}
@@ -1423,7 +1423,7 @@ export default function TrialsTab({
               <span className="text-xs font-bold">طلبات اليوم</span>
             </label>
 
-            <label className="inline-flex items-center gap-2 cursor-pointer text-slate-300 hover:text-white select-none">
+            <label className="inline-flex items-center gap-2 cursor-pointer text-slate-700 hover:text-slate-900 select-none">
               <input
                 type="checkbox"
                 checked={showOnlyDelayed}
@@ -1436,7 +1436,7 @@ export default function TrialsTab({
               </span>
             </label>
 
-            <label className="inline-flex items-center gap-2 cursor-pointer text-slate-300 hover:text-white select-none">
+            <label className="inline-flex items-center gap-2 cursor-pointer text-slate-700 hover:text-slate-900 select-none">
               <input
                 type="checkbox"
                 checked={showOnlyNeedsContact}
@@ -1457,7 +1457,7 @@ export default function TrialsTab({
                 const el = document.getElementById('trials-bulk-import-input');
                 el?.click();
               }}
-              className="px-3.5 py-2 bg-[#0B0B12] hover:bg-[#1C1C26] border border-[rgba(255,255,255,0.06)] rounded-xl text-xs font-bold text-slate-300 hover:text-blue-400 flex items-center gap-1.5 cursor-pointer transition-all"
+              className="px-3.5 py-2 bg-[#0B0B12] hover:bg-[#1C1C26] border border-[rgba(255,255,255,0.06)] rounded-xl text-xs font-bold text-slate-700 hover:text-blue-400 flex items-center gap-1.5 cursor-pointer transition-all"
             >
               <FileUp className="w-4 h-4" />
               <span>استيراد طلبات</span>
@@ -1476,7 +1476,7 @@ export default function TrialsTab({
             {/* Main Add Button (Manual form popup) */}
             <button
               onClick={() => setIsAddModalOpen(true)}
-              className="px-4 py-2 bg-gradient-to-r from-[#8B5CF6] to-[#A855F7] hover:from-[#A855F7] hover:to-[#8B5CF6] text-white text-xs font-black rounded-xl shadow-lg flex items-center gap-1.5 transition-all cursor-pointer"
+              className="px-4 py-2 bg-gradient-to-r from-[#8B5CF6] to-[#A855F7] hover:from-[#A855F7] hover:to-[#8B5CF6] text-slate-900 text-xs font-black rounded-xl shadow-lg flex items-center gap-1.5 transition-all cursor-pointer"
             >
               <Plus className="w-4 h-4" />
               <span>إضافة طلب ترخيص جديد</span>
@@ -1497,11 +1497,11 @@ export default function TrialsTab({
         <div className="xl:col-span-12 bg-[#14141D] border border-[rgba(255,255,255,0.06)] rounded-[18px] overflow-hidden flex flex-col shadow-sm">
           
           <div className="p-5 border-b border-white/5 flex items-center justify-between flex-row-reverse">
-            <div className="text-[11px] font-black text-slate-400 flex items-center gap-1 font-mono">
+            <div className="text-[11px] font-black text-slate-600 flex items-center gap-1 font-mono">
               <span>عرض {(currentPage - 1) * itemsPerPage + 1} - {Math.min(currentPage * itemsPerPage, filteredAndSortedTrials.length)}</span>
               <span>من أصل {filteredAndSortedTrials.length} طلبات مصنفة</span>
             </div>
-            <h3 className="text-sm font-black text-white flex items-center gap-2 flex-row-reverse">
+            <h3 className="text-sm font-black text-slate-900 flex items-center gap-2 flex-row-reverse">
               <span>قائمة طلبات التراخيص والمتاجر الحالية</span>
               {filteredAndSortedTrials.length !== parentSortedTrials.length && (
                 <span className="text-[10px] bg-[#8B5CF6]/10 text-[#8B5CF6] border border-[#8B5CF6]/20 px-2 py-0.5 rounded-full">مفلتر</span>
@@ -1512,7 +1512,7 @@ export default function TrialsTab({
           <div className="overflow-x-auto w-full pb-36">
             <table className="w-full text-right text-xs border-collapse min-w-[900px]">
               <thead>
-                <tr className="bg-[#0B0B12] border-b border-[rgba(255,255,255,0.06)] text-slate-400 text-[10px] uppercase font-black tracking-wider">
+                <tr className="bg-[#0B0B12] border-b border-[rgba(255,255,255,0.06)] text-slate-600 text-[10px] uppercase font-black tracking-wider">
                   <th className="px-5 py-4 text-right">المحل والعميل</th>
                   <th className="px-5 py-4 text-right">الولاية والهاتف</th>
                   <th className="px-5 py-4 text-right">الباقة المختارة</th>
@@ -1558,34 +1558,34 @@ export default function TrialsTab({
                             <div className="w-10 h-10 rounded-xl bg-gradient-to-tr from-[#8B5CF6]/20 to-[#A855F7]/20 border border-[rgba(255,255,255,0.06)] flex items-center justify-center shrink-0 relative">
                               <Laptop className="w-5 h-5 text-[#A855F7]" />
                               {isNew && (
-                                <span className="absolute -top-1 -right-1 bg-blue-500 text-[8px] text-white font-black px-1.5 rounded-full uppercase tracking-widest scale-90 border border-slate-900 animate-pulse">
+                                <span className="absolute -top-1 -right-1 bg-blue-500 text-[8px] text-slate-900 font-black px-1.5 rounded-full uppercase tracking-widest scale-90 border border-slate-200 animate-pulse">
                                   NEW
                                 </span>
                               )}
                             </div>
                             <div className="space-y-0.5">
-                              <div className="font-black text-white text-sm group-hover:text-[#A855F7] transition-colors flex items-center gap-1.5">
+                              <div className="font-black text-slate-900 text-sm group-hover:text-[#A855F7] transition-colors flex items-center gap-1.5">
                                 <span>{req.storeName}</span>
                               </div>
-                              <div className="text-[10px] text-slate-400 font-medium">{req.ownerName}</div>
+                              <div className="text-[10px] text-slate-600 font-medium">{req.ownerName}</div>
                             </div>
                           </div>
                         </td>
 
                         {/* 2. City & Phone */}
                         <td className="px-5 py-4">
-                          <div className="font-bold text-slate-200 text-xs flex items-center gap-1">
+                          <div className="font-bold text-slate-800 text-xs flex items-center gap-1">
                             <MapPin className="w-3.5 h-3.5 text-slate-500" />
                             <span>{req.city}</span>
                           </div>
-                          <div className="text-[10px] text-slate-400 font-mono mt-0.5">{req.phone}</div>
+                          <div className="text-[10px] text-slate-600 font-mono mt-0.5">{req.phone}</div>
                         </td>
 
                         {/* 3. Package Selection */}
                         <td className="px-5 py-4">
                           <div className="flex items-center gap-2 justify-start flex-row-reverse">
                             <div className="space-y-1 text-right">
-                              <span className="font-black text-slate-100 block text-xs">
+                              <span className="font-black text-slate-900 block text-xs">
                                 {req.programType === "pc" || req.programType === "computer" || req.programType === "p_pc_only" ? (
                                   "باقة لوجيسيال حاسوب فقط"
                                 ) : req.programType === "mobile" || req.programType === "phone" || req.programType === "p_mobile_only" ? (
@@ -1626,7 +1626,7 @@ export default function TrialsTab({
                                   <span>CCP</span>
                                 </span>
                               ) : (
-                                <span className="inline-flex items-center gap-1 px-2 py-0.5 rounded-md bg-slate-500/10 border border-slate-500/20 text-slate-400">
+                                <span className="inline-flex items-center gap-1 px-2 py-0.5 rounded-md bg-slate-500/10 border border-slate-500/20 text-slate-600">
                                   <span>بدون دفع</span>
                                 </span>
                               )}
@@ -1664,7 +1664,7 @@ export default function TrialsTab({
                         {/* 5.6. Admin Notes / Customer Description */}
                         <td className="px-5 py-4 text-right" onClick={(e) => e.stopPropagation()}>
                           <textarea
-                            className="w-48 bg-[#1A1A24] border border-[rgba(255,255,255,0.06)] rounded-lg px-3 py-2 text-xs text-slate-300 placeholder-slate-600 focus:outline-none focus:border-[#8B5CF6] transition-colors resize-none overflow-hidden"
+                            className="w-48 bg-[#1A1A24] border border-[rgba(255,255,255,0.06)] rounded-lg px-3 py-2 text-xs text-slate-700 placeholder-slate-600 focus:outline-none focus:border-[#8B5CF6] transition-colors resize-none overflow-hidden"
                             rows={1}
                             placeholder="اكتب ملاحظة (مهتم، متردد...)"
                             defaultValue={req.adminNotes || ""}
@@ -1679,7 +1679,7 @@ export default function TrialsTab({
                         </td>
 
                         {/* 6. Last Active / Timestamp */}
-                        <td className="px-5 py-4 font-mono text-xs text-slate-400">
+                        <td className="px-5 py-4 font-mono text-xs text-slate-600">
                           <div>{new Date(req.timestamp).toLocaleDateString("ar-DZ", { day: "2-digit", month: "2-digit", year: "numeric" })}</div>
                           <div className="text-[10px] text-slate-500 mt-0.5">{new Date(req.timestamp).toLocaleTimeString("ar-DZ", { hour: "2-digit", minute: "2-digit" })}</div>
                         </td>
@@ -1694,7 +1694,7 @@ export default function TrialsTab({
                                 href={generateWhatsAppLink(req.phone, req.ownerName, req.storeName, req.programType)}
                                 target="_blank"
                                 rel="noreferrer"
-                                className="p-1.5 bg-[#0B0B12] hover:bg-emerald-500/10 border border-emerald-500/20 text-emerald-400 rounded-lg transition-all cursor-pointer"
+                                className="p-1.5 bg-[#0B0B12] hover:bg-orange-500/10 border border-emerald-500/20 text-emerald-400 rounded-lg transition-all cursor-pointer"
                                 title="مراسلة عبر واتساب"
                               >
                                 <MessageSquareCode className="w-3.5 h-3.5" />
@@ -1713,7 +1713,7 @@ export default function TrialsTab({
                             {/* Copy number */}
                             <button
                               onClick={() => copyText(req.phone, `${req.id}-phone`, "رقم الهاتف")}
-                              className="p-1.5 bg-[#0B0B12] hover:bg-slate-700/50 border border-white/5 text-slate-300 rounded-lg transition-all cursor-pointer"
+                              className="p-1.5 bg-[#0B0B12] hover:bg-slate-700/50 border border-white/5 text-slate-700 rounded-lg transition-all cursor-pointer"
                               title="نسخ الرقم"
                             >
                               {copiedId === `${req.id}-phone` ? (
@@ -1736,7 +1736,7 @@ export default function TrialsTab({
                             {hasPermission("edit_status") && (
                               <button
                                 onClick={() => openEditModal(req)}
-                                className="p-1.5 bg-[#0B0B12] hover:bg-purple-500/10 border border-purple-500/20 text-purple-400 rounded-lg transition-all cursor-pointer"
+                                className="p-1.5 bg-[#0B0B12] hover:bg-blue-500/10 border border-blue-500/20 text-blue-600 rounded-lg transition-all cursor-pointer"
                                 title="تعديل تفاصيل الطلب"
                               >
                                 <Edit className="w-3.5 h-3.5" />
@@ -1752,7 +1752,7 @@ export default function TrialsTab({
                                     addLog(`تم تنشيط وتفعيل رخصة متجر "${req.storeName}" بنجاح.`);
                                     triggerToast("تم تنشيط رخصة المتجر بنجاح 🟢");
                                   }}
-                                  className="p-1.5 bg-[#0B0B12] hover:bg-emerald-500/20 border border-emerald-500/30 text-emerald-400 rounded-lg transition-all cursor-pointer"
+                                  className="p-1.5 bg-[#0B0B12] hover:bg-orange-500/20 border border-emerald-500/30 text-emerald-400 rounded-lg transition-all cursor-pointer"
                                   title="تنشيط وتسليم الرخصة فوراً"
                                 >
                                   <CheckSquare className="w-3.5 h-3.5" />
@@ -1804,14 +1804,14 @@ export default function TrialsTab({
             <div className="p-5 border-t border-white/5 flex flex-col sm:flex-row items-center justify-between gap-4">
               
               <div className="flex items-center gap-2">
-                <span className="text-xs text-slate-400">الصفوف لكل صفحة:</span>
+                <span className="text-xs text-slate-600">الصفوف لكل صفحة:</span>
                 <select
                   value={itemsPerPage}
                   onChange={(e) => {
                     setItemsPerPage(Number(e.target.value));
                     setCurrentPage(1);
                   }}
-                  className="bg-[#0B0B12] border border-[rgba(255,255,255,0.06)] rounded-lg px-2 py-1 text-xs text-slate-300 focus:outline-none cursor-pointer font-mono"
+                  className="bg-[#0B0B12] border border-[rgba(255,255,255,0.06)] rounded-lg px-2 py-1 text-xs text-slate-700 focus:outline-none cursor-pointer font-mono"
                 >
                   <option value={5}>5</option>
                   <option value={10}>10</option>
@@ -1825,7 +1825,7 @@ export default function TrialsTab({
                 <button
                   disabled={currentPage === 1}
                   onClick={() => setCurrentPage(prev => Math.max(prev - 1, 1))}
-                  className="p-1.5 rounded-lg border border-[rgba(255,255,255,0.06)] bg-[#0B0B12] text-slate-400 hover:text-white disabled:opacity-30 disabled:pointer-events-none transition-all cursor-pointer"
+                  className="p-1.5 rounded-lg border border-[rgba(255,255,255,0.06)] bg-[#0B0B12] text-slate-600 hover:text-slate-900 disabled:opacity-30 disabled:pointer-events-none transition-all cursor-pointer"
                 >
                   <ChevronRight className="w-4 h-4" />
                 </button>
@@ -1837,8 +1837,8 @@ export default function TrialsTab({
                       onClick={() => setCurrentPage(page)}
                       className={`px-3 py-1.5 rounded-lg text-xs font-bold font-mono transition-all cursor-pointer ${
                         currentPage === page 
-                          ? "bg-[#8B5CF6] text-white border border-[#8B5CF6]" 
-                          : "bg-[#0B0B12] hover:bg-[#1C1C26] text-slate-400 border border-[rgba(255,255,255,0.06)]"
+                          ? "bg-[#8B5CF6] text-slate-900 border border-[#8B5CF6]" 
+                          : "bg-[#0B0B12] hover:bg-[#1C1C26] text-slate-600 border border-[rgba(255,255,255,0.06)]"
                       }`}
                     >
                       {page}
@@ -1849,7 +1849,7 @@ export default function TrialsTab({
                 <button
                   disabled={currentPage === totalPages}
                   onClick={() => setCurrentPage(prev => Math.min(prev + 1, totalPages))}
-                  className="p-1.5 rounded-lg border border-[rgba(255,255,255,0.06)] bg-[#0B0B12] text-slate-400 hover:text-white disabled:opacity-30 disabled:pointer-events-none transition-all cursor-pointer"
+                  className="p-1.5 rounded-lg border border-[rgba(255,255,255,0.06)] bg-[#0B0B12] text-slate-600 hover:text-slate-900 disabled:opacity-30 disabled:pointer-events-none transition-all cursor-pointer"
                 >
                   <ChevronLeft className="w-4 h-4" />
                 </button>
@@ -1904,7 +1904,7 @@ export default function TrialsTab({
                   </button>
                   <button
                     onClick={() => setSelectedRequest(null)}
-                    className="p-2 bg-[#14141D] hover:bg-[#1C1C26] border border-white/5 text-slate-400 hover:text-white rounded-xl transition-all cursor-pointer"
+                    className="p-2 bg-[#14141D] hover:bg-[#1C1C26] border border-white/5 text-slate-600 hover:text-slate-900 rounded-xl transition-all cursor-pointer"
                   >
                     <X className="w-4 h-4" />
                   </button>
@@ -1915,7 +1915,7 @@ export default function TrialsTab({
                     <Laptop className="w-6 h-6 text-[#A855F7]" />
                   </div>
                   <div>
-                    <h2 className="text-md font-black text-white">{selectedRequest.storeName}</h2>
+                    <h2 className="text-md font-black text-slate-900">{selectedRequest.storeName}</h2>
                     <p className="text-xs text-[#8B5CF6] font-bold">{translateProg(selectedRequest.programType)}</p>
                   </div>
                 </div>
@@ -1928,7 +1928,7 @@ export default function TrialsTab({
                   className={`py-2 text-[11px] font-black rounded-lg transition-all cursor-pointer ${
                     activeDrawerTab === "details"
                       ? "bg-[#8B5CF6]/10 border border-[#8B5CF6]/30 text-[#8B5CF6]"
-                      : "text-slate-400 hover:bg-white/5 hover:text-white"
+                      : "text-slate-600 hover:bg-white/5 hover:text-slate-900"
                   }`}
                 >
                   البيانات
@@ -1938,7 +1938,7 @@ export default function TrialsTab({
                   className={`py-2 text-[11px] font-black rounded-lg transition-all cursor-pointer ${
                     activeDrawerTab === "licenses"
                       ? "bg-[#8B5CF6]/10 border border-[#8B5CF6]/30 text-[#8B5CF6]"
-                      : "text-slate-400 hover:bg-white/5 hover:text-white"
+                      : "text-slate-600 hover:bg-white/5 hover:text-slate-900"
                   }`}
                 >
                   التراخيص
@@ -1948,7 +1948,7 @@ export default function TrialsTab({
                   className={`py-2 text-[11px] font-black rounded-lg transition-all cursor-pointer ${
                     activeDrawerTab === "whatsapp"
                       ? "bg-[#8B5CF6]/10 border border-[#8B5CF6]/30 text-[#8B5CF6]"
-                      : "text-slate-400 hover:bg-white/5 hover:text-white"
+                      : "text-slate-600 hover:bg-white/5 hover:text-slate-900"
                   }`}
                 >
                   مراسلة سريعة
@@ -1958,7 +1958,7 @@ export default function TrialsTab({
                   className={`py-2 text-[11px] font-black rounded-lg transition-all cursor-pointer ${
                     activeDrawerTab === "notes"
                       ? "bg-[#8B5CF6]/10 border border-[#8B5CF6]/30 text-[#8B5CF6]"
-                      : "text-slate-400 hover:bg-white/5 hover:text-white"
+                      : "text-slate-600 hover:bg-white/5 hover:text-slate-900"
                   }`}
                 >
                   ملاحظات
@@ -1979,22 +1979,22 @@ export default function TrialsTab({
                       </h4>
                       <div className="grid grid-cols-2 gap-3 text-xs">
                         <div>
-                          <span className="text-slate-400 block mb-0.5">اسم المالك الكامل:</span>
-                          <span className="text-white font-bold">{selectedRequest.ownerName}</span>
+                          <span className="text-slate-600 block mb-0.5">اسم المالك الكامل:</span>
+                          <span className="text-slate-900 font-bold">{selectedRequest.ownerName}</span>
                         </div>
                         <div>
-                          <span className="text-slate-400 block mb-0.5">رقم الهاتف الأساسي:</span>
-                          <span className="text-white font-mono font-bold">{selectedRequest.phone}</span>
+                          <span className="text-slate-600 block mb-0.5">رقم الهاتف الأساسي:</span>
+                          <span className="text-slate-900 font-mono font-bold">{selectedRequest.phone}</span>
                         </div>
                         {selectedRequest.phone2 && (
                           <div>
-                            <span className="text-slate-400 block mb-0.5">رقم الهاتف الثانوي:</span>
-                            <span className="text-white font-mono">{selectedRequest.phone2}</span>
+                            <span className="text-slate-600 block mb-0.5">رقم الهاتف الثانوي:</span>
+                            <span className="text-slate-900 font-mono">{selectedRequest.phone2}</span>
                           </div>
                         )}
                         <div>
-                          <span className="text-slate-400 block mb-0.5">المدينة والولاية:</span>
-                          <span className="text-white font-bold">{selectedRequest.city}</span>
+                          <span className="text-slate-600 block mb-0.5">المدينة والولاية:</span>
+                          <span className="text-slate-900 font-bold">{selectedRequest.city}</span>
                         </div>
                       </div>
                     </div>
@@ -2007,23 +2007,23 @@ export default function TrialsTab({
                       </h4>
                       <div className="grid grid-cols-2 gap-3 text-xs">
                         <div>
-                          <span className="text-slate-400 block mb-0.5">اسم المحل التجاري:</span>
-                          <span className="text-white font-bold">{selectedRequest.storeName}</span>
+                          <span className="text-slate-600 block mb-0.5">اسم المحل التجاري:</span>
+                          <span className="text-slate-900 font-bold">{selectedRequest.storeName}</span>
                         </div>
                         <div>
-                          <span className="text-slate-400 block mb-0.5">نوع الباقة:</span>
+                          <span className="text-slate-600 block mb-0.5">نوع الباقة:</span>
                           <span className="text-[#8B5CF6] font-bold">{translateProg(selectedRequest.programType)}</span>
                         </div>
                         <div>
-                          <span className="text-slate-400 block mb-0.5">طريقة الدفع المحددة:</span>
-                          <span className="text-white font-bold capitalize">{selectedRequest.paymentMethod || "مجاني"}</span>
+                          <span className="text-slate-600 block mb-0.5">طريقة الدفع المحددة:</span>
+                          <span className="text-slate-900 font-bold capitalize">{selectedRequest.paymentMethod || "مجاني"}</span>
                         </div>
                         <div>
-                          <span className="text-slate-400 block mb-0.5">المبلغ المفروض:</span>
+                          <span className="text-slate-600 block mb-0.5">المبلغ المفروض:</span>
                           <span className="text-emerald-400 font-mono font-bold">{formatCurrency(getPrice(selectedRequest.programType))}</span>
                         </div>
                         <div className="col-span-2 pt-2.5 border-t border-white/5 flex items-center justify-between flex-row-reverse">
-                          <span className="text-slate-400 font-bold">التحكم في حالة الطلب:</span>
+                          <span className="text-slate-600 font-bold">التحكم في حالة الطلب:</span>
                           <StatusDropdown
                             currentStatus={selectedRequest.status}
                             onChange={(newStatus) => {
@@ -2044,7 +2044,7 @@ export default function TrialsTab({
                           />
                         </div>
                         <div className="col-span-2 pt-2.5 border-t border-white/5 flex items-center justify-between flex-row-reverse">
-                          <span className="text-slate-400 font-bold">حالة تأكيد المؤكدة:</span>
+                          <span className="text-slate-600 font-bold">حالة تأكيد المؤكدة:</span>
                           <ConfirmationDropdown
                             currentStatus={selectedRequest.confirmationStatus || "pending"}
                             onChange={(newStatus) => {
@@ -2088,7 +2088,7 @@ export default function TrialsTab({
                             triggerToast("جاري تنزيل صورة الوصل والتحويل البريدي...");
                             addLog(`تم تحميل إثبات دفع العميل لمتجر: ${selectedRequest.storeName}`);
                           }}
-                          className="px-3 py-1 bg-slate-800 hover:bg-slate-700 text-white font-black rounded-lg cursor-pointer transition-all"
+                          className="px-3 py-1 bg-slate-200 hover:bg-slate-700 text-slate-900 font-black rounded-lg cursor-pointer transition-all"
                         >
                           معاينة وتنزيل الملف المرفق
                         </button>
@@ -2106,13 +2106,13 @@ export default function TrialsTab({
                         <span>توليد وتسليم رموز التراخيص الذكية</span>
                       </h4>
                       
-                      <p className="text-slate-400 leading-relaxed text-[11px]">
+                      <p className="text-slate-600 leading-relaxed text-[11px]">
                         تلقائياً يقوم النظام بربط رمز الترخيص بقاعدة بيانات العميل لتثبيته في النسخة المكتبية من برنامج الكاشير.
                       </p>
 
                       <div className="space-y-2.5 pt-2">
                         <div>
-                          <span className="text-slate-400 block mb-1">رمز تفعيل الخادم الأساسي (Server Key):</span>
+                          <span className="text-slate-600 block mb-1">رمز تفعيل الخادم الأساسي (Server Key):</span>
                           <div className="flex items-center gap-2">
                             <input
                               type="text"
@@ -2122,7 +2122,7 @@ export default function TrialsTab({
                             />
                             <button
                               onClick={() => copyText(`ALGORA-POS-${selectedRequest.id.toUpperCase()}-LIC-2026`, "lic-srv", "مفتاح الترخيص")}
-                              className="p-2 bg-slate-800 hover:bg-slate-700 rounded-lg text-slate-300"
+                              className="p-2 bg-slate-200 hover:bg-slate-700 rounded-lg text-slate-700"
                               title="نسخ الرمز"
                             >
                               <Copy className="w-3.5 h-3.5" />
@@ -2131,17 +2131,17 @@ export default function TrialsTab({
                         </div>
 
                         <div>
-                          <span className="text-slate-400 block mb-1">كود الترخيص الاحتياطي (Backup Key):</span>
+                          <span className="text-slate-600 block mb-1">كود الترخيص الاحتياطي (Backup Key):</span>
                           <div className="flex items-center gap-2">
                             <input
                               type="text"
                               readOnly
                               value={`BAK-9281-01-${selectedRequest.id.split("-")[0]?.toUpperCase() || "DZ"}`}
-                              className="flex-1 bg-[#14141D] border border-white/10 rounded-lg px-3 py-2 text-[11px] font-mono text-slate-400 text-left focus:outline-none"
+                              className="flex-1 bg-[#14141D] border border-white/10 rounded-lg px-3 py-2 text-[11px] font-mono text-slate-600 text-left focus:outline-none"
                             />
                             <button
                               onClick={() => copyText(`BAK-9281-01-${selectedRequest.id.split("-")[0]?.toUpperCase() || "DZ"}`, "lic-bak", "مفتاح الاحتياطي")}
-                              className="p-2 bg-slate-800 hover:bg-slate-700 rounded-lg text-slate-300"
+                              className="p-2 bg-slate-200 hover:bg-slate-700 rounded-lg text-slate-700"
                               title="نسخ الرمز"
                             >
                               <Copy className="w-3.5 h-3.5" />
@@ -2151,18 +2151,18 @@ export default function TrialsTab({
 
                         {/* Order QR Representation */}
                         <div className="pt-2 text-center space-y-2">
-                          <span className="text-slate-400 block text-[11px]">رمز الاستجابة السريع للطلب (Order QR ID):</span>
+                          <span className="text-slate-600 block text-[11px]">رمز الاستجابة السريع للطلب (Order QR ID):</span>
                           <div className="bg-white p-3 rounded-lg w-28 h-28 mx-auto flex items-center justify-center border border-slate-200">
                             {/* Simple visual mock of barcode / QR code using CSS divs */}
                             <div className="grid grid-cols-4 gap-1.5 w-full h-full opacity-85">
-                              <div className="bg-slate-900 h-full w-2"></div>
-                              <div className="bg-slate-900 h-full w-1"></div>
-                              <div className="bg-slate-900 h-full w-3"></div>
-                              <div className="bg-slate-900 h-full w-1.5"></div>
-                              <div className="bg-slate-900 h-full w-1"></div>
-                              <div className="bg-slate-900 h-full w-2"></div>
-                              <div className="bg-slate-900 h-full w-1"></div>
-                              <div className="bg-slate-900 h-full w-2"></div>
+                              <div className="bg-slate-100 h-full w-2"></div>
+                              <div className="bg-slate-100 h-full w-1"></div>
+                              <div className="bg-slate-100 h-full w-3"></div>
+                              <div className="bg-slate-100 h-full w-1.5"></div>
+                              <div className="bg-slate-100 h-full w-1"></div>
+                              <div className="bg-slate-100 h-full w-2"></div>
+                              <div className="bg-slate-100 h-full w-1"></div>
+                              <div className="bg-slate-100 h-full w-2"></div>
                             </div>
                           </div>
                           <span className="text-[10px] font-mono text-slate-500 block">ID: {selectedRequest.id}</span>
@@ -2183,11 +2183,11 @@ export default function TrialsTab({
                       </h4>
 
                       <div className="space-y-2">
-                        <label className="text-[10px] text-slate-400 block">اختر الحدث / القالب للإرسال:</label>
+                        <label className="text-[10px] text-slate-600 block">اختر الحدث / القالب للإرسال:</label>
                         <select
                           value={selectedTemplateId}
                           onChange={(e) => setSelectedTemplateId(e.target.value)}
-                          className="w-full bg-[#14141D] border border-white/10 rounded-lg px-3 py-2 text-[11px] text-white focus:outline-none"
+                          className="w-full bg-[#14141D] border border-white/10 rounded-lg px-3 py-2 text-[11px] text-slate-900 focus:outline-none"
                         >
                           <option value="new_order">طلب جديد (الرسالة الترحيبية)</option>
                           <option value="contacted">تم الاتصال ومتابعة العميل</option>
@@ -2226,7 +2226,7 @@ export default function TrialsTab({
                             }
                           }}
                           disabled={sendingManualMsg}
-                          className="flex-1 py-2 bg-purple-600 hover:bg-purple-500 disabled:opacity-50 text-white font-black rounded-lg flex items-center justify-center gap-1.5 cursor-pointer transition-all"
+                          className="flex-1 py-2 bg-blue-600 hover:bg-blue-500 disabled:opacity-50 text-slate-900 font-black rounded-lg flex items-center justify-center gap-1.5 cursor-pointer transition-all"
                         >
                           <Send className="w-3.5 h-3.5" />
                           <span>إرسال آلي عبر الـ API</span>
@@ -2264,7 +2264,7 @@ export default function TrialsTab({
                               triggerToast("فشل نسخ النص.");
                             }
                           }}
-                          className="px-3 py-2 bg-[#14141D] hover:bg-[#1C1C26] border border-white/10 text-slate-300 font-bold rounded-lg cursor-pointer transition-all"
+                          className="px-3 py-2 bg-[#14141D] hover:bg-[#1C1C26] border border-white/10 text-slate-700 font-bold rounded-lg cursor-pointer transition-all"
                         >
                           نسخ النص
                         </button>
@@ -2275,7 +2275,7 @@ export default function TrialsTab({
                         href={generateWhatsAppLink(selectedRequest.phone, selectedRequest.ownerName, selectedRequest.storeName, selectedRequest.programType)}
                         target="_blank"
                         rel="noreferrer"
-                        className="w-full py-2 bg-emerald-500/10 hover:bg-emerald-500/20 border border-emerald-500/20 text-emerald-400 font-black rounded-lg text-center flex items-center justify-center gap-1.5 cursor-pointer transition-all"
+                        className="w-full py-2 bg-orange-500/10 hover:bg-orange-500/20 border border-emerald-500/20 text-emerald-400 font-black rounded-lg text-center flex items-center justify-center gap-1.5 cursor-pointer transition-all"
                       >
                         <MessageSquare className="w-3.5 h-3.5" />
                         <span>فتح محادثة واتساب ويب مباشرة (يدوي)</span>
@@ -2284,7 +2284,7 @@ export default function TrialsTab({
 
                     {/* Customer WhatsApp Logs List */}
                     <div className="bg-[#0B0B12] p-4 rounded-xl border border-white/5 space-y-2">
-                      <h4 className="text-xs font-black text-indigo-400 flex items-center justify-between flex-row-reverse border-b border-white/5 pb-1.5">
+                      <h4 className="text-xs font-black text-blue-400 flex items-center justify-between flex-row-reverse border-b border-white/5 pb-1.5">
                         <span>سجل الإرسال الخاص بهذا العميل</span>
                         <span className="text-[9px] text-slate-500">محدث تلقائياً</span>
                       </h4>
@@ -2305,14 +2305,14 @@ export default function TrialsTab({
                               ) : (
                                 <span className={`px-1.5 py-0.5 rounded text-[8px] font-bold ${
                                   l.status === "Read" ? "bg-blue-500/15 text-blue-400" :
-                                  l.status === "Delivered" ? "bg-emerald-500/15 text-emerald-400" :
-                                  "bg-indigo-500/15 text-indigo-400"
+                                  l.status === "Delivered" ? "bg-orange-500/15 text-emerald-400" :
+                                  "bg-blue-500/15 text-blue-400"
                                 }`}>
                                   {l.status === "Read" ? "قرئت" : l.status === "Delivered" ? "وصلت" : "أرسلت"}
                                 </span>
                               )}
                               <div className="text-right">
-                                <p className="font-black text-slate-300">{l.template}</p>
+                                <p className="font-black text-slate-700">{l.template}</p>
                                 <p className="text-[8px] text-slate-500 mt-0.5">{new Date(l.sentAt || l.createdAt).toLocaleString("ar-DZ")}</p>
                               </div>
                             </div>
@@ -2337,12 +2337,12 @@ export default function TrialsTab({
                           value={tempNoteText}
                           onChange={(e) => setTempNoteText(e.target.value)}
                           placeholder="أدخل ملاحظات خاصة حول العميل (مثلاً: طريقة التواصل المفضلة، تفاصيل التثبيت، وقت السداد المتوقع)..."
-                          className="w-full bg-[#14141D] border border-white/10 rounded-xl p-3 text-xs text-white placeholder:text-slate-500 text-right focus:outline-none focus:ring-1 focus:ring-[#A855F7] font-medium"
+                          className="w-full bg-[#14141D] border border-white/10 rounded-xl p-3 text-xs text-slate-900 placeholder:text-slate-500 text-right focus:outline-none focus:ring-1 focus:ring-[#A855F7] font-medium"
                         />
                         
                         <button
                           onClick={() => handleSaveDrawerNote(selectedRequest.id)}
-                          className="px-4 py-2 bg-[#8B5CF6] hover:bg-[#A855F7] text-white text-xs font-black rounded-lg transition-all cursor-pointer"
+                          className="px-4 py-2 bg-[#8B5CF6] hover:bg-[#A855F7] text-slate-900 text-xs font-black rounded-lg transition-all cursor-pointer"
                         >
                           حفظ التعديلات
                         </button>
@@ -2364,7 +2364,7 @@ export default function TrialsTab({
                       setSelectedRequest(prev => prev ? { ...prev, status: "approved" } : null);
                       triggerToast("تم تفعيل رخصة المتجر بنجاح 🟢");
                     }}
-                    className="w-full py-3 bg-emerald-500 hover:bg-emerald-600 text-white font-black text-xs rounded-xl flex items-center justify-center gap-1.5 transition-all cursor-pointer"
+                    className="w-full py-3 bg-orange-500 hover:bg-emerald-600 text-slate-900 font-black text-xs rounded-xl flex items-center justify-center gap-1.5 transition-all cursor-pointer"
                   >
                     <CheckSquare className="w-4 h-4" />
                     <span>تنشيط رخصة الترخيص</span>
@@ -2391,7 +2391,7 @@ export default function TrialsTab({
                     setSelectedRequest(prev => prev ? { ...prev, status: "completed" } : null);
                     triggerToast("تم تأكيد دفع العميل بنجاح! 💸");
                   }}
-                  className="w-full py-3 bg-[#8B5CF6] hover:bg-[#A855F7] text-white font-black text-xs rounded-xl flex items-center justify-center gap-1.5 transition-all cursor-pointer"
+                  className="w-full py-3 bg-[#8B5CF6] hover:bg-[#A855F7] text-slate-900 font-black text-xs rounded-xl flex items-center justify-center gap-1.5 transition-all cursor-pointer"
                 >
                   <CreditCard className="w-4 h-4" />
                   <span>تأكيد سداد العميل</span>
@@ -2434,7 +2434,7 @@ export default function TrialsTab({
                     addLog(`تم استخراج وطباعة وثيقة الترخيص لـ: ${selectedRequest.storeName}`);
                     triggerToast("تم فتح نافذة طباعة الوصل والترخيص!");
                   }}
-                  className="w-full py-2.5 bg-slate-800 hover:bg-slate-700 text-slate-300 font-bold text-xs rounded-xl flex items-center justify-center gap-1.5 transition-all cursor-pointer"
+                  className="w-full py-2.5 bg-slate-200 hover:bg-slate-700 text-slate-700 font-bold text-xs rounded-xl flex items-center justify-center gap-1.5 transition-all cursor-pointer"
                 >
                   <Printer className="w-4 h-4" />
                   <span>طباعة وثيقة الترخيص</span>
@@ -2464,7 +2464,7 @@ export default function TrialsTab({
       {/* Add Request Modal Popup */}
       <AnimatePresence>
         {isAddModalOpen && (
-          <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-slate-950/80 backdrop-blur-sm">
+          <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-white/80 backdrop-blur-sm">
             <motion.div
               initial={{ scale: 0.95, opacity: 0 }}
               animate={{ scale: 1, opacity: 1 }}
@@ -2474,76 +2474,76 @@ export default function TrialsTab({
               <div className="bg-[#0B0B0F] px-6 py-4 border-b border-[rgba(255,255,255,0.06)] flex items-center justify-between flex-row-reverse rounded-t-2xl">
                 <button
                   onClick={() => setIsAddModalOpen(false)}
-                  className="p-2 bg-[#121218] hover:bg-slate-800 text-slate-400 rounded-xl transition-colors cursor-pointer"
+                  className="p-2 bg-[#121218] hover:bg-slate-200 text-slate-600 rounded-xl transition-colors cursor-pointer"
                 >
                   <X className="w-4 h-4" />
                 </button>
                 <div className="flex items-center gap-2 flex-row-reverse">
                   <Plus className="w-5 h-5 text-[#8B5CF6]" />
-                  <h3 className="font-black text-white text-base">إضافة طلب ترخيص جديد يدوياً</h3>
+                  <h3 className="font-black text-slate-900 text-base">إضافة طلب ترخيص جديد يدوياً</h3>
                 </div>
               </div>
 
               <form onSubmit={handleAddNewRequestSubmit} className="p-6 space-y-4 overflow-y-auto flex-1">
                 {/* Store Name */}
                 <div className="space-y-1.5">
-                  <label className="block text-xs font-black text-slate-300">اسم المحل التجاري بالكامل <span className="text-rose-500">*</span>:</label>
+                  <label className="block text-xs font-black text-slate-700">اسم المحل التجاري بالكامل <span className="text-rose-500">*</span>:</label>
                   <input
                     type="text"
                     required
                     value={addStoreName}
                     onChange={(e) => setAddStoreName(e.target.value)}
                     placeholder="مثال: ماتريكس للهواتف - Matrix Phone"
-                    className="w-full bg-[#0B0B0F] border border-[rgba(255,255,255,0.06)] rounded-xl px-4 py-2.5 text-xs text-slate-100 text-right focus:outline-none focus:ring-2 focus:ring-[#7C3AED]/50 focus:border-[#7C3AED]"
+                    className="w-full bg-[#0B0B0F] border border-[rgba(255,255,255,0.06)] rounded-xl px-4 py-2.5 text-xs text-slate-900 text-right focus:outline-none focus:ring-2 focus:ring-[#7C3AED]/50 focus:border-[#7C3AED]"
                   />
                 </div>
 
                 {/* Owner Name */}
                 <div className="space-y-1.5">
-                  <label className="block text-xs font-black text-slate-300">اسم صاحب المحل / العميل <span className="text-rose-500">*</span>:</label>
+                  <label className="block text-xs font-black text-slate-700">اسم صاحب المحل / العميل <span className="text-rose-500">*</span>:</label>
                   <input
                     type="text"
                     required
                     value={addOwnerName}
                     onChange={(e) => setAddOwnerName(e.target.value)}
                     placeholder="مثال: ياسين حداد"
-                    className="w-full bg-[#0B0B0F] border border-[rgba(255,255,255,0.06)] rounded-xl px-4 py-2.5 text-xs text-slate-100 text-right focus:outline-none focus:ring-2 focus:ring-[#7C3AED]/50 focus:border-[#7C3AED]"
+                    className="w-full bg-[#0B0B0F] border border-[rgba(255,255,255,0.06)] rounded-xl px-4 py-2.5 text-xs text-slate-900 text-right focus:outline-none focus:ring-2 focus:ring-[#7C3AED]/50 focus:border-[#7C3AED]"
                   />
                 </div>
 
                 {/* Phones */}
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                   <div className="space-y-1.5">
-                    <label className="block text-xs font-black text-slate-300">رقم الهاتف الأساسي <span className="text-rose-500">*</span>:</label>
+                    <label className="block text-xs font-black text-slate-700">رقم الهاتف الأساسي <span className="text-rose-500">*</span>:</label>
                     <input
                       type="text"
                       required
                       value={addPhone}
                       onChange={(e) => setAddPhone(e.target.value)}
                       placeholder="0550123456"
-                      className="w-full bg-[#0B0B0F] border border-[rgba(255,255,255,0.06)] rounded-xl px-4 py-2.5 text-xs text-slate-100 font-mono text-left focus:outline-none focus:ring-2 focus:ring-[#7C3AED]/50"
+                      className="w-full bg-[#0B0B0F] border border-[rgba(255,255,255,0.06)] rounded-xl px-4 py-2.5 text-xs text-slate-900 font-mono text-left focus:outline-none focus:ring-2 focus:ring-[#7C3AED]/50"
                     />
                   </div>
 
                   <div className="space-y-1.5">
-                    <label className="block text-xs font-black text-slate-300">الهاتف الاحتياطي (اختياري):</label>
+                    <label className="block text-xs font-black text-slate-700">الهاتف الاحتياطي (اختياري):</label>
                     <input
                       type="text"
                       value={addPhone2}
                       onChange={(e) => setAddPhone2(e.target.value)}
                       placeholder="0660123456"
-                      className="w-full bg-[#0B0B0F] border border-[rgba(255,255,255,0.06)] rounded-xl px-4 py-2.5 text-xs text-slate-100 font-mono text-left focus:outline-none focus:ring-2 focus:ring-[#7C3AED]/50"
+                      className="w-full bg-[#0B0B0F] border border-[rgba(255,255,255,0.06)] rounded-xl px-4 py-2.5 text-xs text-slate-900 font-mono text-left focus:outline-none focus:ring-2 focus:ring-[#7C3AED]/50"
                     />
                   </div>
                 </div>
 
                 {/* City State */}
                 <div className="space-y-1.5">
-                  <label className="block text-xs font-black text-slate-300">الولاية والمقر الجغرافي بالجزائر <span className="text-rose-500">*</span>:</label>
+                  <label className="block text-xs font-black text-slate-700">الولاية والمقر الجغرافي بالجزائر <span className="text-rose-500">*</span>:</label>
                   <select
                     value={addCity}
                     onChange={(e) => setAddCity(e.target.value)}
-                    className="w-full bg-[#0B0B0F] border border-[rgba(255,255,255,0.06)] rounded-xl px-4 py-2.5 text-xs text-slate-300 text-right focus:outline-none focus:ring-2 focus:ring-[#7C3AED]/50"
+                    className="w-full bg-[#0B0B0F] border border-[rgba(255,255,255,0.06)] rounded-xl px-4 py-2.5 text-xs text-slate-700 text-right focus:outline-none focus:ring-2 focus:ring-[#7C3AED]/50"
                   >
                     <option value="الجزائر العاصمة (Alger)">الجزائر العاصمة (Alger)</option>
                     <option value="وهران (Oran)">وهران (Oran)</option>
@@ -2566,11 +2566,11 @@ export default function TrialsTab({
                 {/* Program Type, Payment */}
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                   <div className="space-y-1.5">
-                    <label className="block text-xs font-black text-slate-300">نوع الباقة الترخيصية:</label>
+                    <label className="block text-xs font-black text-slate-700">نوع الباقة الترخيصية:</label>
                     <select
                       value={addProgramType}
                       onChange={(e) => setAddProgramType(e.target.value)}
-                      className="w-full bg-[#0B0B0F] border border-[rgba(255,255,255,0.06)] rounded-xl px-4 py-2.5 text-xs text-slate-300 text-right focus:outline-none focus:ring-2 focus:ring-[#7C3AED]/50"
+                      className="w-full bg-[#0B0B0F] border border-[rgba(255,255,255,0.06)] rounded-xl px-4 py-2.5 text-xs text-slate-700 text-right focus:outline-none focus:ring-2 focus:ring-[#7C3AED]/50"
                     >
                       <option value="trial">فترة تجريبية أساسية (5 أيام)</option>
                       <option value="pc">باقة لوجيسيال حاسوب فقط (12,000 دج)</option>
@@ -2580,11 +2580,11 @@ export default function TrialsTab({
                   </div>
 
                   <div className="space-y-1.5">
-                    <label className="block text-xs font-black text-slate-300">طريقة الدفع والسداد للترخيص:</label>
+                    <label className="block text-xs font-black text-slate-700">طريقة الدفع والسداد للترخيص:</label>
                     <select
                       value={addPaymentMethod}
                       onChange={(e) => setAddPaymentMethod(e.target.value)}
-                      className="w-full bg-[#0B0B0F] border border-[rgba(255,255,255,0.06)] rounded-xl px-4 py-2.5 text-xs text-slate-300 text-right focus:outline-none focus:ring-2 focus:ring-[#7C3AED]/50"
+                      className="w-full bg-[#0B0B0F] border border-[rgba(255,255,255,0.06)] rounded-xl px-4 py-2.5 text-xs text-slate-700 text-right focus:outline-none focus:ring-2 focus:ring-[#7C3AED]/50"
                     >
                       <option value="baridimob">بريدي موب (Baridimob)</option>
                       <option value="ccp">حساب CCP البريدي الجاري</option>
@@ -2597,37 +2597,37 @@ export default function TrialsTab({
                 {/* Has WhatsApp, Status */}
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                   <div className="space-y-1.5">
-                    <label className="block text-xs font-black text-slate-300">هل يملك رقم واتساب مفعل؟</label>
+                    <label className="block text-xs font-black text-slate-700">هل يملك رقم واتساب مفعل؟</label>
                     <div className="flex gap-4 justify-end mt-2">
-                      <label className="flex items-center gap-1.5 text-xs text-slate-300 cursor-pointer">
+                      <label className="flex items-center gap-1.5 text-xs text-slate-700 cursor-pointer">
                         <span>لا</span>
                         <input
                           type="radio"
                           name="addHasWhatsapp"
                           checked={addHasWhatsapp === "no"}
                           onChange={() => setAddHasWhatsapp("no")}
-                          className="text-[#7C3AED] focus:ring-[#7C3AED] bg-[#0B0B0F] border-slate-800"
+                          className="text-[#7C3AED] focus:ring-[#7C3AED] bg-[#0B0B0F] border-slate-200"
                         />
                       </label>
-                      <label className="flex items-center gap-1.5 text-xs text-slate-300 cursor-pointer">
+                      <label className="flex items-center gap-1.5 text-xs text-slate-700 cursor-pointer">
                         <span>نعم</span>
                         <input
                           type="radio"
                           name="addHasWhatsapp"
                           checked={addHasWhatsapp === "yes"}
                           onChange={() => setAddHasWhatsapp("yes")}
-                          className="text-[#7C3AED] focus:ring-[#7C3AED] bg-[#0B0B0F] border-slate-800"
+                          className="text-[#7C3AED] focus:ring-[#7C3AED] bg-[#0B0B0F] border-slate-200"
                         />
                       </label>
                     </div>
                   </div>
 
                   <div className="space-y-1.5">
-                    <label className="block text-xs font-black text-slate-300">حالة الحساب والتفعيل:</label>
+                    <label className="block text-xs font-black text-slate-700">حالة الحساب والتفعيل:</label>
                     <select
                       value={addStatus}
                       onChange={(e) => setAddStatus(e.target.value as any)}
-                      className="w-full bg-[#0B0B0F] border border-[rgba(255,255,255,0.06)] rounded-xl px-4 py-2.5 text-xs text-slate-300 text-right focus:outline-none focus:ring-2 focus:ring-[#7C3AED]/50"
+                      className="w-full bg-[#0B0B0F] border border-[rgba(255,255,255,0.06)] rounded-xl px-4 py-2.5 text-xs text-slate-700 text-right focus:outline-none focus:ring-2 focus:ring-[#7C3AED]/50"
                     >
                       <option value="pending">⏳ قيد الانتظار والمراجعة</option>
                       <option value="contacted">📞 تم التواصل مع العميل</option>
@@ -2646,14 +2646,14 @@ export default function TrialsTab({
                   <button
                     type="submit"
                     disabled={isSubmittingAdd}
-                    className="px-6 py-2.5 bg-gradient-to-r from-[#8B5CF6] to-[#A855F7] hover:from-[#A855F7] hover:to-[#8B5CF6] text-white text-xs font-black rounded-xl transition-all shadow-lg cursor-pointer disabled:opacity-50"
+                    className="px-6 py-2.5 bg-gradient-to-r from-[#8B5CF6] to-[#A855F7] hover:from-[#A855F7] hover:to-[#8B5CF6] text-slate-900 text-xs font-black rounded-xl transition-all shadow-lg cursor-pointer disabled:opacity-50"
                   >
                     {isSubmittingAdd ? "جاري الحفظ والإنشاء..." : "💾 إضافة وحفظ العميل"}
                   </button>
                   <button
                     type="button"
                     onClick={() => setIsAddModalOpen(false)}
-                    className="px-5 py-2.5 bg-slate-850 hover:bg-slate-800 text-slate-300 text-xs font-bold rounded-xl transition-colors cursor-pointer"
+                    className="px-5 py-2.5 bg-slate-200 hover:bg-slate-200 text-slate-700 text-xs font-bold rounded-xl transition-colors cursor-pointer"
                   >
                     إلغاء والتراجع
                   </button>

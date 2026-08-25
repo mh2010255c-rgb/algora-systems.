@@ -7,21 +7,21 @@ import {
 
 export default function DownloadCenter() {
   return (
-    <div className="min-h-screen bg-[#060813] text-slate-100 flex flex-col font-sans selection:bg-purple-600/30 selection:text-purple-300 antialiased" dir="rtl">
+    <div className="min-h-screen bg-slate-50 text-slate-900 flex flex-col font-sans selection:bg-blue-600/30 selection:text-blue-500 antialiased" dir="rtl">
       
       {/* HEADER SECTION */}
       <div className="pt-20 pb-12 px-4 flex flex-col items-center justify-center text-center relative z-10">
-        <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-emerald-500/10 border border-emerald-500/20 text-emerald-400 text-xs font-bold mb-6">
+        <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-orange-500/10 border border-emerald-500/20 text-emerald-400 text-xs font-bold mb-6">
           <ShieldCheck className="w-4 h-4" />
           <span>تم تشفير الوصول بنجاح</span>
         </div>
         
         <h1 className="text-4xl md:text-5xl font-black mb-4 tracking-tight">
-          <span className="text-white">مركز </span>
-          <span className="bg-gradient-to-r from-purple-500 to-pink-500 text-transparent bg-clip-text drop-shadow-[0_0_15px_rgba(236,72,153,0.5)]">التحميل</span>
+          <span className="text-slate-900">مركز </span>
+          <span className="bg-gradient-to-r from-blue-500 to-pink-500 text-transparent bg-clip-text drop-shadow-[0_0_15px_rgba(236,72,153,0.5)]">التحميل</span>
         </h1>
         
-        <p className="text-slate-400 max-w-lg text-sm leading-relaxed">
+        <p className="text-slate-600 max-w-lg text-sm leading-relaxed">
           اختر النسخة المناسبة لجهازك. ننصح بتثبيت نسخة الكمبيوتر أولاً لإعداد النظام، ثم ربط تطبيق الهاتف.
         </p>
       </div>
@@ -30,7 +30,7 @@ export default function DownloadCenter() {
       <div className="max-w-5xl mx-auto w-full px-4 grid grid-cols-1 md:grid-cols-2 gap-8 relative z-10 pb-20">
         
         {/* Glow effect behind cards */}
-        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-3/4 h-3/4 bg-purple-600/20 blur-[100px] -z-10 rounded-full pointer-events-none"></div>
+        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-3/4 h-3/4 bg-blue-600/10 blur-[100px] -z-10 rounded-full pointer-events-none"></div>
 
         {/* PC CARD */}
         <motion.div 
@@ -49,28 +49,28 @@ export default function DownloadCenter() {
             </div>
           </div>
 
-          <h2 className="text-2xl font-black text-white mb-3">نسخة الكمبيوتر (PC)</h2>
-          <p className="text-slate-400 text-sm leading-relaxed mb-8">
+          <h2 className="text-2xl font-black text-slate-900 mb-3">نسخة الكمبيوتر (PC)</h2>
+          <p className="text-slate-600 text-sm leading-relaxed mb-8">
             البرنامج الشامل لإدارة المحل. يدعم جميع قارئات الباركود والطابعات. يعمل على Windows 10 و 11.
           </p>
 
           <div className="space-y-4 mb-10 flex-1">
             <div className="flex items-center gap-3">
-              <CheckCircle2 className="w-5 h-5 text-emerald-500 shrink-0" />
-              <span className="text-sm text-slate-300 font-medium">تثبيت بنقرة واحدة (Setup.exe)</span>
+              <CheckCircle2 className="w-5 h-5 text-orange-500 shrink-0" />
+              <span className="text-sm text-slate-700 font-medium">تثبيت بنقرة واحدة (Setup.exe)</span>
             </div>
             <div className="flex items-center gap-3">
-              <WifiOff className="w-5 h-5 text-emerald-500 shrink-0" />
-              <span className="text-sm text-slate-300 font-medium">يدعم العمل بدون إنترنت</span>
+              <WifiOff className="w-5 h-5 text-orange-500 shrink-0" />
+              <span className="text-sm text-slate-700 font-medium">يدعم العمل بدون إنترنت</span>
             </div>
             <div className="flex items-center gap-3">
-              <ShieldCheck className="w-5 h-5 text-emerald-500 shrink-0" />
-              <span className="text-sm text-slate-300 font-medium">آمن وخالي من الفيروسات</span>
+              <ShieldCheck className="w-5 h-5 text-orange-500 shrink-0" />
+              <span className="text-sm text-slate-700 font-medium">آمن وخالي من الفيروسات</span>
             </div>
           </div>
 
           <div className="mt-auto">
-            <button className="w-full py-4 bg-gradient-to-r from-blue-600 to-blue-500 hover:from-blue-500 hover:to-blue-400 text-white rounded-xl font-bold flex items-center justify-center gap-2 shadow-[0_0_20px_rgba(59,130,246,0.3)] transition-all transform hover:scale-[1.02]">
+            <button className="w-full py-4 bg-gradient-to-r from-blue-600 to-blue-500 hover:from-blue-500 hover:to-blue-400 text-slate-900 rounded-xl font-bold flex items-center justify-center gap-2 shadow-[0_0_20px_rgba(59,130,246,0.3)] transition-all transform hover:scale-[1.02]">
               <Download className="w-5 h-5" />
               <span>تحميل للويندوز</span>
             </button>
@@ -97,16 +97,16 @@ export default function DownloadCenter() {
             </div>
           </div>
 
-          <h2 className="text-2xl font-black text-white mb-3">تطبيق الهاتف (Mobile)</h2>
-          <p className="text-slate-400 text-sm leading-relaxed mb-8">
+          <h2 className="text-2xl font-black text-slate-900 mb-3">تطبيق الهاتف (Mobile)</h2>
+          <p className="text-slate-600 text-sm leading-relaxed mb-8">
             لمتابعة نشاط محلك عن بعد. قم بتثبيته على هاتفك ثم امسح كود الربط من برنامج الكمبيوتر.
           </p>
 
-          <div className="bg-[#0a0c1a] border border-slate-800/80 rounded-2xl p-4 flex items-center gap-4 mb-10 flex-1">
+          <div className="bg-[#0a0c1a] border border-slate-200/80 rounded-2xl p-4 flex items-center gap-4 mb-10 flex-1">
             <div className="flex-1">
               <div className="flex items-center gap-2 mb-1">
                 <QrCode className="w-4 h-4 text-pink-500" />
-                <h4 className="text-white font-bold text-sm">امسح للتحميل</h4>
+                <h4 className="text-slate-900 font-bold text-sm">امسح للتحميل</h4>
               </div>
               <p className="text-[10px] text-slate-500 leading-tight">
                 وجه كاميرا هاتفك نحو الكود للتحميل المباشر.
@@ -133,22 +133,22 @@ export default function DownloadCenter() {
 
       {/* QUICK INSTALL STEPS SECTION */}
       <div className="max-w-4xl mx-auto w-full px-4 pb-20 relative z-10 text-center">
-        <h3 className="text-xl font-bold text-white mb-8">خطوات التثبيت السريع</h3>
+        <h3 className="text-xl font-bold text-slate-900 mb-8">خطوات التثبيت السريع</h3>
         <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-          <div className="bg-slate-900/50 border border-slate-800/50 p-6 rounded-2xl">
-            <div className="w-8 h-8 rounded-full bg-purple-600/20 text-purple-400 font-bold flex items-center justify-center mx-auto mb-3">1</div>
-            <h4 className="text-sm font-bold text-slate-200 mb-2">تحميل وتثبيت</h4>
-            <p className="text-[11px] text-slate-400">حمل نسخة الويندوز وقم بتثبيتها بشكل عادي على جهازك</p>
+          <div className="bg-slate-100/50 border border-slate-200/50 p-6 rounded-2xl">
+            <div className="w-8 h-8 rounded-full bg-blue-600/10 text-blue-600 font-bold flex items-center justify-center mx-auto mb-3">1</div>
+            <h4 className="text-sm font-bold text-slate-800 mb-2">تحميل وتثبيت</h4>
+            <p className="text-[11px] text-slate-600">حمل نسخة الويندوز وقم بتثبيتها بشكل عادي على جهازك</p>
           </div>
-          <div className="bg-slate-900/50 border border-slate-800/50 p-6 rounded-2xl">
-            <div className="w-8 h-8 rounded-full bg-purple-600/20 text-purple-400 font-bold flex items-center justify-center mx-auto mb-3">2</div>
-            <h4 className="text-sm font-bold text-slate-200 mb-2">تفعيل الحساب</h4>
-            <p className="text-[11px] text-slate-400">افتح البرنامج وأدخل مفتاح الترخيص لتفعيل حسابك</p>
+          <div className="bg-slate-100/50 border border-slate-200/50 p-6 rounded-2xl">
+            <div className="w-8 h-8 rounded-full bg-blue-600/10 text-blue-600 font-bold flex items-center justify-center mx-auto mb-3">2</div>
+            <h4 className="text-sm font-bold text-slate-800 mb-2">تفعيل الحساب</h4>
+            <p className="text-[11px] text-slate-600">افتح البرنامج وأدخل مفتاح الترخيص لتفعيل حسابك</p>
           </div>
-          <div className="bg-slate-900/50 border border-slate-800/50 p-6 rounded-2xl">
-            <div className="w-8 h-8 rounded-full bg-purple-600/20 text-purple-400 font-bold flex items-center justify-center mx-auto mb-3">3</div>
-            <h4 className="text-sm font-bold text-slate-200 mb-2">ربط الهاتف</h4>
-            <p className="text-[11px] text-slate-400">افتح تطبيق الهاتف وامسح الكود من الكمبيوتر للربط المباشر</p>
+          <div className="bg-slate-100/50 border border-slate-200/50 p-6 rounded-2xl">
+            <div className="w-8 h-8 rounded-full bg-blue-600/10 text-blue-600 font-bold flex items-center justify-center mx-auto mb-3">3</div>
+            <h4 className="text-sm font-bold text-slate-800 mb-2">ربط الهاتف</h4>
+            <p className="text-[11px] text-slate-600">افتح تطبيق الهاتف وامسح الكود من الكمبيوتر للربط المباشر</p>
           </div>
         </div>
       </div>

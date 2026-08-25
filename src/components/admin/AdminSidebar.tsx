@@ -37,7 +37,7 @@ export default function AdminSidebar({
       <div className="lg:hidden absolute top-4 left-4">
         <button 
           onClick={() => setIsMobileSidebarOpen(false)}
-          className="p-1.5 rounded-lg bg-[#121218] border border-[rgba(255,255,255,0.12)] text-slate-400 hover:text-white cursor-pointer"
+          className="p-1.5 rounded-lg bg-[#121218] border border-[rgba(255,255,255,0.12)] text-slate-600 hover:text-slate-900 cursor-pointer"
         >
           <X className="w-4 h-4" />
         </button>
@@ -46,9 +46,9 @@ export default function AdminSidebar({
       {/* Logo & Branding */}
       <div className="p-6 border-b border-[rgba(255,255,255,0.06)] flex flex-col items-center justify-center text-center">
         <div className="w-16 h-16 rounded-2xl bg-gradient-to-tr from-[#7C3AED] to-[#A855F7] flex items-center justify-center shadow-[0_0_20px_rgba(124,58,237,0.4)] transition-all hover:scale-105 duration-300">
-          <Sparkles className="w-9 h-9 text-white animate-pulse" />
+          <Sparkles className="w-9 h-9 text-slate-900 animate-pulse" />
         </div>
-        <h2 className="text-xl font-black text-white mt-3 tracking-wide">فون زون</h2>
+        <h2 className="text-xl font-black text-slate-900 mt-3 tracking-wide">فون زون</h2>
         <p className="text-[10px] text-[#A855F7] font-black uppercase tracking-widest mt-1">Fon Zon Systems</p>
       </div>
 
@@ -63,8 +63,8 @@ export default function AdminSidebar({
             onClick={() => { setActiveAdminSubTab("trials"); setIsMobileSidebarOpen(false); }}
             className={`w-full flex items-center justify-between gap-3 px-4 py-3 rounded-xl text-xs font-black transition-all cursor-pointer ${
               activeAdminSubTab === "trials"
-                ? "bg-gradient-to-l from-[#7C3AED] to-[#A855F7] text-white shadow-[0_4px_12px_rgba(124,58,237,0.25)]"
-                : "text-slate-400 hover:text-white hover:bg-[#121218]"
+                ? "bg-gradient-to-l from-[#7C3AED] to-[#A855F7] text-slate-900 shadow-[0_4px_12px_rgba(124,58,237,0.25)]"
+                : "text-slate-600 hover:text-slate-900 hover:bg-[#121218]"
             }`}
           >
             <div className="flex items-center gap-3">
@@ -80,8 +80,8 @@ export default function AdminSidebar({
             onClick={() => { setActiveAdminSubTab("tickets"); setIsMobileSidebarOpen(false); }}
             className={`w-full flex items-center justify-between gap-3 px-4 py-3 rounded-xl text-xs font-black transition-all cursor-pointer ${
               activeAdminSubTab === "tickets"
-                ? "bg-gradient-to-l from-[#7C3AED] to-[#A855F7] text-white shadow-[0_4px_12px_rgba(124,58,237,0.25)]"
-                : "text-slate-400 hover:text-white hover:bg-[#121218]"
+                ? "bg-gradient-to-l from-[#7C3AED] to-[#A855F7] text-slate-900 shadow-[0_4px_12px_rgba(124,58,237,0.25)]"
+                : "text-slate-600 hover:text-slate-900 hover:bg-[#121218]"
             }`}
           >
             <div className="flex items-center gap-3">
@@ -98,8 +98,8 @@ export default function AdminSidebar({
               onClick={() => { setActiveAdminSubTab("baridimob"); setIsMobileSidebarOpen(false); }}
               className={`w-full flex items-center justify-between gap-3 px-4 py-3 rounded-xl text-xs font-black transition-all cursor-pointer ${
                 activeAdminSubTab === "baridimob"
-                  ? "bg-gradient-to-l from-[#7C3AED] to-[#A855F7] text-white shadow-[0_4px_12px_rgba(124,58,237,0.25)]"
-                  : "text-slate-400 hover:text-white hover:bg-[#121218]"
+                  ? "bg-gradient-to-l from-[#7C3AED] to-[#A855F7] text-slate-900 shadow-[0_4px_12px_rgba(124,58,237,0.25)]"
+                  : "text-slate-600 hover:text-slate-900 hover:bg-[#121218]"
               }`}
             >
               <div className="flex items-center gap-3">
@@ -122,8 +122,8 @@ export default function AdminSidebar({
               onClick={() => { setActiveAdminSubTab("whatsapp"); setIsMobileSidebarOpen(false); }}
               className={`w-full flex items-center justify-between gap-3 px-4 py-3 rounded-xl text-xs font-black transition-all cursor-pointer ${
                 activeAdminSubTab === "whatsapp"
-                  ? "bg-gradient-to-l from-[#7C3AED] to-[#A855F7] text-white shadow-[0_4px_12px_rgba(124,58,237,0.25)]"
-                  : "text-slate-400 hover:text-white hover:bg-[#121218]"
+                  ? "bg-gradient-to-l from-[#7C3AED] to-[#A855F7] text-slate-900 shadow-[0_4px_12px_rgba(124,58,237,0.25)]"
+                  : "text-slate-600 hover:text-slate-900 hover:bg-[#121218]"
               }`}
             >
               <div className="flex items-center gap-3">
@@ -136,8 +136,8 @@ export default function AdminSidebar({
               onClick={() => { setActiveAdminSubTab("settings"); setIsMobileSidebarOpen(false); }}
               className={`w-full flex items-center justify-between gap-3 px-4 py-3 rounded-xl text-xs font-black transition-all cursor-pointer ${
                 activeAdminSubTab === "settings"
-                  ? "bg-gradient-to-l from-[#7C3AED] to-[#A855F7] text-white shadow-[0_4px_12px_rgba(124,58,237,0.25)]"
-                  : "text-slate-400 hover:text-white hover:bg-[#121218]"
+                  ? "bg-gradient-to-l from-[#7C3AED] to-[#A855F7] text-slate-900 shadow-[0_4px_12px_rgba(124,58,237,0.25)]"
+                  : "text-slate-600 hover:text-slate-900 hover:bg-[#121218]"
               }`}
             >
               <div className="flex items-center gap-3">
@@ -150,8 +150,8 @@ export default function AdminSidebar({
               onClick={() => { setActiveAdminSubTab("confirmers"); setIsMobileSidebarOpen(false); }}
               className={`w-full flex items-center justify-between gap-3 px-4 py-3 rounded-xl text-xs font-black transition-all cursor-pointer ${
                 activeAdminSubTab === "confirmers"
-                  ? "bg-gradient-to-l from-[#7C3AED] to-[#A855F7] text-white shadow-[0_4px_12px_rgba(124,58,237,0.25)]"
-                  : "text-slate-400 hover:text-white hover:bg-[#121218]"
+                  ? "bg-gradient-to-l from-[#7C3AED] to-[#A855F7] text-slate-900 shadow-[0_4px_12px_rgba(124,58,237,0.25)]"
+                  : "text-slate-600 hover:text-slate-900 hover:bg-[#121218]"
               }`}
             >
               <div className="flex items-center gap-3">
@@ -167,7 +167,7 @@ export default function AdminSidebar({
       <div className="p-4 border-t border-[rgba(255,255,255,0.06)] bg-[#121218] m-4 rounded-2xl">
         <div className="flex items-center gap-3 mb-3 text-right justify-end">
           <div className="text-right">
-            <p className="text-xs font-black text-white">
+            <p className="text-xs font-black text-slate-900">
               {userRole === "admin" ? "مدير النظام" : "مؤكدة الطلبيات"}
             </p>
             <p className="text-[10px] text-slate-500 font-mono">

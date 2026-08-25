@@ -30,8 +30,8 @@ export default function BaridimobTab({
     <div className="p-6 space-y-6 text-right">
       <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 flex-row-reverse">
         <div>
-          <h4 className="text-sm font-black text-white">مطابقة إيصالات سداد بريدي موب والـ CCP بالجزائر</h4>
-          <p className="text-[11px] text-slate-400 mt-1">تأكد من مطابقة اسم المرسل والمبلغ ومرجع العملية قبل التفعيل النهائي.</p>
+          <h4 className="text-sm font-black text-slate-900">مطابقة إيصالات سداد بريدي موب والـ CCP بالجزائر</h4>
+          <p className="text-[11px] text-slate-600 mt-1">تأكد من مطابقة اسم المرسل والمبلغ ومرجع العملية قبل التفعيل النهائي.</p>
         </div>
         <button 
           onClick={() => {
@@ -62,7 +62,7 @@ export default function BaridimobTab({
       <div className="overflow-x-auto w-full">
         <table className="w-full text-right text-xs border-collapse">
           <thead>
-            <tr className="bg-[#0B0B0F] border-b border-[rgba(255,255,255,0.06)] text-slate-400 text-[10px] uppercase font-black tracking-wider">
+            <tr className="bg-[#0B0B0F] border-b border-[rgba(255,255,255,0.06)] text-slate-600 text-[10px] uppercase font-black tracking-wider">
               <th className="px-6 py-4 text-right">صورة المنتج</th>
               <th className="px-6 py-4 text-right">المحل التجاري المستفيد</th>
               <th className="px-6 py-4 text-right">اسم مرسل الحوالة</th>
@@ -84,12 +84,12 @@ export default function BaridimobTab({
                 </td>
 
                 {/* store name */}
-                <td className="px-6 py-4 font-black text-white text-sm">
+                <td className="px-6 py-4 font-black text-slate-900 text-sm">
                   {p.storeName}
                 </td>
 
                 {/* sender name */}
-                <td className="px-6 py-4 font-bold text-slate-300">
+                <td className="px-6 py-4 font-bold text-slate-700">
                   {p.senderName}
                 </td>
 
@@ -99,15 +99,15 @@ export default function BaridimobTab({
                 </td>
 
                 {/* rip/ref */}
-                <td className="px-6 py-4 text-slate-400">
+                <td className="px-6 py-4 text-slate-600">
                   <span className="font-mono text-[11px] bg-[#0B0B0F] px-2.5 py-1 rounded border border-[rgba(255,255,255,0.06)]">{p.transactionRef}</span>
                 </td>
 
                 {/* status */}
                 <td className="px-6 py-4 text-center">
                   {p.status === "verified" ? (
-                    <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-black bg-emerald-500/10 border border-emerald-500/30 text-emerald-400">
-                      <span className="w-1.5 h-1.5 rounded-full bg-emerald-500"></span>
+                    <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-black bg-orange-500/10 border border-emerald-500/30 text-emerald-400">
+                      <span className="w-1.5 h-1.5 rounded-full bg-orange-500"></span>
                       <span>متوفر (مؤكدة)</span>
                     </span>
                   ) : p.status === "rejected" ? (
@@ -129,7 +129,7 @@ export default function BaridimobTab({
                     <div className="flex items-center gap-2 justify-end">
                       <button
                         onClick={() => handleVerifyPayment(p.id, p.amount)}
-                        className="px-3 py-1.5 rounded-xl border border-emerald-500/30 hover:bg-emerald-500/10 text-emerald-400 font-bold transition-all cursor-pointer"
+                        className="px-3 py-1.5 rounded-xl border border-emerald-500/30 hover:bg-orange-500/10 text-emerald-400 font-bold transition-all cursor-pointer"
                       >
                         تأكيد الدفع 🟢
                       </button>

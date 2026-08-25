@@ -812,32 +812,32 @@ export default function AdminDashboard({ onLogout, theme, setTheme }: AdminDashb
             <div className="w-14 h-14 bg-[#7C3AED]/10 border border-[#7C3AED]/30 text-[#A855F7] rounded-2xl flex items-center justify-center shadow-lg">
               <Lock className="w-7 h-7" />
             </div>
-            <h2 className="text-xl font-black text-white">لوحة تحكم المشرف والطلبات</h2>
-            <p className="text-xs text-slate-400">يرجى تسجيل الدخول للوصول إلى قاعدة بيانات العملاء</p>
+            <h2 className="text-xl font-black text-slate-900">لوحة تحكم المشرف والطلبات</h2>
+            <p className="text-xs text-slate-600">يرجى تسجيل الدخول للوصول إلى قاعدة بيانات العملاء</p>
           </div>
 
           <form onSubmit={handleLogin} className="space-y-4">
             <div>
-              <label className="block text-xs font-bold text-slate-300 mb-1.5">اسم مستخدم الإدارة:</label>
+              <label className="block text-xs font-bold text-slate-700 mb-1.5">اسم مستخدم الإدارة:</label>
               <input
                 type="text"
                 required
                 value={username}
                 onChange={(e) => setUsername(e.target.value)}
                 placeholder="اسم المستخدم"
-                className="w-full bg-[#0B0B0F] border border-[rgba(255,255,255,0.06)] rounded-xl px-4 py-3 text-sm text-slate-100 placeholder:text-slate-600 text-right focus:outline-none focus:ring-1 focus:ring-[#7C3AED]"
+                className="w-full bg-[#0B0B0F] border border-[rgba(255,255,255,0.06)] rounded-xl px-4 py-3 text-sm text-slate-900 placeholder:text-slate-600 text-right focus:outline-none focus:ring-1 focus:ring-[#7C3AED]"
               />
             </div>
 
             <div>
-              <label className="block text-xs font-bold text-slate-300 mb-1.5">كلمة مرور لوحة التحكم:</label>
+              <label className="block text-xs font-bold text-slate-700 mb-1.5">كلمة مرور لوحة التحكم:</label>
               <input
                 type="password"
                 required
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
                 placeholder="كلمة المرور"
-                className="w-full bg-[#0B0B0F] border border-[rgba(255,255,255,0.06)] rounded-xl px-4 py-3 text-sm text-slate-100 placeholder:text-slate-600 text-right focus:outline-none focus:ring-1 focus:ring-[#7C3AED]"
+                className="w-full bg-[#0B0B0F] border border-[rgba(255,255,255,0.06)] rounded-xl px-4 py-3 text-sm text-slate-900 placeholder:text-slate-600 text-right focus:outline-none focus:ring-1 focus:ring-[#7C3AED]"
               />
             </div>
 
@@ -861,7 +861,7 @@ export default function AdminDashboard({ onLogout, theme, setTheme }: AdminDashb
   }
 
   return (
-    <div className="min-h-screen bg-[#0B0B0F] text-slate-300 font-sans flex flex-row-reverse" id="admin-crm-workspace">
+    <div className="min-h-screen bg-[#0B0B0F] text-slate-700 font-sans flex flex-row-reverse" id="admin-crm-workspace">
       
       {/* 1. FIXED RIGHT SIDEBAR */}
       <AdminSidebar
@@ -907,7 +907,7 @@ export default function AdminDashboard({ onLogout, theme, setTheme }: AdminDashb
                   <select
                     value={cityFilter}
                     onChange={(e) => setCityFilter(e.target.value)}
-                    className="bg-[#0B0B0F] border border-[rgba(255,255,255,0.06)] rounded-lg px-3 py-2 text-xs text-slate-300 focus:outline-none focus:ring-1 focus:ring-[#7C3AED] cursor-pointer"
+                    className="bg-[#0B0B0F] border border-[rgba(255,255,255,0.06)] rounded-lg px-3 py-2 text-xs text-slate-700 focus:outline-none focus:ring-1 focus:ring-[#7C3AED] cursor-pointer"
                   >
                     <option value="all">كل الولايات 🇩🇿</option>
                     {uniqueCities.map((city) => (
@@ -921,7 +921,7 @@ export default function AdminDashboard({ onLogout, theme, setTheme }: AdminDashb
                   <select
                     value={programFilter}
                     onChange={(e) => setProgramFilter(e.target.value)}
-                    className="bg-[#0B0B0F] border border-[rgba(255,255,255,0.06)] rounded-lg px-3 py-2 text-xs text-slate-300 focus:outline-none focus:ring-1 focus:ring-[#7C3AED] cursor-pointer"
+                    className="bg-[#0B0B0F] border border-[rgba(255,255,255,0.06)] rounded-lg px-3 py-2 text-xs text-slate-700 focus:outline-none focus:ring-1 focus:ring-[#7C3AED] cursor-pointer"
                   >
                     <option value="all">كل الباقات 📦</option>
                     <option value="trial">فترة تجريبية ⏳</option>
@@ -935,7 +935,7 @@ export default function AdminDashboard({ onLogout, theme, setTheme }: AdminDashb
                 <select
                   value={statusFilter}
                   onChange={(e) => setStatusFilter(e.target.value)}
-                  className="bg-[#0B0B0F] border border-[rgba(255,255,255,0.06)] rounded-lg px-3 py-2 text-xs text-slate-300 focus:outline-none focus:ring-1 focus:ring-[#7C3AED] cursor-pointer"
+                  className="bg-[#0B0B0F] border border-[rgba(255,255,255,0.06)] rounded-lg px-3 py-2 text-xs text-slate-700 focus:outline-none focus:ring-1 focus:ring-[#7C3AED] cursor-pointer"
                 >
                   <option value="all">كل الحالات 🔍</option>
                   {activeAdminSubTab === "trials" ? (
@@ -955,7 +955,7 @@ export default function AdminDashboard({ onLogout, theme, setTheme }: AdminDashb
                 <select
                   value={sortBy}
                   onChange={(e) => setSortBy(e.target.value as any)}
-                  className="bg-[#0B0B0F] border border-[rgba(255,255,255,0.06)] rounded-lg px-3 py-2 text-xs text-slate-300 focus:outline-none focus:ring-1 focus:ring-[#7C3AED] cursor-pointer"
+                  className="bg-[#0B0B0F] border border-[rgba(255,255,255,0.06)] rounded-lg px-3 py-2 text-xs text-slate-700 focus:outline-none focus:ring-1 focus:ring-[#7C3AED] cursor-pointer"
                 >
                   <option value="date_desc">الأحدث أولاً ⏱️</option>
                   <option value="date_asc">الأقدم أولاً ⏱️</option>
@@ -979,7 +979,7 @@ export default function AdminDashboard({ onLogout, theme, setTheme }: AdminDashb
 
                 <button
                   onClick={printTable}
-                  className="px-3 py-2 bg-transparent border border-slate-700 hover:border-slate-600 text-slate-300 text-xs font-bold rounded-lg transition-all cursor-pointer flex items-center gap-1.5"
+                  className="px-3 py-2 bg-transparent border border-slate-700 hover:border-slate-600 text-slate-700 text-xs font-bold rounded-lg transition-all cursor-pointer flex items-center gap-1.5"
                 >
                   <Printer className="w-3.5 h-3.5" />
                   <span>طباعة</span>
@@ -988,7 +988,7 @@ export default function AdminDashboard({ onLogout, theme, setTheme }: AdminDashb
                 {activeAdminSubTab === "trials" && (
                   <button
                     onClick={createMockRequest}
-                    className="px-3.5 py-2 bg-[#7C3AED] hover:bg-[#A855F7] text-white text-xs font-black rounded-lg transition-all cursor-pointer shadow flex items-center gap-1"
+                    className="px-3.5 py-2 bg-[#7C3AED] hover:bg-[#A855F7] text-slate-900 text-xs font-black rounded-lg transition-all cursor-pointer shadow flex items-center gap-1"
                   >
                     <Plus className="w-4 h-4" />
                     <span>إضافة طلب افتراضي</span>
@@ -998,7 +998,7 @@ export default function AdminDashboard({ onLogout, theme, setTheme }: AdminDashb
                 {activeAdminSubTab === "tickets" && (
                   <button
                     onClick={createMockTicket}
-                    className="px-3.5 py-2 bg-[#7C3AED] hover:bg-[#A855F7] text-white text-xs font-black rounded-lg transition-all cursor-pointer shadow flex items-center gap-1"
+                    className="px-3.5 py-2 bg-[#7C3AED] hover:bg-[#A855F7] text-slate-900 text-xs font-black rounded-lg transition-all cursor-pointer shadow flex items-center gap-1"
                   >
                     <Plus className="w-4 h-4" />
                     <span>توليد تذكرة دعم</span>
@@ -1014,7 +1014,7 @@ export default function AdminDashboard({ onLogout, theme, setTheme }: AdminDashb
             {loading ? (
               <div className="flex-1 flex flex-col items-center justify-center py-20 text-xs text-slate-500 gap-3">
                 <RefreshCw className="w-8 h-8 text-[#7C3AED] animate-spin" />
-                <p className="font-black text-slate-400">جاري مزامنة وجلب البيانات الحية من خوادم السحابة...</p>
+                <p className="font-black text-slate-600">جاري مزامنة وجلب البيانات الحية من خوادم السحابة...</p>
               </div>
             ) : (
               <div className="flex-1 flex flex-col">
@@ -1085,8 +1085,8 @@ export default function AdminDashboard({ onLogout, theme, setTheme }: AdminDashb
 
                 {activeAdminSubTab === "logs" && (
                   <div className="p-6 space-y-4 text-right">
-                    <div className="flex items-center justify-between flex-row-reverse border-b border-slate-800 pb-3">
-                      <h4 className="text-sm font-black text-white">سجل العمليات الدقيقة ونشاطات النظام (Audit Trail)</h4>
+                    <div className="flex items-center justify-between flex-row-reverse border-b border-slate-200 pb-3">
+                      <h4 className="text-sm font-black text-slate-900">سجل العمليات الدقيقة ونشاطات النظام (Audit Trail)</h4>
                       <button 
                         onClick={() => {
                           setActivityLogs(["[نظام] تم تصفير وإعادة تعيين سجلات النشاط."]);
@@ -1096,9 +1096,9 @@ export default function AdminDashboard({ onLogout, theme, setTheme }: AdminDashb
                         مسح السجل
                       </button>
                     </div>
-                    <div className="bg-[#0B0B0F] p-4 rounded-xl border border-[rgba(255,255,255,0.06)] space-y-2 h-[450px] overflow-y-auto font-mono text-xs text-slate-400 scrollbar-thin">
+                    <div className="bg-[#0B0B0F] p-4 rounded-xl border border-[rgba(255,255,255,0.06)] space-y-2 h-[450px] overflow-y-auto font-mono text-xs text-slate-600 scrollbar-thin">
                       {activityLogs.map((log, idx) => (
-                        <div key={idx} className="py-1 border-b border-slate-900 pb-1.5 last:border-0 hover:text-white transition-colors">
+                        <div key={idx} className="py-1 border-b border-slate-200 pb-1.5 last:border-0 hover:text-slate-900 transition-colors">
                           {log}
                         </div>
                       ))}
@@ -1133,7 +1133,7 @@ export default function AdminDashboard({ onLogout, theme, setTheme }: AdminDashb
       {/* 6. GIGANTIC LUXURIOUS EDITING SIDE DRAWER/PANEL */}
       <AnimatePresence>
         {editingRequest && (
-          <div className="fixed inset-0 z-50 flex items-center justify-end p-0 bg-slate-950/80 backdrop-blur-sm">
+          <div className="fixed inset-0 z-50 flex items-center justify-end p-0 bg-white/80 backdrop-blur-sm">
             <motion.div
               initial={{ x: "100%", opacity: 0.5 }}
               animate={{ x: 0, opacity: 1 }}
@@ -1144,7 +1144,7 @@ export default function AdminDashboard({ onLogout, theme, setTheme }: AdminDashb
               <div className="bg-[#0B0B0F] px-6 py-5 border-b border-[rgba(255,255,255,0.06)] flex items-center justify-between flex-row-reverse">
                 <button
                   onClick={() => setEditingRequest(null)}
-                  className="p-2 bg-[#121218] hover:bg-slate-800 text-slate-400 rounded-xl transition-colors cursor-pointer"
+                  className="p-2 bg-[#121218] hover:bg-slate-200 text-slate-600 rounded-xl transition-colors cursor-pointer"
                 >
                   <X className="w-4 h-4" />
                 </button>
@@ -1152,7 +1152,7 @@ export default function AdminDashboard({ onLogout, theme, setTheme }: AdminDashb
                   <span className="text-xs bg-[#7C3AED]/10 border border-[#7C3AED]/20 text-[#A855F7] px-2.5 py-0.5 rounded font-mono font-bold">
                     ID: {editingRequest.id}
                   </span>
-                  <h3 className="font-black text-white text-lg">تعديل بيانات رخصة المتجر</h3>
+                  <h3 className="font-black text-slate-900 text-lg">تعديل بيانات رخصة المتجر</h3>
                 </div>
               </div>
 
@@ -1160,72 +1160,72 @@ export default function AdminDashboard({ onLogout, theme, setTheme }: AdminDashb
                 
                 {/* Store Name */}
                 <div className="space-y-1.5">
-                  <label className="block text-xs font-black text-slate-300">اسم المحل التجاري بالكامل:</label>
+                  <label className="block text-xs font-black text-slate-700">اسم المحل التجاري بالكامل:</label>
                   <input
                     type="text"
                     required
                     value={editStoreName}
                     onChange={(e) => setEditStoreName(e.target.value)}
-                    className="w-full bg-[#0B0B0F] border border-[rgba(255,255,255,0.06)] rounded-xl px-4 py-3 text-xs text-slate-100 text-right focus:outline-none focus:ring-2 focus:ring-[#7C3AED]/50 focus:border-[#7C3AED]"
+                    className="w-full bg-[#0B0B0F] border border-[rgba(255,255,255,0.06)] rounded-xl px-4 py-3 text-xs text-slate-900 text-right focus:outline-none focus:ring-2 focus:ring-[#7C3AED]/50 focus:border-[#7C3AED]"
                   />
                 </div>
 
                 {/* Owner Name */}
                 <div className="space-y-1.5">
-                  <label className="block text-xs font-black text-slate-300">اسم صاحب المحل / المدير المسؤول:</label>
+                  <label className="block text-xs font-black text-slate-700">اسم صاحب المحل / المدير المسؤول:</label>
                   <input
                     type="text"
                     required
                     value={editOwnerName}
                     onChange={(e) => setEditOwnerName(e.target.value)}
-                    className="w-full bg-[#0B0B0F] border border-[rgba(255,255,255,0.06)] rounded-xl px-4 py-3 text-xs text-slate-100 text-right focus:outline-none focus:ring-2 focus:ring-[#7C3AED]/50 focus:border-[#7C3AED]"
+                    className="w-full bg-[#0B0B0F] border border-[rgba(255,255,255,0.06)] rounded-xl px-4 py-3 text-xs text-slate-900 text-right focus:outline-none focus:ring-2 focus:ring-[#7C3AED]/50 focus:border-[#7C3AED]"
                   />
                 </div>
 
                 {/* Phones */}
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                   <div className="space-y-1.5">
-                    <label className="block text-xs font-black text-slate-300">رقم الهاتف الأساسي للاتصال:</label>
+                    <label className="block text-xs font-black text-slate-700">رقم الهاتف الأساسي للاتصال:</label>
                     <input
                       type="text"
                       required
                       value={editPhone}
                       onChange={(e) => setEditPhone(e.target.value)}
-                      className="w-full bg-[#0B0B0F] border border-[rgba(255,255,255,0.06)] rounded-xl px-4 py-3 text-xs text-slate-100 font-mono text-left focus:outline-none focus:ring-2 focus:ring-[#7C3AED]/50"
+                      className="w-full bg-[#0B0B0F] border border-[rgba(255,255,255,0.06)] rounded-xl px-4 py-3 text-xs text-slate-900 font-mono text-left focus:outline-none focus:ring-2 focus:ring-[#7C3AED]/50"
                     />
                   </div>
 
                   <div className="space-y-1.5">
-                    <label className="block text-xs font-black text-slate-300">الهاتف الاحتياطي (اختياري):</label>
+                    <label className="block text-xs font-black text-slate-700">الهاتف الاحتياطي (اختياري):</label>
                     <input
                       type="text"
                       value={editPhone2}
                       onChange={(e) => setEditPhone2(e.target.value)}
-                      className="w-full bg-[#0B0B0F] border border-[rgba(255,255,255,0.06)] rounded-xl px-4 py-3 text-xs text-slate-100 font-mono text-left focus:outline-none focus:ring-2 focus:ring-[#7C3AED]/50"
+                      className="w-full bg-[#0B0B0F] border border-[rgba(255,255,255,0.06)] rounded-xl px-4 py-3 text-xs text-slate-900 font-mono text-left focus:outline-none focus:ring-2 focus:ring-[#7C3AED]/50"
                     />
                   </div>
                 </div>
 
                 {/* City State */}
                 <div className="space-y-1.5">
-                  <label className="block text-xs font-black text-slate-300">الولاية والمقر الجغرافي بالجزائر:</label>
+                  <label className="block text-xs font-black text-slate-700">الولاية والمقر الجغرافي بالجزائر:</label>
                   <input
                     type="text"
                     required
                     value={editCity}
                     onChange={(e) => setEditCity(e.target.value)}
-                    className="w-full bg-[#0B0B0F] border border-[rgba(255,255,255,0.06)] rounded-xl px-4 py-3 text-xs text-slate-100 text-right focus:outline-none focus:ring-2 focus:ring-[#7C3AED]/50 focus:border-[#7C3AED]"
+                    className="w-full bg-[#0B0B0F] border border-[rgba(255,255,255,0.06)] rounded-xl px-4 py-3 text-xs text-slate-900 text-right focus:outline-none focus:ring-2 focus:ring-[#7C3AED]/50 focus:border-[#7C3AED]"
                   />
                 </div>
 
                 {/* Program Type, Payment, Status */}
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                   <div className="space-y-1.5">
-                    <label className="block text-xs font-black text-slate-300">نوع الباقة الترخيصية:</label>
+                    <label className="block text-xs font-black text-slate-700">نوع الباقة الترخيصية:</label>
                     <select
                       value={editProgramType}
                       onChange={(e) => setEditProgramType(e.target.value)}
-                      className="w-full bg-[#0B0B0F] border border-[rgba(255,255,255,0.06)] rounded-xl px-4 py-3 text-xs text-slate-300 text-right focus:outline-none focus:ring-2 focus:ring-[#7C3AED]/50"
+                      className="w-full bg-[#0B0B0F] border border-[rgba(255,255,255,0.06)] rounded-xl px-4 py-3 text-xs text-slate-700 text-right focus:outline-none focus:ring-2 focus:ring-[#7C3AED]/50"
                     >
                       <option value="trial">فترة تجريبية أساسية (5 أيام)</option>
                       <option value="pc">باقة لوجيسيال حاسوب فقط (12,000 دج)</option>
@@ -1235,11 +1235,11 @@ export default function AdminDashboard({ onLogout, theme, setTheme }: AdminDashb
                   </div>
 
                   <div className="space-y-1.5">
-                    <label className="block text-xs font-black text-slate-300">طريقة الدفع والسداد للترخيص:</label>
+                    <label className="block text-xs font-black text-slate-700">طريقة الدفع والسداد للترخيص:</label>
                     <select
                       value={editPaymentMethod}
                       onChange={(e) => setEditPaymentMethod(e.target.value)}
-                      className="w-full bg-[#0B0B0F] border border-[rgba(255,255,255,0.06)] rounded-xl px-4 py-3 text-xs text-slate-300 text-right focus:outline-none focus:ring-2 focus:ring-[#7C3AED]/50"
+                      className="w-full bg-[#0B0B0F] border border-[rgba(255,255,255,0.06)] rounded-xl px-4 py-3 text-xs text-slate-700 text-right focus:outline-none focus:ring-2 focus:ring-[#7C3AED]/50"
                     >
                       <option value="baridimob">بريدي موب (Baridimob)</option>
                       <option value="ccp">حساب CCP البريدي الجاري</option>
@@ -1251,37 +1251,37 @@ export default function AdminDashboard({ onLogout, theme, setTheme }: AdminDashb
 
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 pt-2">
                   <div className="space-y-1.5">
-                    <label className="block text-xs font-black text-slate-300">هل يملك رقم واتساب مفعل؟</label>
+                    <label className="block text-xs font-black text-slate-700">هل يملك رقم واتساب مفعل؟</label>
                     <div className="flex gap-4 justify-end mt-1.5">
-                      <label className="flex items-center gap-1.5 text-xs text-slate-300 cursor-pointer">
+                      <label className="flex items-center gap-1.5 text-xs text-slate-700 cursor-pointer">
                         <span>لا</span>
                         <input
                           type="radio"
                           name="editHasWhatsapp"
                           checked={editHasWhatsapp === "no"}
                           onChange={() => setEditHasWhatsapp("no")}
-                          className="text-[#7C3AED] focus:ring-[#7C3AED] bg-[#0B0B0F] border-slate-800"
+                          className="text-[#7C3AED] focus:ring-[#7C3AED] bg-[#0B0B0F] border-slate-200"
                         />
                       </label>
-                      <label className="flex items-center gap-1.5 text-xs text-slate-300 cursor-pointer">
+                      <label className="flex items-center gap-1.5 text-xs text-slate-700 cursor-pointer">
                         <span>نعم</span>
                         <input
                           type="radio"
                           name="editHasWhatsapp"
                           checked={editHasWhatsapp === "yes"}
                           onChange={() => setEditHasWhatsapp("yes")}
-                          className="text-[#7C3AED] focus:ring-[#7C3AED] bg-[#0B0B0F] border-slate-800"
+                          className="text-[#7C3AED] focus:ring-[#7C3AED] bg-[#0B0B0F] border-slate-200"
                         />
                       </label>
                     </div>
                   </div>
 
                   <div className="space-y-1.5">
-                    <label className="block text-xs font-black text-slate-300">حالة الحساب والتفعيل:</label>
+                    <label className="block text-xs font-black text-slate-700">حالة الحساب والتفعيل:</label>
                     <select
                       value={editStatus}
                       onChange={(e) => setEditStatus(e.target.value as any)}
-                      className="w-full bg-[#0B0B0F] border border-[rgba(255,255,255,0.06)] rounded-xl px-4 py-3 text-xs text-slate-300 text-right focus:outline-none focus:ring-2 focus:ring-[#7C3AED]/50"
+                      className="w-full bg-[#0B0B0F] border border-[rgba(255,255,255,0.06)] rounded-xl px-4 py-3 text-xs text-slate-700 text-right focus:outline-none focus:ring-2 focus:ring-[#7C3AED]/50"
                     >
                       <option value="pending">⏳ قيد الانتظار والمراجعة</option>
                       <option value="contacted">📞 تم التواصل مع العميل</option>
@@ -1300,14 +1300,14 @@ export default function AdminDashboard({ onLogout, theme, setTheme }: AdminDashb
                   <button
                     type="submit"
                     disabled={isUpdating}
-                    className="px-6 py-3 bg-[#7C3AED] hover:bg-[#A855F7] text-white text-xs font-black rounded-xl transition-all shadow-lg cursor-pointer disabled:opacity-50"
+                    className="px-6 py-3 bg-[#7C3AED] hover:bg-[#A855F7] text-slate-900 text-xs font-black rounded-xl transition-all shadow-lg cursor-pointer disabled:opacity-50"
                   >
                     {isUpdating ? "جاري حفظ التعديل..." : "💾 حفظ كافة البيانات"}
                   </button>
                   <button
                     type="button"
                     onClick={() => setEditingRequest(null)}
-                    className="px-5 py-3 bg-slate-850 hover:bg-slate-800 text-slate-300 text-xs font-bold rounded-xl transition-colors cursor-pointer"
+                    className="px-5 py-3 bg-slate-200 hover:bg-slate-200 text-slate-700 text-xs font-bold rounded-xl transition-colors cursor-pointer"
                   >
                     إلغاء والتراجع
                   </button>

@@ -9,7 +9,6 @@ import LandingPage from "./components/LandingPage";
 import InteractiveDashboardDemo from "./components/InteractiveDashboardDemo";
 import DownloadCenter from "./components/DownloadCenter";
 import SupportCenter from "./components/SupportCenter";
-import GreetingWizard from "./components/GreetingWizard";
 import InfoPages, { InfoSection } from "./components/InfoPages";
 import AdminDashboard from "./components/AdminDashboard";
 import { ErrorBoundary } from "react-error-boundary";
@@ -22,7 +21,7 @@ function AdminErrorFallback({ error, resetErrorBoundary }: any) {
         <div className="bg-black/50 p-3 rounded-lg overflow-x-auto mb-4">
           <pre className="text-red-400 text-xs text-left" dir="ltr">{error.message}</pre>
         </div>
-        <button onClick={resetErrorBoundary} className="px-4 py-2 bg-red-600 hover:bg-red-700 text-white rounded-xl text-sm transition-colors">
+        <button onClick={resetErrorBoundary} className="px-4 py-2 bg-red-600 hover:bg-red-700 text-slate-900 rounded-xl text-sm transition-colors">
           حاول مرة أخرى
         </button>
       </div>
@@ -35,7 +34,6 @@ type ActiveTab = "home" | "demo" | "support" | "info" | "admin";
 export default function App() {
   const [activeTab, setActiveTab] = useState<ActiveTab>("home");
   const [activeInfoSection, setActiveInfoSection] = useState<InfoSection>("about");
-  const [showGreeting, setShowGreeting] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [isSidebarCollapsed, setIsSidebarCollapsed] = useState(false);
   const trialFormRef = useRef<HTMLDivElement>(null);
@@ -55,25 +53,25 @@ export default function App() {
     localStorage.setItem("theme", theme);
   }, [theme]);
 
-  // Trigger interactive greeting wizard on first load if not requested trial yet or route to specific tabs
+  useEffect(() => {
+    document.title = "Algora Systems | " + (
+      activeTab === "home" ? "الرئيسية" :
+      activeTab === "demo" ? "العرض التجريبي" :
+      activeTab === "support" ? "مركز الدعم" :
+      activeTab === "admin" ? "لوحة التحكم" :
+      "معلومات"
+    );
+  }, [activeTab]);
+
+  // Route to specific tabs on load
   useEffect(() => {
     const path = window.location.pathname.replace(/\/$/, "");
     if (path === "/admin" || path === "/admine") {
       setActiveTab("admin");
     } else if (path === "/demo") {
       setActiveTab("demo");
-    } else {
-      const hasRequested = localStorage.getItem("algora_trial_requested");
-      if (!hasRequested) {
-        // Delay slightly for dramatic introduction effect
-        const timer = setTimeout(() => {
-          setShowGreeting(true);
-        }, 1000);
-        return () => clearTimeout(timer);
-      }
     }
   }, []);
-
   const handleNavToTrialForm = () => {
     setActiveTab("home");
     setMobileMenuOpen(false);
@@ -102,7 +100,7 @@ export default function App() {
   }
 
   return (
-    <div dir="rtl" className="min-h-screen bg-[#060813] text-slate-100 flex flex-col font-sans selection:bg-purple-600/30 selection:text-purple-300 antialiased overflow-x-hidden">
+    <div dir="rtl" className="min-h-screen bg-slate-50 text-slate-900 flex flex-col font-sans selection:bg-blue-600/30 selection:text-blue-500 antialiased overflow-x-hidden">
       
       {/* 1. BACKDROP OVERLAY FOR MOBILE SIDEBAR DRAWER */}
       <AnimatePresence>
@@ -112,7 +110,7 @@ export default function App() {
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
             onClick={() => setMobileMenuOpen(false)}
-            className="fixed inset-0 bg-slate-950/80 backdrop-blur-sm z-40 md:hidden animate-fade-in"
+            className="fixed inset-0 bg-white/80 backdrop-blur-sm z-40 md:hidden animate-fade-in"
           />
         )}
       </AnimatePresence>
@@ -125,23 +123,23 @@ export default function App() {
             animate={{ x: 0 }}
             exit={{ x: "100%" }}
             transition={{ type: "spring", damping: 25, stiffness: 200 }}
-            className="fixed top-0 right-0 bottom-0 w-72 bg-slate-950/95 border-l border-slate-900/60 backdrop-blur-md z-50 p-6 flex flex-col justify-between md:hidden shadow-2xl"
+            className="fixed top-0 right-0 bottom-0 w-72 bg-white/95 border-l border-slate-200/60 backdrop-blur-md z-50 p-6 flex flex-col justify-between md:hidden shadow-2xl"
           >
             <div className="space-y-6">
               {/* Header inside drawer */}
-              <div className="flex items-center justify-between border-b border-slate-900 pb-4">
+              <div className="flex items-center justify-between border-b border-slate-200 pb-4">
                 <div className="flex items-center gap-2.5 text-right">
-                  <div className="w-8 h-8 bg-purple-600 rounded-lg flex items-center justify-center font-black text-white text-sm">
+                  <div className="w-8 h-8 bg-blue-600 rounded-lg flex items-center justify-center font-black text-white text-sm">
                     A
                   </div>
                   <div>
-                    <h4 className="text-white font-black text-sm tracking-tight">Algora Systems</h4>
+                    <h4 className="text-slate-900 font-black text-sm tracking-tight">Algora Systems</h4>
                     <p className="text-[9px] text-slate-500">إدارة محلات الهواتف والصيانة</p>
                   </div>
                 </div>
                 <button
                   onClick={() => setMobileMenuOpen(false)}
-                  className="p-1.5 bg-slate-900/60 hover:bg-slate-850 border border-slate-800/40 rounded-lg text-slate-400 hover:text-slate-200 transition-colors"
+                  className="p-1.5 bg-slate-50/60 hover:bg-slate-200 border border-slate-200/40 rounded-lg text-slate-600 hover:text-slate-800 transition-colors"
                 >
                   <X className="w-4 h-4" />
                 </button>
@@ -156,11 +154,11 @@ export default function App() {
                   }}
                   className={`flex items-center gap-3 w-full px-4 py-3 rounded-xl transition-all font-bold text-xs ${
                     activeTab === "home"
-                      ? "bg-gradient-to-l from-purple-600/20 to-indigo-600/20 text-white border-r-4 border-purple-500"
-                      : "text-slate-400 hover:text-slate-200 hover:bg-slate-900/40 border-r-4 border-transparent"
+                      ? "bg-gradient-to-l from-blue-600/10 to-blue-500/10 text-slate-900 border-r-4 border-blue-500"
+                      : "text-slate-600 hover:text-slate-800 hover:bg-slate-50/40 border-r-4 border-transparent"
                   }`}
                 >
-                  <LayoutDashboard className="w-4 h-4 text-purple-400 shrink-0" />
+                  <LayoutDashboard className="w-4 h-4 text-blue-600 shrink-0" />
                   <span>الرئيسية والمميزات</span>
                 </button>
 
@@ -171,13 +169,13 @@ export default function App() {
                   }}
                   className={`flex items-center gap-3 w-full px-4 py-3 rounded-xl transition-all font-bold text-xs ${
                     activeTab === "demo"
-                      ? "bg-gradient-to-l from-purple-600/20 to-indigo-600/20 text-white border-r-4 border-purple-500"
-                      : "text-slate-400 hover:text-slate-200 hover:bg-slate-900/40 border-r-4 border-transparent"
+                      ? "bg-gradient-to-l from-blue-600/10 to-blue-500/10 text-slate-900 border-r-4 border-blue-500"
+                      : "text-slate-600 hover:text-slate-800 hover:bg-slate-50/40 border-r-4 border-transparent"
                   }`}
                 >
-                  <PlayCircle className="w-4 h-4 text-purple-400 shrink-0" />
+                  <PlayCircle className="w-4 h-4 text-blue-600 shrink-0" />
                   <span className="flex-1 text-right">العرض التجريبي الحيّ</span>
-                  <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse"></span>
+                  <span className="w-1.5 h-1.5 rounded-full bg-orange-500 animate-pulse"></span>
                 </button>
 
                 <button
@@ -187,11 +185,11 @@ export default function App() {
                   }}
                   className={`flex items-center gap-3 w-full px-4 py-3 rounded-xl transition-all font-bold text-xs ${
                     activeTab === "support"
-                      ? "bg-gradient-to-l from-purple-600/20 to-indigo-600/20 text-white border-r-4 border-purple-500"
-                      : "text-slate-400 hover:text-slate-200 hover:bg-slate-900/40 border-r-4 border-transparent"
+                      ? "bg-gradient-to-l from-blue-600/10 to-blue-500/10 text-slate-900 border-r-4 border-blue-500"
+                      : "text-slate-600 hover:text-slate-800 hover:bg-slate-50/40 border-r-4 border-transparent"
                   }`}
                 >
-                  <Headphones className="w-4 h-4 text-purple-400 shrink-0" />
+                  <Headphones className="w-4 h-4 text-blue-600 shrink-0" />
                   <span>الدعم الفني والذكاء</span>
                 </button>
 
@@ -205,50 +203,50 @@ export default function App() {
                     }}
                     className={`flex items-center gap-3 w-full px-4 py-3 rounded-xl transition-all font-bold text-xs ${
                       activeTab === "info"
-                        ? "bg-gradient-to-l from-purple-600/20 to-indigo-600/20 text-white border-r-4 border-purple-500"
-                        : "text-slate-400 hover:text-slate-200 hover:bg-slate-900/40 border-r-4 border-transparent"
+                        ? "bg-gradient-to-l from-blue-600/10 to-blue-500/10 text-slate-900 border-r-4 border-blue-500"
+                        : "text-slate-600 hover:text-slate-800 hover:bg-slate-50/40 border-r-4 border-transparent"
                     }`}
                   >
-                    <Info className="w-4 h-4 text-purple-400 shrink-0" />
+                    <Info className="w-4 h-4 text-blue-600 shrink-0" />
                     <span>من نحن والسياسات</span>
                   </button>
                   
                   {/* Nested Policy Sublinks */}
-                  <div className="mr-6 pr-2 border-r border-slate-800/80 my-1.5 space-y-1">
+                  <div className="mr-6 pr-2 border-r border-slate-200/80 my-1.5 space-y-1">
                     <button
                       onClick={() => handleNavToInfo("about")}
                       className={`w-full py-1.5 text-[11px] font-bold text-right flex items-center justify-start gap-2 ${
-                        activeTab === "info" && activeInfoSection === "about" ? "text-purple-400" : "text-slate-500 hover:text-slate-300"
+                        activeTab === "info" && activeInfoSection === "about" ? "text-blue-600" : "text-slate-500 hover:text-slate-700"
                       }`}
                     >
-                      <span className="w-1.5 h-1.5 rounded-full bg-purple-500 shrink-0"></span>
+                      <span className="w-1.5 h-1.5 rounded-full bg-blue-500 shrink-0"></span>
                       <span>حول الشركة - Algora Systems</span>
                     </button>
                     
                     <button
                       onClick={() => handleNavToInfo("terms")}
                       className={`w-full py-1.5 text-[11px] font-bold text-right flex items-center justify-start gap-2 ${
-                        activeTab === "info" && activeInfoSection === "terms" ? "text-purple-400" : "text-slate-500 hover:text-slate-300"
+                        activeTab === "info" && activeInfoSection === "terms" ? "text-blue-600" : "text-slate-500 hover:text-slate-700"
                       }`}
                     >
-                      <span className="w-1.5 h-1.5 rounded-full bg-indigo-500 shrink-0"></span>
+                      <span className="w-1.5 h-1.5 rounded-full bg-blue-500 shrink-0"></span>
                       <span>شروط وأحكام الخدمة</span>
                     </button>
 
                     <button
                       onClick={() => handleNavToInfo("privacy")}
                       className={`w-full py-1.5 text-[11px] font-bold text-right flex items-center justify-start gap-2 ${
-                        activeTab === "info" && activeInfoSection === "privacy" ? "text-purple-400" : "text-slate-500 hover:text-slate-300"
+                        activeTab === "info" && activeInfoSection === "privacy" ? "text-blue-600" : "text-slate-500 hover:text-slate-700"
                       }`}
                     >
-                      <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 shrink-0"></span>
+                      <span className="w-1.5 h-1.5 rounded-full bg-orange-500 shrink-0"></span>
                       <span>سياسة حماية الخصوصية</span>
                     </button>
 
                     <button
                       onClick={() => handleNavToInfo("refund")}
                       className={`w-full py-1.5 text-[11px] font-bold text-right flex items-center justify-start gap-2 ${
-                        activeTab === "info" && activeInfoSection === "refund" ? "text-purple-400" : "text-slate-500 hover:text-slate-300"
+                        activeTab === "info" && activeInfoSection === "refund" ? "text-blue-600" : "text-slate-500 hover:text-slate-700"
                       }`}
                     >
                       <span className="w-1.5 h-1.5 rounded-full bg-amber-500 shrink-0"></span>
@@ -261,15 +259,15 @@ export default function App() {
 
             <div className="space-y-3">
               {/* Theme Selector Section inside Mobile Drawer */}
-              <div className="flex items-center justify-between flex-row-reverse bg-slate-900/40 p-3 rounded-xl border border-slate-900/60 mb-2">
-                <span className="text-slate-400 text-xs font-bold">مظهر التطبيق:</span>
+              <div className="flex items-center justify-between flex-row-reverse bg-slate-50/40 p-3 rounded-xl border border-slate-200/60 mb-2">
+                <span className="text-slate-600 text-xs font-bold">مظهر التطبيق:</span>
                 <button
                   onClick={() => setTheme(theme === "light" ? "dark" : "light")}
-                  className="flex items-center gap-1.5 px-3 py-1.5 bg-slate-900 hover:bg-slate-850 border border-slate-800/80 text-slate-200 rounded-lg text-xs font-black transition-all cursor-pointer"
+                  className="flex items-center gap-1.5 px-3 py-1.5 bg-slate-100 hover:bg-slate-200 border border-slate-200/80 text-slate-800 rounded-lg text-xs font-black transition-all cursor-pointer"
                 >
                   {theme === "light" ? (
                     <>
-                      <Moon className="w-3.5 h-3.5 text-purple-400" />
+                      <Moon className="w-3.5 h-3.5 text-blue-600" />
                       <span>الوضع الداكن</span>
                     </>
                   ) : (
@@ -286,15 +284,15 @@ export default function App() {
                   setShowGreeting(true);
                   setMobileMenuOpen(false);
                 }}
-                className="w-full py-2.5 bg-slate-900/60 hover:bg-slate-850 border border-slate-800 text-slate-300 rounded-xl text-xs font-black flex items-center justify-center gap-2"
+                className="w-full py-2.5 bg-slate-50/60 hover:bg-slate-200 border border-slate-200 text-slate-700 rounded-xl text-xs font-black flex items-center justify-center gap-2"
               >
-                <HelpCircle className="w-4 h-4 text-purple-400" />
+                <HelpCircle className="w-4 h-4 text-blue-600" />
                 <span>الدليل والتعليمات</span>
               </button>
 
               <button
                 onClick={handleNavToTrialForm}
-                className="w-full py-3 bg-gradient-to-l from-purple-600 to-indigo-600 hover:from-purple-500 hover:to-indigo-500 text-white font-extrabold text-xs rounded-xl shadow-lg transition-all"
+                className="w-full py-3 bg-gradient-to-l from-blue-600 to-blue-500 hover:from-blue-500 hover:to-blue-400 text-white font-extrabold text-xs rounded-xl shadow-lg transition-all"
               >
                 تفعيل تجريبي مجاني ⚡
               </button>
@@ -310,14 +308,14 @@ export default function App() {
         <div className="space-y-8">
           {/* Logo Section */}
           <div className="flex items-center gap-3 justify-start overflow-hidden">
-            <div className="w-10 h-10 bg-purple-600 rounded-xl flex items-center justify-center font-black text-white text-lg border border-purple-500/25 shadow-lg shadow-purple-900/30 shrink-0">
+            <div className="w-10 h-10 bg-blue-600 rounded-xl flex items-center justify-center font-black text-white text-lg border border-blue-500/25 shadow-lg shadow-blue-900/10 shrink-0">
               A
             </div>
             {!isSidebarCollapsed && (
               <div className="text-right">
                 <div className="flex items-center gap-1.5">
-                  <span className="text-white font-black text-sm tracking-tight">Algora Systems</span>
-                  <span className="text-[9px] bg-purple-500/15 border border-purple-500/25 text-purple-400 font-bold px-1.5 py-0.5 rounded-full">الجزائر</span>
+                  <span className="text-slate-900 font-black text-sm tracking-tight">Algora Systems</span>
+                  <span className="text-[9px] bg-blue-500/15 border border-blue-500/25 text-blue-600 font-bold px-1.5 py-0.5 rounded-full">الجزائر</span>
                 </div>
                 <p className="text-[9px] text-slate-500 font-medium">لوجيسيال محلات الهواتف والصيانة</p>
               </div>
@@ -330,12 +328,12 @@ export default function App() {
               onClick={() => setActiveTab("home")}
               className={`flex items-center gap-3 w-full px-4 py-3 rounded-xl transition-all font-bold text-xs ${
                 activeTab === "home"
-                  ? "bg-gradient-to-l from-purple-600/20 to-indigo-600/20 text-white border-r-4 border-purple-500 shadow-md shadow-purple-900/5"
-                  : "text-slate-400 hover:text-slate-200 hover:bg-slate-900/40 border-r-4 border-transparent"
+                  ? "bg-gradient-to-l from-blue-600/10 to-blue-500/10 text-slate-900 border-r-4 border-blue-500 shadow-md shadow-blue-900/5"
+                  : "text-slate-600 hover:text-slate-800 hover:bg-slate-50/40 border-r-4 border-transparent"
               } ${isSidebarCollapsed ? "justify-center" : "justify-start"}`}
               title="الرئيسية والمميزات"
             >
-              <LayoutDashboard className="w-4.5 h-4.5 text-purple-400 shrink-0" />
+              <LayoutDashboard className="w-4.5 h-4.5 text-blue-600 shrink-0" />
               {!isSidebarCollapsed && <span>الرئيسية والمميزات</span>}
             </button>
 
@@ -343,19 +341,19 @@ export default function App() {
               onClick={() => setActiveTab("demo")}
               className={`flex items-center gap-3 w-full px-4 py-3 rounded-xl transition-all font-bold text-xs ${
                 activeTab === "demo"
-                  ? "bg-gradient-to-l from-purple-600/20 to-indigo-600/20 text-white border-r-4 border-purple-500 shadow-md shadow-purple-900/5"
-                  : "text-slate-400 hover:text-slate-200 hover:bg-slate-900/40 border-r-4 border-transparent"
+                  ? "bg-gradient-to-l from-blue-600/10 to-blue-500/10 text-slate-900 border-r-4 border-blue-500 shadow-md shadow-blue-900/5"
+                  : "text-slate-600 hover:text-slate-800 hover:bg-slate-50/40 border-r-4 border-transparent"
               } ${isSidebarCollapsed ? "justify-center" : "justify-start"}`}
               title="العرض التجريبي الحيّ"
             >
-              <PlayCircle className="w-4.5 h-4.5 text-purple-400 shrink-0" />
+              <PlayCircle className="w-4.5 h-4.5 text-blue-600 shrink-0" />
               {!isSidebarCollapsed ? (
                 <>
                   <span className="flex-1 text-right">العرض التجريبي الحيّ</span>
-                  <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse"></span>
+                  <span className="w-1.5 h-1.5 rounded-full bg-orange-500 animate-pulse"></span>
                 </>
               ) : (
-                <div className="absolute right-2 top-2 w-2.5 h-2.5 rounded-full bg-emerald-500 border border-slate-950 animate-pulse"></div>
+                <div className="absolute right-2 top-2 w-2.5 h-2.5 rounded-full bg-orange-500 border border-slate-950 animate-pulse"></div>
               )}
             </button>
 
@@ -363,12 +361,12 @@ export default function App() {
               onClick={() => setActiveTab("support")}
               className={`flex items-center gap-3 w-full px-4 py-3 rounded-xl transition-all font-bold text-xs ${
                 activeTab === "support"
-                  ? "bg-gradient-to-l from-purple-600/20 to-indigo-600/20 text-white border-r-4 border-purple-500 shadow-md shadow-purple-900/5"
-                  : "text-slate-400 hover:text-slate-200 hover:bg-slate-900/40 border-r-4 border-transparent"
+                  ? "bg-gradient-to-l from-blue-600/10 to-blue-500/10 text-slate-900 border-r-4 border-blue-500 shadow-md shadow-blue-900/5"
+                  : "text-slate-600 hover:text-slate-800 hover:bg-slate-50/40 border-r-4 border-transparent"
               } ${isSidebarCollapsed ? "justify-center" : "justify-start"}`}
               title="الدعم الفني والذكاء الاصطناعي"
             >
-              <Headphones className="w-4.5 h-4.5 text-purple-400 shrink-0" />
+              <Headphones className="w-4.5 h-4.5 text-blue-600 shrink-0" />
               {!isSidebarCollapsed && <span>الدعم والذكاء الاصطناعي</span>}
             </button>
 
@@ -381,51 +379,51 @@ export default function App() {
                 }}
                 className={`flex items-center gap-3 w-full px-4 py-3 rounded-xl transition-all font-bold text-xs ${
                   activeTab === "info"
-                    ? "bg-gradient-to-l from-purple-600/20 to-indigo-600/20 text-white border-r-4 border-purple-500 shadow-md"
-                    : "text-slate-400 hover:text-slate-200 hover:bg-slate-900/40 border-r-4 border-transparent"
+                    ? "bg-gradient-to-l from-blue-600/10 to-blue-500/10 text-slate-900 border-r-4 border-blue-500 shadow-md"
+                    : "text-slate-600 hover:text-slate-800 hover:bg-slate-50/40 border-r-4 border-transparent"
                 } ${isSidebarCollapsed ? "justify-center" : "justify-start"}`}
                 title="من نحن والسياسات"
               >
-                <Info className="w-4.5 h-4.5 text-purple-400 shrink-0" />
+                <Info className="w-4.5 h-4.5 text-blue-600 shrink-0" />
                 {!isSidebarCollapsed && <span>معلوماتنا وسياساتنا</span>}
               </button>
 
               {!isSidebarCollapsed && activeTab === "info" && (
-                <div className="mr-6 pr-3 border-r border-slate-900 my-1.5 space-y-1">
+                <div className="mr-6 pr-3 border-r border-slate-200 my-1.5 space-y-1">
                   <button
                     onClick={() => handleNavToInfo("about")}
                     className={`w-full py-1 text-[11px] font-bold text-right flex items-center justify-start gap-2 ${
-                      activeInfoSection === "about" ? "text-purple-400" : "text-slate-500 hover:text-slate-300"
+                      activeInfoSection === "about" ? "text-blue-600" : "text-slate-500 hover:text-slate-700"
                     }`}
                   >
-                    <span className="w-1.5 h-1.5 rounded-full bg-purple-500 shrink-0"></span>
+                    <span className="w-1.5 h-1.5 rounded-full bg-blue-500 shrink-0"></span>
                     <span>من نحن - Algora</span>
                   </button>
                   
                   <button
                     onClick={() => handleNavToInfo("terms")}
                     className={`w-full py-1 text-[11px] font-bold text-right flex items-center justify-start gap-2 ${
-                      activeInfoSection === "terms" ? "text-purple-400" : "text-slate-500 hover:text-slate-300"
+                      activeInfoSection === "terms" ? "text-blue-600" : "text-slate-500 hover:text-slate-700"
                     }`}
                   >
-                    <span className="w-1.5 h-1.5 rounded-full bg-indigo-500 shrink-0"></span>
+                    <span className="w-1.5 h-1.5 rounded-full bg-blue-500 shrink-0"></span>
                     <span>شروط الاستخدام</span>
                   </button>
 
                   <button
                     onClick={() => handleNavToInfo("privacy")}
                     className={`w-full py-1 text-[11px] font-bold text-right flex items-center justify-start gap-2 ${
-                      activeInfoSection === "privacy" ? "text-purple-400" : "text-slate-500 hover:text-slate-300"
+                      activeInfoSection === "privacy" ? "text-blue-600" : "text-slate-500 hover:text-slate-700"
                     }`}
                   >
-                    <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 shrink-0"></span>
+                    <span className="w-1.5 h-1.5 rounded-full bg-orange-500 shrink-0"></span>
                     <span>سياسة الخصوصية</span>
                   </button>
 
                   <button
                     onClick={() => handleNavToInfo("refund")}
                     className={`w-full py-1 text-[11px] font-bold text-right flex items-center justify-start gap-2 ${
-                      activeInfoSection === "refund" ? "text-purple-400" : "text-slate-500 hover:text-slate-300"
+                      activeInfoSection === "refund" ? "text-blue-600" : "text-slate-500 hover:text-slate-700"
                     }`}
                   >
                     <span className="w-1.5 h-1.5 rounded-full bg-amber-500 shrink-0"></span>
@@ -439,12 +437,12 @@ export default function App() {
               onClick={() => setActiveTab("admin")}
               className={`flex items-center gap-3 w-full px-4 py-3 rounded-xl transition-all font-bold text-xs ${
                 activeTab === "admin"
-                  ? "bg-gradient-to-l from-purple-600/20 to-indigo-600/20 text-white border-r-4 border-purple-500 shadow-md shadow-purple-900/5"
-                  : "text-purple-400 hover:text-purple-300 hover:bg-slate-900/40 border-r-4 border-transparent"
+                  ? "bg-gradient-to-l from-blue-600/10 to-blue-500/10 text-slate-900 border-r-4 border-blue-500 shadow-md shadow-blue-900/5"
+                  : "text-blue-600 hover:text-blue-500 hover:bg-slate-50/40 border-r-4 border-transparent"
               } ${isSidebarCollapsed ? "justify-center" : "justify-start"}`}
               title="لوحة تسيير الطلبات المشفرة"
             >
-              <Lock className="w-4.5 h-4.5 text-purple-400 shrink-0" />
+              <Lock className="w-4.5 h-4.5 text-blue-600 shrink-0" />
               {!isSidebarCollapsed && (
                 <span className="flex items-center gap-1">
                   <span>لوحة تسيير الطلبات</span>
@@ -459,19 +457,19 @@ export default function App() {
         <div className="space-y-4">
           <button
             onClick={() => setShowGreeting(true)}
-            className={`w-full py-2.5 bg-slate-900/60 hover:bg-slate-850 border border-slate-800/40 text-slate-300 rounded-xl text-xs font-black flex items-center gap-2 ${
+            className={`w-full py-2.5 bg-slate-50/60 hover:bg-slate-200 border border-slate-200/40 text-slate-700 rounded-xl text-xs font-black flex items-center gap-2 ${
               isSidebarCollapsed ? "justify-center" : "px-4 justify-start"
             }`}
             title="الدليل التفاعلي"
           >
-            <HelpCircle className="w-4 h-4 text-purple-400 shrink-0" />
+            <HelpCircle className="w-4 h-4 text-blue-600 shrink-0" />
             {!isSidebarCollapsed && <span>الدليل والتعليمات</span>}
           </button>
 
           {!isSidebarCollapsed ? (
             <button
               onClick={handleNavToTrialForm}
-              className="w-full py-3 bg-gradient-to-l from-purple-600 to-indigo-600 hover:from-purple-500 hover:to-indigo-500 text-white font-extrabold text-xs rounded-xl shadow-lg transition-all flex items-center justify-center gap-1.5"
+              className="w-full py-3 bg-gradient-to-l from-blue-600 to-blue-500 hover:from-blue-500 hover:to-blue-400 text-white font-extrabold text-xs rounded-xl shadow-lg transition-all flex items-center justify-center gap-1.5"
             >
               <span>تجربة مجانية (5 أيام)</span>
               <ArrowLeft className="w-3.5 h-3.5" />
@@ -479,7 +477,7 @@ export default function App() {
           ) : (
             <button
               onClick={handleNavToTrialForm}
-              className="w-10 h-10 bg-gradient-to-l from-purple-600 to-indigo-600 hover:from-purple-500 hover:to-indigo-500 text-white rounded-xl shadow-lg transition-all flex items-center justify-center mx-auto"
+              className="w-10 h-10 bg-gradient-to-l from-blue-600 to-blue-500 hover:from-blue-500 hover:to-blue-400 text-white rounded-xl shadow-lg transition-all flex items-center justify-center mx-auto"
               title="تجربة مجانية"
             >
               <Sparkles className="w-4 h-4" />
@@ -489,15 +487,15 @@ export default function App() {
           {/* Sidebar collapse toggler button */}
           <button
             onClick={() => setIsSidebarCollapsed(!isSidebarCollapsed)}
-            className="w-full py-1.5 bg-slate-950 hover:bg-slate-900 border border-slate-900 text-slate-500 hover:text-slate-300 rounded-lg text-[10px] font-black flex items-center justify-center gap-1 transition-all"
+            className="w-full py-1.5 bg-white hover:bg-slate-100 border border-slate-200 text-slate-500 hover:text-slate-700 rounded-lg text-[10px] font-black flex items-center justify-center gap-1 transition-all"
           >
             {isSidebarCollapsed ? (
               <>
-                <ChevronLeft className="w-3.5 h-3.5 text-purple-400" />
+                <ChevronLeft className="w-3.5 h-3.5 text-blue-600" />
               </>
             ) : (
               <>
-                <ChevronRight className="w-3.5 h-3.5 text-purple-400" />
+                <ChevronRight className="w-3.5 h-3.5 text-blue-600" />
                 <span>تصغير القائمة</span>
               </>
             )}
@@ -510,19 +508,19 @@ export default function App() {
         
         {/* DESKTOP MASTER HEADER */}
         {activeTab !== "admin" && (
-          <header className="hidden md:flex items-center justify-between bg-slate-950/80 border-b border-slate-900 backdrop-blur-md px-8 py-4 sticky top-0 z-30">
+          <header className="hidden md:flex items-center justify-between bg-white/80 border-b border-slate-200 backdrop-blur-md px-8 py-4 sticky top-0 z-30">
             
             {/* Right Group: Logo and Nav Menu */}
             <div className="flex items-center gap-8">
               {/* Logo Section */}
               <div className="flex items-center gap-3">
-                <div className="w-9 h-9 bg-purple-600 rounded-xl flex items-center justify-center font-black text-white text-base border border-purple-500/25 shadow-lg shadow-purple-900/30 shrink-0">
+                <div className="w-9 h-9 bg-blue-600 rounded-xl flex items-center justify-center font-black text-white text-base border border-blue-500/25 shadow-lg shadow-blue-900/10 shrink-0">
                   A
                 </div>
                 <div className="text-right">
                   <div className="flex items-center gap-1.5">
-                    <span className="text-white font-black text-sm tracking-tight">Algora Systems</span>
-                    <span className="text-[9px] bg-purple-500/15 border border-purple-500/25 text-purple-400 font-bold px-1.5 py-0.5 rounded-full">الجزائر</span>
+                    <span className="text-slate-900 font-black text-sm tracking-tight">Algora Systems</span>
+                    <span className="text-[9px] bg-blue-500/15 border border-blue-500/25 text-blue-600 font-bold px-1.5 py-0.5 rounded-full">الجزائر</span>
                   </div>
                   <p className="text-[9px] text-slate-500 font-medium">لوجيسيال محلات الهواتف والصيانة</p>
                 </div>
@@ -534,11 +532,11 @@ export default function App() {
                   onClick={() => setActiveTab("home")}
                   className={`flex items-center gap-2 px-3.5 py-2 rounded-xl transition-all font-bold text-xs cursor-pointer ${
                     activeTab === "home"
-                      ? "bg-purple-600/15 text-purple-400 border border-purple-500/20"
-                      : "text-slate-400 hover:text-slate-200 hover:bg-slate-900/40"
+                      ? "bg-blue-600/10 text-blue-600 border border-blue-500/20"
+                      : "text-slate-600 hover:text-slate-800 hover:bg-slate-50/40"
                   }`}
                 >
-                  <LayoutDashboard className="w-4 h-4 text-purple-400 shrink-0" />
+                  <LayoutDashboard className="w-4 h-4 text-blue-600 shrink-0" />
                   <span>الرئيسية والمميزات</span>
                 </button>
 
@@ -546,24 +544,24 @@ export default function App() {
                   onClick={() => setActiveTab("demo")}
                   className={`flex items-center gap-2 px-3.5 py-2 rounded-xl transition-all font-bold text-xs relative cursor-pointer ${
                     activeTab === "demo"
-                      ? "bg-purple-600/15 text-purple-400 border border-purple-500/20"
-                      : "text-slate-400 hover:text-slate-200 hover:bg-slate-900/40"
+                      ? "bg-blue-600/10 text-blue-600 border border-blue-500/20"
+                      : "text-slate-600 hover:text-slate-800 hover:bg-slate-50/40"
                   }`}
                 >
-                  <PlayCircle className="w-4 h-4 text-purple-400 shrink-0" />
+                  <PlayCircle className="w-4 h-4 text-blue-600 shrink-0" />
                   <span>العرض التجريبي الحيّ</span>
-                  <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse"></span>
+                  <span className="w-1.5 h-1.5 rounded-full bg-orange-500 animate-pulse"></span>
                 </button>
 
                 <button
                   onClick={() => setActiveTab("support")}
                   className={`flex items-center gap-2 px-3.5 py-2 rounded-xl transition-all font-bold text-xs cursor-pointer ${
                     activeTab === "support"
-                      ? "bg-purple-600/15 text-purple-400 border border-purple-500/20"
-                      : "text-slate-400 hover:text-slate-200 hover:bg-slate-900/40"
+                      ? "bg-blue-600/10 text-blue-600 border border-blue-500/20"
+                      : "text-slate-600 hover:text-slate-800 hover:bg-slate-50/40"
                   }`}
                 >
-                  <Headphones className="w-4 h-4 text-purple-400 shrink-0" />
+                  <Headphones className="w-4 h-4 text-blue-600 shrink-0" />
                   <span>الدعم والذكاء الاصطناعي</span>
                 </button>
 
@@ -576,47 +574,47 @@ export default function App() {
                     }}
                     className={`flex items-center gap-2 px-3.5 py-2 rounded-xl transition-all font-bold text-xs cursor-pointer ${
                       activeTab === "info"
-                        ? "bg-purple-600/15 text-purple-400 border border-purple-500/20"
-                        : "text-slate-400 hover:text-slate-200 hover:bg-slate-900/40"
+                        ? "bg-blue-600/10 text-blue-600 border border-blue-500/20"
+                        : "text-slate-600 hover:text-slate-800 hover:bg-slate-50/40"
                     }`}
                   >
-                    <Info className="w-4 h-4 text-purple-400 shrink-0" />
+                    <Info className="w-4 h-4 text-blue-600 shrink-0" />
                     <span>معلوماتنا وسياساتنا</span>
                   </button>
                   
                   {/* Dropdown Menu on Hover */}
-                  <div className="absolute right-0 top-full mt-1.5 w-48 bg-slate-950/95 border border-slate-900 rounded-xl p-1.5 hidden group-hover:block hover:block shadow-2xl z-50 transition-all duration-200">
+                  <div className="absolute right-0 top-full mt-1.5 w-48 bg-white/95 border border-slate-200 rounded-xl p-1.5 hidden group-hover:block hover:block shadow-2xl z-50 transition-all duration-200">
                     <button
                       onClick={() => handleNavToInfo("about")}
                       className={`w-full px-3 py-2 text-[11px] font-bold text-right flex items-center gap-2 rounded-lg cursor-pointer ${
-                        activeTab === "info" && activeInfoSection === "about" ? "bg-purple-600/10 text-purple-400" : "text-slate-400 hover:text-slate-200 hover:bg-slate-900/40"
+                        activeTab === "info" && activeInfoSection === "about" ? "bg-blue-600/5 text-blue-600" : "text-slate-600 hover:text-slate-800 hover:bg-slate-50/40"
                       }`}
                     >
-                      <span className="w-1.5 h-1.5 rounded-full bg-purple-500 shrink-0"></span>
+                      <span className="w-1.5 h-1.5 rounded-full bg-blue-500 shrink-0"></span>
                       <span>من نحن - Algora</span>
                     </button>
                     <button
                       onClick={() => handleNavToInfo("terms")}
                       className={`w-full px-3 py-2 text-[11px] font-bold text-right flex items-center gap-2 rounded-lg cursor-pointer ${
-                        activeTab === "info" && activeInfoSection === "terms" ? "bg-purple-600/10 text-purple-400" : "text-slate-400 hover:text-slate-200 hover:bg-slate-900/40"
+                        activeTab === "info" && activeInfoSection === "terms" ? "bg-blue-600/5 text-blue-600" : "text-slate-600 hover:text-slate-800 hover:bg-slate-50/40"
                       }`}
                     >
-                      <span className="w-1.5 h-1.5 rounded-full bg-indigo-500 shrink-0"></span>
+                      <span className="w-1.5 h-1.5 rounded-full bg-blue-500 shrink-0"></span>
                       <span>شروط الاستخدام</span>
                     </button>
                     <button
                       onClick={() => handleNavToInfo("privacy")}
                       className={`w-full px-3 py-2 text-[11px] font-bold text-right flex items-center gap-2 rounded-lg cursor-pointer ${
-                        activeTab === "info" && activeInfoSection === "privacy" ? "bg-purple-600/10 text-purple-400" : "text-slate-400 hover:text-slate-200 hover:bg-slate-900/40"
+                        activeTab === "info" && activeInfoSection === "privacy" ? "bg-blue-600/5 text-blue-600" : "text-slate-600 hover:text-slate-800 hover:bg-slate-50/40"
                       }`}
                     >
-                      <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 shrink-0"></span>
+                      <span className="w-1.5 h-1.5 rounded-full bg-orange-500 shrink-0"></span>
                       <span>سياسة الخصوصية</span>
                     </button>
                     <button
                       onClick={() => handleNavToInfo("refund")}
                       className={`w-full px-3 py-2 text-[11px] font-bold text-right flex items-center gap-2 rounded-lg cursor-pointer ${
-                        activeTab === "info" && activeInfoSection === "refund" ? "bg-purple-600/10 text-purple-400" : "text-slate-400 hover:text-slate-200 hover:bg-slate-900/40"
+                        activeTab === "info" && activeInfoSection === "refund" ? "bg-blue-600/5 text-blue-600" : "text-slate-600 hover:text-slate-800 hover:bg-slate-50/40"
                       }`}
                     >
                       <span className="w-1.5 h-1.5 rounded-full bg-amber-500 shrink-0"></span>
@@ -632,7 +630,7 @@ export default function App() {
               {/* Light Mode / Dark Mode Toggle button */}
               <button
                 onClick={() => setTheme(theme === "light" ? "dark" : "light")}
-                className="p-2.5 bg-slate-900/60 hover:bg-slate-850 border border-slate-800/40 text-slate-300 hover:text-white rounded-xl transition-all cursor-pointer flex items-center justify-center"
+                className="p-2.5 bg-slate-50/60 hover:bg-slate-200 border border-slate-200/40 text-slate-700 hover:text-slate-900 rounded-xl transition-all cursor-pointer flex items-center justify-center"
                 title={theme === "light" ? "تفعيل الوضع الداكن" : "تفعيل الوضع المضيء"}
               >
                 {theme === "light" ? <Moon className="w-4 h-4 text-[#A855F7]" /> : <Sun className="w-4 h-4 text-amber-500" />}
@@ -640,16 +638,16 @@ export default function App() {
 
               <button
                 onClick={() => setShowGreeting(true)}
-                className="py-2 px-3.5 bg-slate-900/60 hover:bg-slate-850 border border-slate-800/40 text-slate-300 rounded-xl text-xs font-black flex items-center gap-2 transition-colors cursor-pointer"
+                className="py-2 px-3.5 bg-slate-50/60 hover:bg-slate-200 border border-slate-200/40 text-slate-700 rounded-xl text-xs font-black flex items-center gap-2 transition-colors cursor-pointer"
                 title="الدليل التفاعلي"
               >
-                <HelpCircle className="w-4 h-4 text-purple-400 shrink-0" />
+                <HelpCircle className="w-4 h-4 text-blue-600 shrink-0" />
                 <span>الدليل والتعليمات</span>
               </button>
 
               <button
                 onClick={handleNavToTrialForm}
-                className="py-2.5 px-4 bg-gradient-to-l from-purple-600 to-indigo-600 hover:from-purple-500 hover:to-indigo-500 text-white font-extrabold text-xs rounded-xl shadow-lg transition-all flex items-center gap-1.5 cursor-pointer"
+                className="py-2.5 px-4 bg-gradient-to-l from-blue-600 to-blue-500 hover:from-blue-500 hover:to-blue-400 text-white font-extrabold text-xs rounded-xl shadow-lg transition-all flex items-center gap-1.5 cursor-pointer"
               >
                 <span>تجربة مجانية (5 أيام)</span>
                 <ArrowLeft className="w-3.5 h-3.5" />
@@ -660,14 +658,14 @@ export default function App() {
 
         {/* MOBILE DYNAMIC HEADER */}
         {activeTab !== "admin" && (
-          <header className="md:hidden sticky top-0 z-30 bg-slate-950/80 backdrop-blur-md border-b border-slate-900 px-4 py-4 flex items-center justify-between">
+          <header className="md:hidden sticky top-0 z-30 bg-white/80 backdrop-blur-md border-b border-slate-200 px-4 py-4 flex items-center justify-between">
             <div className="flex items-center gap-2.5">
-              <div className="w-8 h-8 bg-purple-600 rounded-lg flex items-center justify-center font-black text-white text-sm">
+              <div className="w-8 h-8 bg-blue-600 rounded-lg flex items-center justify-center font-black text-white text-sm">
                 A
               </div>
               <div className="text-right">
-                <span className="text-white font-black text-xs">Algora Systems</span>
-                <span className="text-[8px] bg-purple-500/10 border border-purple-500/20 text-purple-400 px-1 py-0.2 rounded-full mr-1.5">الجزائر</span>
+                <span className="text-slate-900 font-black text-xs">Algora Systems</span>
+                <span className="text-[8px] bg-blue-500/10 border border-blue-500/20 text-blue-600 px-1 py-0.2 rounded-full mr-1.5">الجزائر</span>
               </div>
             </div>
 
@@ -676,21 +674,21 @@ export default function App() {
                 href="https://wa.me/213671037202?text=%D9%85%D8%B1%D8%AD%D8%A8%D8%A7%D9%8B%D8%8C%20%D8%A3%D9%86%D8%A7%20%D9%85%D9%87%D8%AA%D9%85%20%D8%A8%D9%86%D8%B8%D8%A7%D9%85%20Algora%20%D9%88%D8%A3%D8%B1%D9%8A%D8%AF%20%D8%A7%D9%84%D8%AD%D8%B5%D9%88%D9%84%20%D8%B9%D9%84%D9%89%20%D9%86%D8%B3%D8%AE%D8%AA%D9%8A%20%D8%A7%D9%84%D8%AA%D8%AC%D8%B1%D9%8A%D8%A8%D9%8A%D8%A9%20%D8%A7%D9%84%D9%85%D8%AC%D8%A7%D9%86%D9%8A%D8%A9"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="p-2 bg-slate-900 hover:bg-slate-850 border border-slate-800 rounded-lg text-slate-200 transition-colors cursor-pointer flex items-center justify-center"
+                className="p-2 bg-slate-100 hover:bg-slate-200 border border-slate-200 rounded-lg text-slate-800 transition-colors cursor-pointer flex items-center justify-center"
                 title="تواصل معنا عبر واتساب"
               >
                 <svg className="w-4 h-4 fill-[#25D366]" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51a12.8 12.8 0 0 0-.57-.01c-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 0 1-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 0 1-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 0 1 2.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0 0 12.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 0 0 5.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 0 0-3.48-8.413Z"/></svg>
               </a>
               <button
                 onClick={() => setTheme(theme === "light" ? "dark" : "light")}
-                className="p-2 bg-slate-900 hover:bg-slate-850 border border-slate-800 rounded-lg text-slate-200 transition-colors cursor-pointer flex items-center justify-center"
+                className="p-2 bg-slate-100 hover:bg-slate-200 border border-slate-200 rounded-lg text-slate-800 transition-colors cursor-pointer flex items-center justify-center"
                 title={theme === "light" ? "تفعيل الوضع الداكن" : "تفعيل الوضع المضيء"}
               >
                 {theme === "light" ? <Moon className="w-4 h-4 text-[#A855F7]" /> : <Sun className="w-4 h-4 text-amber-500" />}
               </button>
               <button
                 onClick={() => setMobileMenuOpen(true)}
-                className="p-2 bg-slate-900 hover:bg-slate-850 border border-slate-800 rounded-lg text-slate-200 transition-colors flex items-center justify-center"
+                className="p-2 bg-slate-100 hover:bg-slate-200 border border-slate-200 rounded-lg text-slate-800 transition-colors flex items-center justify-center"
               >
                 <Menu className="w-4 h-4" />
               </button>
@@ -700,10 +698,10 @@ export default function App() {
 
         {/* DESKTOP TOP STATUS BAR */}
         {activeTab !== "admin" && (
-          <div className="hidden md:flex items-center justify-between bg-slate-950/20 border-b border-slate-900/40 px-8 py-3 text-xs text-slate-400 shrink-0">
+          <div className="hidden md:flex items-center justify-between bg-white/40 border-b border-slate-200/40 px-8 py-3 text-xs text-slate-600 shrink-0">
             <div className="flex items-center gap-4 text-right">
-              <span className="text-[11px] font-black text-slate-200 flex items-center gap-2 bg-slate-950/50 border border-slate-850/60 px-3 py-1 rounded-full">
-                <span className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></span>
+              <span className="text-[11px] font-black text-slate-800 flex items-center gap-2 bg-white/90 border border-slate-200/60 px-3 py-1 rounded-full">
+                <span className="w-2 h-2 rounded-full bg-orange-500 animate-pulse"></span>
                 <span>
                   {activeTab === "home" && "الرئيسية والمزايا التجارية"}
                   {activeTab === "demo" && "منصة المحاكاة والعرض الحي"}
@@ -716,13 +714,13 @@ export default function App() {
             <div className="flex items-center gap-4 font-bold text-[11px]">
               <span className="text-slate-500">طريقة الدفع المقبولة: بريدي موب (Baridimob) & CCP</span>
               <span className="text-slate-700">•</span>
-              <span className="text-slate-300">الولاية الحالية للتغطية: <span className="text-purple-400">58 ولاية الجزائر 🇩🇿</span></span>
+              <span className="text-slate-700">الولاية الحالية للتغطية: <span className="text-blue-600">58 ولاية الجزائر 🇩🇿</span></span>
             </div>
           </div>
         )}
 
         {/* 5. CORE ROUTER STAGE */}
-        <main className={`flex-1 w-full py-12 relative transition-all duration-300 ${activeTab === "admin" ? "max-w-none w-full px-6 md:px-14 lg:px-24" : "max-w-7xl mx-auto px-4 md:px-8"}`}>
+        <main className={`flex-1 w-full py-12 relative transition-all duration-300 ${activeTab === "admin" ? "max-w-none w-full px-6 md:px-14 lg:px-24" : "w-full"}`}>
         
         <AnimatePresence mode="wait">
           
@@ -796,13 +794,13 @@ export default function App() {
 
       {/* 4. COMPREHENSIVE LANDING FOOTER */}
       {activeTab !== "admin" && (
-        <footer className="bg-slate-950 border-t border-slate-900 py-12 px-6 md:px-8 text-right mt-12 text-slate-400 text-xs">
+        <footer className="bg-white border-t border-slate-200 py-12 px-6 md:px-8 text-right mt-12 text-slate-600 text-xs">
           <div className="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-4 gap-8">
             
             <div className="space-y-3">
               <div className="flex items-center gap-2 justify-end">
-                <span className="text-white font-black text-sm">Algora Systems</span>
-                <div className="w-6 h-6 bg-purple-600 rounded-lg flex items-center justify-center font-bold text-white text-[11px]">A</div>
+                <span className="text-slate-900 font-black text-sm">Algora Systems</span>
+                <div className="w-6 h-6 bg-blue-600 rounded-lg flex items-center justify-center font-bold text-slate-900 text-[11px]">A</div>
               </div>
               <p className="leading-relaxed">
                 الخيار الأول والحل البرمجي المتكامل الأكثر دقة وتوافقية لتسيير ومتابعة محلات الهواتف والصيانة في الجزائر.
@@ -810,7 +808,7 @@ export default function App() {
             </div>
 
             <div className="space-y-2">
-              <h5 className="font-extrabold text-slate-200">أقسام ومزايا النظام:</h5>
+              <h5 className="font-extrabold text-slate-800">أقسام ومزايا النظام:</h5>
               <ul className="space-y-1 text-slate-500">
                 <li>• كاشير سريع POS بالباركود</li>
                 <li>• جرد السلع ومخزون الـ IMEI</li>
@@ -821,7 +819,7 @@ export default function App() {
             </div>
 
             <div className="space-y-2">
-              <h5 className="font-extrabold text-slate-200">الدعم وطرق الدفع بالجزائر:</h5>
+              <h5 className="font-extrabold text-slate-800">الدعم وطرق الدفع بالجزائر:</h5>
               <ul className="space-y-1 text-slate-500">
                 <li>• بريدي موب Baridimob (RIP)</li>
                 <li>• الحساب البريدي الجاري CCP</li>
@@ -832,16 +830,16 @@ export default function App() {
             </div>
 
             <div className="space-y-3">
-              <h5 className="font-extrabold text-slate-200">تواصل معنا مباشرة:</h5>
+              <h5 className="font-extrabold text-slate-800">تواصل معنا مباشرة:</h5>
               <p className="text-slate-500 leading-relaxed">فريق الدعم والمهندسين متواجد بالجزائر لخدمتك.</p>
               <div className="flex flex-col gap-2">
-                <p className="font-mono text-slate-300 font-bold text-[13px] inline-block text-right" dir="ltr">هاتف: <a href="https://wa.me/213671037202?text=%D9%85%D8%B1%D8%AD%D8%A8%D8%A7%D9%8B%D8%8C%20%D8%A3%D9%86%D8%A7%20%D9%85%D9%87%D8%AA%D9%85%20%D8%A8%D9%86%D8%B8%D8%A7%D9%85%20Algora%20%D9%88%D8%A3%D8%B1%D9%8A%D8%AF%20%D8%A7%D9%84%D8%AD%D8%B5%D9%88%D9%84%20%D8%B9%D9%84%D9%89%20%D9%86%D8%B3%D8%AE%D8%AA%D9%8A%20%D8%A7%D9%84%D8%AA%D8%AC%D8%B1%D9%8A%D8%A8%D9%8A%D8%A9%20%D8%A7%D9%84%D9%85%D8%AC%D8%A7%D9%86%D9%8A%D8%A9" target="_blank" rel="noopener noreferrer" className="hover:underline hover:text-purple-400 transition-colors cursor-pointer">+213 671 03 72 02</a></p>
+                <p className="font-mono text-slate-700 font-bold text-[13px] inline-block text-right" dir="ltr">هاتف: <a href="https://wa.me/213671037202?text=%D9%85%D8%B1%D8%AD%D8%A8%D8%A7%D9%8B%D8%8C%20%D8%A3%D9%86%D8%A7%20%D9%85%D9%87%D8%AA%D9%85%20%D8%A8%D9%86%D8%B8%D8%A7%D9%85%20Algora%20%D9%88%D8%A3%D8%B1%D9%8A%D8%AF%20%D8%A7%D9%84%D8%AD%D8%B5%D9%88%D9%84%20%D8%B9%D9%84%D9%89%20%D9%86%D8%B3%D8%AE%D8%AA%D9%8A%20%D8%A7%D9%84%D8%AA%D8%AC%D8%B1%D9%8A%D8%A8%D9%8A%D8%A9%20%D8%A7%D9%84%D9%85%D8%AC%D8%A7%D9%86%D9%8A%D8%A9" target="_blank" rel="noopener noreferrer" className="hover:underline hover:text-blue-600 transition-colors cursor-pointer">+213 671 03 72 02</a></p>
                 <div>
                   <a
                     href="https://wa.me/213671037202?text=%D9%85%D8%B1%D8%AD%D8%A8%D8%A7%D9%8B%D8%8C%20%D8%A3%D9%86%D8%A7%20%D9%85%D9%87%D8%AA%D9%85%20%D8%A8%D9%86%D8%B8%D8%A7%D9%85%20Algora%20%D9%88%D8%A3%D8%B1%D9%8A%D8%AF%20%D8%A7%D9%84%D8%AD%D8%B5%D9%88%D9%84%20%D8%B9%D9%84%D9%89%20%D9%86%D8%B3%D8%AE%D8%AA%D9%8A%20%D8%A7%D9%84%D8%AA%D8%AC%D8%B1%D9%8A%D8%A8%D9%8A%D8%A9%20%D8%A7%D9%84%D9%85%D8%AC%D8%A7%D9%86%D9%8A%D8%A9"
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="inline-flex items-center gap-1.5 px-3 py-1 bg-emerald-600 hover:bg-emerald-700 text-white rounded-lg text-[10px] font-black shadow transition-all cursor-pointer"
+                    className="inline-flex items-center gap-1.5 px-3 py-1 bg-emerald-600 hover:bg-emerald-700 text-slate-900 rounded-lg text-[10px] font-black shadow transition-all cursor-pointer"
                   >
                     <svg className="w-2.5 h-2.5 fill-current" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                       <path d="M.057 24l1.687-6.163c-1.041-1.804-1.588-3.849-1.587-5.946C.06 5.348 5.397.01 12.008.01c3.202.001 6.212 1.246 8.477 3.514 2.266 2.268 3.507 5.28 3.505 8.484-.004 6.657-5.34 11.997-11.953 11.997-2.005-.001-3.973-.502-5.724-1.455L0 24zm6.59-4.846c1.6.95 3.188 1.449 4.825 1.451 5.436 0 9.86-4.37 9.864-9.799.002-2.623-1.023-5.086-2.885-6.948C16.59 2.016 14.11 1.008 11.99 1.008 6.556 1.008 2.13 5.379 2.127 10.81c-.001 1.76.46 3.473 1.336 4.985l-.997 3.638 3.75-.98c1.478.808 2.985 1.2 4.541 1.201h.003zm11.236-7.394c-.29-.144-1.711-.844-1.977-.94-.266-.097-.46-.144-.654.144-.194.288-.75.94-.919 1.13-.17.19-.338.213-.628.069-.29-.144-1.226-.452-2.336-1.443-.864-.77-1.447-1.722-1.617-2.011-.17-.29-.018-.447.127-.59.13-.13.29-.338.435-.506.145-.17.194-.288.29-.48.097-.193.048-.36-.024-.505-.072-.144-.654-1.577-.895-2.155-.236-.577-.496-.499-.679-.508-.176-.008-.377-.01-.58-.01-.202 0-.53.076-.807.38-.277.303-1.057 1.034-1.057 2.52 0 1.487 1.082 2.923 1.231 3.125.15.202 2.13 3.251 5.16 4.56.72.311 1.282.497 1.72.637.724.23 1.383.197 1.903.12.58-.087 1.712-.699 1.952-1.376.24-.678.24-1.258.17-1.376-.073-.118-.266-.192-.556-.338z"/>
@@ -850,27 +848,27 @@ export default function App() {
                   </a>
                 </div>
               </div>
-              <p className="font-mono text-slate-400">إيميل: contact@algora.dz</p>
+              <p className="font-mono text-slate-600">إيميل: contact@algora.dz</p>
             </div>
 
           </div>
 
-          <div className="max-w-7xl mx-auto h-px bg-slate-900 my-8" />
+          <div className="max-w-7xl mx-auto h-px bg-slate-100 my-8" />
 
           <div className="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-center gap-4 text-slate-500 text-[10px]">
             <p>© {new Date().getFullYear()} Algora Systems. جميع الحقوق محفوظة لشركتنا بالجزائر.</p>
             <div className="flex flex-wrap gap-x-4 gap-y-2 justify-center">
-              <button onClick={() => handleNavToInfo("about")} className="hover:text-slate-300 transition-colors cursor-pointer">من نحن</button>
+              <button onClick={() => handleNavToInfo("about")} className="hover:text-slate-700 transition-colors cursor-pointer">من نحن</button>
               <span>•</span>
-              <button onClick={() => handleNavToInfo("terms")} className="hover:text-slate-300 transition-colors cursor-pointer">شروط الاستخدام</button>
+              <button onClick={() => handleNavToInfo("terms")} className="hover:text-slate-700 transition-colors cursor-pointer">شروط الاستخدام</button>
               <span>•</span>
-              <button onClick={() => handleNavToInfo("privacy")} className="hover:text-slate-300 transition-colors cursor-pointer">سياسة الخصوصية</button>
+              <button onClick={() => handleNavToInfo("privacy")} className="hover:text-slate-700 transition-colors cursor-pointer">سياسة الخصوصية</button>
               <span>•</span>
-              <button onClick={() => handleNavToInfo("refund")} className="hover:text-slate-300 transition-colors cursor-pointer">سياسة الاستبدال والاسترجاع</button>
+              <button onClick={() => handleNavToInfo("refund")} className="hover:text-slate-700 transition-colors cursor-pointer">سياسة الاستبدال والاسترجاع</button>
               <span>•</span>
-              <a href="#trial" onClick={handleNavToTrialForm} className="hover:text-slate-300 transition-colors">طلب نسخة تجريبية مجانية</a>
+              <a href="#trial" onClick={handleNavToTrialForm} className="hover:text-slate-700 transition-colors">طلب نسخة تجريبية مجانية</a>
               <span>•</span>
-              <a href="#demo" onClick={() => setActiveTab("demo")} className="hover:text-slate-300 transition-colors">العرض التجريبي</a>
+              <a href="#demo" onClick={() => setActiveTab("demo")} className="hover:text-slate-700 transition-colors">العرض التجريبي</a>
             </div>
           </div>
         </footer>
@@ -878,25 +876,13 @@ export default function App() {
 
       </div>
 
-      {/* 5. INTERACTIVE ONBOARDING GREETING WIZARD OVERLAY */}
-      <AnimatePresence>
-        {showGreeting && (
-          <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-slate-950/80 backdrop-blur-sm">
-            <GreetingWizard 
-              onClose={() => setShowGreeting(false)} 
-              onSelectTrial={handleNavToTrialForm}
-            />
-          </div>
-        )}
-      </AnimatePresence>
-
       {/* FLOATING WHATSAPP BUTTON */}
       {activeTab !== "admin" && (
         <a
           href="https://wa.me/213671037202?text=%D9%85%D8%B1%D8%AD%D8%A8%D8%A7%D9%8B%D8%8C%20%D8%A3%D9%86%D8%A7%20%D9%85%D9%87%D8%AA%D9%85%20%D8%A8%D9%86%D8%B8%D8%A7%D9%85%20Algora%20%D9%88%D8%A3%D8%B1%D9%8A%D8%AF%20%D8%A7%D9%84%D8%AD%D8%B5%D9%88%D9%84%20%D8%B9%D9%84%D9%89%20%D9%86%D8%B3%D8%AE%D8%AA%D9%8A%20%D8%A7%D9%84%D8%AA%D8%AC%D8%B1%D9%8A%D8%A8%D9%8A%D8%A9%20%D8%A7%D9%84%D9%85%D8%AC%D8%A7%D9%86%D9%8A%D8%A9"
           target="_blank"
           rel="noopener noreferrer"
-          className="fixed bottom-6 left-6 z-50 flex items-center justify-center w-12 h-12 bg-[#25D366] text-white rounded-full shadow-lg hover:scale-110 transition-transform duration-300"
+          className="fixed bottom-6 left-6 z-50 flex items-center justify-center w-12 h-12 bg-[#25D366] text-slate-900 rounded-full shadow-lg hover:scale-110 transition-transform duration-300"
           aria-label="تواصل معنا عبر واتساب"
         >
           <svg className="w-6 h-6 fill-current" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">

@@ -114,11 +114,11 @@ export default function ConfirmersTab() {
       {/* Tab Info Header */}
       <div className="flex flex-col md:flex-row items-start md:items-center justify-between gap-4 border-b border-white/5 pb-5 flex-row-reverse">
         <div>
-          <h4 className="text-sm font-black text-white flex items-center gap-2 justify-end">
+          <h4 className="text-sm font-black text-slate-900 flex items-center gap-2 justify-end">
             <span>إدارة حسابات وصلاحيات مؤكدات الطلبيات</span>
             <Shield className="w-5 h-5 text-[#8B5CF6]" />
           </h4>
-          <p className="text-[11px] text-slate-400 mt-1">
+          <p className="text-[11px] text-slate-600 mt-1">
             أنشئ حسابات خاصة للموظفين (المؤكدات) وحدد ما يمكنهم فعله ورؤيته بدقة في لوحة التسيير الكبرى.
           </p>
         </div>
@@ -129,7 +129,7 @@ export default function ConfirmersTab() {
         {/* RIGHT COLUMN: LIST OF CONFIRMERS (8 Cols) */}
         <div className="xl:col-span-8 bg-[#14141D] border border-[rgba(255,255,255,0.06)] rounded-[18px] overflow-hidden flex flex-col shadow-sm">
           <div className="p-5 border-b border-white/5 flex items-center justify-between flex-row-reverse">
-            <h3 className="text-xs font-black text-white flex items-center gap-2">
+            <h3 className="text-xs font-black text-slate-900 flex items-center gap-2">
               <Users className="w-4 h-4 text-[#8B5CF6]" />
               <span>الحسابات الحالية والمؤكدات النشطات</span>
             </h3>
@@ -153,7 +153,7 @@ export default function ConfirmersTab() {
             ) : (
               <table className="w-full text-right text-xs border-collapse">
                 <thead>
-                  <tr className="bg-[#0B0B12] border-b border-[rgba(255,255,255,0.06)] text-slate-400 text-[10px] uppercase font-black tracking-wider">
+                  <tr className="bg-[#0B0B12] border-b border-[rgba(255,255,255,0.06)] text-slate-600 text-[10px] uppercase font-black tracking-wider">
                     <th className="px-5 py-4 text-right">الاسم والمستخدم</th>
                     <th className="px-5 py-4 text-right">تاريخ الإنشاء</th>
                     <th className="px-5 py-4 text-right">صلاحيات الحساب</th>
@@ -172,7 +172,7 @@ export default function ConfirmersTab() {
                             {conf.name.substring(0, 2).toUpperCase()}
                           </div>
                           <div>
-                            <div className="font-black text-white text-xs">{conf.name}</div>
+                            <div className="font-black text-slate-900 text-xs">{conf.name}</div>
                             <div className="text-[10px] text-slate-500 font-mono mt-0.5">@{conf.username}</div>
                           </div>
                         </div>
@@ -195,7 +195,7 @@ export default function ConfirmersTab() {
                                 className={`px-2 py-0.5 rounded text-[9px] font-bold transition-all border cursor-pointer ${
                                   isGranted
                                     ? "bg-[#8B5CF6]/15 border-[#8B5CF6]/30 text-[#A855F7]"
-                                    : "bg-transparent border-white/5 text-slate-600 hover:border-white/10 hover:text-slate-400"
+                                    : "bg-transparent border-white/5 text-slate-600 hover:border-white/10 hover:text-slate-600"
                                 }`}
                                 title={opt.desc}
                               >
@@ -212,7 +212,7 @@ export default function ConfirmersTab() {
                           onClick={() => handleToggleConfirmerActive(conf._id, conf.isActive)}
                           className={`inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-[10px] font-black border transition-all cursor-pointer ${
                             conf.isActive
-                              ? "bg-emerald-500/10 border-emerald-500/30 text-emerald-400 hover:bg-emerald-500/20"
+                              ? "bg-orange-500/10 border-emerald-500/30 text-emerald-400 hover:bg-orange-500/20"
                               : "bg-rose-500/10 border-rose-500/30 text-rose-400 hover:bg-rose-500/20"
                           }`}
                         >
@@ -244,7 +244,7 @@ export default function ConfirmersTab() {
         <div className="xl:col-span-4 bg-[#14141D] border border-[rgba(255,255,255,0.06)] rounded-[18px] p-5 space-y-5 shadow-sm">
           
           <div>
-            <h3 className="text-xs font-black text-white flex items-center gap-2 justify-end">
+            <h3 className="text-xs font-black text-slate-900 flex items-center gap-2 justify-end">
               <UserPlus className="w-4 h-4 text-[#8B5CF6]" />
               <span>إضافة حساب مؤكدة جديد</span>
             </h3>
@@ -255,46 +255,46 @@ export default function ConfirmersTab() {
             
             {/* Display Name */}
             <div className="space-y-1.5">
-              <label className="block text-[10px] font-black text-slate-300">الاسم الكامل للمؤكدة (مثال: فاطمة الزهراء):</label>
+              <label className="block text-[10px] font-black text-slate-700">الاسم الكامل للمؤكدة (مثال: فاطمة الزهراء):</label>
               <input
                 type="text"
                 required
                 value={name}
                 onChange={(e) => setName(e.target.value)}
                 placeholder="الاسم المعروض"
-                className="w-full bg-[#0B0B0F] border border-[rgba(255,255,255,0.06)] rounded-xl px-3 py-2.5 text-xs text-slate-100 text-right focus:outline-none focus:ring-1 focus:ring-[#8B5CF6]"
+                className="w-full bg-[#0B0B0F] border border-[rgba(255,255,255,0.06)] rounded-xl px-3 py-2.5 text-xs text-slate-900 text-right focus:outline-none focus:ring-1 focus:ring-[#8B5CF6]"
               />
             </div>
 
             {/* Username */}
             <div className="space-y-1.5">
-              <label className="block text-[10px] font-black text-slate-300">اسم المستخدم لتسجيل الدخول (بالإنجليزي):</label>
+              <label className="block text-[10px] font-black text-slate-700">اسم المستخدم لتسجيل الدخول (بالإنجليزي):</label>
               <input
                 type="text"
                 required
                 value={username}
                 onChange={(e) => setUsername(e.target.value)}
                 placeholder="username"
-                className="w-full bg-[#0B0B0F] border border-[rgba(255,255,255,0.06)] rounded-xl px-3 py-2.5 text-xs text-slate-100 text-left focus:outline-none focus:ring-1 focus:ring-[#8B5CF6] font-mono"
+                className="w-full bg-[#0B0B0F] border border-[rgba(255,255,255,0.06)] rounded-xl px-3 py-2.5 text-xs text-slate-900 text-left focus:outline-none focus:ring-1 focus:ring-[#8B5CF6] font-mono"
               />
             </div>
 
             {/* Password */}
             <div className="space-y-1.5">
-              <label className="block text-[10px] font-black text-slate-300">كلمة المرور الخاصة بها:</label>
+              <label className="block text-[10px] font-black text-slate-700">كلمة المرور الخاصة بها:</label>
               <input
                 type="password"
                 required
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
                 placeholder="••••••••"
-                className="w-full bg-[#0B0B0F] border border-[rgba(255,255,255,0.06)] rounded-xl px-3 py-2.5 text-xs text-slate-100 text-left focus:outline-none focus:ring-1 focus:ring-[#8B5CF6] font-mono"
+                className="w-full bg-[#0B0B0F] border border-[rgba(255,255,255,0.06)] rounded-xl px-3 py-2.5 text-xs text-slate-900 text-left focus:outline-none focus:ring-1 focus:ring-[#8B5CF6] font-mono"
               />
             </div>
 
             {/* Permissions Checkbox Grid */}
             <div className="space-y-2 pt-2 border-t border-white/5">
-              <label className="block text-[10px] font-black text-slate-300">تحديد الصلاحيات الممنوحة:</label>
+              <label className="block text-[10px] font-black text-slate-700">تحديد الصلاحيات الممنوحة:</label>
               <div className="space-y-2">
                 {permissionOptions.map((opt) => {
                   const isChecked = selectedPermissions.includes(opt.id);
@@ -313,7 +313,7 @@ export default function ConfirmersTab() {
                         )}
                       </div>
                       <div className="flex-1 min-w-0 text-right">
-                        <div className={`text-[11px] font-black ${isChecked ? "text-white" : "text-slate-400"}`}>
+                        <div className={`text-[11px] font-black ${isChecked ? "text-slate-900" : "text-slate-600"}`}>
                           {opt.label}
                         </div>
                         <div className="text-[9px] text-slate-500 font-medium mt-0.5 truncate leading-tight">

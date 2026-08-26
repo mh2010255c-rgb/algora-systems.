@@ -173,8 +173,8 @@ export default function App() {
                       : "text-slate-600 hover:text-slate-800 hover:bg-slate-50/40 border-r-4 border-transparent"
                   }`}
                 >
-                  <PlayCircle className="w-4 h-4 text-blue-600 shrink-0" />
-                  <span className="flex-1 text-right">العرض التجريبي الحيّ</span>
+                  <Download className="w-4 h-4 text-blue-600 shrink-0" />
+                  <span className="flex-1 text-right">صفحة التحميل</span>
                   <span className="w-1.5 h-1.5 rounded-full bg-orange-500 animate-pulse"></span>
                 </button>
 
@@ -344,12 +344,12 @@ export default function App() {
                   ? "bg-gradient-to-l from-blue-600/10 to-blue-500/10 text-slate-900 border-r-4 border-blue-500 shadow-md shadow-blue-900/5"
                   : "text-slate-600 hover:text-slate-800 hover:bg-slate-50/40 border-r-4 border-transparent"
               } ${isSidebarCollapsed ? "justify-center" : "justify-start"}`}
-              title="العرض التجريبي الحيّ"
+              title="صفحة التحميل"
             >
-              <PlayCircle className="w-4.5 h-4.5 text-blue-600 shrink-0" />
+              <Download className="w-4.5 h-4.5 text-blue-600 shrink-0" />
               {!isSidebarCollapsed ? (
                 <>
-                  <span className="flex-1 text-right">العرض التجريبي الحيّ</span>
+                  <span className="flex-1 text-right">صفحة التحميل</span>
                   <span className="w-1.5 h-1.5 rounded-full bg-orange-500 animate-pulse"></span>
                 </>
               ) : (
@@ -548,8 +548,8 @@ export default function App() {
                       : "text-slate-600 hover:text-slate-800 hover:bg-slate-50/40"
                   }`}
                 >
-                  <PlayCircle className="w-4 h-4 text-blue-600 shrink-0" />
-                  <span>العرض التجريبي الحيّ</span>
+                  <Download className="w-4 h-4 text-blue-600 shrink-0" />
+                  <span>صفحة التحميل</span>
                   <span className="w-1.5 h-1.5 rounded-full bg-orange-500 animate-pulse"></span>
                 </button>
 

@@ -63,15 +63,43 @@ export default function App() {
     );
   }, [activeTab]);
 
-  // Route to specific tabs on load
+  // Route to specific tabs on load and handle back/forward browser buttons
   useEffect(() => {
-    const path = window.location.pathname.replace(/\/$/, "");
-    if (path === "/admin" || path === "/admine") {
-      setActiveTab("admin");
-    } else if (path === "/demo") {
-      setActiveTab("demo");
-    }
+    const handlePopState = () => {
+      const path = decodeURIComponent(window.location.pathname).replace(/\/$/, "");
+      if (path === "/admin" || path === "/admine") {
+        setActiveTab("admin");
+      } else if (
+        path === "/demo" || 
+        path.toLowerCase() === "/download" || 
+        path.toLowerCase() === "/telecharger" || 
+        path === "/Télécharger"
+      ) {
+        setActiveTab("demo");
+      } else {
+        setActiveTab("home");
+      }
+    };
+
+    // Run once on load
+    handlePopState();
+
+    window.addEventListener("popstate", handlePopState);
+    return () => window.removeEventListener("popstate", handlePopState);
   }, []);
+
+  // Update browser URL when tab changes
+  useEffect(() => {
+    const currentPath = decodeURIComponent(window.location.pathname).replace(/\/$/, "");
+    if (activeTab === "admin" && currentPath !== "/admin") {
+      window.history.pushState(null, "", "/admin");
+    } else if (activeTab === "demo" && currentPath !== "/Télécharger") {
+      window.history.pushState(null, "", "/Télécharger");
+    } else if (activeTab === "home" && currentPath !== "") {
+      window.history.pushState(null, "", "/");
+    }
+  }, [activeTab]);
+
   const handleNavToTrialForm = () => {
     setActiveTab("home");
     setMobileMenuOpen(false);
@@ -96,7 +124,7 @@ export default function App() {
   };
 
   if (activeTab === "demo") {
-    return <DownloadCenter />;
+    return <DownloadCenter onBack={() => setActiveTab("home")} />;
   }
 
   return (

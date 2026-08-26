@@ -2,15 +2,28 @@ import React from "react";
 import { motion } from "motion/react";
 import { 
   Monitor, Smartphone, Download, CheckCircle2, QrCode, 
-  ShieldCheck, WifiOff, Zap, Lock
+  ShieldCheck, WifiOff, Zap, Lock, ArrowRight
 } from "lucide-react";
 
-export default function DownloadCenter() {
+interface DownloadCenterProps {
+  onBack?: () => void;
+}
+
+export default function DownloadCenter({ onBack }: DownloadCenterProps) {
   return (
-    <div className="min-h-screen bg-slate-50 text-slate-900 flex flex-col font-sans selection:bg-blue-600/30 selection:text-blue-500 antialiased" dir="rtl">
+    <div className="min-h-screen bg-slate-50 text-slate-900 flex flex-col font-sans selection:bg-blue-600/30 selection:text-blue-500 antialiased relative" dir="rtl">
       
       {/* HEADER SECTION */}
       <div className="pt-20 pb-12 px-4 flex flex-col items-center justify-center text-center relative z-10">
+        {onBack && (
+          <button 
+            onClick={onBack}
+            className="absolute top-6 right-6 flex items-center gap-2 px-4 py-2 bg-white border border-slate-200/80 hover:border-slate-300 rounded-xl font-bold text-xs text-slate-700 hover:bg-slate-50 transition-all shadow-sm cursor-pointer active:scale-95"
+          >
+            <ArrowRight className="w-4 h-4 text-blue-600" />
+            <span>العودة للرئيسية</span>
+          </button>
+        )}
         <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-emerald-50 border border-emerald-200 text-emerald-700 text-xs font-bold mb-6">
           <ShieldCheck className="w-4 h-4" />
           <span>تم تشفير الوصول بنجاح</span>

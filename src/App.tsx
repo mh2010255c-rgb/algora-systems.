@@ -748,7 +748,7 @@ export default function App() {
         )}
 
         {/* 5. CORE ROUTER STAGE */}
-        <main className={`flex-1 w-full py-12 relative transition-all duration-300 ${activeTab === "admin" ? "max-w-none w-full px-6 md:px-14 lg:px-24" : "w-full"}`}>
+        <main className={`flex-1 w-full py-12 md:pt-4 md:pb-12 relative transition-all duration-300 ${activeTab === "admin" ? "max-w-none w-full px-6 md:px-14 lg:px-24" : "w-full"}`}>
         
         <AnimatePresence mode="wait">
           

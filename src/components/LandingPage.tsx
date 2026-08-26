@@ -540,7 +540,7 @@ export default function LandingPage({ onSelectDemo, onSelectSupport, onSelectTri
     <div className="space-y-24 pb-16 text-right">
       
       {/* 1. HERO SECTION (Welcoming Introduction) */}
-      <section className="relative py-12 md:py-32 overflow-hidden bg-white">
+      <section className="relative py-12 md:pt-12 md:pb-24 overflow-hidden bg-white">
         {/* Clean Blue Background Effects */}
         <div className="absolute inset-0 z-0 pointer-events-none overflow-hidden">
           {/* Top subtle blue glow */}

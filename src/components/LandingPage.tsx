@@ -5,7 +5,7 @@ import { api } from "../../convex/_generated/api";
 import { 
   ArrowLeft, Smartphone, ShieldCheck, Wrench, BarChart3, ScanBarcode, 
   Check, Printer, AlertCircle, Sparkles, ChevronLeft, ChevronRight, CreditCard,
-  CheckCircle2, Star, MessageCircle, HelpCircle, Loader2, Award, ArrowDown,
+  CheckCircle2, Star, MessageCircle, Loader2, Award, ArrowDown,
   Play, Pause, Volume2, VolumeX, UploadCloud, Video, Link2, Youtube, FileVideo, CheckCircle,
   Image, Plus, Trash2, Maximize2, Sliders, X, Laptop, Download, FileText, ExternalLink
 } from "lucide-react";
@@ -247,12 +247,7 @@ export default function LandingPage({ onSelectDemo, onSelectSupport, onSelectTri
     }
   };
 
-  // Faq State
-  const [faqOpen, setFaqOpen] = useState<number | null>(null);
 
-  // Tutorials Accordion State
-  const [tutorialOpen, setTutorialOpen] = useState<number | null>(null);
-  const [activeTutorialTab, setActiveTutorialTab] = useState<"computer" | "phone">("computer");
 
   // System Screenshots Gallery States
   const [selectedLightboxImage, setSelectedLightboxImage] = useState<any | null>(null);
@@ -474,78 +469,7 @@ export default function LandingPage({ onSelectDemo, onSelectSupport, onSelectTri
     }
   ];
 
-  // 3. FAQs Definition
-  const faqs = [
-    {
-      q: "كيف تتم عملية تفعيل الاشتراك بعد دفع قيمة الباقة؟",
-      a: "بمجرد إتمام الدفع بأي من طرقنا المحلية (بريدي موب، CCP، ريدوت باي)، يمكنك تصوير وصل الدفع وإرساله لفريق دعمنا عبر واتساب أو تسجيل تذكرة دعم فني. سيقوم مهندس الدعم بتفعيل ترخيصك مباشرة عن بعد ولن تفقد أي بيانات سجلتها في الفترة التجريبية."
-    },
-    {
-      q: "هل يعمل البرنامج أوفلاين دون الحاجة للإنترنت؟",
-      a: "نعم! اللوجيسيال يدعم العمل أوفلاين بالكامل داخل المحل لحفظ مبيعاتك ومخزونك اليومي، مع إمكانية المزامنة السحابية الاحتياطية بمجرد توفر اتصال بالإنترنت لضمان سلامة قاعدة بياناتك من الضياع في حال تلف الحاسوب."
-    },
-    {
-      q: "هل يدعم البرنامج طابعات الفواتير الصينية وماسحات الباركود الرخيصة؟",
-      a: "بالتأكيد! نظام Algora Systems مصمم ليدعم العمل المباشر مع 99% من معدات الكاشير المتوفرة بالجزائر، بما في ذلك طابعات 58mm و80mm الصينية وماسحات الباركود السلكية واللاسلكية دون الحاجة لتعريفات معقدة."
-    },
-    {
-      q: "ماذا يحدث بعد انتهاء الفترة التجريبية لـ 5 أيام؟",
-      a: "البرنامج لن يحذف بياناتك إطلاقاً! سيتوقف الكاشير مؤقتاً لحين اختيارك إحدى الباقات (الشهرية أو السنوية) وتفعيلها بمساعدة فريق دعمنا، وبمجرد التفعيل ستستأنف عملك بشكل طبيعي مع نفس السلع والزبائن المسجلين مسبقاً."
-    }
-  ];
 
-  // 4. Tutorial Definitions with Google Drive download links
-  const tutorials = [
-    {
-      title: "كيفية تحميل وتثبيت لوجيسيال Algora Systems على الحاسوب",
-      desc: "اضغط على زر التحميل أدناه للحصول على ملف التثبيت (Setup) مباشرة. بعد التحميل، شغّل الملف وسيبدأ معالج التثبيت خطوة بخطوة تلقائياً.",
-      driveUrl: "https://drive.google.com/drive/folders/1GFDi3qJWiB0hPWpPf0p8oZcfT9yOsVl7",
-      driveLabel: "تحميل لوجيسيال Algora PC",
-      category: "computer" as const
-    },
-    {
-      title: "كيفية إضافة السلع والمنتجات وضبط كميات المخزون بالباركود والـ IMEI",
-      desc: "بعد تثبيت البرنامج، ابدأ بإضافة سلعك بسهولة. راجع دليل المستخدم أو تواصل مع فريق الدعم للمساعدة.",
-      driveUrl: "https://drive.google.com/drive/folders/1GFDi3qJWiB0hPWpPf0p8oZcfT9yOsVl7",
-      driveLabel: "تحميل لوجيسيال Algora PC",
-      category: "computer" as const
-    },
-    {
-      title: "إدارة ورشة الصيانة واستلام أجهزة الزبائن وتتبع العطل",
-      desc: "استخدم وحدة الصيانة المدمجة في البرنامج لإدارة الطلبات وتتبع العطل. حمّل البرنامج أولاً للبدء.",
-      driveUrl: "https://drive.google.com/drive/folders/1GFDi3qJWiB0hPWpPf0p8oZcfT9yOsVl7",
-      driveLabel: "تحميل لوجيسيال Algora PC",
-      category: "computer" as const
-    },
-    {
-      title: "كيفية تفعيل الاشتراك وإدخال مفتاح الترخيص بعد الدفع",
-      desc: "بعد الدفع سيصلك مفتاح الترخيص عبر الواتساب. شغّل البرنامج وأدخل المفتاح في خانة التفعيل.",
-      driveUrl: "https://drive.google.com/drive/folders/1GFDi3qJWiB0hPWpPf0p8oZcfT9yOsVl7",
-      driveLabel: "تحميل لوجيسيال Algora PC",
-      category: "computer" as const
-    },
-    {
-      title: "كيفية ربط تطبيق الهاتف وتفعيل المزامنة السحابية",
-      desc: "حمّل تطبيق الهاتف من الرابط أدناه، ثم افتح البرنامج على حاسوبك لمسح رمز QR ومزامنة البيانات.",
-      driveUrl: "https://drive.google.com/drive/folders/1GFDi3qJWiB0hPWpPf0p8oZcfT9yOsVl7",
-      driveLabel: "تحميل تطبيق Algora Mobile",
-      category: "phone" as const
-    },
-    {
-      title: "متابعة المبيعات والتقارير الفورية والأرباح من الهاتف",
-      desc: "بعد تثبيت تطبيق الهاتف ومزامنته، يمكنك متابعة مبيعاتك وأرباحك من أي مكان وفي أي وقت.",
-      driveUrl: "https://drive.google.com/drive/folders/1GFDi3qJWiB0hPWpPf0p8oZcfT9yOsVl7",
-      driveLabel: "تحميل تطبيق Algora Mobile",
-      category: "phone" as const
-    },
-    {
-      title: "إجراء عمليات الجرد السريع وقراءة الباركود عبر كاميرا الهاتف",
-      desc: "استخدم كاميرا هاتفك كقارئ باركود مباشرة داخل التطبيق. حمّل التطبيق من الرابط أدناه للبدء.",
-      driveUrl: "https://drive.google.com/drive/folders/1GFDi3qJWiB0hPWpPf0p8oZcfT9yOsVl7",
-      driveLabel: "تحميل تطبيق Algora Mobile",
-      category: "phone" as const
-    }
-  ];
 
   // Submit trial request to API
   const handleRegisterTrial = async (e: React.FormEvent) => {
@@ -1797,145 +1721,6 @@ export default function LandingPage({ onSelectDemo, onSelectSupport, onSelectTri
 
         </div>
 
-        {/* Local support hint */}
-        <div className="max-w-xl mx-auto bg-white/30 border border-slate-200 p-4 rounded-xl text-center text-xs text-slate-600 space-y-1 relative z-10">
-          <p className="font-extrabold text-slate-800">💡 هل تواجه صعوبة في التثبيت أو ربط الطابعات؟</p>
-          <p className="leading-relaxed">
-            لا تقلق، فريق الدعم الفني الجزائري في خدمتك! اتصل بنا عبر الهاتف <a href="https://wa.me/213671037202?text=%D9%85%D8%B1%D8%AD%D8%A8%D8%A7%D9%8B%D8%8C%20%D8%A3%D9%86%D8%A7%20%D9%85%D9%87%D8%AA%D9%85%20%D8%A8%D9%86%D8%B8%D8%A7%D9%85%20Algora%20%D9%88%D8%A3%D8%B1%D9%8A%D8%AF%20%D8%A7%D9%84%D8%AD%D8%B5%D9%88%D9%84%20%D8%B9%D9%84%D9%89%20%D9%86%D8%B3%D8%AE%D8%AA%D9%8A%20%D8%A7%D9%84%D8%AA%D8%AC%D8%B1%D9%8A%D8%A8%D9%8A%D8%A9%20%D8%A7%D9%84%D9%85%D8%AC%D8%A7%D9%86%D9%8A%D8%A9" target="_blank" rel="noopener noreferrer" className="font-mono font-bold text-blue-600 text-[13px] inline-block hover:underline cursor-pointer" dir="ltr">+213 671 03 72 02</a> أو تواصل معنا عبر واتساب، وسيتصل بك أحد مهندسينا لتثبيت وتجهيز البرنامج على حاسوبك مجانًا بالكامل عبر <span className="font-bold text-blue-400">AnyDesk</span>.
-          </p>
-        </div>
-      </section>
-
-      {/* 8. FAQs ACCORDION */}
-      <section className="space-y-8 max-w-3xl mx-auto text-right">
-        <div className="text-center space-y-2">
-          <h2 className="text-xl md:text-3xl font-black text-slate-900">الأسئلة الشائعة حول لوجيسيال Algora</h2>
-          <p className="text-xs md:text-sm text-slate-600">إجابات سريعة وتفصيلية عن الأسئلة الأكثر طرحاً من قبل أصحاب محلات الهواتف الجزائريين.</p>
-        </div>
-
-        <div className="space-y-3.5">
-          {faqs.map((faq, idx) => (
-            <div key={idx} className="bg-white/60 border border-slate-200 rounded-xl overflow-hidden transition-all">
-              <button
-                onClick={() => setFaqOpen(faqOpen === idx ? null : idx)}
-                className="w-full p-4 flex justify-between items-center text-right font-bold text-xs md:text-sm text-slate-800 hover:text-blue-600 transition-colors cursor-pointer"
-              >
-                <HelpCircle className={`w-4 h-4 text-blue-600 shrink-0 transition-transform ${faqOpen === idx ? "rotate-180" : ""}`} />
-                <span>{faq.q}</span>
-              </button>
-              
-              <AnimatePresence>
-                {faqOpen === idx && (
-                  <motion.div
-                    initial={{ height: 0, opacity: 0 }}
-                    animate={{ height: "auto", opacity: 1 }}
-                    exit={{ height: 0, opacity: 0 }}
-                    className="border-t border-slate-200 bg-slate-100/10"
-                  >
-                    <p className="p-4 text-xs md:text-sm text-slate-600 leading-relaxed">
-                      {faq.a}
-                    </p>
-                  </motion.div>
-                )}
-              </AnimatePresence>
-            </div>
-          ))}
-        </div>
-      </section>
-
-      {/* 9. TUTORIALS ACCORDION */}
-      <section className="space-y-8 max-w-3xl mx-auto text-right">
-        <div className="text-center space-y-2">
-          <span className="inline-flex items-center gap-1.5 px-3 py-1 bg-blue-500/10 border border-blue-500/20 rounded-full text-blue-600 text-xs font-black">
-            <Video className="w-3.5 h-3.5" />
-            <span>شروحات استخدام النظام بالفيديو</span>
-          </span>
-          <h2 className="text-xl md:text-3xl font-black text-slate-900">دروس تعليمية مصورة خطوة بخطوة</h2>
-          <p className="text-xs md:text-sm text-slate-600">شاهد بالفيديو كيفية تثبيت البرنامج، إضافة منتجاتك، وتسيير محلك باحترافية كاملة.</p>
-        </div>
-
-        {/* Tab Buttons */}
-        <div className="flex justify-center gap-4 bg-white/40 p-1.5 rounded-2xl border border-slate-200/60 max-w-md mx-auto relative z-10">
-          <button
-            onClick={() => {
-              setActiveTutorialTab("computer");
-              setTutorialOpen(null);
-            }}
-            className={`flex-1 py-3 px-4 rounded-xl font-bold text-xs md:text-sm transition-all duration-300 flex items-center justify-center gap-2 cursor-pointer ${
-              activeTutorialTab === "computer"
-                ? "bg-gradient-to-r from-blue-600 to-blue-500 text-slate-900 shadow-lg shadow-blue-900/20 scale-105"
-                : "text-slate-600 hover:text-slate-800 hover:bg-slate-50/40"
-            }`}
-          >
-            <Laptop className="w-4 h-4" />
-            <span>تطبيق الحاسوب (PC)</span>
-          </button>
-          <button
-            onClick={() => {
-              setActiveTutorialTab("phone");
-              setTutorialOpen(null);
-            }}
-            className={`flex-1 py-3 px-4 rounded-xl font-bold text-xs md:text-sm transition-all duration-300 flex items-center justify-center gap-2 cursor-pointer ${
-              activeTutorialTab === "phone"
-                ? "bg-gradient-to-r from-blue-600 to-blue-500 text-slate-900 shadow-lg shadow-blue-900/20 scale-105"
-                : "text-slate-600 hover:text-slate-800 hover:bg-slate-50/40"
-            }`}
-          >
-            <Smartphone className="w-4 h-4" />
-            <span>تطبيق الهاتف (Mobile)</span>
-          </button>
-        </div>
-
-        <div className="space-y-3.5">
-          {tutorials
-            .filter((t) => t.category === activeTutorialTab)
-            .map((tutorial, idx) => (
-              <div key={idx} className="bg-white/60 border border-slate-200 rounded-xl overflow-hidden transition-all">
-                <button
-                  onClick={() => setTutorialOpen(tutorialOpen === idx ? null : idx)}
-                  className="w-full p-4 flex justify-between items-center text-right font-bold text-xs md:text-sm text-slate-800 hover:text-blue-600 transition-colors cursor-pointer"
-                >
-                  <Play className={`w-3.5 h-3.5 text-blue-600 shrink-0 transition-transform ${tutorialOpen === idx ? "rotate-90 text-blue-400 fill-blue-400" : "fill-blue-500"}`} />
-                  <span>{tutorial.title}</span>
-                </button>
-                
-                <AnimatePresence>
-                  {tutorialOpen === idx && (
-                    <motion.div
-                      initial={{ height: 0, opacity: 0 }}
-                      animate={{ height: "auto", opacity: 1 }}
-                      exit={{ height: 0, opacity: 0 }}
-                      className="border-t border-slate-200 bg-slate-100/10 p-5 space-y-4"
-                    >
-                      {tutorial.desc && (
-                        <p className="text-xs md:text-sm text-slate-600 leading-relaxed text-right">
-                          {tutorial.desc}
-                        </p>
-                      )}
-                      <div className="flex justify-center">
-                        <a
-                          href={tutorial.driveUrl}
-                          target="_blank"
-                          rel="noopener noreferrer"
-                          className="inline-flex items-center gap-3 px-6 py-3.5 bg-gradient-to-l from-blue-600 to-blue-500 hover:from-blue-500 hover:to-blue-400 text-white font-extrabold rounded-xl shadow-lg shadow-blue-900/10 transition-all duration-200 hover:scale-105 active:scale-100 text-sm"
-                        >
-                          <svg className="w-5 h-5 shrink-0" viewBox="0 0 87.3 78" xmlns="http://www.w3.org/2000/svg">
-                            <path d="m6.6 66.85 3.85 6.65c.8 1.4 1.95 2.5 3.3 3.3l13.75-23.8h-27.5c0 1.55.4 3.1 1.2 4.5z" fill="#0066da"/>
-                            <path d="m43.65 25-13.75-23.8c-1.35.8-2.5 1.9-3.3 3.3l-25.4 44a9.06 9.06 0 0 0 -1.2 4.5h27.5z" fill="#00ac47"/>
-                            <path d="m73.55 76.8c1.35-.8 2.5-1.9 3.3-3.3l1.6-2.75 7.65-13.25c.8-1.4 1.2-2.95 1.2-4.5h-27.502l5.852 11.5z" fill="#ea4335"/>
-                            <path d="m43.65 25 13.75-23.8c-1.35-.8-2.9-1.2-4.5-1.2h-18.5c-1.6 0-3.15.45-4.5 1.2z" fill="#00832d"/>
-                            <path d="m59.8 53h-32.3l-13.75 23.8c1.35.8 2.9 1.2 4.5 1.2h50.8c1.6 0 3.15-.45 4.5-1.2z" fill="#2684fc"/>
-                            <path d="m73.4 26.5-12.7-22c-.8-1.4-1.95-2.5-3.3-3.3l-13.75 23.8 16.15 27h27.45c0-1.55-.4-3.1-1.2-4.5z" fill="#ffba00"/>
-                          </svg>
-                          <span>{tutorial.driveLabel}</span>
-                        </a>
-                      </div>
-                    </motion.div>
-                  )}
-                </AnimatePresence>
-              </div>
-            ))}
-        </div>
       </section>
 
       {/* Floating Download Toast Notifications */}

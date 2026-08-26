@@ -11,14 +11,14 @@ export default function DownloadCenter() {
       
       {/* HEADER SECTION */}
       <div className="pt-20 pb-12 px-4 flex flex-col items-center justify-center text-center relative z-10">
-        <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-orange-500/10 border border-emerald-500/20 text-emerald-400 text-xs font-bold mb-6">
+        <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-emerald-50 border border-emerald-200 text-emerald-700 text-xs font-bold mb-6">
           <ShieldCheck className="w-4 h-4" />
           <span>تم تشفير الوصول بنجاح</span>
         </div>
         
         <h1 className="text-4xl md:text-5xl font-black mb-4 tracking-tight">
           <span className="text-slate-900">مركز </span>
-          <span className="bg-gradient-to-r from-blue-500 to-pink-500 text-transparent bg-clip-text drop-shadow-[0_0_15px_rgba(236,72,153,0.5)]">التحميل</span>
+          <span className="bg-gradient-to-r from-blue-500 to-pink-500 text-transparent bg-clip-text drop-shadow-[0_0_15px_rgba(236,72,153,0.15)]">التحميل</span>
         </h1>
         
         <p className="text-slate-600 max-w-lg text-sm leading-relaxed">
@@ -30,22 +30,22 @@ export default function DownloadCenter() {
       <div className="max-w-5xl mx-auto w-full px-4 grid grid-cols-1 md:grid-cols-2 gap-8 relative z-10 pb-20">
         
         {/* Glow effect behind cards */}
-        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-3/4 h-3/4 bg-blue-600/10 blur-[100px] -z-10 rounded-full pointer-events-none"></div>
+        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-3/4 h-3/4 bg-blue-600/5 blur-[120px] -z-10 rounded-full pointer-events-none"></div>
 
         {/* PC CARD */}
         <motion.div 
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.4 }}
-          className="bg-[#0b0c16] border border-blue-900/10 rounded-3xl p-8 relative overflow-hidden flex flex-col shadow-2xl hover:border-blue-500/30 transition-all group"
+          className="bg-white border border-slate-200/80 rounded-3xl p-8 relative overflow-hidden flex flex-col shadow-xl hover:shadow-2xl hover:border-blue-500/30 transition-all group"
         >
           {/* Top Badges & Icon */}
           <div className="flex justify-between items-start mb-8">
-            <span className="px-3 py-1 bg-blue-500/10 border border-blue-500/20 text-blue-400 text-[10px] font-bold rounded-full">
+            <span className="px-3 py-1 bg-blue-50 border border-blue-100 text-blue-600 text-[10px] font-bold rounded-full">
               الإصدار v2.4.0
             </span>
-            <div className="w-12 h-12 bg-[#1a1f3c] rounded-2xl flex items-center justify-center shadow-inner group-hover:bg-blue-600/20 transition-colors">
-              <Monitor className="w-6 h-6 text-blue-400" />
+            <div className="w-12 h-12 bg-blue-50 rounded-2xl flex items-center justify-center shadow-inner group-hover:bg-blue-100/50 transition-colors">
+              <Monitor className="w-6 h-6 text-blue-600" />
             </div>
           </div>
 
@@ -70,7 +70,7 @@ export default function DownloadCenter() {
           </div>
 
           <div className="mt-auto">
-            <button className="w-full py-4 bg-gradient-to-r from-blue-600 to-blue-500 hover:from-blue-500 hover:to-blue-400 text-slate-900 rounded-xl font-bold flex items-center justify-center gap-2 shadow-[0_0_20px_rgba(59,130,246,0.3)] transition-all transform hover:scale-[1.02]">
+            <button className="w-full py-4 bg-gradient-to-r from-blue-600 to-blue-500 hover:from-blue-500 hover:to-blue-400 text-white rounded-xl font-bold flex items-center justify-center gap-2 shadow-[0_4px_20px_rgba(59,130,246,0.2)] transition-all transform hover:scale-[1.02] cursor-pointer">
               <Download className="w-5 h-5" />
               <span>تحميل للويندوز</span>
             </button>
@@ -85,15 +85,15 @@ export default function DownloadCenter() {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.4, delay: 0.1 }}
-          className="bg-[#100a14] border border-pink-900/10 rounded-3xl p-8 relative overflow-hidden flex flex-col shadow-2xl hover:border-pink-500/30 transition-all group"
+          className="bg-white border border-slate-200/80 rounded-3xl p-8 relative overflow-hidden flex flex-col shadow-xl hover:shadow-2xl hover:border-pink-500/30 transition-all group"
         >
           {/* Top Badges & Icon */}
           <div className="flex justify-between items-start mb-8">
-            <span className="px-3 py-1 bg-pink-500/10 border border-pink-500/20 text-pink-400 text-[10px] font-bold rounded-full">
+            <span className="px-3 py-1 bg-pink-50 border border-pink-100 text-pink-600 text-[10px] font-bold rounded-full">
               الإصدار v1.2.0
             </span>
-            <div className="w-12 h-12 bg-[#2a162a] rounded-2xl flex items-center justify-center shadow-inner group-hover:bg-pink-600/20 transition-colors">
-              <Smartphone className="w-6 h-6 text-pink-400" />
+            <div className="w-12 h-12 bg-pink-50 rounded-2xl flex items-center justify-center shadow-inner group-hover:bg-pink-100/50 transition-colors">
+              <Smartphone className="w-6 h-6 text-pink-600" />
             </div>
           </div>
 
@@ -102,24 +102,24 @@ export default function DownloadCenter() {
             لمتابعة نشاط محلك عن بعد. قم بتثبيته على هاتفك ثم امسح كود الربط من برنامج الكمبيوتر.
           </p>
 
-          <div className="bg-[#0a0c1a] border border-slate-200/80 rounded-2xl p-4 flex items-center gap-4 mb-10 flex-1">
+          <div className="bg-slate-50 border border-slate-200/80 rounded-2xl p-4 flex items-center gap-4 mb-10 flex-1">
             <div className="flex-1">
               <div className="flex items-center gap-2 mb-1">
-                <QrCode className="w-4 h-4 text-pink-500" />
+                <QrCode className="w-4 h-4 text-pink-600" />
                 <h4 className="text-slate-900 font-bold text-sm">امسح للتحميل</h4>
               </div>
               <p className="text-[10px] text-slate-500 leading-tight">
                 وجه كاميرا هاتفك نحو الكود للتحميل المباشر.
               </p>
             </div>
-            <div className="w-16 h-16 bg-white rounded-lg p-1 shrink-0">
+            <div className="w-16 h-16 bg-white rounded-lg p-1 shrink-0 border border-slate-200">
               {/* Fake QR code representation */}
               <div className="w-full h-full bg-[url('https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=https://algora.dz/download/apk')] bg-contain bg-no-repeat bg-center"></div>
             </div>
           </div>
 
           <div className="mt-auto">
-            <button className="w-full py-4 bg-white hover:bg-slate-100 text-pink-600 rounded-xl font-black flex items-center justify-center gap-2 shadow-[0_0_20px_rgba(255,255,255,0.1)] transition-all transform hover:scale-[1.02]">
+            <button className="w-full py-4 bg-gradient-to-r from-pink-600 to-pink-500 hover:from-pink-500 hover:to-pink-400 text-white rounded-xl font-bold flex items-center justify-center gap-2 shadow-[0_4px_20px_rgba(236,72,153,0.2)] transition-all transform hover:scale-[1.02] cursor-pointer">
               <Download className="w-5 h-5" />
               <span>تحميل ملف APK</span>
             </button>

@@ -85,7 +85,12 @@ export default function App() {
       ) {
         setActiveTab("demo");
       } else {
-        setActiveTab("home");
+        // If it's the root path and they haven't seen the trial funnel, show it
+        if (path === "" && localStorage.getItem("hasSeenTrialFunnel") !== "true") {
+          setActiveTab("trial");
+        } else {
+          setActiveTab("home");
+        }
       }
     };
 

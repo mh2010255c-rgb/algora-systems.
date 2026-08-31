@@ -11,6 +11,7 @@ import DownloadCenter from "./components/DownloadCenter";
 import SupportCenter from "./components/SupportCenter";
 import InfoPages, { InfoSection } from "./components/InfoPages";
 import AdminDashboard from "./components/AdminDashboard";
+import TrialFunnel from "./components/TrialFunnel";
 import { ErrorBoundary } from "react-error-boundary";
 
 function AdminErrorFallback({ error, resetErrorBoundary }: any) {
@@ -37,6 +38,15 @@ export default function App() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [isSidebarCollapsed, setIsSidebarCollapsed] = useState(false);
   const trialFormRef = useRef<HTMLDivElement>(null);
+
+  const [showTrialFunnel, setShowTrialFunnel] = useState(() => {
+    return localStorage.getItem("hasSeenTrialFunnel") !== "true";
+  });
+
+  const completeTrialFunnel = () => {
+    localStorage.setItem("hasSeenTrialFunnel", "true");
+    setShowTrialFunnel(false);
+  };
 
   const [theme, setTheme] = useState<"light" | "dark">(() => {
     return (localStorage.getItem("theme") as "light" | "dark") || "dark";
@@ -130,6 +140,16 @@ export default function App() {
   return (
     <div dir="rtl" className="min-h-screen bg-slate-50 text-slate-900 flex flex-col font-sans selection:bg-blue-600/30 selection:text-blue-500 antialiased overflow-x-hidden">
       
+      {/* 0. TRIAL FUNNEL (Appears on first visit) */}
+      <AnimatePresence>
+        {showTrialFunnel && (
+          <TrialFunnel 
+            onComplete={completeTrialFunnel} 
+            onSkip={completeTrialFunnel} 
+          />
+        )}
+      </AnimatePresence>
+
       {/* 1. BACKDROP OVERLAY FOR MOBILE SIDEBAR DRAWER */}
       <AnimatePresence>
         {mobileMenuOpen && (

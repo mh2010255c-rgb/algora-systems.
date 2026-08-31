@@ -1,6 +1,10 @@
 import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "motion/react";
-import { CheckCircle2, Download, Send, User, Phone, Store, MapPin, Mail, ArrowRight, X } from "lucide-react";
+import { 
+  CheckCircle2, Download, MessageCircle, ArrowRight, X, 
+  Monitor, Smartphone, MonitorSmartphone, CreditCard, Banknote, MapPin, 
+  Building2, User, Phone, PhoneCall, MessageSquare, Zap, BadgeCheck
+} from "lucide-react";
 
 type TrialFunnelProps = {
   onComplete: () => void;
@@ -16,14 +20,19 @@ export default function TrialFunnel({ onComplete, onSkip }: TrialFunnelProps) {
 
   // Form State
   const [formData, setFormData] = useState({
-    fullName: "",
-    phone: "",
     shopName: "",
+    ownerName: "",
+    phone1: "",
+    phone2: "",
     wilaya: "",
-    email: "",
+    city: "",
+    package: "both", // 'pc', 'mobile', 'both'
+    hasWhatsapp: true,
+    paymentMethod: "ccp", // 'cash', 'baridimob', 'ccp'
+    notes: ""
   });
 
-  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
+  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement>) => {
     setFormData(prev => ({
       ...prev,
       [e.target.name]: e.target.value
@@ -32,8 +41,8 @@ export default function TrialFunnel({ onComplete, onSkip }: TrialFunnelProps) {
 
   const handleFormSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    if (!formData.fullName || !formData.phone || !formData.shopName || !formData.wilaya) {
-      alert("الرجاء ملء جميع الحقول المطلوبة");
+    if (!formData.shopName || !formData.ownerName || !formData.phone1 || !formData.wilaya) {
+      alert("الرجاء ملء جميع الحقول المطلوبة (اسم المحل، اسم المالك، رقم الهاتف، والولاية)");
       return;
     }
     
@@ -50,13 +59,6 @@ export default function TrialFunnel({ onComplete, onSkip }: TrialFunnelProps) {
     // Simulate download delay
     setTimeout(() => {
       setIsDownloading(false);
-      
-      // Optional: trigger actual file download here
-      // const link = document.createElement('a');
-      // link.href = '/path/to/installer.exe';
-      // link.download = 'Fonezoon-Trial.exe';
-      // link.click();
-      
       setStep(3);
     }, 2000);
   };
@@ -80,244 +82,438 @@ export default function TrialFunnel({ onComplete, onSkip }: TrialFunnelProps) {
   }, []);
 
   return (
-    <div className="fixed inset-0 z-[100] flex items-center justify-center bg-slate-900/60 backdrop-blur-xl p-4 md:p-6" dir="rtl">
+    <div className="fixed inset-0 z-[100] flex items-center justify-center bg-slate-900/60 backdrop-blur-md p-2 md:p-6 overflow-y-auto" dir="rtl">
       {onSkip && (
         <button 
           onClick={onSkip}
-          className="absolute top-6 left-6 p-2 bg-white/10 hover:bg-white/20 text-white rounded-full transition-colors z-10"
+          className="fixed top-4 left-4 md:top-6 md:left-6 p-2 bg-slate-800/50 hover:bg-slate-800/80 text-white rounded-full transition-colors z-[110]"
           title="تخطي"
         >
           <X className="w-6 h-6" />
         </button>
       )}
 
-      <div className="w-full max-w-2xl bg-white dark:bg-slate-900 rounded-3xl shadow-2xl border border-slate-200 dark:border-slate-800 overflow-hidden relative">
+      <div className="w-full max-w-6xl bg-white dark:bg-slate-950 rounded-2xl md:rounded-[2rem] shadow-2xl overflow-hidden relative min-h-[90vh] md:min-h-0 my-auto flex flex-col md:flex-row">
         
-        {/* Background Decorations */}
-        <div className="absolute top-0 right-0 w-64 h-64 bg-blue-500/10 blur-3xl rounded-full translate-x-1/2 -translate-y-1/2 pointer-events-none"></div>
-        <div className="absolute bottom-0 left-0 w-80 h-80 bg-purple-500/10 blur-3xl rounded-full -translate-x-1/2 translate-y-1/2 pointer-events-none"></div>
-
-        <div className="relative p-8 md:p-12">
+        <AnimatePresence mode="wait">
           
-          <AnimatePresence mode="wait">
-            
-            {/* STEP 1: Form */}
-            {step === 1 && (
-              <motion.div
-                key="step1"
-                initial={{ opacity: 0, x: -20 }}
-                animate={{ opacity: 1, x: 0 }}
-                exit={{ opacity: 0, x: 20 }}
-                className="space-y-8"
-              >
-                <div className="text-center space-y-3">
-                  <div className="w-16 h-16 bg-gradient-to-br from-blue-600 to-blue-400 rounded-2xl mx-auto flex items-center justify-center shadow-lg shadow-blue-500/30 mb-6">
-                    <User className="w-8 h-8 text-white" />
+          {/* STEP 1: Form Layout */}
+          {step === 1 && (
+            <motion.div
+              key="step1"
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              className="flex flex-col md:flex-row w-full"
+            >
+              {/* Right Side (Info) */}
+              <div className="w-full md:w-5/12 bg-slate-50 dark:bg-slate-900 p-8 md:p-12 flex flex-col justify-center border-b md:border-b-0 md:border-l border-slate-200 dark:border-slate-800">
+                <div className="space-y-6 max-w-md mx-auto">
+                  <div className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-blue-50 dark:bg-blue-900/20 text-blue-600 dark:text-blue-400 font-bold text-xs border border-blue-100 dark:border-blue-800/50">
+                    <BadgeCheck className="w-4 h-4" />
+                    <span>جرب نظامنا بالكامل 5 أيام مجاناً</span>
                   </div>
-                  <h2 className="text-3xl font-black text-slate-900 dark:text-white tracking-tight">مرحباً بك في Fonezoon 👋</h2>
-                  <p className="text-slate-600 dark:text-slate-400 text-sm">أدخل معلوماتك للحصول على نسختك التجريبية المجانية</p>
+                  
+                  <h2 className="text-3xl md:text-4xl font-black text-slate-900 dark:text-white leading-tight">
+                    اطلب تفعيل نسختك التجريبية المجانية في ثوانٍ معدودة
+                  </h2>
+
+                  <div className="bg-white dark:bg-slate-800/50 border border-slate-200 dark:border-slate-700/50 rounded-2xl p-6 mt-8 shadow-sm">
+                    <h3 className="font-black text-slate-800 dark:text-slate-200 text-sm flex items-center gap-2 mb-4">
+                      <span>ماذا يشمل طلب التجربة المجانية؟</span>
+                      <Zap className="w-4 h-4 text-amber-500 fill-amber-500" />
+                    </h3>
+                    <ul className="space-y-3">
+                      {[
+                        "5 أيام كاملة دون أي التزام أو دفع مسبق",
+                        "دعم فني كامل هاتفياً وعبر AnyDesk للتثبيت مجاناً",
+                        "إمكانية الاحتفاظ بكافة السلع التي جردتها بعد الاشتراك"
+                      ].map((item, i) => (
+                        <li key={i} className="flex items-start gap-2.5 text-sm text-slate-600 dark:text-slate-400 font-medium">
+                          <CheckCircle2 className="w-4 h-4 text-green-500 shrink-0 mt-0.5" />
+                          <span>{item}</span>
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
                 </div>
+              </div>
 
-                <form onSubmit={handleFormSubmit} className="space-y-5">
-                  <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
-                    {/* Full Name */}
-                    <div className="space-y-2">
-                      <label className="text-sm font-bold text-slate-700 dark:text-slate-300">الاسم الكامل <span className="text-red-500">*</span></label>
-                      <div className="relative">
-                        <User className="absolute right-3 top-1/2 -translate-y-1/2 w-4 h-4 text-slate-400" />
-                        <input 
-                          type="text" 
-                          name="fullName"
-                          value={formData.fullName}
-                          onChange={handleInputChange}
-                          required
-                          className="w-full pl-4 pr-10 py-3 bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-xl focus:ring-2 focus:ring-blue-500 outline-none text-slate-900 dark:text-white transition-all"
-                          placeholder="الاسم واللقب"
-                        />
-                      </div>
-                    </div>
-
-                    {/* Phone */}
-                    <div className="space-y-2">
-                      <label className="text-sm font-bold text-slate-700 dark:text-slate-300">رقم الهاتف <span className="text-red-500">*</span></label>
-                      <div className="relative">
-                        <Phone className="absolute right-3 top-1/2 -translate-y-1/2 w-4 h-4 text-slate-400" />
-                        <input 
-                          type="tel" 
-                          name="phone"
-                          value={formData.phone}
-                          onChange={handleInputChange}
-                          required
-                          dir="ltr"
-                          className="w-full pl-4 pr-10 py-3 bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-xl focus:ring-2 focus:ring-blue-500 outline-none text-slate-900 dark:text-white transition-all text-right"
-                          placeholder="0550 00 00 00"
-                        />
-                      </div>
-                    </div>
-
-                    {/* Shop Name */}
-                    <div className="space-y-2">
-                      <label className="text-sm font-bold text-slate-700 dark:text-slate-300">اسم المحل <span className="text-red-500">*</span></label>
-                      <div className="relative">
-                        <Store className="absolute right-3 top-1/2 -translate-y-1/2 w-4 h-4 text-slate-400" />
-                        <input 
-                          type="text" 
-                          name="shopName"
-                          value={formData.shopName}
-                          onChange={handleInputChange}
-                          required
-                          className="w-full pl-4 pr-10 py-3 bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-xl focus:ring-2 focus:ring-blue-500 outline-none text-slate-900 dark:text-white transition-all"
-                          placeholder="اسم محلك التجاري"
-                        />
-                      </div>
-                    </div>
-
-                    {/* Wilaya */}
-                    <div className="space-y-2">
-                      <label className="text-sm font-bold text-slate-700 dark:text-slate-300">الولاية <span className="text-red-500">*</span></label>
-                      <div className="relative">
-                        <MapPin className="absolute right-3 top-1/2 -translate-y-1/2 w-4 h-4 text-slate-400" />
-                        <select
-                          name="wilaya"
-                          value={formData.wilaya}
-                          onChange={handleInputChange}
-                          required
-                          className="w-full pl-4 pr-10 py-3 bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-xl focus:ring-2 focus:ring-blue-500 outline-none text-slate-900 dark:text-white transition-all appearance-none cursor-pointer"
-                        >
-                          <option value="" disabled>اختر الولاية...</option>
-                          {wilayas.map(w => (
-                            <option key={w} value={w}>{w}</option>
-                          ))}
-                        </select>
-                      </div>
-                    </div>
+              {/* Left Side (Form) */}
+              <div className="w-full md:w-7/12 p-6 md:p-10 bg-white dark:bg-slate-950 overflow-y-auto max-h-[85vh] custom-scrollbar">
+                <form onSubmit={handleFormSubmit} className="space-y-6 max-w-2xl mx-auto">
+                  
+                  {/* Shop Name */}
+                  <div className="space-y-1.5">
+                    <label className="text-xs font-bold text-slate-700 dark:text-slate-300">اسم المحل التجاري</label>
+                    <input 
+                      type="text" 
+                      name="shopName"
+                      value={formData.shopName}
+                      onChange={handleInputChange}
+                      required
+                      className="w-full px-4 py-3 bg-slate-50 dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-xl focus:ring-2 focus:ring-blue-500 focus:border-blue-500 outline-none text-slate-900 dark:text-white transition-all text-sm"
+                      placeholder="مثال: البهجة موبايل"
+                    />
                   </div>
 
-                  {/* Email (Optional) */}
-                  <div className="space-y-2">
-                    <label className="text-sm font-bold text-slate-700 dark:text-slate-300 flex items-center gap-2">
-                      البريد الإلكتروني 
-                      <span className="text-xs font-normal text-slate-400 bg-slate-100 dark:bg-slate-800 px-2 py-0.5 rounded-full">اختياري</span>
-                    </label>
-                    <div className="relative">
-                      <Mail className="absolute right-3 top-1/2 -translate-y-1/2 w-4 h-4 text-slate-400" />
+                  {/* Owner Name */}
+                  <div className="space-y-1.5">
+                    <label className="text-xs font-bold text-slate-700 dark:text-slate-300">اسم ولقب صاحب المحل</label>
+                    <input 
+                      type="text" 
+                      name="ownerName"
+                      value={formData.ownerName}
+                      onChange={handleInputChange}
+                      required
+                      className="w-full px-4 py-3 bg-slate-50 dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-xl focus:ring-2 focus:ring-blue-500 focus:border-blue-500 outline-none text-slate-900 dark:text-white transition-all text-sm"
+                      placeholder="مثال: يوسف جيلالي"
+                    />
+                  </div>
+
+                  {/* Phones Row */}
+                  <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    <div className="space-y-1.5">
+                      <label className="text-xs font-bold text-slate-700 dark:text-slate-300">رقم الهاتف الأول (النشط بالجزائر)</label>
                       <input 
-                        type="email" 
-                        name="email"
-                        value={formData.email}
+                        type="tel" 
+                        name="phone1"
+                        value={formData.phone1}
                         onChange={handleInputChange}
+                        required
                         dir="ltr"
-                        className="w-full pl-4 pr-10 py-3 bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-xl focus:ring-2 focus:ring-blue-500 outline-none text-slate-900 dark:text-white transition-all text-right"
-                        placeholder="contact@example.com"
+                        className="w-full px-4 py-3 bg-slate-50 dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-xl focus:ring-2 focus:ring-blue-500 focus:border-blue-500 outline-none text-slate-900 dark:text-white transition-all text-sm text-right"
+                        placeholder="مثال: 0671837282"
                       />
                     </div>
+                    <div className="space-y-1.5">
+                      <label className="text-xs font-bold text-slate-700 dark:text-slate-300 text-slate-500">رقم الهاتف الثاني (اختياري)</label>
+                      <input 
+                        type="tel" 
+                        name="phone2"
+                        value={formData.phone2}
+                        onChange={handleInputChange}
+                        dir="ltr"
+                        className="w-full px-4 py-3 bg-slate-50 dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-xl focus:ring-2 focus:ring-blue-500 focus:border-blue-500 outline-none text-slate-900 dark:text-white transition-all text-sm text-right"
+                        placeholder="مثال: 0666123456"
+                      />
+                    </div>
+                  </div>
+
+                  {/* Location Row */}
+                  <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    <div className="space-y-1.5">
+                      <label className="text-xs font-bold text-slate-700 dark:text-slate-300">الولاية</label>
+                      <select
+                        name="wilaya"
+                        value={formData.wilaya}
+                        onChange={handleInputChange}
+                        required
+                        className="w-full px-4 py-3 bg-slate-50 dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-xl focus:ring-2 focus:ring-blue-500 focus:border-blue-500 outline-none text-slate-900 dark:text-white transition-all text-sm cursor-pointer"
+                      >
+                        <option value="" disabled>اختر الولاية...</option>
+                        {wilayas.map(w => (
+                          <option key={w} value={w}>{w}</option>
+                        ))}
+                      </select>
+                    </div>
+                    <div className="space-y-1.5">
+                      <label className="text-xs font-bold text-slate-700 dark:text-slate-300">المدينة (البلدية)</label>
+                      <input 
+                        type="text" 
+                        name="city"
+                        value={formData.city}
+                        onChange={handleInputChange}
+                        required
+                        className="w-full px-4 py-3 bg-slate-50 dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-xl focus:ring-2 focus:ring-blue-500 focus:border-blue-500 outline-none text-slate-900 dark:text-white transition-all text-sm"
+                        placeholder="اختر البلدية..."
+                      />
+                    </div>
+                  </div>
+
+                  {/* Package Selection */}
+                  <div className="space-y-3">
+                    <label className="text-xs font-bold text-slate-700 dark:text-slate-300 flex items-center gap-1.5">
+                      <MonitorSmartphone className="w-4 h-4 text-blue-500" />
+                      <span>باقة البرنامج المطلوب تفعيله</span>
+                    </label>
+                    <div className="space-y-2">
+                      
+                      {/* Option 1: PC */}
+                      <label className={`flex items-center justify-between p-4 rounded-xl border-2 cursor-pointer transition-all ${
+                        formData.package === 'pc' 
+                          ? 'border-blue-500 bg-blue-50 dark:bg-blue-900/10' 
+                          : 'border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 hover:border-slate-300 dark:hover:border-slate-700'
+                      }`}>
+                        <div className="flex items-center gap-4">
+                          <div className={`w-5 h-5 rounded-full border flex items-center justify-center ${
+                            formData.package === 'pc' ? 'border-blue-500 bg-blue-500' : 'border-slate-300 dark:border-slate-600'
+                          }`}>
+                            {formData.package === 'pc' && <div className="w-2 h-2 bg-white rounded-full"></div>}
+                          </div>
+                          <div>
+                            <p className="font-bold text-sm text-slate-900 dark:text-white">باقة لوجيسيال حاسوب فقط</p>
+                            <p className="text-xs text-slate-500">برنامج متكامل على نظام ويندوز لإدارة الفواتير والمبيعات</p>
+                          </div>
+                        </div>
+                        <div className="flex items-center gap-2">
+                          <span className="font-bold text-blue-600 dark:text-blue-400 text-sm">12,000 دج / سنة</span>
+                          <Monitor className="w-5 h-5 text-slate-400" />
+                        </div>
+                      </label>
+
+                      {/* Option 2: Mobile */}
+                      <label className={`flex items-center justify-between p-4 rounded-xl border-2 cursor-pointer transition-all ${
+                        formData.package === 'mobile' 
+                          ? 'border-blue-500 bg-blue-50 dark:bg-blue-900/10' 
+                          : 'border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 hover:border-slate-300 dark:hover:border-slate-700'
+                      }`}>
+                        <div className="flex items-center gap-4">
+                          <div className={`w-5 h-5 rounded-full border flex items-center justify-center ${
+                            formData.package === 'mobile' ? 'border-blue-500 bg-blue-500' : 'border-slate-300 dark:border-slate-600'
+                          }`}>
+                            {formData.package === 'mobile' && <div className="w-2 h-2 bg-white rounded-full"></div>}
+                          </div>
+                          <div>
+                            <p className="font-bold text-sm text-slate-900 dark:text-white">باقة تطبيق هاتف فقط</p>
+                            <p className="text-xs text-slate-500">تطبيق أندرويد وآيفون متكامل لمتابعة محلك أينما كنت</p>
+                          </div>
+                        </div>
+                        <div className="flex items-center gap-2">
+                          <span className="font-bold text-blue-600 dark:text-blue-400 text-sm">12,000 دج / سنة</span>
+                          <Smartphone className="w-5 h-5 text-slate-400" />
+                        </div>
+                      </label>
+
+                      {/* Option 3: Both (Recommended) */}
+                      <label className={`flex items-center justify-between p-4 rounded-xl border-2 cursor-pointer transition-all ${
+                        formData.package === 'both' 
+                          ? 'border-blue-500 bg-blue-50 dark:bg-blue-900/10' 
+                          : 'border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 hover:border-slate-300 dark:hover:border-slate-700'
+                      }`}>
+                        <div className="flex items-center gap-4">
+                          <div className={`w-5 h-5 rounded-full border flex items-center justify-center ${
+                            formData.package === 'both' ? 'border-blue-500 bg-blue-500' : 'border-slate-300 dark:border-slate-600'
+                          }`}>
+                            {formData.package === 'both' && <div className="w-2 h-2 bg-white rounded-full"></div>}
+                          </div>
+                          <div>
+                            <p className="font-bold text-sm text-slate-900 dark:text-white flex items-center gap-2">
+                              <span>باقة تطبيق هاتف مع حاسوب معاً</span>
+                              <span className="text-[9px] bg-orange-100 text-orange-600 px-1.5 py-0.5 rounded font-black">الأكثر طلباً وتوفيراً 🔥</span>
+                            </p>
+                            <p className="text-xs text-slate-500">التكامل والتحكم المطلق (حاسوب + هاتف متزامنان كلياً)</p>
+                          </div>
+                        </div>
+                        <div className="flex items-center gap-2">
+                          <span className="font-bold text-blue-600 dark:text-blue-400 text-sm">20,000 دج / سنة</span>
+                          <div className="w-8 h-8 rounded-lg bg-blue-600 flex items-center justify-center">
+                            <MonitorSmartphone className="w-4 h-4 text-white" />
+                          </div>
+                        </div>
+                      </label>
+
+                    </div>
+                  </div>
+
+                  {/* Whatsapp Connected Check */}
+                  <div className="space-y-3">
+                    <label className="text-xs font-bold text-slate-700 dark:text-slate-300 flex items-center gap-1.5">
+                      <MessageCircle className="w-4 h-4 text-green-500" />
+                      <span>هل رقم الهاتف هذا مرتبط بالواتساب؟</span>
+                    </label>
+                    <div className="grid grid-cols-2 gap-3">
+                      <button
+                        type="button"
+                        onClick={() => setFormData({...formData, hasWhatsapp: false})}
+                        className={`py-3 px-4 rounded-xl font-bold text-sm border-2 transition-all flex items-center justify-center gap-2 ${
+                          !formData.hasWhatsapp 
+                            ? 'border-slate-800 bg-slate-800 text-white dark:border-slate-200 dark:bg-slate-200 dark:text-slate-900' 
+                            : 'border-slate-200 bg-white text-slate-600 hover:border-slate-300 dark:border-slate-800 dark:bg-slate-900 dark:text-slate-400'
+                        }`}
+                      >
+                        <PhoneCall className="w-4 h-4" />
+                        <span>لا، اتصال هاتفي فقط</span>
+                      </button>
+                      
+                      <button
+                        type="button"
+                        onClick={() => setFormData({...formData, hasWhatsapp: true})}
+                        className={`py-3 px-4 rounded-xl font-bold text-sm border-2 transition-all flex items-center justify-center gap-2 ${
+                          formData.hasWhatsapp 
+                            ? 'border-[#25D366] bg-[#25D366] text-white' 
+                            : 'border-slate-200 bg-white text-slate-600 hover:border-[#25D366]/30 dark:border-slate-800 dark:bg-slate-900 dark:text-slate-400'
+                        }`}
+                      >
+                        <MessageSquare className="w-4 h-4" />
+                        <span>نعم، يوجد واتساب</span>
+                      </button>
+                    </div>
+                  </div>
+
+                  {/* Payment Method */}
+                  <div className="space-y-3">
+                    <label className="text-xs font-bold text-slate-700 dark:text-slate-300 flex items-center gap-1.5">
+                      <CreditCard className="w-4 h-4 text-blue-500" />
+                      <span>وسيلة الدفع المفضلة لتفعيل الاشتراك لاحقاً</span>
+                    </label>
+                    <div className="grid grid-cols-3 gap-3">
+                      <button
+                        type="button"
+                        onClick={() => setFormData({...formData, paymentMethod: 'cash'})}
+                        className={`py-3 px-2 rounded-xl font-bold text-xs border-2 transition-all flex flex-col items-center justify-center gap-1.5 ${
+                          formData.paymentMethod === 'cash' 
+                            ? 'border-blue-600 bg-blue-600 text-white' 
+                            : 'border-slate-200 bg-white text-slate-600 hover:border-slate-300 dark:border-slate-800 dark:bg-slate-900 dark:text-slate-400'
+                        }`}
+                      >
+                        <span className="text-lg">📦</span>
+                        <span>دفع عند الاستلام</span>
+                      </button>
+                      <button
+                        type="button"
+                        onClick={() => setFormData({...formData, paymentMethod: 'baridimob'})}
+                        className={`py-3 px-2 rounded-xl font-bold text-xs border-2 transition-all flex flex-col items-center justify-center gap-1.5 ${
+                          formData.paymentMethod === 'baridimob' 
+                            ? 'border-blue-600 bg-blue-600 text-white' 
+                            : 'border-slate-200 bg-white text-slate-600 hover:border-slate-300 dark:border-slate-800 dark:bg-slate-900 dark:text-slate-400'
+                        }`}
+                      >
+                        <span className="text-lg">📱</span>
+                        <span>بريدي موب</span>
+                      </button>
+                      <button
+                        type="button"
+                        onClick={() => setFormData({...formData, paymentMethod: 'ccp'})}
+                        className={`py-3 px-2 rounded-xl font-bold text-xs border-2 transition-all flex flex-col items-center justify-center gap-1.5 ${
+                          formData.paymentMethod === 'ccp' 
+                            ? 'border-blue-600 bg-blue-600 text-white' 
+                            : 'border-slate-200 bg-white text-slate-600 hover:border-slate-300 dark:border-slate-800 dark:bg-slate-900 dark:text-slate-400'
+                        }`}
+                      >
+                        <span className="text-lg text-blue-400">💳</span>
+                        <span>CCP</span>
+                      </button>
+                    </div>
+                  </div>
+
+                  {/* Notes */}
+                  <div className="space-y-1.5">
+                    <label className="text-xs font-bold text-slate-700 dark:text-slate-300">ملاحظات (اختياري)</label>
+                    <textarea 
+                      name="notes"
+                      value={formData.notes}
+                      onChange={handleInputChange}
+                      rows={2}
+                      className="w-full px-4 py-3 bg-slate-50 dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-xl focus:ring-2 focus:ring-blue-500 focus:border-blue-500 outline-none text-slate-900 dark:text-white transition-all text-sm resize-none"
+                      placeholder="اكتب أي ملاحظات إضافية هنا..."
+                    />
                   </div>
 
                   <button 
                     type="submit" 
                     disabled={isSubmitting}
-                    className="w-full mt-6 py-4 bg-gradient-to-l from-blue-600 to-blue-500 hover:from-blue-500 hover:to-blue-400 text-white font-extrabold text-base rounded-xl shadow-xl shadow-blue-500/20 transition-all flex items-center justify-center gap-2 disabled:opacity-70 disabled:cursor-not-allowed group relative overflow-hidden"
+                    className="w-full py-4 bg-blue-600 hover:bg-blue-700 text-white font-extrabold text-sm md:text-base rounded-xl shadow-xl shadow-blue-600/20 transition-all flex items-center justify-center gap-2 disabled:opacity-70 disabled:cursor-not-allowed group"
                   >
-                    <div className="absolute inset-0 bg-white/20 translate-x-[-100%] group-hover:translate-x-[100%] transition-transform duration-700 ease-in-out"></div>
                     {isSubmitting ? (
-                      <span className="animate-pulse">جاري التسجيل...</span>
+                      <span className="animate-pulse">جاري تسجيل طلبك...</span>
                     ) : (
                       <>
-                        <Send className="w-5 h-5" />
-                        <span>🚀 تحميل النسخة التجريبية</span>
+                        <CheckCircle2 className="w-5 h-5 group-hover:scale-110 transition-transform" />
+                        <span>اطلب نسختك التجريبية وتفعيل الدعم الآن</span>
                       </>
                     )}
                   </button>
                 </form>
-              </motion.div>
-            )}
+              </div>
+            </motion.div>
+          )}
 
-            {/* STEP 2: Download */}
-            {step === 2 && (
-              <motion.div
-                key="step2"
-                initial={{ opacity: 0, x: -20 }}
-                animate={{ opacity: 1, x: 0 }}
-                exit={{ opacity: 0, x: 20 }}
-                className="flex flex-col items-center justify-center text-center py-10 space-y-8"
+          {/* STEP 2: Download */}
+          {step === 2 && (
+            <motion.div
+              key="step2"
+              initial={{ opacity: 0, scale: 0.95 }}
+              animate={{ opacity: 1, scale: 1 }}
+              exit={{ opacity: 0, scale: 1.05 }}
+              className="flex flex-col items-center justify-center text-center p-12 space-y-8 w-full"
+            >
+              <div className="w-20 h-20 bg-green-500/10 rounded-full flex items-center justify-center animate-fade-in-up">
+                <CheckCircle2 className="w-10 h-10 text-green-500" />
+              </div>
+              
+              <div className="space-y-4">
+                <h2 className="text-3xl font-black text-slate-900 dark:text-white tracking-tight">تم تسجيل طلبك بنجاح ✅</h2>
+                <p className="text-slate-600 dark:text-slate-400 max-w-sm mx-auto">
+                  يمكنك الآن تحميل وتجربة برنامج Fonezoon. سيقوم فريقنا بالاتصال بك قريباً لتفعيل النسخة.
+                </p>
+              </div>
+
+              <button 
+                onClick={handleDownload}
+                disabled={isDownloading}
+                className="w-full max-w-md py-5 bg-slate-900 dark:bg-white text-white dark:text-slate-900 font-black text-lg rounded-2xl shadow-2xl transition-all flex items-center justify-center gap-3 hover:scale-[1.02] active:scale-95 disabled:opacity-80 disabled:hover:scale-100 group relative overflow-hidden"
               >
-                <div className="w-20 h-20 bg-green-500/10 rounded-full flex items-center justify-center animate-fade-in-up">
-                  <CheckCircle2 className="w-10 h-10 text-green-500" />
+                <div className="absolute inset-0 bg-blue-500/20 translate-x-[-100%] group-hover:translate-x-[100%] transition-transform duration-700 ease-in-out"></div>
+                {isDownloading ? (
+                  <span className="flex items-center gap-2">
+                    <span className="w-5 h-5 border-2 border-white/30 dark:border-slate-900/30 border-t-white dark:border-t-slate-900 rounded-full animate-spin"></span>
+                    جاري التحميل...
+                  </span>
+                ) : (
+                  <>
+                    <Download className="w-6 h-6 animate-bounce" />
+                    <span>⬇️ Télécharger le logiciel</span>
+                  </>
+                )}
+              </button>
+            </motion.div>
+          )}
+
+          {/* STEP 3: Thank You & Contact */}
+          {step === 3 && (
+            <motion.div
+              key="step3"
+              initial={{ opacity: 0, scale: 0.95 }}
+              animate={{ opacity: 1, scale: 1 }}
+              className="flex flex-col items-center justify-center text-center p-12 space-y-8 w-full"
+            >
+              <div className="relative">
+                <div className="absolute inset-0 bg-amber-500/20 blur-xl rounded-full"></div>
+                <span className="text-7xl drop-shadow-xl relative z-10 block animate-bounce-slow">🎉</span>
+              </div>
+              
+              <div className="space-y-4">
+                <h2 className="text-3xl font-black text-slate-900 dark:text-white">شكراً لثقتك بنا!</h2>
+                <div className="bg-slate-50 dark:bg-slate-800/50 p-6 rounded-2xl border border-slate-200 dark:border-slate-700">
+                  <p className="text-slate-700 dark:text-slate-300 font-bold mb-2">تم تحميل النسخة التجريبية بنجاح.</p>
+                  <p className="text-slate-500 dark:text-slate-400 text-sm">فريق الدعم الفني سيتواصل معك عبر الهاتف لضبط إعدادات البرنامج.</p>
                 </div>
-                
-                <div className="space-y-4">
-                  <h2 className="text-3xl font-black text-slate-900 dark:text-white tracking-tight">تم تسجيل معلوماتك بنجاح ✅</h2>
-                  <p className="text-slate-600 dark:text-slate-400 max-w-sm mx-auto">
-                    يمكنك الآن تحميل وتجربة برنامج Fonezoon الخاص بإدارة محلات الهواتف والصيانة.
-                  </p>
-                </div>
+              </div>
+
+              <div className="w-full max-w-sm space-y-3">
+                <a 
+                  href="https://wa.me/213671037202?text=مرحباً، قمت للتو بتحميل النسخة التجريبية من برنامج Fonezoon وأحتاج إلى مساعدة في التثبيت."
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="w-full py-4 bg-[#25D366] hover:bg-[#128C7E] text-white font-extrabold text-base rounded-xl shadow-lg shadow-[#25D366]/30 transition-all flex items-center justify-center gap-2 hover:scale-[1.02]"
+                >
+                  <MessageSquare className="w-5 h-5 fill-white" />
+                  <span>💬 التواصل معنا على WhatsApp</span>
+                </a>
 
                 <button 
-                  onClick={handleDownload}
-                  disabled={isDownloading}
-                  className="w-full max-w-md py-5 bg-slate-900 dark:bg-white text-white dark:text-slate-900 font-black text-lg rounded-2xl shadow-2xl transition-all flex items-center justify-center gap-3 hover:scale-[1.02] active:scale-95 disabled:opacity-80 disabled:hover:scale-100 group relative overflow-hidden"
+                  onClick={onComplete}
+                  className="w-full py-4 bg-transparent hover:bg-slate-100 dark:hover:bg-slate-800 text-slate-600 dark:text-slate-400 font-bold text-sm rounded-xl transition-all flex items-center justify-center gap-2"
                 >
-                  <div className="absolute inset-0 bg-blue-500/20 translate-x-[-100%] group-hover:translate-x-[100%] transition-transform duration-700 ease-in-out"></div>
-                  {isDownloading ? (
-                    <span className="flex items-center gap-2">
-                      <span className="w-5 h-5 border-2 border-white/30 dark:border-slate-900/30 border-t-white dark:border-t-slate-900 rounded-full animate-spin"></span>
-                      جاري التحميل...
-                    </span>
-                  ) : (
-                    <>
-                      <Download className="w-6 h-6 animate-bounce" />
-                      <span>⬇️ Télécharger le logiciel</span>
-                    </>
-                  )}
+                  <span>الدخول إلى الموقع</span>
+                  <ArrowRight className="w-4 h-4" />
                 </button>
-              </motion.div>
-            )}
+              </div>
+            </motion.div>
+          )}
 
-            {/* STEP 3: Thank You & Contact */}
-            {step === 3 && (
-              <motion.div
-                key="step3"
-                initial={{ opacity: 0, scale: 0.9 }}
-                animate={{ opacity: 1, scale: 1 }}
-                className="flex flex-col items-center justify-center text-center py-8 space-y-8"
-              >
-                <div className="relative">
-                  <div className="absolute inset-0 bg-amber-500/20 blur-xl rounded-full"></div>
-                  <span className="text-7xl drop-shadow-xl relative z-10 block animate-bounce-slow">🎉</span>
-                </div>
-                
-                <div className="space-y-4">
-                  <h2 className="text-3xl font-black text-slate-900 dark:text-white">شكراً لتسجيلك!</h2>
-                  <div className="bg-slate-50 dark:bg-slate-800/50 p-6 rounded-2xl border border-slate-200 dark:border-slate-700">
-                    <p className="text-slate-700 dark:text-slate-300 font-bold mb-2">تم تحميل النسخة التجريبية بنجاح.</p>
-                    <p className="text-slate-500 dark:text-slate-400 text-sm">فريقنا سيتواصل معك قريباً لمساعدتك في تشغيل وإعداد البرنامج.</p>
-                  </div>
-                </div>
-
-                <div className="w-full max-w-sm space-y-3">
-                  <a 
-                    href="https://wa.me/213671037202?text=مرحباً، قمت للتو بتحميل النسخة التجريبية من برنامج Fonezoon وأحتاج إلى مساعدة في التثبيت والتفعيل."
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="w-full py-4 bg-[#25D366] hover:bg-[#128C7E] text-white font-extrabold text-base rounded-xl shadow-lg shadow-[#25D366]/30 transition-all flex items-center justify-center gap-2 hover:scale-[1.02]"
-                  >
-                    <svg className="w-5 h-5 fill-white" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51a12.8 12.8 0 0 0-.57-.01c-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 0 1-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 0 1-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 0 1 2.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0 0 12.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 0 0 5.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 0 0-3.48-8.413Z"/></svg>
-                    <span>💬 التواصل معنا على WhatsApp</span>
-                  </a>
-
-                  <button 
-                    onClick={onComplete}
-                    className="w-full py-4 bg-transparent hover:bg-slate-100 dark:hover:bg-slate-800 text-slate-600 dark:text-slate-400 font-bold text-sm rounded-xl transition-all flex items-center justify-center gap-2"
-                  >
-                    <span>الدخول إلى الموقع</span>
-                    <ArrowRight className="w-4 h-4" />
-                  </button>
-                </div>
-              </motion.div>
-            )}
-
-          </AnimatePresence>
-        </div>
+        </AnimatePresence>
       </div>
     </div>
   );

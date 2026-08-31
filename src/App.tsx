@@ -30,22 +30,20 @@ function AdminErrorFallback({ error, resetErrorBoundary }: any) {
   );
 }
 
-type ActiveTab = "home" | "demo" | "support" | "info" | "admin";
+type ActiveTab = "home" | "demo" | "support" | "info" | "admin" | "trial";
 
 export default function App() {
-  const [activeTab, setActiveTab] = useState<ActiveTab>("home");
+  const [activeTab, setActiveTab] = useState<ActiveTab>(() => {
+    return localStorage.getItem("hasSeenTrialFunnel") !== "true" ? "trial" : "home";
+  });
   const [activeInfoSection, setActiveInfoSection] = useState<InfoSection>("about");
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [isSidebarCollapsed, setIsSidebarCollapsed] = useState(false);
   const trialFormRef = useRef<HTMLDivElement>(null);
 
-  const [showTrialFunnel, setShowTrialFunnel] = useState(() => {
-    return localStorage.getItem("hasSeenTrialFunnel") !== "true";
-  });
-
   const completeTrialFunnel = () => {
     localStorage.setItem("hasSeenTrialFunnel", "true");
-    setShowTrialFunnel(false);
+    setActiveTab("home");
   };
 
   const [theme, setTheme] = useState<"light" | "dark">(() => {
@@ -111,14 +109,8 @@ export default function App() {
   }, [activeTab]);
 
   const handleNavToTrialForm = () => {
-    setActiveTab("home");
+    setActiveTab("trial");
     setMobileMenuOpen(false);
-    setTimeout(() => {
-      const el = document.getElementById("trial-form-section");
-      if (el) {
-        el.scrollIntoView({ behavior: "smooth" });
-      }
-    }, 150);
   };
 
   const handleNavToInfo = (section: InfoSection) => {
@@ -137,19 +129,20 @@ export default function App() {
     return <DownloadCenter onBack={() => setActiveTab("home")} />;
   }
 
+  if (activeTab === "trial") {
+    return (
+      <div className="min-h-screen bg-slate-50 text-slate-900 flex flex-col font-sans selection:bg-blue-600/30 selection:text-blue-500 antialiased" dir="rtl">
+        <TrialFunnel 
+          onComplete={completeTrialFunnel} 
+          onSkip={completeTrialFunnel} 
+        />
+      </div>
+    );
+  }
+
   return (
     <div dir="rtl" className="min-h-screen bg-slate-50 text-slate-900 flex flex-col font-sans selection:bg-blue-600/30 selection:text-blue-500 antialiased overflow-x-hidden">
       
-      {/* 0. TRIAL FUNNEL (Appears on first visit) */}
-      <AnimatePresence>
-        {showTrialFunnel && (
-          <TrialFunnel 
-            onComplete={completeTrialFunnel} 
-            onSkip={completeTrialFunnel} 
-          />
-        )}
-      </AnimatePresence>
-
       {/* 1. BACKDROP OVERLAY FOR MOBILE SIDEBAR DRAWER */}
       <AnimatePresence>
         {mobileMenuOpen && (

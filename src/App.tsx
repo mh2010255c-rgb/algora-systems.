@@ -84,6 +84,8 @@ export default function App() {
         path === "/Télécharger"
       ) {
         setActiveTab("demo");
+      } else if (path === "/trial") {
+        setActiveTab("trial");
       } else {
         // If it's the root path and they haven't seen the trial funnel, show it
         if (path === "" && localStorage.getItem("hasSeenTrialFunnel") !== "true") {

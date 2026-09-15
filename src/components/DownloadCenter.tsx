@@ -150,18 +150,18 @@ export default function DownloadCenter({ onBack }: DownloadCenterProps) {
         <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
           <div className="bg-slate-100/50 border border-slate-200/50 p-6 rounded-2xl">
             <div className="w-8 h-8 rounded-full bg-blue-600/10 text-blue-600 font-bold flex items-center justify-center mx-auto mb-3">1</div>
-            <h4 className="text-sm font-bold text-slate-800 mb-2">تحميل وتثبيت</h4>
-            <p className="text-[11px] text-slate-600">حمل نسخة الويندوز وقم بتثبيتها بشكل عادي على جهازك</p>
+            <h4 className="text-sm font-bold text-slate-800 mb-2">التحميل</h4>
+            <p className="text-[11px] text-slate-600">اضغط على زر التحميل تحميل للويندوز او تحميل ملف apk</p>
           </div>
           <div className="bg-slate-100/50 border border-slate-200/50 p-6 rounded-2xl">
             <div className="w-8 h-8 rounded-full bg-blue-600/10 text-blue-600 font-bold flex items-center justify-center mx-auto mb-3">2</div>
-            <h4 className="text-sm font-bold text-slate-800 mb-2">تفعيل الحساب</h4>
-            <p className="text-[11px] text-slate-600">افتح البرنامج وأدخل مفتاح الترخيص لتفعيل حسابك</p>
+            <h4 className="text-sm font-bold text-slate-800 mb-2">إدخال المعلومات</h4>
+            <p className="text-[11px] text-slate-600">ادخل الى تطبيق ادخل معلومات خاصة بك</p>
           </div>
           <div className="bg-slate-100/50 border border-slate-200/50 p-6 rounded-2xl">
             <div className="w-8 h-8 rounded-full bg-blue-600/10 text-blue-600 font-bold flex items-center justify-center mx-auto mb-3">3</div>
-            <h4 className="text-sm font-bold text-slate-800 mb-2">ربط الهاتف</h4>
-            <p className="text-[11px] text-slate-600">افتح تطبيق الهاتف وامسح الكود من الكمبيوتر للربط المباشر</p>
+            <h4 className="text-sm font-bold text-slate-800 mb-2">الدخول للنظام</h4>
+            <p className="text-[11px] text-slate-600">قم بالدخول الى نضام</p>
           </div>
         </div>
       </div>

@@ -1228,9 +1228,9 @@ export default function AdminDashboard({ onLogout, theme, setTheme }: AdminDashb
                       className="w-full bg-[#0B0B0F] border border-[rgba(255,255,255,0.06)] rounded-xl px-4 py-3 text-xs text-slate-700 text-right focus:outline-none focus:ring-2 focus:ring-[#7C3AED]/50"
                     >
                       <option value="trial">فترة تجريبية أساسية (5 أيام)</option>
-                      <option value="pc">باقة لوجيسيال حاسوب فقط (12,000 دج)</option>
-                      <option value="mobile">باقة تطبيق هاتف فقط (12,000 دج)</option>
-                      <option value="both">باقة تطبيق هاتف مع حاسوب معاً (20,000 دج)</option>
+                      <option value="pc">باقة لوجيسيال حاسوب فقط (10,000 دج)</option>
+                      <option value="mobile">باقة تطبيق هاتف فقط (8,000 دج)</option>
+                      <option value="both">باقة تطبيق هاتف مع حاسوب معاً (12,000 دج)</option>
                     </select>
                   </div>
 

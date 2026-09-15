@@ -257,7 +257,7 @@ export default function TrialFunnel({ onComplete, onSkip }: TrialFunnelProps) {
                           </div>
                         </div>
                         <div className="flex items-center gap-2">
-                          <span className="font-bold text-blue-600 dark:text-blue-400 text-sm">12,000 دج / سنة</span>
+                          <span className="font-bold text-blue-600 dark:text-blue-400 text-sm">10,000 دج / سنة</span>
                           <Monitor className="w-5 h-5 text-slate-400" />
                         </div>
                       </label>
@@ -280,38 +280,12 @@ export default function TrialFunnel({ onComplete, onSkip }: TrialFunnelProps) {
                           </div>
                         </div>
                         <div className="flex items-center gap-2">
-                          <span className="font-bold text-blue-600 dark:text-blue-400 text-sm">12,000 دج / سنة</span>
+                          <span className="font-bold text-blue-600 dark:text-blue-400 text-sm">8,000 دج / سنة</span>
                           <Smartphone className="w-5 h-5 text-slate-400" />
                         </div>
                       </label>
 
-                      {/* Option 3: Both (Recommended) */}
-                      <label className={`flex items-center justify-between p-4 rounded-xl border-2 cursor-pointer transition-all ${
-                        formData.package === 'both' 
-                          ? 'border-blue-500 bg-blue-50 dark:bg-blue-900/10' 
-                          : 'border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 hover:border-slate-300 dark:hover:border-slate-700'
-                      }`}>
-                        <div className="flex items-center gap-4">
-                          <div className={`w-5 h-5 rounded-full border flex items-center justify-center ${
-                            formData.package === 'both' ? 'border-blue-500 bg-blue-500' : 'border-slate-300 dark:border-slate-600'
-                          }`}>
-                            {formData.package === 'both' && <div className="w-2 h-2 bg-white rounded-full"></div>}
-                          </div>
-                          <div>
-                            <p className="font-bold text-sm text-slate-900 dark:text-white flex items-center gap-2">
-                              <span>باقة تطبيق هاتف مع حاسوب معاً</span>
-                              <span className="text-[9px] bg-orange-100 text-orange-600 px-1.5 py-0.5 rounded font-black">الأكثر طلباً وتوفيراً 🔥</span>
-                            </p>
-                            <p className="text-xs text-slate-500">التكامل والتحكم المطلق (حاسوب + هاتف متزامنان كلياً)</p>
-                          </div>
-                        </div>
-                        <div className="flex items-center gap-2">
-                          <span className="font-bold text-blue-600 dark:text-blue-400 text-sm">20,000 دج / سنة</span>
-                          <div className="w-8 h-8 rounded-lg bg-blue-600 flex items-center justify-center">
-                            <MonitorSmartphone className="w-4 h-4 text-white" />
-                          </div>
-                        </div>
-                      </label>
+
 
                     </div>
                   </div>

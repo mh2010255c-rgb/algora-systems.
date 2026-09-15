@@ -416,7 +416,7 @@ export default function LandingPage({ onSelectDemo, onSelectSupport, onSelectTri
     {
       id: "p_mobile_only",
       name: "باقة تطبيق هاتف فقط",
-      price: "12,000 دج",
+      price: "8,000 دج",
       period: "سنة",
       description: "تطبيق أندرويد و آيفون مخصص لإدارة محلك ومتابعة مبيعاتك ومخزونك أينما كنت مباشرة من هاتفك.",
       features: [
@@ -428,32 +428,15 @@ export default function LandingPage({ onSelectDemo, onSelectSupport, onSelectTri
         "تحديثات مجانية مستمرة للبرنامج"
       ],
       ctaText: "اطلب باقة الهاتف",
-      color: "border-slate-200 hover:border-slate-700 bg-white/40"
-    },
-    {
-      id: "p_both",
-      name: "باقة تطبيق هاتف مع حاسوب",
-      price: "20,000 دج",
-      oldPrice: "22,000 دج",
-      period: "سنة",
       badge: "الأكثر طلباً وتوفيراً 🔥",
-      description: "التكامل والتحكم المطلق! لوجيسيال حاسوب متكامل لإدارة البيع مع تطبيق هاتف ذكي متزامن كلياً للمتابعة اللحظية.",
-      features: [
-        "لوجيسيال حاسوب (ويندوز) + تطبيق هاتف",
-        "مزامنة سحابية فورية وتلقائية بين الأجهزة",
-        "تسيير المخزون المتقدم بالـ IMEI والباركود",
-        "لوحة تحكم إدارية شاملة من الهاتف والحاسوب",
-        "موديول صيانة وإصلاح أجهزة متكامل ومتزامن",
-        "دعم فني مخصص وأولوية في التحديثات",
-        "نسخ احتياطي يومي مجدول تلقائياً"
-      ],
-      ctaText: "اطلب الباقة الكاملة الآن",
+      oldPrice: "12,000 دج",
       color: "border-blue-500 border-2 bg-gradient-to-b from-blue-50 to-white relative shadow-2xl shadow-blue-900/10 md:scale-105 z-10"
     },
+
     {
       id: "p_pc_only",
       name: "باقة لوجيسيال حاسوب فقط",
-      price: "12,000 دج",
+      price: "10,000 دج",
       period: "سنة",
       description: "برنامج متكامل على نظام ويندوز لتسيير الكواشير والمبيعات والمخازن والصيانة باحترافية تامة.",
       features: [
@@ -587,25 +570,20 @@ export default function LandingPage({ onSelectDemo, onSelectSupport, onSelectTri
             className="flex flex-col sm:flex-row gap-3 justify-center pt-4"
           >
             <a
-              href="#trial-form-section"
-              onClick={() => {
-                const el = document.getElementById("trial-form-section");
-                if (el) el.scrollIntoView({ behavior: "smooth" });
-              }}
-              className="py-3 px-6 bg-gradient-to-l from-blue-600 to-blue-500 hover:from-blue-500 hover:to-blue-400 text-white font-black rounded-xl shadow-lg shadow-blue-900/40 transition-all text-xs md:text-sm flex items-center justify-center gap-2 cursor-pointer group"
-            >
-              جرب النظام مجاناً لمدة 5 أيام
-              <ArrowLeft className="w-4 h-4 group-hover:-translate-x-1 transition-transform" />
-            </a>
-
-            <a
               href="https://wa.me/213671037202?text=%D9%85%D8%B1%D8%AD%D8%A8%D8%A7%D9%8B%D8%8C%20%D8%A3%D9%86%D8%A7%20%D9%85%D9%87%D8%AA%D9%85%20%D8%A8%D9%86%D8%B8%D8%A7%D9%85%20Algora%20%D9%88%D8%A3%D8%B1%D9%8A%D8%AF%20%D8%A7%D9%84%D8%AD%D8%B5%D9%88%D9%84%20%D8%B9%D9%84%D9%89%20%D9%86%D8%B3%D8%AE%D8%AA%D9%8A%20%D8%A7%D9%84%D8%AA%D8%AC%D8%B1%D9%8A%D8%A8%D9%8A%D8%A9%20%D8%A7%D9%84%D9%85%D8%AC%D8%A7%D9%86%D9%8A%D8%A9"
               target="_blank"
               rel="noopener noreferrer"
-              className="py-3 px-6 bg-white hover:bg-slate-100 border border-slate-200 hover:border-slate-700 text-slate-800 font-bold rounded-xl transition-all text-xs md:text-sm flex items-center justify-center gap-2 cursor-pointer"
+              className="py-4 px-10 bg-gradient-to-r from-emerald-600 to-emerald-500 hover:from-emerald-500 hover:to-emerald-400 text-white font-black rounded-xl shadow-lg shadow-emerald-900/40 transition-all text-sm md:text-lg flex items-center justify-center gap-3 cursor-pointer group w-full md:w-auto"
             >
               <span>اطلب نسختك التجريبية عبر واتساب</span>
-              <Smartphone className="w-4 h-4 text-emerald-400" />
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                viewBox="0 0 24 24"
+                fill="currentColor"
+                className="w-6 h-6 text-white group-hover:scale-110 transition-transform"
+              >
+                <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/>
+              </svg>
             </a>
           </motion.div>
 
@@ -636,128 +614,100 @@ export default function LandingPage({ onSelectDemo, onSelectSupport, onSelectTri
         </div>
       </section>
 
-      {/* WHATSAPP CTA BADGE IN GAP */}
-      <div className="flex justify-center -mt-4 mb-10 relative z-20">
-        <a
-          href="https://wa.me/213671037202?text=%D9%85%D8%B1%D8%AD%D8%A8%D8%A7%D9%8B%D8%8C%20%D8%A3%D9%86%D8%A7%20%D9%85%D9%87%D8%AA%D9%85%20%D8%A8%D9%86%D8%B8%D8%A7%D9%85%20Algora%20%D9%88%D8%A3%D8%B1%D9%8A%D8%AF%20%D8%A7%D9%84%D8%AD%D8%B5%D9%88%D9%84%20%D8%B9%D9%84%D9%89%20%D9%86%D8%B3%D8%AE%D8%AA%D9%8A%20%D8%A7%D9%84%D8%AA%D8%AC%D8%B1%D9%8A%D8%A8%D9%8A%D8%A9%20%D8%A7%D9%84%D9%85%D8%AC%D8%A7%D9%86%D9%8A%D8%A9"
-          target="_blank"
-          rel="noopener noreferrer"
-          className="group relative inline-flex items-center gap-2.5 px-6 py-3 bg-slate-100 border border-[#25D366]/40 rounded-xl hover:bg-slate-200 transition-all duration-300 shadow-[0_0_25px_rgba(37,211,102,0.25)] hover:shadow-[0_0_35px_rgba(37,211,102,0.4)] hover:-translate-y-1"
-        >
-          {/* Subtle pulse behind the icon */}
-          <div className="absolute right-6 w-5 h-5 bg-[#25D366] rounded-full blur-md opacity-30 group-hover:opacity-60 transition-opacity animate-pulse"></div>
-          
-          <Smartphone className="w-5 h-5 text-[#25D366] relative z-10" />
-          <span className="text-slate-900 text-[15px] font-bold relative z-10">اطلب نسختك التجريبية عبر واتساب</span>
-        </a>
-      </div>
+
 
       {/* 1.5 SYSTEM VIDEO DEMONSTRATION SECTION */}
-      <section id="demo-video-section" className="relative py-6 overflow-hidden">
-        {/* Decorative ambient blurred shapes */}
-        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[400px] bg-blue-900/10 rounded-full blur-3xl pointer-events-none" />
+
+      {/* 2. CORE FEATURES (Organized Sales and Inventory) */}
+      <section className="space-y-12 py-6 relative">
+        <div className="absolute top-1/4 left-1/2 -translate-x-1/2 w-80 h-80 bg-blue-500/5 rounded-full blur-3xl pointer-events-none" />
         
-        <div className="max-w-7xl mx-auto px-2 md:px-6 space-y-8">
-          <div className="text-center space-y-3">
-            <span className="inline-flex items-center gap-1.5 px-3.5 py-1 bg-blue-500/10 border border-blue-500/20 rounded-full text-blue-400 text-xs font-black">
-              <Video className="w-4 h-4" />
-              <span>فيديو توضيحي تفاعلي للنظام</span>
-            </span>
-            <h2 className="text-xl md:text-3xl lg:text-4xl font-black text-slate-900 leading-tight">
-              اكتشف ميزات Algora Systems في دقيقتين قبل تفعيل حسابك
-            </h2>
-            <p className="text-xs md:text-sm text-slate-600 max-w-2xl mx-auto leading-relaxed">
-              شاهد كيف يسهّل لك اللوجيسيال بيع السلع وإدخال الـ IMEI وإدارة ورشة الصيانة باحترافية كاملة.
-            </p>
+        <div className="text-center space-y-3 relative z-10">
+          <div className="inline-flex items-center gap-1.5 px-3 py-1 bg-blue-500/10 border border-blue-500/20 rounded-full text-blue-600 text-xs font-black">
+            <Sparkles className="w-3.5 h-3.5" />
+            <span>لوجيسيال واحد يحل ڨاع مشاكل الحانوت</span>
           </div>
+          <h2 className="text-xl md:text-3xl font-black text-slate-900 tracking-tight">
+            تهنى من تكسار الراس وتحكم فحانوتك كيما يلزم
+          </h2>
+          <p className="text-xs md:text-sm text-slate-600 max-w-lg mx-auto leading-relaxed">
+            البرنامج مخدوم سبيسيال لمقنين التليفونات، باش ينحيلك الغبينة تاع التسيير اليومي، الكريدي، ولاطوليي.
+          </p>
+        </div>
 
-          {/* Centered Video Player Display - Larger and with minimum height for mobile */}
-          <div className="relative w-full aspect-video min-h-[420px] sm:min-h-[480px] md:min-h-[520px] lg:min-h-[600px] xl:min-h-[680px] 2xl:min-h-[780px] rounded-2xl bg-white border border-slate-200 overflow-hidden shadow-2xl group transition-all duration-300">
-            
-            {/* YouTube Link or Direct Link Handler */}
-            {videoSrc.includes("youtube.com") || videoSrc.includes("youtu.be") ? (
-              <iframe
-                src={videoSrc.replace("watch?v=", "embed/").split("&")[0]}
-                title="Algora Systems Video Demo"
-                className="w-full h-full border-0"
-                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                allowFullScreen
-              />
-            ) : (
-              <>
-                <video
-                  ref={videoRef}
-                  autoPlay
-                  loop
-                  muted={isMuted}
-                  playsInline
-                  preload="auto"
-                  className="w-full h-full object-cover"
-                  onClick={handlePlayPause}
-                  onPlay={() => setIsPlaying(true)}
-                  onPause={() => setIsPlaying(false)}
-                  onError={(e) => {
-                    console.error('Video failed to load:', e);
-                  }}
-                >
-                  <source src={videoSrc} type="video/mp4" />
-                  <source src={videoSrc.replace('.mp4', '.mov')} type="video/quicktime" />
-                  متصفحك لا يدعم تشغيل الفيديو
-                </video>
-
-                {/* Styled Player Controls Overlay */}
-                <div className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-black/95 via-black/50 to-transparent p-5 opacity-100 lg:opacity-0 lg:group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-end gap-3">
-                  {/* Mute/Unmute control */}
-                  <button
-                    onClick={handleMuteUnmute}
-                    className="w-10 h-10 rounded-full bg-slate-100/90 hover:bg-slate-200 text-slate-700 flex items-center justify-center cursor-pointer border border-slate-200/80"
-                    title={isMuted ? "تشغيل الصوت" : "كتم الصوت"}
-                  >
-                    {isMuted ? <VolumeX className="w-5 h-5" /> : <Volume2 className="w-5 h-5 text-blue-600" />}
-                  </button>
-
-                  {/* Fullscreen control */}
-                  <button
-                    onClick={handleFullscreen}
-                    className="w-10 h-10 rounded-full bg-slate-100/90 hover:bg-slate-200 text-slate-700 flex items-center justify-center cursor-pointer border border-slate-200/80"
-                    title="ملء الشاشة"
-                  >
-                    <Maximize2 className="w-5 h-5 text-blue-400" />
-                  </button>
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 relative z-10">
+          {[
+            {
+              title: "تهنيت من تخلط التليفونات والـ IMEI",
+              icon: <Smartphone className="w-5 h-5 text-blue-600 group-hover:text-blue-500" />,
+              badge: "تسيير بلا غلطات",
+              desc: "شحال من مرة تبيع تليفون وتتخلطلك البواطة؟ ولا خدام يغلط فـ IMEI؟ مع اللوجيسيال تاعنا، تفوت السلعة فالسكانير كلش يدخل مريقل، وتعرف واش بقالك فالحانوت حبة بحبة."
+            },
+            {
+              title: "نظم لاطوليي تاعك والريباراسيون",
+              icon: <Wrench className="w-5 h-5 text-blue-400 group-hover:text-blue-300" />,
+              badge: "الأكثر طلباً",
+              desc: "يجيك كليون يخلي تليفونو وتنسى واش فيه؟ ولا تبدلو بياسة وتنسى تحسبها؟ درك تسجل كل تليفون، واش خاسر فيه، والبياس لي ركبتو، وتعرف شحال الفايدة تاعك فالتصليح بلا تكسار الراس."
+            },
+            {
+              title: "كاشير خفيف يطير للكسيسوارات",
+              icon: <ScanBarcode className="w-5 h-5 text-pink-400 group-hover:text-pink-300" />,
+              badge: "بيع فثانية",
+              desc: "تبيع شارجور ولا كيتمان وتظل تكتب فالكارني؟ مع الكاشير تاعنا، فوت السلعة فالسكانير تخرجلك فالبون ديريكت. تربح الوقت، تنقص الغلطات، والكليون ميزيدش يستنى كاع."
+            },
+            {
+              title: "تعرف فايدتك الصافية دورو بدورو",
+              icon: <BarChart3 className="w-5 h-5 text-emerald-400 group-hover:text-emerald-300" />,
+              badge: "حسابات مريقلة",
+              desc: "تظل تبيع ومع اللخر متعرفش شحال دخلت فايدة صح؟ البرنامج يحسبلك الفايدة الصافية بعد ما ينحي حق السلعة والمصاريف (الخدام، الكرا، تريسيتي). هكذا تعرف حانوتك وين راهو رايح."
+            },
+            {
+              title: "تهنى من كارني الكريدي ومشاكلو",
+              icon: <CheckCircle2 className="w-5 h-5 text-amber-400 group-hover:text-amber-300" />,
+              badge: "خلاص بلا حشمة",
+              desc: "الكارني تاع الكريدي تلفلك ولا تقطعت ورقة؟ درك كلش مسجل فالميكرو، تعرف شكون يسالك وشكون تسالو، وتقدر تبعثلو ميساج واتساب يفكرو يخلصك بلا حشمة."
+            },
+            {
+              title: "سلعتك ودراهمك في أمان فالسحابة",
+              icon: <ShieldCheck className="w-5 h-5 text-blue-400 group-hover:text-blue-300" />,
+              badge: "أمان تام",
+              desc: "تخاف الميكرو يخسر ويروحلك كلش؟ مع Algora Systems، ديرنا سوفقارد كل يوم فالسحابة أوتوماتيكيا. حتى لو تسرق الميكرو، جيب ميكرو جديد ورجع خدمتك في 5 دقايق."
+            }
+          ].map((feature, idx) => (
+            <div 
+              key={idx}
+              className="group relative bg-white/40 hover:bg-slate-50/40 border border-slate-200/80 hover:border-blue-500/30 rounded-2xl p-6 transition-all duration-300 hover:-translate-y-1.5 shadow-xl hover:shadow-blue-950/10 overflow-hidden text-right flex flex-col justify-between"
+            >
+              {/* Decorative corner light */}
+              <div className="absolute -right-10 -top-10 w-24 h-24 bg-gradient-to-br from-blue-600/5 to-blue-500/5 rounded-full blur-xl group-hover:scale-150 transition-all duration-500 pointer-events-none" />
+              
+              {/* Left visual accent indicator */}
+              <div className="absolute top-0 right-0 h-full w-[3px] bg-gradient-to-b from-blue-500/80 to-blue-500/80 opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none" />
+              
+              <div className="space-y-4">
+                {/* Header card row */}
+                <div className="flex items-start justify-between gap-4">
+                  <span className="px-2 py-0.5 bg-slate-100/80 border border-slate-200 rounded-full text-[9px] text-slate-600 font-bold group-hover:border-blue-500/20 group-hover:text-blue-500 transition-all duration-300">
+                    {feature.badge}
+                  </span>
+                  
+                  <div className="w-12 h-12 rounded-xl bg-slate-100 border border-slate-200/80 flex items-center justify-center group-hover:border-blue-500/20 group-hover:bg-blue-950/20 transition-all duration-300 shadow-inner">
+                    {feature.icon}
+                  </div>
                 </div>
 
-                {/* Big Center Play Button (Visible when paused) */}
-                {!isPlaying && (
-                  <button
-                    onClick={handlePlayPause}
-                    className="absolute inset-0 m-auto w-20 h-20 rounded-full bg-blue-600/95 hover:bg-blue-500 hover:scale-110 text-slate-900 flex items-center justify-center shadow-2xl shadow-blue-950/50 cursor-pointer transition-all active:scale-95 border border-blue-500/20"
-                  >
-                    <Play className="w-9 h-9 fill-white translate-x-0.5" />
-                  </button>
-                )}
-              </>
-            )}
-
-
-          </div>
-
-
-
-          {/* Under video: Button "اطلب نسخة" */}
-          <div className="flex flex-col items-center justify-center pt-2 pb-4 space-y-2">
-            <button
-              onClick={() => {
-                const el = document.getElementById("trial-form-section");
-                if (el) el.scrollIntoView({ behavior: "smooth" });
-              }}
-              className="px-8 py-4 bg-gradient-to-l from-blue-600 to-blue-500 hover:from-blue-500 hover:to-blue-400 text-white font-extrabold text-sm md:text-base rounded-2xl flex items-center justify-center gap-2 transition-all shadow-xl hover:shadow-blue-500/25 active:scale-95 cursor-pointer"
-            >
-              <Award className="w-5 h-5" />
-              <span>اطلب نسختك التجريبية المجانية الآن ⚡</span>
-              <ArrowDown className="w-4 h-4 animate-bounce" />
-            </button>
-          </div>
-
+                {/* Info */}
+                <div className="space-y-2">
+                  <h4 className="font-extrabold text-slate-900 group-hover:text-blue-500 transition-colors duration-200 text-base md:text-lg">
+                    {feature.title}
+                  </h4>
+                  <p className="text-slate-600 text-xs leading-relaxed group-hover:text-slate-700 transition-colors duration-200">
+                    {feature.desc}
+                  </p>
+                </div>
+              </div>
+            </div>
+          ))}
         </div>
       </section>
       {/* 7. FREE TRIAL REQUEST FORM SECTION - DESIGNED IN BEAUTIFUL WHITE / LIGHT GRAY */}
@@ -1009,24 +959,16 @@ export default function LandingPage({ onSelectDemo, onSelectSupport, onSelectTri
                       { 
                         id: "pc", 
                         name: "باقة لوجيسيال حاسوب فقط", 
-                        price: "12,000 دج / سنة", 
+                        price: "10,000 دج / سنة", 
                         icon: <Laptop className="w-4 h-4" />,
                         desc: "برنامج متكامل على نظام ويندوز لإدارة الكواشير والصيانة" 
                       },
                       { 
                         id: "mobile", 
                         name: "باقة تطبيق هاتف فقط", 
-                        price: "12,000 دج / سنة", 
+                        price: "8,000 دج / سنة", 
                         icon: <Smartphone className="w-4 h-4" />,
                         desc: "تطبيق أندرويد وآيفون متكامل لمتابعة محلك أينما كنت" 
-                      },
-                      { 
-                        id: "both", 
-                        name: "باقة تطبيق هاتف مع حاسوب معاً", 
-                        price: "20,000 دج / سنة", 
-                        icon: <Sparkles className="w-4 h-4" />,
-                        desc: "التكامل والتحكم المطلق! (حاسوب + هاتف متزامن كلياً)",
-                        badge: "الأكثر طلباً وتوفيراً 🔥" 
                       }
                     ].map((pkg) => {
                       const isSelected = programType === pkg.id;
@@ -1045,15 +987,15 @@ export default function LandingPage({ onSelectDemo, onSelectSupport, onSelectTri
                             {pkg.icon}
                           </div>
                           <div className="flex-1 space-y-0.5 min-w-0">
-                            <div className="flex items-center justify-between gap-2">
-                              <span className="text-xs font-black text-slate-900">{pkg.name}</span>
-                              <span className={`text-[11px] font-black shrink-0 ${isSelected ? "text-blue-700" : "text-blue-600"}`}>
+                            <div className="flex flex-col gap-1">
+                              <span className="text-sm font-black text-slate-900 leading-tight">{pkg.name}</span>
+                              <span className={`text-xs font-black ${isSelected ? "text-blue-700" : "text-blue-600"}`}>
                                 {pkg.price}
                               </span>
                             </div>
-                            <p className="text-[10px] text-slate-500 font-medium leading-relaxed truncate">{pkg.desc}</p>
+                            <p className="text-[10.5px] text-slate-500 font-medium leading-relaxed mt-1">{pkg.desc}</p>
                             {pkg.badge && (
-                              <span className="inline-block mt-1 text-[9px] font-extrabold bg-amber-500/10 border border-amber-500/20 text-amber-700 px-2 py-0.5 rounded-full">
+                              <span className="inline-block mt-1.5 text-[9px] font-extrabold bg-amber-500/10 border border-amber-500/20 text-amber-700 px-2 py-0.5 rounded-full">
                                 {pkg.badge}
                               </span>
                             )}
@@ -1070,18 +1012,18 @@ export default function LandingPage({ onSelectDemo, onSelectSupport, onSelectTri
                 </div>
 
                 {/* WhatsApp Check (Clean White/Emerald design) */}
-                <div className="bg-slate-50 p-3.5 rounded-xl border border-slate-200 space-y-2">
+                <div className="bg-slate-50 p-3.5 rounded-xl border border-slate-200 space-y-2 text-right">
                   <span className="block text-xs font-bold text-slate-700 flex items-center justify-end gap-1.5">
                     <span>هل رقم الهاتف هذا مرتبط بالواتساب؟</span>
                     <MessageCircle className="w-3.5 h-3.5 text-emerald-600 shrink-0" />
                   </span>
-                  <div className="grid grid-cols-2 gap-2">
+                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
                     <button
                       type="button"
                       onClick={() => setHasWhatsapp("yes")}
-                      className={`py-2 text-xs font-extrabold rounded-lg transition-all cursor-pointer ${
+                      className={`py-2 px-3 text-xs font-extrabold rounded-lg transition-all cursor-pointer ${
                         hasWhatsapp === "yes"
-                          ? "bg-emerald-600 border-emerald-600 text-slate-900 shadow-md shadow-emerald-600/10"
+                          ? "bg-emerald-600 border-emerald-600 text-white shadow-md shadow-emerald-600/10"
                           : "bg-white border-slate-200 text-slate-500 hover:text-slate-700 hover:bg-slate-100"
                       } border`}
                     >
@@ -1090,9 +1032,9 @@ export default function LandingPage({ onSelectDemo, onSelectSupport, onSelectTri
                     <button
                       type="button"
                       onClick={() => setHasWhatsapp("no")}
-                      className={`py-2 text-xs font-extrabold rounded-lg transition-all cursor-pointer ${
+                      className={`py-2 px-3 text-xs font-extrabold rounded-lg transition-all cursor-pointer ${
                         hasWhatsapp === "no"
-                          ? "bg-slate-700 border-slate-700 text-slate-900 shadow-md shadow-slate-700/10"
+                          ? "bg-slate-700 border-slate-700 text-white shadow-md shadow-slate-700/10"
                           : "bg-white border-slate-200 text-slate-500 hover:text-slate-700 hover:bg-slate-100"
                       } border`}
                     >
@@ -1107,11 +1049,11 @@ export default function LandingPage({ onSelectDemo, onSelectSupport, onSelectTri
                     <span>وسيلة الدفع المفضلة لتفعيل الاشتراك لاحقاً</span>
                     <CreditCard className="w-3.5 h-3.5 text-blue-600 shrink-0" />
                   </label>
-                  <div className="grid grid-cols-1 md:grid-cols-3 gap-2 text-right">
+                  <div className="grid grid-cols-3 gap-2 text-right">
                     {[
                       { id: "ccp", name: "CCP", icon: "💳" },
                       { id: "baridimob", name: "بريدي موب", icon: "📱" },
-                      { id: "cod", name: "دفع عند الاستلام", icon: "🤝" },
+                      { id: "cod", name: "الدفع عند الاستلام", icon: "🤝" },
                     ].map((method) => {
                       const isSelected = paymentMethod === method.id;
                       return (
@@ -1119,15 +1061,15 @@ export default function LandingPage({ onSelectDemo, onSelectSupport, onSelectTri
                           key={method.id}
                           type="button"
                           onClick={() => setPaymentMethod(method.id)}
-                          className={`p-2.5 rounded-xl text-center transition-all border cursor-pointer ${
+                          className={`p-2 rounded-xl text-center transition-all border cursor-pointer ${
                             isSelected
-                              ? "bg-gradient-to-l from-blue-600 to-blue-500 border-blue-600 text-slate-900 shadow-md shadow-blue-600/20"
+                              ? "bg-gradient-to-l from-blue-600 to-blue-500 border-blue-600 text-white shadow-md shadow-blue-600/20"
                               : "bg-slate-50 border-slate-200/80 text-slate-700 hover:bg-slate-100 hover:text-slate-900"
                           }`}
                         >
-                          <div className="flex flex-col items-center justify-center gap-1.5 py-1">
+                          <div className="flex flex-col items-center justify-center gap-1 py-0.5">
                             <span className="text-lg">{method.icon}</span>
-                            <span className="text-xs font-black">{method.name}</span>
+                            <span className="text-[10px] sm:text-xs font-black leading-tight">{method.name}</span>
                           </div>
                         </button>
                       );
@@ -1496,98 +1438,6 @@ export default function LandingPage({ onSelectDemo, onSelectSupport, onSelectTri
         </AnimatePresence>
       </section>
 
-      {/* 2. CORE FEATURES (Organized Sales and Inventory) */}
-      <section className="space-y-12 py-6 relative">
-        <div className="absolute top-1/4 left-1/2 -translate-x-1/2 w-80 h-80 bg-blue-500/5 rounded-full blur-3xl pointer-events-none" />
-        
-        <div className="text-center space-y-3 relative z-10">
-          <div className="inline-flex items-center gap-1.5 px-3 py-1 bg-blue-500/10 border border-blue-500/20 rounded-full text-blue-600 text-xs font-black">
-            <Sparkles className="w-3.5 h-3.5" />
-            <span>قوة الأداء والتكامل في لوجيسيال واحد</span>
-          </div>
-          <h2 className="text-xl md:text-3xl font-black text-slate-900 tracking-tight">
-            تحكم كامل ومطلق في كافة جوانب متجرك
-          </h2>
-          <p className="text-xs md:text-sm text-slate-600 max-w-lg mx-auto leading-relaxed">
-            صُممت أقسام وموديلات البرنامج بدقة بالغة لتغطي متطلبات محلات الهواتف والصيانة بالتفصيل.
-          </p>
-        </div>
-
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 relative z-10">
-          {[
-            {
-              title: "تسيير المخزون بالـ IMEI",
-              icon: <Smartphone className="w-5 h-5 text-blue-600 group-hover:text-blue-500" />,
-              badge: "ذكي وآمن",
-              desc: "تسجيل وجرد الهواتف بالرقم التسلسلي الفريد للـ IMEI للوقاية التامة من بيع الهواتف الخاطئة أو تبديل العلب، وتنبيهات فورية عند وصول السلع للحد الأدنى للوقاية من نفاد المخزون."
-            },
-            {
-              title: "موديول صيانة احترافي متكامل",
-              icon: <Wrench className="w-5 h-5 text-blue-400 group-hover:text-blue-300" />,
-              badge: "الأكثر مبيعاً",
-              desc: "تسجيل الهواتف المطلوب إصلاحها، تتبع حالة الصيانة (انتظار، قيد التصليح، جاهز)، وخصم قطع الغيار المستعملة تلقائياً، مع حساب دقيق لربح اليد العاملة والقطع المستخدمة."
-            },
-            {
-              title: "كاشير سريع متوافق مع الباركود",
-              icon: <ScanBarcode className="w-5 h-5 text-pink-400 group-hover:text-pink-300" />,
-              badge: "فائق السرعة",
-              desc: "إضافة مبيعات الإكسسوارات والشواحن في أجزاء من الثانية بمجرد تمرير السلعة على قارئ الباركود، مع دعم كامل للطباعة التلقائية لوصولات البيع الحرارية أو الورقية A4 وA5 للضمان."
-            },
-            {
-              title: "تقارير المبيعات والأرباح الصافية",
-              icon: <BarChart3 className="w-5 h-5 text-emerald-400 group-hover:text-emerald-300" />,
-              badge: "دقة محاسبية",
-              desc: "تعرّف على ربحك الصافي اليومي والشهري بنقرة واحدة بعد طرح تكلفة الشراء والمصاريف الإضافية (مثل أجور العمال أو الكراء)، مع مبيعات تفصيلية لكل عامل لمراقبة الأداء بدقة."
-            },
-            {
-              title: "إدارة ديون الكريدي والولاء",
-              icon: <CheckCircle2 className="w-5 h-5 text-amber-400 group-hover:text-amber-300" />,
-              badge: "زيادة مبيعات",
-              desc: "تتبع مستحقات الكريدي للزبائن مع كشف حساب فوري لكل شخص وتواريخ السداد المحددة، مع نظام مكافآت ونقاط ولاء جذابة لتشجيع الزبائن على تكرار الشراء والمحافظة عليهم."
-            },
-            {
-              title: "نسخ احتياطي سحابي تلقائي",
-              icon: <ShieldCheck className="w-5 h-5 text-blue-400 group-hover:text-blue-300" />,
-              badge: "أمان مطلق",
-              desc: "راحة بال تامة! قاعدة بيانات محلك محمية بنسخ احتياطي آلي يومي يرفع مباشرة لسحابة Algora، مما يضمن استعادة بيانات مبيعاتك ومخزونك في ثوانٍ في حال سرقة أو تلف حاسوبك."
-            }
-          ].map((feature, idx) => (
-            <div 
-              key={idx}
-              className="group relative bg-white/40 hover:bg-slate-50/40 border border-slate-200/80 hover:border-blue-500/30 rounded-2xl p-6 transition-all duration-300 hover:-translate-y-1.5 shadow-xl hover:shadow-blue-950/10 overflow-hidden text-right flex flex-col justify-between"
-            >
-              {/* Decorative corner light */}
-              <div className="absolute -right-10 -top-10 w-24 h-24 bg-gradient-to-br from-blue-600/5 to-blue-500/5 rounded-full blur-xl group-hover:scale-150 transition-all duration-500 pointer-events-none" />
-              
-              {/* Left visual accent indicator */}
-              <div className="absolute top-0 right-0 h-full w-[3px] bg-gradient-to-b from-blue-500/80 to-blue-500/80 opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none" />
-              
-              <div className="space-y-4">
-                {/* Header card row */}
-                <div className="flex items-start justify-between gap-4">
-                  <span className="px-2 py-0.5 bg-slate-100/80 border border-slate-200 rounded-full text-[9px] text-slate-600 font-bold group-hover:border-blue-500/20 group-hover:text-blue-500 transition-all duration-300">
-                    {feature.badge}
-                  </span>
-                  
-                  <div className="w-12 h-12 rounded-xl bg-slate-100 border border-slate-200/80 flex items-center justify-center group-hover:border-blue-500/20 group-hover:bg-blue-950/20 transition-all duration-300 shadow-inner">
-                    {feature.icon}
-                  </div>
-                </div>
-
-                {/* Info */}
-                <div className="space-y-2">
-                  <h4 className="font-extrabold text-slate-900 group-hover:text-blue-500 transition-colors duration-200 text-base md:text-lg">
-                    {feature.title}
-                  </h4>
-                  <p className="text-slate-600 text-xs leading-relaxed group-hover:text-slate-700 transition-colors duration-200">
-                    {feature.desc}
-                  </p>
-                </div>
-              </div>
-            </div>
-          ))}
-        </div>
-      </section>
 
 
 
@@ -1761,6 +1611,24 @@ export default function LandingPage({ onSelectDemo, onSelectSupport, onSelectTri
           </motion.div>
         )}
       </AnimatePresence>
+
+      {/* Floating WhatsApp Button */}
+      <a
+        href="https://wa.me/213671037202?text=%D9%85%D8%B1%D8%AD%D8%A8%D8%A7%D9%8B%D8%8C%20%D8%A3%D9%86%D8%A7%20%D9%85%D9%87%D8%AA%D9%85%20%D8%A8%D9%86%D8%B8%D8%A7%D9%85%20Algora%20%D9%88%D8%A3%D8%B1%D9%8A%D8%AF%20%D8%A7%D9%84%D8%AD%D8%B5%D9%88%D9%84%20%D8%B9%D9%84%D9%89%20%D9%86%D8%B3%D8%AE%D8%AA%D9%8A%20%D8%A7%D9%84%D8%AA%D8%AC%D8%B1%D9%8A%D8%A8%D9%8A%D8%A9%20%D8%A7%D9%84%D9%85%D8%AC%D8%A7%D9%86%D9%8A%D8%A9"
+        target="_blank"
+        rel="noopener noreferrer"
+        className="fixed bottom-6 left-6 z-[100] w-14 h-14 bg-[#25D366] rounded-full flex items-center justify-center shadow-lg hover:scale-110 transition-transform hover:shadow-xl hover:shadow-[#25D366]/30 cursor-pointer"
+        aria-label="تواصل معنا عبر واتساب"
+      >
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          viewBox="0 0 24 24"
+          fill="currentColor"
+          className="w-8 h-8 text-white"
+        >
+          <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/>
+        </svg>
+      </a>
 
     </div>
   );

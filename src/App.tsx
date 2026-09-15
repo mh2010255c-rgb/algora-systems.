@@ -34,7 +34,7 @@ type ActiveTab = "home" | "demo" | "support" | "info" | "admin" | "trial";
 
 export default function App() {
   const [activeTab, setActiveTab] = useState<ActiveTab>(() => {
-    return localStorage.getItem("hasSeenTrialFunnel") !== "true" ? "trial" : "home";
+    return "home";
   });
   const [activeInfoSection, setActiveInfoSection] = useState<InfoSection>("about");
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
@@ -87,12 +87,7 @@ export default function App() {
       } else if (path === "/trial") {
         setActiveTab("trial");
       } else {
-        // If it's the root path and they haven't seen the trial funnel, show it
-        if (path === "" && localStorage.getItem("hasSeenTrialFunnel") !== "true") {
-          setActiveTab("trial");
-        } else {
-          setActiveTab("home");
-        }
+        setActiveTab("home");
       }
     };
 

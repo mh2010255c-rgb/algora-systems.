@@ -35,12 +35,12 @@ export default function DownloadCenter({ onBack }: DownloadCenterProps) {
         </h1>
         
         <p className="text-slate-600 max-w-lg text-sm leading-relaxed">
-          اختر النسخة المناسبة لجهازك. ننصح بتثبيت نسخة الكمبيوتر أولاً لإعداد النظام، ثم ربط تطبيق الهاتف.
+          قم بتحميل نسخة الكمبيوتر للبدء في إدارة مبيعاتك ومخزونك باحترافية.
         </p>
       </div>
 
       {/* CARDS SECTION */}
-      <div className="max-w-5xl mx-auto w-full px-4 grid grid-cols-1 md:grid-cols-2 gap-8 relative z-10 pb-20">
+      <div className="max-w-lg mx-auto w-full px-4 relative z-10 pb-20">
         
         {/* Glow effect behind cards */}
         <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-3/4 h-3/4 bg-blue-600/5 blur-[120px] -z-10 rounded-full pointer-events-none"></div>
@@ -93,54 +93,6 @@ export default function DownloadCenter({ onBack }: DownloadCenterProps) {
           </div>
         </motion.div>
 
-        {/* MOBILE CARD */}
-        <motion.div 
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.4, delay: 0.1 }}
-          className="bg-white border border-slate-200/80 rounded-3xl p-8 relative overflow-hidden flex flex-col shadow-xl hover:shadow-2xl hover:border-pink-500/30 transition-all group"
-        >
-          {/* Top Badges & Icon */}
-          <div className="flex justify-between items-start mb-8">
-            <span className="px-3 py-1 bg-pink-50 border border-pink-100 text-pink-600 text-[10px] font-bold rounded-full">
-              الإصدار v1.2.0
-            </span>
-            <div className="w-12 h-12 bg-pink-50 rounded-2xl flex items-center justify-center shadow-inner group-hover:bg-pink-100/50 transition-colors">
-              <Smartphone className="w-6 h-6 text-pink-600" />
-            </div>
-          </div>
-
-          <h2 className="text-2xl font-black text-slate-900 mb-3">تطبيق الهاتف (Mobile)</h2>
-          <p className="text-slate-600 text-sm leading-relaxed mb-8">
-            لمتابعة نشاط محلك عن بعد. قم بتثبيته على هاتفك ثم امسح كود الربط من برنامج الكمبيوتر.
-          </p>
-
-          <div className="bg-slate-50 border border-slate-200/80 rounded-2xl p-4 flex items-center gap-4 mb-10 flex-1">
-            <div className="flex-1">
-              <div className="flex items-center gap-2 mb-1">
-                <QrCode className="w-4 h-4 text-pink-600" />
-                <h4 className="text-slate-900 font-bold text-sm">امسح للتحميل</h4>
-              </div>
-              <p className="text-[10px] text-slate-500 leading-tight">
-                وجه كاميرا هاتفك نحو الكود للتحميل المباشر.
-              </p>
-            </div>
-            <div className="w-16 h-16 bg-white rounded-lg p-1 shrink-0 border border-slate-200">
-              {/* Fake QR code representation */}
-              <div className="w-full h-full bg-[url('https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=https://algora.dz/download/apk')] bg-contain bg-no-repeat bg-center"></div>
-            </div>
-          </div>
-
-          <div className="mt-auto">
-            <button className="w-full py-4 bg-gradient-to-r from-pink-600 to-pink-500 hover:from-pink-500 hover:to-pink-400 text-white rounded-xl font-bold flex items-center justify-center gap-2 shadow-[0_4px_20px_rgba(236,72,153,0.2)] transition-all transform hover:scale-[1.02] cursor-pointer">
-              <Download className="w-5 h-5" />
-              <span>تحميل ملف APK</span>
-            </button>
-            <p className="text-center text-slate-500 text-[10px] mt-4 font-mono invisible">
-              Spacer
-            </p>
-          </div>
-        </motion.div>
 
       </div>
 

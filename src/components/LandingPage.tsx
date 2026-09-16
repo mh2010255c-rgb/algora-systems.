@@ -159,7 +159,7 @@ export default function LandingPage({ onSelectDemo, onSelectSupport, onSelectTri
   const [hasWhatsapp, setHasWhatsapp] = useState<"yes" | "no">("yes");
   const [paymentMethod, setPaymentMethod] = useState("ccp");
   const [deliveryType, setDeliveryType] = useState("home");
-  const [programType, setProgramType] = useState("both");
+  const [programType, setProgramType] = useState("pc");
   const [city, setCity] = useState("");
   const [province, setProvince] = useState("");
   const [selectedWilayaCode, setSelectedWilayaCode] = useState<number | "">("");
@@ -176,74 +176,43 @@ export default function LandingPage({ onSelectDemo, onSelectSupport, onSelectTri
   const registerTrial = useMutation(api.orders.create);
 
   const startDownload = async (filename: string) => {
-    if (filename === "Setup.exe") {
+    setDownloadToast({
+      show: true,
+      type: "info",
+      message: "جاري التحقق من وجود الملف لبدء التنزيل المباشر..."
+    });
+
+    try {
+      const response = await fetch(`/downloads/${filename}`, { method: "HEAD" });
+      
+      if (!response.ok) {
+        throw new Error("File not found on server");
+      }
+
       setDownloadToast({
         show: true,
-        type: "info",
-        message: "جاري تحويلك إلى صفحة التحميل على Google Drive..."
+        type: "success",
+        message: "تم العثور على الملف! يبدأ التنزيل المباشر الآن..."
       });
 
-      try {
-        // Open the shared Google Drive folder in a new tab
-        window.open("https://drive.google.com/drive/folders/1vtKQi5XgidR2DSzLcfaDSbAZVRIWaohv?usp=drive_link", "_blank");
+      // Auto-hide success toast after 3 seconds
+      setTimeout(() => {
+        setDownloadToast(prev => prev?.type === "success" ? null : prev);
+      }, 3000);
 
-        setDownloadToast({
-          show: true,
-          type: "success",
-          message: "تم توجيهك بنجاح! يمكنك الآن تحميل الملف من مجلد Google Drive."
-        });
-
-        // Auto-hide success toast after 3 seconds
-        setTimeout(() => {
-          setDownloadToast(prev => prev?.type === "success" ? null : prev);
-        }, 3000);
-      } catch (error) {
-        console.error("Download redirection error:", error);
-        setDownloadToast({
-          show: true,
-          type: "error",
-          message: "عذراً، حدث خطأ أثناء محاولة التوجيه لصفحة التحميل. يرجى المحاولة لاحقاً."
-        });
-      }
-    } else {
+      const link = document.createElement("a");
+      link.href = `/downloads/${filename}`;
+      link.setAttribute("download", filename);
+      document.body.appendChild(link);
+      link.click();
+      document.body.removeChild(link);
+    } catch (error) {
+      console.error("Download verification error:", error);
       setDownloadToast({
         show: true,
-        type: "info",
-        message: "جاري التحقق من وجود الملف لبدء التنزيل المباشر..."
+        type: "error",
+        message: "عذراً، هذا الملف غير متوفر حالياً للتنزيل المباشر. يرجى الاتصال بالدعم الفني."
       });
-
-      try {
-        const response = await fetch(`/downloads/${filename}`, { method: "HEAD" });
-        
-        if (!response.ok) {
-          throw new Error("File not found on server");
-        }
-
-        setDownloadToast({
-          show: true,
-          type: "success",
-          message: "تم العثور على الملف! يبدأ التنزيل المباشر الآن..."
-        });
-
-        // Auto-hide success toast after 3 seconds
-        setTimeout(() => {
-          setDownloadToast(prev => prev?.type === "success" ? null : prev);
-        }, 3000);
-
-        const link = document.createElement("a");
-        link.href = `/downloads/${filename}`;
-        link.setAttribute("download", filename);
-        document.body.appendChild(link);
-        link.click();
-        document.body.removeChild(link);
-      } catch (error) {
-        console.error("Download verification error:", error);
-        setDownloadToast({
-          show: true,
-          type: "error",
-          message: "عذراً، هذا الملف غير متوفر حالياً للتنزيل المباشر. يرجى الاتصال بالدعم الفني."
-        });
-      }
     }
   };
 
@@ -414,29 +383,9 @@ export default function LandingPage({ onSelectDemo, onSelectSupport, onSelectTri
   // 2. Subscription Plans Definition (Local prices, CCP/Baridimob support)
   const plans: SubscriptionPlan[] = [
     {
-      id: "p_mobile_only",
-      name: "باقة تطبيق هاتف فقط",
-      price: "8,000 دج",
-      period: "سنة",
-      description: "تطبيق أندرويد و آيفون مخصص لإدارة محلك ومتابعة مبيعاتك ومخزونك أينما كنت مباشرة من هاتفك.",
-      features: [
-        "تطبيق هاتف ذكي (أندرويد / iOS)",
-        "متابعة المخزن وحالة الأجهزة مباشرة",
-        "مراقبة الكاشير والعمال عن بعد",
-        "تقارير وإشعارات حية ومباشرة",
-        "إضافة وتعديل المنتجات بالهاتف",
-        "تحديثات مجانية مستمرة للبرنامج"
-      ],
-      ctaText: "اطلب باقة الهاتف",
-      badge: "الأكثر طلباً وتوفيراً 🔥",
-      oldPrice: "12,000 دج",
-      color: "border-blue-500 border-2 bg-gradient-to-b from-blue-50 to-white relative shadow-2xl shadow-blue-900/10 md:scale-105 z-10"
-    },
-
-    {
       id: "p_pc_only",
       name: "باقة لوجيسيال حاسوب فقط",
-      price: "10,000 دج",
+      price: "8,000 دج",
       period: "سنة",
       description: "برنامج متكامل على نظام ويندوز لتسيير الكواشير والمبيعات والمخازن والصيانة باحترافية تامة.",
       features: [
@@ -448,7 +397,9 @@ export default function LandingPage({ onSelectDemo, onSelectSupport, onSelectTri
         "نسخ احتياطي سحابي تلقائي"
       ],
       ctaText: "اطلب باقة الحاسوب",
-      color: "border-slate-200 hover:border-slate-700 bg-white/40"
+      badge: "الأكثر طلباً وتوفيراً 🔥",
+      oldPrice: "12,000 دج",
+      color: "border-blue-500 border-2 bg-gradient-to-b from-blue-50 to-white relative shadow-2xl shadow-blue-900/10 md:scale-105 z-10"
     }
   ];
 
@@ -479,7 +430,7 @@ export default function LandingPage({ onSelectDemo, onSelectSupport, onSelectTri
         province,
         city,
         packageType: programType,
-        packagePrice: programType === "both" ? 20000 : 12000,
+        packagePrice: 8000,
         paymentMethod: finalPaymentMethod,
         notes: notes || "",
       });
@@ -796,11 +747,11 @@ export default function LandingPage({ onSelectDemo, onSelectSupport, onSelectTri
                         <button
                           type="button"
                           onClick={() => {
-                            startDownload("Setup.exe");
+                            startDownload("FonZone-Setup-1.0.0-x64.exe");
                           }}
                           className="w-full py-2 px-3 bg-blue-600 hover:bg-blue-500 text-slate-900 font-bold text-xs rounded-lg flex items-center justify-between gap-2 transition-all cursor-pointer active:scale-95"
                         >
-                          <span className="font-mono text-[9px] opacity-75">Windows • 84 MB</span>
+                          <span className="font-mono text-[9px] opacity-75">Windows • 156 MB</span>
                           <span className="flex items-center gap-1">
                             <Laptop className="w-3.5 h-3.5" />
                             <span>تحميل مباشر للكمبيوتر</span>
@@ -959,16 +910,9 @@ export default function LandingPage({ onSelectDemo, onSelectSupport, onSelectTri
                       { 
                         id: "pc", 
                         name: "باقة لوجيسيال حاسوب فقط", 
-                        price: "10,000 دج / سنة", 
+                        price: "8,000 دج / سنة", 
                         icon: <Laptop className="w-4 h-4" />,
                         desc: "برنامج متكامل على نظام ويندوز لإدارة الكواشير والصيانة" 
-                      },
-                      { 
-                        id: "mobile", 
-                        name: "باقة تطبيق هاتف فقط", 
-                        price: "8,000 دج / سنة", 
-                        icon: <Smartphone className="w-4 h-4" />,
-                        desc: "تطبيق أندرويد وآيفون متكامل لمتابعة محلك أينما كنت" 
                       }
                     ].map((pkg) => {
                       const isSelected = programType === pkg.id;
@@ -1481,13 +1425,13 @@ export default function LandingPage({ onSelectDemo, onSelectSupport, onSelectTri
                 </p>
               </div>
               <div className="pt-2 border-t border-slate-200 flex justify-between items-center text-[10px] text-slate-500 font-mono font-bold">
-                <span>الإصدار: v4.2.5</span>
-                <span>الحجم: 84 MB</span>
+                <span>الإصدار: v1.0.0</span>
+                <span>الحجم: 156 MB</span>
               </div>
             </div>
             <button
               onClick={() => {
-                startDownload("Setup.exe");
+                startDownload("FonZone-Setup-1.0.0-x64.exe");
               }}
               className="w-full py-3 bg-blue-600 hover:bg-blue-500 text-slate-900 font-black text-xs rounded-xl flex items-center justify-center gap-2 cursor-pointer transition-all active:scale-95 shadow-lg shadow-blue-900/20"
             >
@@ -1496,38 +1440,6 @@ export default function LandingPage({ onSelectDemo, onSelectSupport, onSelectTri
             </button>
           </div>
 
-          {/* Android App Download Card */}
-          <div className="bg-white/90 hover:bg-slate-100/50 border border-slate-200 hover:border-blue-500/20 p-6 rounded-2xl transition-all duration-300 hover:-translate-y-1 text-right flex flex-col justify-between space-y-6">
-            <div className="space-y-4">
-              <div className="flex items-center justify-between">
-                <span className="px-2 py-0.5 bg-blue-500/10 border border-blue-500/20 rounded-full text-[9px] text-blue-300 font-bold">
-                  نظام Android / APK
-                </span>
-                <div className="w-10 h-10 rounded-xl bg-blue-950/30 border border-blue-900/30 flex items-center justify-center text-blue-400">
-                  <Smartphone className="w-5 h-5" />
-                </div>
-              </div>
-              <div className="space-y-1">
-                <h4 className="font-extrabold text-slate-900 text-sm md:text-base">تطبيق الهاتف والتابلت</h4>
-                <p className="text-[11px] text-slate-600 leading-relaxed">
-                  تابع مبيعات محلك، أرباحك وحركة الصيانة بشكل فوري ومباشر من هاتفك أو تابلت أندرويد في أي مكان.
-                </p>
-              </div>
-              <div className="pt-2 border-t border-slate-200 flex justify-between items-center text-[10px] text-slate-500 font-mono font-bold">
-                <span>الإصدار: v2.1.0</span>
-                <span>الحجم: 18 MB</span>
-              </div>
-            </div>
-            <button
-              onClick={() => {
-                startDownload("app-debug.apk");
-              }}
-              className="w-full py-3 bg-blue-600 hover:bg-blue-500 text-slate-900 font-black text-xs rounded-xl flex items-center justify-center gap-2 cursor-pointer transition-all active:scale-95 shadow-lg shadow-blue-900/20"
-            >
-              <Download className="w-4 h-4" />
-              <span>تحميل تطبيق الهاتف (APK)</span>
-            </button>
-          </div>
 
           {/* Video Guide Card */}
           <div className="bg-white/90 hover:bg-slate-100/50 border border-slate-200 hover:border-blue-500/20 p-6 rounded-2xl transition-all duration-300 hover:-translate-y-1 text-right flex flex-col justify-between space-y-6">

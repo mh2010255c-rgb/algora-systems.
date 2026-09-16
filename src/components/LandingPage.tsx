@@ -385,7 +385,7 @@ export default function LandingPage({ onSelectDemo, onSelectSupport, onSelectTri
     {
       id: "p_pc_only",
       name: "باقة لوجيسيال حاسوب فقط",
-      price: "8,000 دج",
+      price: "12,000 دج",
       period: "سنة",
       description: "برنامج متكامل على نظام ويندوز لتسيير الكواشير والمبيعات والمخازن والصيانة باحترافية تامة.",
       features: [
@@ -396,10 +396,10 @@ export default function LandingPage({ onSelectDemo, onSelectSupport, onSelectTri
         "تسيير ديون الزبائن والكريدي",
         "نسخ احتياطي سحابي تلقائي"
       ],
-      ctaText: "اطلب باقة الحاسوب",
+      ctaText: "اطلب باقة الحاسوب الآن",
       badge: "الأكثر طلباً وتوفيراً 🔥",
-      oldPrice: "12,000 دج",
-      color: "border-blue-500 border-2 bg-gradient-to-b from-blue-50 to-white relative shadow-2xl shadow-blue-900/10 md:scale-105 z-10"
+      oldPrice: "16,000 دج",
+      color: "border-blue-500 border-[3px] bg-gradient-to-b from-blue-50/90 via-white to-white relative shadow-2xl shadow-blue-600/20 md:scale-105 z-10 backdrop-blur-xl ring-4 ring-blue-500/10"
     }
   ];
 
@@ -712,83 +712,61 @@ export default function LandingPage({ onSelectDemo, onSelectSupport, onSelectTri
                     </p>
                   </div>
 
-                  <div className="w-full bg-white/95 p-4 rounded-xl border border-emerald-100/50 space-y-3.5 text-right shadow-inner">
-                    <h4 className="text-xs font-black text-blue-950 flex items-center justify-end gap-1.5">
-                      <span>هل ترغب في تحميل البرنامج وتجربته فوراً الآن؟</span>
-                      <Sparkles className="w-4 h-4 text-blue-600 shrink-0" />
-                    </h4>
-                    <p className="text-[10px] text-slate-500 leading-relaxed font-bold">
-                      لقد وفرنا لك روابط تحميل مباشرة للنسخة التجريبية (للكمبيوتر والهاتف) لتبدأ بالاستكشاف والتجربة فوراً قبل حتى أن يتصل بك الدعم!
-                    </p>
-                    
-                    {!showSuccessDownloads ? (
-                      <button
-                        type="button"
-                        onClick={() => {
-                          setShowSuccessDownloads(true);
-                        }}
-                        className="w-full py-2.5 bg-gradient-to-l from-blue-600 to-blue-500 hover:from-blue-500 hover:to-blue-400 text-white font-extrabold text-xs rounded-lg flex items-center justify-center gap-2 transition-all shadow-md shadow-blue-900/10 cursor-pointer active:scale-95"
-                      >
-                        <Download className="w-4 h-4 animate-pulse" />
-                        <span>نعم، أريد تحميل النسخة التجريبية الآن 📥</span>
-                      </button>
-                    ) : (
-                      <motion.div 
-                        initial={{ opacity: 0, height: 0 }}
-                        animate={{ opacity: 1, height: "auto" }}
-                        className="space-y-2 pt-1 text-right"
-                      >
-                        <p className="text-[10px] text-emerald-800 font-bold mb-1.5 flex items-center justify-end gap-1">
-                          <span>اختر الملف لبدء التحميل فوراً (بدون الانتقال لأسفل الصفحة):</span>
-                          <span className="w-1.5 h-1.5 rounded-full bg-orange-500"></span>
-                        </p>
-                        
-                        {/* Windows Link */}
-                        <button
-                          type="button"
-                          onClick={() => {
-                            startDownload("FonZone-Setup-1.0.0-x64.exe");
-                          }}
-                          className="w-full py-2 px-3 bg-blue-600 hover:bg-blue-500 text-slate-900 font-bold text-xs rounded-lg flex items-center justify-between gap-2 transition-all cursor-pointer active:scale-95"
-                        >
-                          <span className="font-mono text-[9px] opacity-75">Windows • 156 MB</span>
-                          <span className="flex items-center gap-1">
-                            <Laptop className="w-3.5 h-3.5" />
-                            <span>تحميل مباشر للكمبيوتر</span>
-                          </span>
-                        </button>
+                  <div className="w-full space-y-4">
+                    {/* WhatsApp Button */}
+                    <a
+                      href={`https://wa.me/213671037202?text=${encodeURIComponent(`مرحباً، لقد قمت بطلب النسخة التجريبية من الموقع وأريد تفعيل حسابي.\nالاسم: ${ownerName}\nالمحل: ${storeName}\nرقم الهاتف: ${phone}\nالولاية: ${province} - ${city}`)}`}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="w-full py-3.5 bg-[#25D366] hover:bg-[#20bd5a] text-white font-black text-[13px] rounded-xl flex items-center justify-center gap-2 transition-all shadow-lg shadow-[#25D366]/20 cursor-pointer active:scale-95"
+                    >
+                      <MessageCircle className="w-5 h-5" />
+                      <span>تواصل معنا لتفعيل حسابك فوراً (واتساب)</span>
+                    </a>
 
-                        {/* Android Link */}
+                    <div className="w-full bg-white/95 p-4 rounded-xl border border-emerald-100/50 space-y-3.5 text-right shadow-inner">
+                      <h4 className="text-xs font-black text-blue-950 flex items-center justify-end gap-1.5">
+                        <span>هل ترغب في تحميل البرنامج للكمبيوتر الآن؟</span>
+                        <Laptop className="w-4 h-4 text-blue-600 shrink-0" />
+                      </h4>
+                      <p className="text-[10px] text-slate-500 leading-relaxed font-bold">
+                        لقد وفرنا لك رابط تحميل مباشر للنسخة التجريبية (للكمبيوتر) لتبدأ بالاستكشاف فوراً.
+                      </p>
+                      
+                      {!showSuccessDownloads ? (
                         <button
                           type="button"
                           onClick={() => {
-                            startDownload("app-debug.apk");
+                            setShowSuccessDownloads(true);
                           }}
-                          className="w-full py-2 px-3 bg-blue-600 hover:bg-blue-500 text-slate-900 font-bold text-xs rounded-lg flex items-center justify-between gap-2 transition-all cursor-pointer active:scale-95"
+                          className="w-full py-2.5 bg-gradient-to-l from-blue-600 to-blue-500 hover:from-blue-500 hover:to-blue-400 text-white font-extrabold text-xs rounded-lg flex items-center justify-center gap-2 transition-all shadow-md shadow-blue-900/10 cursor-pointer active:scale-95"
                         >
-                          <span className="font-mono text-[9px] opacity-75">Android APK • 18 MB</span>
-                          <span className="flex items-center gap-1">
-                            <Smartphone className="w-3.5 h-3.5" />
-                            <span>تحميل تطبيق الهاتف (APK)</span>
-                          </span>
+                          <Download className="w-4 h-4 animate-pulse" />
+                          <span>نعم، أريد تحميل البرنامج 📥</span>
                         </button>
-
-                        {/* PDF Guide Link */}
-                        <button
-                          type="button"
-                          onClick={() => {
-                            startDownload("Algora_QuickStart_Guide.pdf");
-                          }}
-                          className="w-full py-2 px-3 bg-amber-600 hover:bg-amber-500 text-slate-900 font-bold text-xs rounded-lg flex items-center justify-between gap-2 transition-all cursor-pointer active:scale-95"
+                      ) : (
+                        <motion.div 
+                          initial={{ opacity: 0, height: 0 }}
+                          animate={{ opacity: 1, height: "auto" }}
+                          className="space-y-2 pt-1 text-right"
                         >
-                          <span className="font-mono text-[9px] opacity-75">PDF • 2.4 MB</span>
-                          <span className="flex items-center gap-1">
-                            <FileText className="w-3.5 h-3.5" />
-                            <span>دليل البدء السريع</span>
-                          </span>
-                        </button>
-                      </motion.div>
-                    )}
+                          {/* Windows Link */}
+                          <button
+                            type="button"
+                            onClick={() => {
+                              startDownload("FonZone-Setup-1.0.0-x64.exe");
+                            }}
+                            className="w-full py-3 px-4 bg-gradient-to-r from-blue-600 to-blue-500 hover:from-blue-500 hover:to-blue-400 text-white font-black text-sm rounded-xl flex items-center justify-between gap-2 transition-all shadow-md shadow-blue-900/20 cursor-pointer active:scale-95 border border-blue-400"
+                          >
+                            <span className="font-mono text-[10px] opacity-90 font-medium">Windows • 156 MB</span>
+                            <span className="flex items-center gap-1.5">
+                              <Laptop className="w-4 h-4" />
+                              <span>تحميل مباشر للكمبيوتر</span>
+                            </span>
+                          </button>
+                        </motion.div>
+                      )}
+                    </div>
                   </div>
                 </motion.div>
               )}
@@ -1118,60 +1096,63 @@ export default function LandingPage({ onSelectDemo, onSelectSupport, onSelectTri
           <p className="text-xs md:text-sm text-slate-600 max-w-lg mx-auto leading-relaxed">خطط تسعير واضحة، اقتصادية ومناسبة تماماً لحجم ونوع نشاطك التجاري دون رسوم خفية.</p>
         </div>
 
-        <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 items-stretch relative z-10">
+        <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 items-stretch relative z-10 mt-8">
           {plans.map((plan) => (
-            <div key={plan.id} className={`${plan.color} border p-6 rounded-2xl flex flex-col justify-between space-y-6 text-right transition-all duration-200 hover:-translate-y-1 relative overflow-hidden`}>
+            <div key={plan.id} className={`${plan.color} p-8 rounded-3xl flex flex-col justify-between space-y-6 text-right transition-all duration-300 hover:-translate-y-2 relative overflow-visible`}>
               
-              <div className="space-y-4">
+              <div className="space-y-5">
                 {plan.badge && (
-                  <span className="absolute top-2 left-2 bg-gradient-to-r from-blue-600 to-blue-500 border border-blue-500 text-white font-extrabold text-[9px] rounded-full px-2.5 py-1 tracking-wider animate-pulse">
+                  <span className="absolute -top-4 left-1/2 -translate-x-1/2 bg-gradient-to-r from-blue-600 to-blue-500 border border-blue-400 text-white font-extrabold text-[11px] rounded-full px-4 py-1.5 tracking-wider shadow-lg shadow-blue-500/30 whitespace-nowrap z-20">
                     {plan.badge}
                   </span>
                 )}
                 
-                <div className="pt-2">
-                  <h3 className="font-extrabold text-base md:text-lg text-slate-900">{plan.name}</h3>
-                  <p className="text-[11px] text-slate-600 leading-relaxed mt-1.5">{plan.description}</p>
+                <div className="pt-2 text-center">
+                  <h3 className="font-extrabold text-lg md:text-xl text-slate-900">{plan.name}</h3>
+                  <p className="text-xs md:text-[13px] text-slate-600 leading-relaxed mt-2 font-medium">{plan.description}</p>
                 </div>
 
-                <div className="h-px bg-slate-100/80" />
+                <div className="h-px bg-slate-200/80 w-3/4 mx-auto" />
 
-                <div className="flex items-baseline gap-1.5 justify-end">
-                  <span className="text-2xl md:text-3xl font-black text-blue-600 font-mono">{plan.price}</span>
+                <div className="flex items-baseline gap-2 justify-center py-2">
+                  <span className="text-3xl md:text-4xl font-black text-blue-600 font-mono tracking-tight">{plan.price}</span>
                   {plan.oldPrice && (
-                    <span className="text-sm font-bold text-slate-500 line-through decoration-red-500/50 decoration-2 mr-2">
+                    <span className="text-sm md:text-base font-bold text-slate-400 line-through decoration-red-500/50 decoration-2 mr-2">
                       {plan.oldPrice}
                     </span>
                   )}
-                  <span className="text-xs text-slate-500">/ {plan.period}</span>
+                  <span className="text-xs text-slate-500 font-bold">/ {plan.period}</span>
                 </div>
 
-                <div className="h-px bg-slate-100/80" />
+                <div className="h-px bg-slate-200/80 w-full" />
 
-                <ul className="text-xs text-slate-700 space-y-3">
+                <ul className="text-sm text-slate-700 space-y-4 pt-2">
                   {plan.features.map((feat, idx) => (
-                    <li key={idx} className="flex items-center gap-2 justify-end">
-                      <span className="text-right text-slate-600">{feat}</span>
-                      <Check className="w-4 h-4 text-emerald-400 shrink-0" />
+                    <li key={idx} className="flex items-center gap-3 justify-end group">
+                      <span className="text-right text-slate-700 font-semibold group-hover:text-blue-700 transition-colors">{feat}</span>
+                      <div className="w-5 h-5 rounded-full bg-emerald-100 flex items-center justify-center shrink-0">
+                        <Check className="w-3.5 h-3.5 text-emerald-600" />
+                      </div>
                     </li>
                   ))}
                 </ul>
               </div>
 
-              <div>
+              <div className="pt-4">
                 <a
                   href="#trial-form-section"
                   onClick={() => {
                     const el = document.getElementById("trial-form-section");
                     if (el) el.scrollIntoView({ behavior: "smooth" });
                   }}
-                  className={`w-full py-3 rounded-xl font-bold text-xs flex items-center justify-center gap-1.5 transition-all text-center ${
-                    plan.id === "p_both"
-                      ? "bg-gradient-to-l from-blue-600 to-blue-500 hover:from-blue-500 hover:to-blue-400 text-white shadow-lg shadow-blue-900/40 cursor-pointer"
+                  className={`w-full py-4 rounded-xl font-black text-sm flex items-center justify-center gap-2 transition-all duration-300 text-center ${
+                    plan.id === "p_pc_only" || plan.id === "p_both"
+                      ? "bg-gradient-to-r from-blue-600 to-blue-500 hover:from-blue-500 hover:to-blue-400 text-white shadow-xl shadow-blue-600/30 hover:shadow-blue-600/50 cursor-pointer hover:-translate-y-1"
                       : "bg-slate-100 hover:bg-slate-200 border border-slate-200 hover:border-slate-700 text-slate-800 cursor-pointer"
                   }`}
                 >
                   {plan.ctaText}
+                  <ChevronLeft className="w-4 h-4" />
                 </a>
               </div>
 
